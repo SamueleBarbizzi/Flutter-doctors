@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_doctors/screens/homepage.dart';
+import 'package:flutter_doctors/screens/mainnavigator.dart';
 import 'package:flutter_login/flutter_login.dart';
 
 class LoginPage extends StatelessWidget {
@@ -117,7 +117,7 @@ class LoginPage extends StatelessWidget {
       onSignup: _signUpUser,
       onRecoverPassword: _recoverPassword,
       onSubmitAnimationCompleted: () async{
-        Navigator.of(context).pushReplacement(MaterialPageRoute(builder: (context) => const HomePage()));
+        Navigator.of(context).pushReplacement(MaterialPageRoute(builder: (context) => const MainNavigator()));
       },
     );
   } // build
