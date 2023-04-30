@@ -2,6 +2,7 @@
 
 import 'package:flutter/material.dart';
 import 'package:flutter_doctors/screens/loginpage.dart';
+import 'package:flutter_doctors/screens/infopage.dart';
 
 class AccountPage extends StatelessWidget {
   AccountPage({Key? key}) : super(key: key);
@@ -14,11 +15,11 @@ class AccountPage extends StatelessWidget {
     return Scaffold(
       appBar: AppBar(
         title: Text(AccountPage.routename),
-        actions: <Widget>[
+        actions: [
           IconButton(
-            icon: const Icon(Icons.logout),
-            tooltip: 'Logout',
-            onPressed: () => _toLoginPage(context), //THIS HAS A BUG
+            icon: const Icon(Icons.info),
+            tooltip: 'Info',
+            onPressed: () => _toInfoPage(context), //THIS HAS A BUG
           ),
         ],
       ),
@@ -50,5 +51,10 @@ class AccountPage extends StatelessWidget {
     //Then pop the HomePage
     Navigator.of(context).pushReplacement(MaterialPageRoute(builder: (context) => const LoginPage()));
   }//_toLoginPage
+
+    void _toInfoPage(BuildContext context){
+    //Then pop the AccountPage
+    Navigator.of(context).push(MaterialPageRoute(builder: (context) => InfoPage()));
+  }//_toInfoPage
 
 } //AccountPage
