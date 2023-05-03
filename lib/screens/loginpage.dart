@@ -1,17 +1,49 @@
+// ignore_for_file: use_build_context_synchronously, depend_on_referenced_packages
+
 import 'package:flutter/material.dart';
 import 'package:flutter_doctors/screens/mainnavigator.dart';
 import 'package:flutter_login/flutter_login.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
-class LoginPage extends StatelessWidget {
+class LoginPage extends StatefulWidget {
   const LoginPage({Key? key}) : super(key: key);
 
   static const routename = 'LoginPage';
-  final String email = 'admin@admin.com';
-  final String password = 'admin';
+
+  @override
+  State<LoginPage> createState() => _LoginPageState();
+}
+
+class _LoginPageState extends State<LoginPage> {
+
+  @override
+  void initState() {
+    super.initState();
+    //Check if the user is already logged
+    _checkIfLogged();
+  }//initState
+
+  void _checkIfLogged() async {
+    //Get the SharedPreference instance and check if the value of the 'username' filed is set or not
+    final sp = await SharedPreferences.getInstance();
+    if(sp.getString('username') != null){
+      //If 'username' is set, go to MainNavigator
+      _toMainNavigator(context);
+    }//if
+  }//_checkIfLogged
+
 
   Future<String> _loginUser(LoginData data) async {
+    const String email = 'admin@admin.com';
+    const String password = 'admin';
+
     if(data.name == email && data.password == password){
+
+      final sp = await SharedPreferences.getInstance();
+      sp.setString('username', data.name);
+
       return '';
+      
     } else {
       return 'Wrong credentials';
     }
@@ -117,8 +149,13 @@ class LoginPage extends StatelessWidget {
       onSignup: _signUpUser,
       onRecoverPassword: _recoverPassword,
       onSubmitAnimationCompleted: () async{
-        Navigator.of(context).pushReplacement(MaterialPageRoute(builder: (context) => const MainNavigator()));
+        _toMainNavigator(context);
       },
     );
   } // build
+
+  void _toMainNavigator(BuildContext context){
+    Navigator.of(context).pushReplacement(MaterialPageRoute(builder: (context) => const MainNavigator()));
+  }//_toHomePage
+
 } // LoginScreen
