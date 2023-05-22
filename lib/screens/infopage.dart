@@ -17,13 +17,13 @@ class InfoPage extends StatelessWidget {
             onPressed: () => Navigator.pop(context),
           ),
       ),
-      body: const SingleChildScrollView(
+      body: SingleChildScrollView(
         child: Padding(
         padding: EdgeInsets.all(30.0),
        
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
+          children: const [
           SizedBox(height: 16.0),
             Text(
               'About FoodFitFinder',
