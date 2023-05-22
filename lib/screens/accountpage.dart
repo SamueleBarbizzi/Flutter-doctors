@@ -1,8 +1,9 @@
-// ignore_for_file: prefer_const_constructors_in_immutables, avoid_print, prefer_const_constructors
+// ignore_for_file: prefer_const_constructors_in_immutables, avoid_print, prefer_const_constructors, depend_on_referenced_packages, use_build_context_synchronously
 
 import 'package:flutter/material.dart';
 import 'package:flutter_doctors/screens/loginpage.dart';
 import 'package:flutter_doctors/screens/infopage.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 class AccountPage extends StatelessWidget {
   AccountPage({Key? key}) : super(key: key);
@@ -45,7 +46,11 @@ class AccountPage extends StatelessWidget {
     
   } //build
 
-  void _toLoginPage(BuildContext context){
+  void _toLoginPage(BuildContext context) async{
+    //Unset the 'username' filed in SharedPreference 
+    final sp = await SharedPreferences.getInstance();
+    sp.remove('username');
+    
     //Pop the drawer first 
     Navigator.pop(context);
     //Then pop the HomePage

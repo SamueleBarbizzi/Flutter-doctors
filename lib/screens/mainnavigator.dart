@@ -1,4 +1,4 @@
-// ignore_for_file: depend_on_referenced_packages, library_private_types_in_public_api, avoid_print
+// ignore_for_file: depend_on_referenced_packages, library_private_types_in_public_api, avoid_print, unused_element
 
 import 'package:flutter/material.dart';
 import 'package:material_design_icons_flutter/material_design_icons_flutter.dart';
