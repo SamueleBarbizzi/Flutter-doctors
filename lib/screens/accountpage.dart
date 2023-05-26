@@ -20,7 +20,7 @@ class AccountPage extends StatelessWidget {
           IconButton(
             icon: const Icon(Icons.info),
             tooltip: 'Info',
-            onPressed: () => _toInfoPage(context), //THIS HAS A BUG
+            onPressed: () => _toInfoPage(context),
           ),
         ],
       ),
