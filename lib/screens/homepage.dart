@@ -31,62 +31,114 @@ class HomePage extends StatelessWidget {
           Column( 
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
-              const SizedBox(height: 30),
-              Row( mainAxisAlignment: MainAxisAlignment.center,
+              //SizedBox(height: 10),
+              Row(  
+                children: [ Text("CALORIES",
+                  style: const TextStyle(
+                  fontWeight: FontWeight.bold,
+                  fontSize: 20,
+                  color: Color.fromARGB(255, 76, 175, 80))
+                )]
+              ),
+              Row(
+                children: [ Text("Remaining = Target - Food + Exercise",
+                  style: const TextStyle(
+                  fontSize: 12,
+                  color: Colors.black)
+                )]
+              ),
+              SizedBox(height: 15),
+              Row( //mainAxisAlignment: MainAxisAlignment.center,
                 children: [
-                Container( alignment: Alignment.topRight,
+                /* Container( alignment: Alignment.topRight,
                   child: SizedBox(
                     height: 170,
-                    child: Text("CALORIES",
-                        style: const TextStyle(
-                        fontWeight: FontWeight.bold,
-                        fontSize: 20,
-                        color: Color.fromARGB(255, 76, 175, 80)),
-                    ),
                   ),
-                ),
-                //SizedBox(height: 20,),
-                Align(
-                  alignment: Alignment.center,
-                  child: SizedBox(
-                    width: 150,
-                    height: 150,
-                    child: CustomPaint(
-                      painter: ScoreCircularProgress(
-                      backColor: Color.fromARGB(255, 76, 175, 80).withOpacity(0.4),
-                      frontColor: const Color.fromARGB(255, 76, 175, 80),
-                      strokeWidth: 20,
-                      value: 0.5, // da mettere valori 
-                      ),
-                      child: Align(
-                        //alignment: Alignment.center,
-                        child: Center( 
-                          child: Padding(
-                            padding: const EdgeInsets.only(top: 40.0),
-                            child: Column(
-                              mainAxisAlignment: MainAxisAlignment.start,
-                              children: [
-                                Text('num calorie', // mettere numero calorie
-                                  style: const TextStyle(
-                                    fontWeight: FontWeight.bold,
-                                    fontSize: 16,
-                                    color: Color.fromARGB(255, 76, 175, 80)),
-                                ),
-                                const Text('Remaining', style: TextStyle(fontSize: 16),)
-                              ]
+                ), */
+                SizedBox(
+                  width: 150,
+                  height: 150,
+                  child: CustomPaint(
+                    painter: ScoreCircularProgress(
+                    backColor: Color.fromARGB(255, 76, 175, 80).withOpacity(0.4),
+                    frontColor: const Color.fromARGB(255, 76, 175, 80),
+                    strokeWidth: 20,
+                    value: 0.5, // da mettere valori 
+                    ),
+                    child: Center( 
+                      child: Padding(
+                        padding: const EdgeInsets.only(top: 40.0),
+                        child: Column(
+                          mainAxisAlignment: MainAxisAlignment.start,
+                          children: [
+                            Text('2481', // mettere numero calorie con dati
+                              style: const TextStyle(
+                                fontWeight: FontWeight.bold,
+                                fontSize: 16,
+                                color: Color.fromARGB(255, 76, 175, 80)),
                             ),
-                          )
-                        )
-                      ),
-                    ),
+                            const Text('Remaining', style: TextStyle(fontSize: 12),)
+                          ]
+                        ),
+                      )
+                    )
                   ),
                 ),
+
+                Column( mainAxisAlignment: MainAxisAlignment.start,
+                  children: [
+                  Row(
+                    children: [
+                    Icon(MdiIcons.bullseyeArrow),
+                    Text("Base Target",
+                      style: const TextStyle(
+                      fontSize: 12,
+                      color: Colors.black)
+                    ),
+                    Text("2387",
+                      style: const TextStyle(
+                      fontWeight: FontWeight.bold,
+                      fontSize: 12,
+                      color: Colors.black)
+                    ), // inserire dati aggiornati
+                  ],),
+                  Row(
+                    children: [
+                    Icon(MdiIcons.silverwareForkKnife),
+                    Text("Food",
+                      style: const TextStyle(
+                      fontSize: 12,
+                      color: Colors.black)
+                    ),
+                    Text("1099",
+                      style: const TextStyle(
+                      fontWeight: FontWeight.bold,
+                      fontSize: 12,
+                      color: Colors.black)
+                    ), // inserire dati aggiornati
+                  ],),
+                  Row(
+                    children: [
+                    Icon(MdiIcons.fire),
+                    Text("Exercise",
+                      style: const TextStyle(
+                      fontSize: 12,
+                      color: Colors.black)
+                    ),
+                    Text("503",
+                      style: const TextStyle(
+                      fontWeight: FontWeight.bold,
+                      fontSize: 12,
+                      color: Colors.black)
+                    ), // inserire dati aggiornati
+                  ],)
+                ],)
               ],),
 
               Align(
                 alignment: Alignment.center,
                 child: Container(
-                  padding: EdgeInsets.fromLTRB(150, 50, 50, 50),
+                  //padding: EdgeInsets.fromLTRB(150, 0, 50, 50),
                   alignment: Alignment.center,
                   child: Column(
                     children: [
@@ -113,7 +165,8 @@ class HomePage extends StatelessWidget {
                             style: ElevatedButton.styleFrom(
                               shape: CircleBorder(),
                               //padding: EdgeInsets.all(15),
-                              backgroundColor: Color.fromARGB(255, 14, 75, 16), // <-- Button color
+                              backgroundColor: Color.fromARGB(255, 14, 75, 16),
+                              shadowColor: Color.fromARGB(255, 14, 75, 16),                            
                             ),
                           ) 
                         ],
@@ -127,12 +180,13 @@ class HomePage extends StatelessWidget {
                             onPressed: () {},
                             style: ElevatedButton.styleFrom(
                               //padding: EdgeInsets.fromLTRB(0, 20, 50, 20), 
-                              backgroundColor: Colors.green,
+                              backgroundColor: Colors.lightGreen,
                               fixedSize: Size(220, 40),
                               textStyle: TextStyle(fontSize: 22, fontWeight: FontWeight.bold),
                               elevation: 15,
-                              shadowColor: Colors.green,
-                              shape: StadiumBorder()
+                              shadowColor:  Color.fromARGB(255, 14, 75, 16),
+                              shape: StadiumBorder(),
+                              side: BorderSide(color: Color.fromARGB(255, 14, 75, 16), width: 2.5)
                             ),
                           )
                         ],
@@ -146,11 +200,13 @@ class HomePage extends StatelessWidget {
                             onPressed: () {},
                             style: ElevatedButton.styleFrom(
                               //padding: EdgeInsets.all(20.0), 
-                              backgroundColor: Colors.green,
+                              backgroundColor:  Colors.lightGreen,
                               fixedSize: Size(220, 40),
                               textStyle: TextStyle(fontSize: 22, fontWeight: FontWeight.bold),
-                              elevation: 15,                                shadowColor: Colors.green,
-                              shape: StadiumBorder()
+                              elevation: 15,
+                              shadowColor:  Color.fromARGB(255, 14, 75, 16),                                
+                              shape: StadiumBorder(),
+                              side: BorderSide(color: Color.fromARGB(255, 14, 75, 16), width: 2.5)
                             ),
                           )
                         ],
@@ -164,12 +220,13 @@ class HomePage extends StatelessWidget {
                             onPressed: () {},
                             style: ElevatedButton.styleFrom(
                               //padding: EdgeInsets.fromLTRB(0, 20, 50, 20), 
-                              backgroundColor: Colors.green,
+                              backgroundColor:  Colors.lightGreen,
                               fixedSize: Size(220, 40),
                               textStyle: TextStyle(fontSize: 22, fontWeight: FontWeight.bold),
                               elevation: 15,
-                              shadowColor: Colors.green,
-                              shape: StadiumBorder()
+                              shadowColor:  Color.fromARGB(255, 14, 75, 16),
+                              shape: StadiumBorder(),
+                              side: BorderSide(color: Color.fromARGB(255, 14, 75, 16), width: 2.5)
                             ),
                           )
                         ],
