@@ -29,35 +29,30 @@ class HomePage extends StatelessWidget {
       ),
         body: 
           Column( 
-            mainAxisAlignment: MainAxisAlignment.center,
+            //mainAxisAlignment: MainAxisAlignment.center,
             children: [
-              //SizedBox(height: 10),
-              Row(  
-                children: [ Text("CALORIES",
+              Container( height: 40, alignment: Alignment(-0.63, 0.5),
+                child:  Text("CALORIES",
                   style: const TextStyle(
                   fontWeight: FontWeight.bold,
                   fontSize: 20,
                   color: Color.fromARGB(255, 76, 175, 80))
-                )]
+                )
               ),
-              Row(
-                children: [ Text("Remaining = Target - Food + Exercise",
+              Container( height: 20, alignment: Alignment(-0.49,0),
+                child: Text("Remaining = Target - Food + Exercise",
                   style: const TextStyle(
                   fontSize: 12,
                   color: Colors.black)
-                )]
+                )
               ),
               SizedBox(height: 15),
-              Row( //mainAxisAlignment: MainAxisAlignment.center,
+              Row( mainAxisAlignment: MainAxisAlignment.center,
                 children: [
-                /* Container( alignment: Alignment.topRight,
-                  child: SizedBox(
-                    height: 170,
-                  ),
-                ), */
-                SizedBox(
+                Align( alignment: Alignment(0,0),
+                child: SizedBox(
                   width: 150,
-                  height: 150,
+                  height: 150,  
                   child: CustomPaint(
                     painter: ScoreCircularProgress(
                     backColor: Color.fromARGB(255, 76, 175, 80).withOpacity(0.4),
@@ -67,30 +62,36 @@ class HomePage extends StatelessWidget {
                     ),
                     child: Center( 
                       child: Padding(
-                        padding: const EdgeInsets.only(top: 40.0),
+                        padding: const EdgeInsets.only(top: 35.0),
                         child: Column(
                           mainAxisAlignment: MainAxisAlignment.start,
                           children: [
                             Text('2481', // mettere numero calorie con dati
                               style: const TextStyle(
                                 fontWeight: FontWeight.bold,
-                                fontSize: 16,
+                                fontSize: 26,
                                 color: Color.fromARGB(255, 76, 175, 80)),
                             ),
-                            const Text('Remaining', style: TextStyle(fontSize: 12),)
+                            const Text('Remaining', style: TextStyle(fontSize: 14),)
                           ]
                         ),
                       )
                     )
                   ),
-                ),
+                )),
+                
+                SizedBox(width: 30, height: 150),
 
-                Column( mainAxisAlignment: MainAxisAlignment.start,
+                Align( alignment: Alignment(1,0),
+                child: SizedBox(
+                  width: 150,
+                  height: 150,
+                child: Column( crossAxisAlignment: CrossAxisAlignment.end,
                   children: [
                   Row(
                     children: [
-                    Icon(MdiIcons.bullseyeArrow),
-                    Text("Base Target",
+                    Icon(MdiIcons.bullseyeArrow, color: Colors.red),
+                    Text("Base Target   ",
                       style: const TextStyle(
                       fontSize: 12,
                       color: Colors.black)
@@ -104,8 +105,8 @@ class HomePage extends StatelessWidget {
                   ],),
                   Row(
                     children: [
-                    Icon(MdiIcons.silverwareForkKnife),
-                    Text("Food",
+                    Icon(MdiIcons.silverwareForkKnife, color: Colors.blue),
+                    Text("Food   ",
                       style: const TextStyle(
                       fontSize: 12,
                       color: Colors.black)
@@ -119,8 +120,8 @@ class HomePage extends StatelessWidget {
                   ],),
                   Row(
                     children: [
-                    Icon(MdiIcons.fire),
-                    Text("Exercise",
+                    Icon(MdiIcons.fire, color: Colors.orange),
+                    Text("Exercise   ",
                       style: const TextStyle(
                       fontSize: 12,
                       color: Colors.black)
@@ -132,26 +133,35 @@ class HomePage extends StatelessWidget {
                       color: Colors.black)
                     ), // inserire dati aggiornati
                   ],)
-                ],)
+                ],),)),
               ],),
 
-              Align(
-                alignment: Alignment.center,
-                child: Container(
-                  //padding: EdgeInsets.fromLTRB(150, 0, 50, 50),
-                  alignment: Alignment.center,
-                  child: Column(
+              Container( height: 30, alignment: Alignment(-0.2,-1),
+                child: Text("Cick on the meal to select a recipe ",
+                style: const TextStyle(
+                  fontWeight: FontWeight.bold,
+                  fontSize: 16,
+                  color: Colors.black)),
+              ),
+
+              Container( height: 250,
+                  padding: EdgeInsets.only(left: 115),
+                  //alignment: Alignment(0,0),
+                  child: Column( crossAxisAlignment: CrossAxisAlignment.end,
                     children: [
                       Row(
                         children: [
-                          ElevatedButton.icon(
-                            icon: Icon(MdiIcons.coffee),
-                            label: Text('BREAKFAST'),
+                          Icon(MdiIcons.coffee, color: Colors.grey, size: 35),
+                          SizedBox(width: 20, height: 40),
+                          ElevatedButton(
+                            //icon: Icon(MdiIcons.coffee),
+                            //label: Text('BREAKFAST'),
+                            child: Text('BREAKFAST'),
                             onPressed: () {},
                             style: ElevatedButton.styleFrom(
                               //padding: EdgeInsets.fromLTRB(0, 20, 20, 20), 
                               backgroundColor: Colors.lightGreen,
-                              fixedSize: Size(220, 40),
+                              fixedSize: Size(200, 40),
                               textStyle: TextStyle(fontSize: 22, fontWeight: FontWeight.bold, color: Color.fromARGB(255, 14, 75, 16)),
                               elevation: 15,
                               shadowColor: Color.fromARGB(255, 14, 75, 16),
@@ -234,7 +244,7 @@ class HomePage extends StatelessWidget {
                     ], 
                   ),
                 ),
-              ),
+              //),
             ],
           ),
       );
