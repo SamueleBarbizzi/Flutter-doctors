@@ -6,10 +6,17 @@ import 'package:flutter_doctors/screens/loginpage.dart';
 import 'package:flutter_doctors/screens/infopage.dart';
 import 'package:flutter_doctors/screens/score_circular_progress.dart';
 
-class HomePage extends StatelessWidget {
+class HomePage extends StatefulWidget {
   const HomePage({Key? key}) : super(key: key);
-
   static const routename = 'Homepage';
+
+  @override
+  _HomePageState createState() => _HomePageState();
+}
+
+class _HomePageState extends State<HomePage> {
+  
+  bool _isShow = true;
 
   @override
   Widget build(BuildContext context) {
@@ -151,13 +158,13 @@ class HomePage extends StatelessWidget {
                     children: [
                       Row(
                         children: [
-                          Icon(MdiIcons.coffee, color: Colors.grey, size: 35),
                           SizedBox(width: 20, height: 40),
-                          ElevatedButton(
-                            //icon: Icon(MdiIcons.coffee),
-                            //label: Text('BREAKFAST'),
-                            child: Text('BREAKFAST'),
-                            onPressed: () {},
+                          ElevatedButton.icon(
+                            icon: Icon(MdiIcons.coffee, 
+                              color: Color.fromARGB(255, 6, 90, 158),
+                              shadows: <Shadow>[Shadow(color: Colors.black, blurRadius: 15.0)]),
+                            label: Text('Breakfast'),
+                            onPressed: () {setState(() {_isShow=!_isShow;},);},
                             style: ElevatedButton.styleFrom(
                               //padding: EdgeInsets.fromLTRB(0, 20, 20, 20), 
                               backgroundColor: Colors.lightGreen,
@@ -169,29 +176,34 @@ class HomePage extends StatelessWidget {
                               side: BorderSide(color: Color.fromARGB(255, 14, 75, 16), width: 2.5)
                             ),
                           ),
-                          ElevatedButton(
-                            onPressed: () {},
-                            child: Icon(Icons.add_circle, color: Colors.lightGreen, size: 35),
-                            style: ElevatedButton.styleFrom(
-                              shape: CircleBorder(),
-                              //padding: EdgeInsets.all(15),
-                              backgroundColor: Color.fromARGB(255, 14, 75, 16),
-                              shadowColor: Color.fromARGB(255, 14, 75, 16),                            
+                          Visibility( visible: _isShow,
+                            child: ElevatedButton(
+                              onPressed: () {},
+                              child: Icon(MdiIcons.pencil, color: Color.fromARGB(255, 14, 75, 16), size: 27.5),
+                              style: ElevatedButton.styleFrom(
+                                shape: CircleBorder(),
+                                padding: EdgeInsets.all(13),
+                                backgroundColor: Colors.lightGreen,
+                                shadowColor: Color.fromARGB(255, 14, 75, 16),
+                                side: BorderSide(color: Color.fromARGB(255, 14, 75, 16), width: 3)                            
+                              ),
                             ),
-                          ) 
+                          ), 
                         ],
                       ),
                       const SizedBox(height: 16),
                       Row(
                         children: [
                           ElevatedButton.icon(
-                            icon: Icon(MdiIcons.whiteBalanceSunny),
+                            icon: Icon(MdiIcons.whiteBalanceSunny, 
+                              color: Color.fromARGB(255, 219, 200, 23), 
+                              shadows: <Shadow>[Shadow(color: Colors.black, blurRadius: 15.0)]),
                             label: Text('LUNCH'),
                             onPressed: () {},
                             style: ElevatedButton.styleFrom(
                               //padding: EdgeInsets.fromLTRB(0, 20, 50, 20), 
                               backgroundColor: Colors.lightGreen,
-                              fixedSize: Size(220, 40),
+                              fixedSize: Size(200, 40),
                               textStyle: TextStyle(fontSize: 22, fontWeight: FontWeight.bold),
                               elevation: 15,
                               shadowColor:  Color.fromARGB(255, 14, 75, 16),
@@ -205,13 +217,15 @@ class HomePage extends StatelessWidget {
                       Row(
                         children: [                
                           ElevatedButton.icon(
-                            icon: Icon(MdiIcons.moonWaningCrescent),
-                            label: Text('DINNER'),
+                            icon: Icon(Icons.mode_night_rounded,
+                              color: Color.fromARGB(255, 126, 125, 125),
+                              shadows: <Shadow>[Shadow(color: Colors.black, blurRadius: 15.0)]),
+                            label: Text('Dinner'),
                             onPressed: () {},
                             style: ElevatedButton.styleFrom(
                               //padding: EdgeInsets.all(20.0), 
                               backgroundColor:  Colors.lightGreen,
-                              fixedSize: Size(220, 40),
+                              fixedSize: Size(200, 40),
                               textStyle: TextStyle(fontSize: 22, fontWeight: FontWeight.bold),
                               elevation: 15,
                               shadowColor:  Color.fromARGB(255, 14, 75, 16),                                
@@ -225,13 +239,15 @@ class HomePage extends StatelessWidget {
                       Row(
                         children: [
                           ElevatedButton.icon(
-                            icon: Icon(MdiIcons.foodApple),
+                            icon: Icon(MdiIcons.foodApple, 
+                              color: Color.fromARGB(255, 218, 26, 12),
+                              shadows: <Shadow>[Shadow(color: Colors.black, blurRadius: 15.0)]),
                             label: Text('SNACK'),
                             onPressed: () {},
                             style: ElevatedButton.styleFrom(
                               //padding: EdgeInsets.fromLTRB(0, 20, 50, 20), 
                               backgroundColor:  Colors.lightGreen,
-                              fixedSize: Size(220, 40),
+                              fixedSize: Size(200, 40),
                               textStyle: TextStyle(fontSize: 22, fontWeight: FontWeight.bold),
                               elevation: 15,
                               shadowColor:  Color.fromARGB(255, 14, 75, 16),
