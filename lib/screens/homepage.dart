@@ -16,15 +16,20 @@ class HomePage extends StatefulWidget {
 
 class _HomePageState extends State<HomePage> {
   
-  bool _isShow = true;
+  bool _isShowBreakfast = false;
+  bool _isShowLunch = false;
+  bool _isShowDinner = false;
+  bool _isShowSnack = false;
 
   @override
   Widget build(BuildContext context) {
     print('${HomePage.routename} built');
     return Scaffold(
       appBar: AppBar(
-        title: const Text(HomePage.routename, 
-        style: const TextStyle(fontWeight: FontWeight.bold)),
+        title: Row(children: [
+          Image.asset("assets/images/logo.png", width: 50),
+          const Text(HomePage.routename, 
+          style: const TextStyle(fontWeight: FontWeight.bold))]),
         centerTitle: true,
         actions: [
           IconButton(
@@ -35,18 +40,32 @@ class _HomePageState extends State<HomePage> {
         ],
       ),
         body: 
-          Column( 
-            //mainAxisAlignment: MainAxisAlignment.center,
+          Column(
             children: [
-              Container( height: 40, alignment: Alignment(-0.63, 0.5),
-                child:  Text("CALORIES",
+              Align( alignment: Alignment.center,
+              child: Container( height: 230, width: 350,
+                  margin: EdgeInsets.only(top: 10),
+                  decoration: BoxDecoration(
+                    color: Colors.white,
+                    border: Border.all(color: Colors.grey.shade400, width: 1.0),
+                    borderRadius: BorderRadius.circular(10),
+                    boxShadow: [ BoxShadow(
+                      color:Colors.grey.shade700,
+                      blurRadius: 6,
+                      spreadRadius: 2,
+                      offset: Offset(-4,-4),
+                    )],
+                  ),
+              child: Column(
+                children: [Container( height: 40, alignment: Alignment(-0.95, 0.5),
+                child:  Text("Calories",
                   style: const TextStyle(
                   fontWeight: FontWeight.bold,
                   fontSize: 20,
                   color: Color.fromARGB(255, 76, 175, 80))
                 )
               ),
-              Container( height: 20, alignment: Alignment(-0.49,0),
+              Container( height: 20, alignment: Alignment(-0.9,0),
                 child: Text("Remaining = Target - Food + Exercise",
                   style: const TextStyle(
                   fontSize: 12,
@@ -54,16 +73,17 @@ class _HomePageState extends State<HomePage> {
                 )
               ),
               SizedBox(height: 15),
-              Row( mainAxisAlignment: MainAxisAlignment.center,
-                children: [
-                Align( alignment: Alignment(0,0),
-                child: SizedBox(
+              Align( alignment: Alignment(1,-1),
+              child: Container( 
+              child: Row( mainAxisAlignment: MainAxisAlignment.end, crossAxisAlignment: CrossAxisAlignment.end,
+                children: [ 
+                  SizedBox(
                   width: 150,
-                  height: 150,  
+                  height: 150,
                   child: CustomPaint(
                     painter: ScoreCircularProgress(
-                    backColor: Color.fromARGB(255, 76, 175, 80).withOpacity(0.4),
-                    frontColor: const Color.fromARGB(255, 76, 175, 80),
+                    backColor: Colors.lightGreen.withOpacity(0.4),
+                    frontColor: Colors.lightGreen,
                     strokeWidth: 20,
                     value: 0.5, // da mettere valori 
                     ),
@@ -85,7 +105,7 @@ class _HomePageState extends State<HomePage> {
                       )
                     )
                   ),
-                )),
+                ),
                 
                 SizedBox(width: 30, height: 150),
 
@@ -107,7 +127,7 @@ class _HomePageState extends State<HomePage> {
                       style: const TextStyle(
                       fontWeight: FontWeight.bold,
                       fontSize: 12,
-                      color: Colors.black)
+                      color: Color.fromARGB(255, 76, 175, 80))
                     ), // inserire dati aggiornati
                   ],),
                   Row(
@@ -122,7 +142,7 @@ class _HomePageState extends State<HomePage> {
                       style: const TextStyle(
                       fontWeight: FontWeight.bold,
                       fontSize: 12,
-                      color: Colors.black)
+                      color: Color.fromARGB(255, 76, 175, 80))
                     ), // inserire dati aggiornati
                   ],),
                   Row(
@@ -137,46 +157,57 @@ class _HomePageState extends State<HomePage> {
                       style: const TextStyle(
                       fontWeight: FontWeight.bold,
                       fontSize: 12,
-                      color: Colors.black)
+                      color: Color.fromARGB(255, 76, 175, 80))
                     ), // inserire dati aggiornati
                   ],)
-                ],),)),
-              ],),
+                ],),),)
+              ],),),),]))),
+              
+              SizedBox(height: 15),
 
-              Container( height: 30, alignment: Alignment(-0.2,-1),
-                child: Text("Cick on the meal to select a recipe ",
-                style: const TextStyle(
-                  fontWeight: FontWeight.bold,
-                  fontSize: 16,
-                  color: Colors.black)),
-              ),
-
-              Container( height: 250,
-                  padding: EdgeInsets.only(left: 115),
-                  //alignment: Alignment(0,0),
-                  child: Column( crossAxisAlignment: CrossAxisAlignment.end,
+              Container( height: 250, width: 350,
+                  //margin: EdgeInsets.only(bottom: 10),
+                  decoration: BoxDecoration(
+                    color: Colors.white,
+                    border: Border.all(color: Colors.grey.shade400, width: 1.0),
+                    borderRadius: BorderRadius.circular(10),
+                    boxShadow: [ BoxShadow(
+                      color:Colors.grey.shade700,
+                      blurRadius: 6,
+                      spreadRadius: 2,
+                      offset: Offset(-4,-4),
+                    )],
+                  ),
+                  child: Column( mainAxisAlignment: MainAxisAlignment.center,
                     children: [
-                      Row(
+                      Container( height: 25, alignment: Alignment(-0.95, 0.5), padding: EdgeInsets.only(left: 5),
+                        child: Text("Meal Selection", 
+                        style: const TextStyle(
+                          fontWeight: FontWeight.bold,
+                          fontSize: 20,
+                          color: Color.fromARGB(255, 76, 175, 80))),
+                      ),
+                      const SizedBox(height: 14),
+                      Row( mainAxisAlignment: MainAxisAlignment.center,
                         children: [
-                          SizedBox(width: 20, height: 40),
                           ElevatedButton.icon(
                             icon: Icon(MdiIcons.coffee, 
                               color: Color.fromARGB(255, 6, 90, 158),
-                              shadows: <Shadow>[Shadow(color: Colors.black, blurRadius: 15.0)]),
-                            label: Text('Breakfast'),
-                            onPressed: () {setState(() {_isShow=!_isShow;},);},
+                              shadows: <Shadow>[Shadow(color: Color.fromARGB(255, 6, 90, 158), blurRadius: 1.0, offset: Offset(0,2))]),
+                            label: Text('Breakfast'), 
+                            onPressed: () {setState(() {_isShowBreakfast=!_isShowBreakfast;},);},
                             style: ElevatedButton.styleFrom(
                               //padding: EdgeInsets.fromLTRB(0, 20, 20, 20), 
-                              backgroundColor: Colors.lightGreen,
+                              backgroundColor: Colors.lightGreen.shade400,
                               fixedSize: Size(200, 40),
-                              textStyle: TextStyle(fontSize: 22, fontWeight: FontWeight.bold, color: Color.fromARGB(255, 14, 75, 16)),
+                              textStyle: TextStyle(fontSize: 22, fontWeight: FontWeight.bold),
                               elevation: 15,
                               shadowColor: Color.fromARGB(255, 14, 75, 16),
                               shape: StadiumBorder(),
                               side: BorderSide(color: Color.fromARGB(255, 14, 75, 16), width: 2.5)
                             ),
                           ),
-                          Visibility( visible: _isShow,
+                          Visibility( visible: _isShowBreakfast,
                             child: ElevatedButton(
                               onPressed: () {},
                               child: Icon(MdiIcons.pencil, color: Color.fromARGB(255, 14, 75, 16), size: 27.5),
@@ -191,15 +222,15 @@ class _HomePageState extends State<HomePage> {
                           ), 
                         ],
                       ),
-                      const SizedBox(height: 16),
-                      Row(
+                      const SizedBox(height: 12),
+                      Row( mainAxisAlignment: MainAxisAlignment.center,
                         children: [
                           ElevatedButton.icon(
                             icon: Icon(MdiIcons.whiteBalanceSunny, 
                               color: Color.fromARGB(255, 219, 200, 23), 
-                              shadows: <Shadow>[Shadow(color: Colors.black, blurRadius: 15.0)]),
-                            label: Text('LUNCH'),
-                            onPressed: () {},
+                              shadows: <Shadow>[Shadow(color: Colors.black, blurRadius: 1.0, offset: Offset(0,2))]),
+                            label: Text('Lunch'),
+                            onPressed: () {setState(() {_isShowLunch=!_isShowLunch;},);},
                             style: ElevatedButton.styleFrom(
                               //padding: EdgeInsets.fromLTRB(0, 20, 50, 20), 
                               backgroundColor: Colors.lightGreen,
@@ -210,18 +241,31 @@ class _HomePageState extends State<HomePage> {
                               shape: StadiumBorder(),
                               side: BorderSide(color: Color.fromARGB(255, 14, 75, 16), width: 2.5)
                             ),
-                          )
+                          ),
+                          Visibility( visible: _isShowLunch,
+                            child: ElevatedButton(
+                              onPressed: () {},
+                              child: Icon(MdiIcons.pencil, color: Color.fromARGB(255, 14, 75, 16), size: 27.5),
+                              style: ElevatedButton.styleFrom(
+                                shape: CircleBorder(),
+                                padding: EdgeInsets.all(13),
+                                backgroundColor: Colors.lightGreen,
+                                shadowColor: Color.fromARGB(255, 14, 75, 16),
+                                side: BorderSide(color: Color.fromARGB(255, 14, 75, 16), width: 3)                            
+                              ),
+                            ),
+                          ),
                         ],
                       ),
-                      const SizedBox(height: 16),
-                      Row(
+                      const SizedBox(height: 12),
+                      Row( mainAxisAlignment: MainAxisAlignment.center,
                         children: [                
                           ElevatedButton.icon(
                             icon: Icon(Icons.mode_night_rounded,
                               color: Color.fromARGB(255, 126, 125, 125),
                               shadows: <Shadow>[Shadow(color: Colors.black, blurRadius: 15.0)]),
                             label: Text('Dinner'),
-                            onPressed: () {},
+                            onPressed: () {setState(() {_isShowDinner=!_isShowDinner;},);},
                             style: ElevatedButton.styleFrom(
                               //padding: EdgeInsets.all(20.0), 
                               backgroundColor:  Colors.lightGreen,
@@ -232,18 +276,31 @@ class _HomePageState extends State<HomePage> {
                               shape: StadiumBorder(),
                               side: BorderSide(color: Color.fromARGB(255, 14, 75, 16), width: 2.5)
                             ),
-                          )
+                          ),
+                          Visibility( visible: _isShowDinner,
+                            child: ElevatedButton(
+                              onPressed: () {},
+                              child: Icon(MdiIcons.pencil, color: Color.fromARGB(255, 14, 75, 16), size: 27.5),
+                              style: ElevatedButton.styleFrom(
+                                shape: CircleBorder(),
+                                padding: EdgeInsets.all(13),
+                                backgroundColor: Colors.lightGreen,
+                                shadowColor: Color.fromARGB(255, 14, 75, 16),
+                                side: BorderSide(color: Color.fromARGB(255, 14, 75, 16), width: 3)                            
+                              ),
+                            ),
+                          ), 
                         ],
                       ),
-                      const SizedBox(height: 16),
-                      Row(
+                      const SizedBox(height: 12),
+                      Row( mainAxisAlignment: MainAxisAlignment.center,
                         children: [
-                          ElevatedButton.icon(
+                          ElevatedButton.icon( 
                             icon: Icon(MdiIcons.foodApple, 
                               color: Color.fromARGB(255, 218, 26, 12),
                               shadows: <Shadow>[Shadow(color: Colors.black, blurRadius: 15.0)]),
-                            label: Text('SNACK'),
-                            onPressed: () {},
+                            label: Text('Snack'),
+                            onPressed: () {setState(() {_isShowSnack=!_isShowSnack;},);},
                             style: ElevatedButton.styleFrom(
                               //padding: EdgeInsets.fromLTRB(0, 20, 50, 20), 
                               backgroundColor:  Colors.lightGreen,
@@ -254,7 +311,20 @@ class _HomePageState extends State<HomePage> {
                               shape: StadiumBorder(),
                               side: BorderSide(color: Color.fromARGB(255, 14, 75, 16), width: 2.5)
                             ),
-                          )
+                          ),
+                          Visibility( visible: _isShowSnack,
+                            child: ElevatedButton(
+                              onPressed: () {},
+                              child: Icon(MdiIcons.pencil, color: Color.fromARGB(255, 14, 75, 16), size: 27.5),
+                              style: ElevatedButton.styleFrom(
+                                shape: CircleBorder(),
+                                padding: EdgeInsets.all(13),
+                                backgroundColor: Colors.lightGreen,
+                                shadowColor: Color.fromARGB(255, 14, 75, 16),
+                                side: BorderSide(color: Color.fromARGB(255, 14, 75, 16), width: 3)                            
+                              ),
+                            ),
+                          ), 
                         ],
                       ),
                     ], 
