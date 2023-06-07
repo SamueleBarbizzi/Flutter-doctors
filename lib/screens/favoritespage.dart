@@ -16,10 +16,14 @@ class FavoritesPage extends StatefulWidget {
 
 class _FavoritesPageState extends State<FavoritesPage> {
 
-  // This controller will store the value of the search bar
-  TextEditingController editingController = TextEditingController();
-
   //IMPORTANTE: LA BARRA DI RICERCA HA UN BUG: SI SMINCHIA TUTTO QUANDO SI ELIMINA DAI PREFERITI UNA COSA CHE SI STA CERCANDO
+  //COMMENTO LA BARRA DI RICERCA PER IL MOMENTO
+
+
+  // This controller will store the value of the search bar
+  //TextEditingController editingController = TextEditingController();
+
+
   
 
   List<Map> items = [];
@@ -52,7 +56,7 @@ class _FavoritesPageState extends State<FavoritesPage> {
           children: <Widget>[
             Padding(
               padding: const EdgeInsets.all(10),
-              child: TextField(
+              /*child: TextField(
               onChanged: (value) {
                 _filterSearchResults(value);
               },
@@ -70,7 +74,7 @@ class _FavoritesPageState extends State<FavoritesPage> {
                         _filterSearchResults('');
                         }),    
                       ),
-              ),
+              ),*/
             ),
             Expanded(
               child:
@@ -111,13 +115,13 @@ class _FavoritesPageState extends State<FavoritesPage> {
     );
   } //build
 
-  void _filterSearchResults(String query) {
+  /*void _filterSearchResults(String query) {
   setState(() {
     items = Provider.of<Favorites>(context, listen: false).favorites
         .where((item) => item['name'].toLowerCase().contains(query.toLowerCase()))
         .toList();
     });
-  }
+  }*/
 
 
   void _toInfoPage(BuildContext context){
