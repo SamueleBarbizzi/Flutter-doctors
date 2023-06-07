@@ -1,57 +1,50 @@
-// ignore_for_file: depend_on_referenced_packages, library_private_types_in_public_api, avoid_print, unused_import
+// ignore_for_file: prefer_const_constructors_in_immutables, avoid_print, prefer_const_constructors, library_private_types_in_public_api
 
 import 'package:flutter/material.dart';
-import 'package:material_design_icons_flutter/material_design_icons_flutter.dart';
-import 'package:flutter_doctors/screens/mainnavigator.dart';
-import 'package:flutter_doctors/screens/ingredientspage.dart';
+import 'package:flutter_doctors/screens/infopage.dart';
 import 'package:flutter_doctors/models/favorites.dart';
-import 'package:flutter_doctors/models/cookbook.dart';
 import 'package:provider/provider.dart';
 
-class CookBookPage extends StatefulWidget {
-  const CookBookPage({Key? key, required this.selected}) : super(key: key);
+class FavoritesPage extends StatefulWidget {
+  FavoritesPage({Key? key}) : super(key: key);
 
-  final List<Map> selected;
-
-  static const routename = 'CookBookPage';
+  static const routename = 'Favorites';
 
   @override
-  _CookBookPageState createState() => _CookBookPageState();
+  _FavoritesPageState createState() => _FavoritesPageState();
 }
 
-class _CookBookPageState extends State<CookBookPage> {
-  //List of recipes
-  final List<Map> recipes = CookBook().recipeslist;
-  
-  List<Map> items = [];
+class _FavoritesPageState extends State<FavoritesPage> {
 
   // This controller will store the value of the search bar
   TextEditingController editingController = TextEditingController();
 
+  //IMPORTANTE: LA BARRA DI RICERCA HA UN BUG: SI SMINCHIA TUTTO QUANDO SI ELIMINA DAI PREFERITI UNA COSA CHE SI STA CERCANDO
+  
+
+  List<Map> items = [];
+
   @override
   void initState() {
-    items = widget.selected;
+    items = Provider.of<Favorites>(context, listen: false).favorites;
     items.sort((a, b) => a["name"].compareTo(b["name"]));
     super.initState();
   }
 
-
   @override
   Widget build(BuildContext context) {
-    print('${CookBookPage.routename} built');
+    print('${FavoritesPage.routename} built');
+
+    final List<Map> favorites = Provider.of<Favorites>(context).favorites;
 
     return Scaffold(
       appBar: AppBar(
-        backgroundColor: Colors.green,
-        title: const Text(CookBookPage.routename),
-        leading: BackButton(
-            onPressed: () => Navigator.of(context).pushReplacement(MaterialPageRoute(builder: (context) => const IngredientsPage())),
-          ),
+        title: const Text(FavoritesPage.routename),
         actions: [
           IconButton(
-            icon: const Icon(Icons.home),
-            tooltip: 'Home',
-            onPressed: () => _toMainNavigator(context),
+            icon: const Icon(Icons.info),
+            tooltip: 'Info',
+            onPressed: () => _toInfoPage(context),
           ),
         ],
       ),
@@ -91,57 +84,45 @@ class _CookBookPageState extends State<CookBookPage> {
                     shape: RoundedRectangleBorder(
                         borderRadius: BorderRadius.circular(5)),
 
-                    // The color depends on this is selected or not
-                    color: items[index]['isSelected'] == true
-                        ? Colors.lightGreen
-                        : Colors.white,
+                    color: Colors.white,
                     child: ListTile(
                       onTap: () {
-                        // if this item isn't selected yet, "isSelected": false -> true
-                        // If this item already is selected: "isSelected": true -> false
-                        setState(() {
-                          items[index]['isSelected'] = !items[index]['isSelected'];
-                        });
+                        //open the recipe on tap
+                        //TO BE IMPLEMENTED
                       },
-
                       //leading: CircleAvatar(
                       //    backgroundColor: Colors.green,
-                      //    child: Text(items[index]['id'].toString())),
+                      //    child: Text(context.watch<Favorites>().favorites[index]['id'].toString())),
                       title: Text(items[index]['name']),
                       trailing:  IconButton(
-                        icon: Provider.of<Favorites>(context).isExist(recipes[index])
+                        icon: Provider.of<Favorites>(context).isExist(items[index])
                           ? const Icon(Icons.favorite, color: Colors.red)
                           : const Icon(Icons.favorite_border),
-
                         onPressed: () {
-                        // if this item isn't selected yet, "isSaved": false -> true
-                        // If this item already is selected: "isSaved": true -> false
-                          
-                        Provider.of<Favorites>(context, listen: false).toggleFavorite(recipes[index]);
-                      
+                          Provider.of<Favorites>(context, listen: false).toggleFavorite(favorites[index]);
                       },
-                    )));
+                    )
+                    ));
               },
             ),  
             ),
           ],
         ),
-
     );
   } //build
 
   void _filterSearchResults(String query) {
   setState(() {
-    items = recipes
+    items = Provider.of<Favorites>(context, listen: false).favorites
         .where((item) => item['name'].toLowerCase().contains(query.toLowerCase()))
         .toList();
     });
   }
 
-  void _toMainNavigator(BuildContext context){
-    Navigator.of(context).pushReplacement(MaterialPageRoute(builder: (context) => const MainNavigator()));
-  }//_toHomePage
 
+  void _toInfoPage(BuildContext context){
+    //Then pop the FoodStoragePage
+    Navigator.of(context).push(MaterialPageRoute(builder: (context) => InfoPage()));
+  }//_toInfoPage
 
-
-} //HomePage
+} //FoodStorage

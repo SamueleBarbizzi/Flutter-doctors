@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:material_design_icons_flutter/material_design_icons_flutter.dart';
 import 'package:flutter_doctors/screens/mainnavigator.dart';
 import 'package:flutter_doctors/screens/cookbookpage.dart';
+import 'package:flutter_doctors/models/ingredientslist.dart';
 
 
 class IngredientsPage extends StatefulWidget {
@@ -17,8 +18,7 @@ class IngredientsPage extends StatefulWidget {
 
 class _IngredientsPageState extends State<IngredientsPage> {
   //List of ingredients
-  final List<Map> ingredients = List.generate(100,
-      (index) => {'id': index, 'name': 'Ingredient $index', 'isSelected': false});
+  final ingredients = IngredientsList().ingredientslist;
   
   List<Map> items = [];
   List<Map> chosen = [];
@@ -29,6 +29,7 @@ class _IngredientsPageState extends State<IngredientsPage> {
   @override
   void initState() {
     items = ingredients;
+    items.sort((a, b) => a["name"].compareTo(b["name"]));
     super.initState();
   }
 
@@ -98,9 +99,9 @@ class _IngredientsPageState extends State<IngredientsPage> {
                           items[index]['isSelected'] = !items[index]['isSelected'];
                         });
                       },
-                      leading: CircleAvatar(
-                          backgroundColor: Colors.green,
-                          child: Text(items[index]['id'].toString())),
+                      //leading: CircleAvatar(
+                      //    backgroundColor: Colors.green,
+                      //    child: Text(items[index]['id'].toString())),
                       title: Text(items[index]['name']),
                     ));
               },
@@ -140,4 +141,4 @@ class _IngredientsPageState extends State<IngredientsPage> {
 
 
 
-} //HomePage
+} //IngredientsPage
