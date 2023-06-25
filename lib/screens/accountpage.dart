@@ -68,7 +68,7 @@ class _AccountPageState extends State<AccountPage> {
           IconButton(
             icon: const Icon(Icons.info),
             tooltip: 'Info',
-            onPressed: () => _toInfoPage(context), //THIS HAS A BUG
+            onPressed: () => _toInfoPage(context),
           ),
         ],
       ),
