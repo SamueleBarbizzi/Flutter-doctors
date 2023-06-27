@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_doctors/models/favorites.dart';
 import 'package:flutter_doctors/screens/loginpage.dart';
+import 'package:provider/provider.dart';
 
 void main() {
   runApp(const MyApp());
@@ -9,12 +11,16 @@ class MyApp extends StatelessWidget {
   const MyApp({Key? key}) : super(key: key);
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
+    //Here we are injecting an instance of Favorites through the widget tree. As such, the instance will be shared through the application.
+    //Moreover, everyone will be able to perform action over this instance. 
+    return ChangeNotifierProvider<Favorites>(
+      create: (context) => Favorites(),
+      child: const MaterialApp(
       theme: ThemeData(
         primarySwatch: Colors.green,
         appBarTheme: AppBarTheme(color: Color.fromARGB(255, 14, 75, 16),),
       ),
-      home: LoginPage(),
+      home: LoginPage(),)
     );
   } //build
 }//MyApp

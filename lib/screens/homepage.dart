@@ -5,6 +5,8 @@ import 'package:material_design_icons_flutter/material_design_icons_flutter.dart
 import 'package:flutter_doctors/screens/loginpage.dart';
 import 'package:flutter_doctors/screens/infopage.dart';
 import 'package:flutter_doctors/screens/score_circular_progress.dart';
+import 'package:flutter_doctors/screens/ingredientspage.dart';
+
 
 class HomePage extends StatefulWidget {
   const HomePage({Key? key}) : super(key: key);
@@ -35,7 +37,7 @@ class _HomePageState extends State<HomePage> {
           IconButton(
             icon: const Icon(Icons.info),
             tooltip: 'Info',
-            onPressed: () => _toInfoPage(context), //THIS HAS A BUG
+            onPressed: () => _toInfoPage(context),
           ),
         ],
       ),
@@ -331,10 +333,19 @@ class _HomePageState extends State<HomePage> {
                     ], 
                   ),
                 ),
-              //),
             ],
           ),
       );
+      /*body: Center(
+          child:
+            ElevatedButton(
+              onPressed: () => _toIngredientsPage(context),
+              child: const Text('Ingredients')
+          ),
+        ),
+      
+    );*/
+
   } //build
 
   void _toInfoPage(BuildContext context){
@@ -342,8 +353,10 @@ class _HomePageState extends State<HomePage> {
     Navigator.of(context).push(MaterialPageRoute(builder: (context) => InfoPage()));
   }//_toInfoPage
 
-//  void_toIngredientsPage(BuildContext context){
-//    Navigator.of(context).pushReplacement(MaterialPageRoute(builder: (context) => const IngredientsPage()));
-//  }
+
+  void _toIngredientsPage(BuildContext context){
+    Navigator.of(context).pushReplacement(MaterialPageRoute(builder: (context) => const IngredientsPage()));
+  }//_toIngredientsPage
+
 
 } //HomePage

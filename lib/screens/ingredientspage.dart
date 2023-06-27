@@ -3,49 +3,45 @@
 import 'package:flutter/material.dart';
 import 'package:material_design_icons_flutter/material_design_icons_flutter.dart';
 import 'package:flutter_doctors/screens/mainnavigator.dart';
-import 'package:flutter_doctors/screens/ingredientspage.dart';
-import 'package:flutter_doctors/models/favorites.dart';
-import 'package:flutter_doctors/models/cookbook.dart';
-import 'package:provider/provider.dart';
+import 'package:flutter_doctors/screens/cookbookpage.dart';
+import 'package:flutter_doctors/models/ingredientslist.dart';
 
-class CookBookPage extends StatefulWidget {
-  const CookBookPage({Key? key, required this.selected}) : super(key: key);
 
-  final List<Map> selected;
+class IngredientsPage extends StatefulWidget {
+  const IngredientsPage({Key? key}) : super(key: key);
 
-  static const routename = 'CookBookPage';
+  static const routename = 'IngredientsPage';
 
   @override
-  _CookBookPageState createState() => _CookBookPageState();
+  _IngredientsPageState createState() => _IngredientsPageState();
 }
 
-class _CookBookPageState extends State<CookBookPage> {
-  //List of recipes
-  final List<Map> recipes = CookBook().recipeslist;
+class _IngredientsPageState extends State<IngredientsPage> {
+  //List of ingredients
+  final ingredients = IngredientsList().ingredientslist;
   
   List<Map> items = [];
+  List<Map> chosen = [];
 
   // This controller will store the value of the search bar
   TextEditingController editingController = TextEditingController();
 
   @override
   void initState() {
-    items = widget.selected;
+    items = ingredients;
     items.sort((a, b) => a["name"].compareTo(b["name"]));
     super.initState();
   }
 
-
   @override
   Widget build(BuildContext context) {
-    print('${CookBookPage.routename} built');
-
+    print('${IngredientsPage.routename} built');
     return Scaffold(
       appBar: AppBar(
         backgroundColor: Colors.green,
-        title: const Text(CookBookPage.routename),
+        title: const Text(IngredientsPage.routename),
         leading: BackButton(
-            onPressed: () => Navigator.of(context).pushReplacement(MaterialPageRoute(builder: (context) => const IngredientsPage())),
+            onPressed: () => Navigator.of(context).pushReplacement(MaterialPageRoute(builder: (context) => const MainNavigator())),
           ),
         actions: [
           IconButton(
@@ -66,7 +62,7 @@ class _CookBookPageState extends State<CookBookPage> {
                 controller: editingController,
                 decoration: InputDecoration(
                     labelText: "Search",
-                    hintText: "Name of the recipe...",
+                    hintText: "Name of the ingredient...",
                     prefixIcon: const Icon(Icons.search),
                     border: const OutlineInputBorder(
                         borderRadius: BorderRadius.all(Radius.circular(10))),
@@ -103,45 +99,46 @@ class _CookBookPageState extends State<CookBookPage> {
                           items[index]['isSelected'] = !items[index]['isSelected'];
                         });
                       },
-
                       //leading: CircleAvatar(
                       //    backgroundColor: Colors.green,
                       //    child: Text(items[index]['id'].toString())),
                       title: Text(items[index]['name']),
-                      trailing:  IconButton(
-                        icon: Provider.of<Favorites>(context).isExist(recipes[index])
-                          ? const Icon(Icons.favorite, color: Colors.red)
-                          : const Icon(Icons.favorite_border),
-
-                        onPressed: () {
-                        // if this item isn't selected yet, "isSaved": false -> true
-                        // If this item already is selected: "isSaved": true -> false
-                          
-                        Provider.of<Favorites>(context, listen: false).toggleFavorite(recipes[index]);
-                      
-                      },
-                    )));
+                    ));
               },
             ),  
             ),
           ],
         ),
-
+        floatingActionButton:FloatingActionButton(
+        onPressed: () {
+          //go to recipes page
+          _toCookBookPage(context);
+        },
+        backgroundColor: Colors.blue,
+        child: const Icon(Icons.done),
+      ),
     );
   } //build
 
   void _filterSearchResults(String query) {
   setState(() {
-    items = recipes
+    items = ingredients
         .where((item) => item['name'].toLowerCase().contains(query.toLowerCase()))
         .toList();
     });
   }
 
+
   void _toMainNavigator(BuildContext context){
     Navigator.of(context).pushReplacement(MaterialPageRoute(builder: (context) => const MainNavigator()));
   }//_toHomePage
 
+  void _toCookBookPage(BuildContext context){
+    Navigator.of(context).pushReplacement(MaterialPageRoute(builder: (context) => CookBookPage(selected: chosen = items
+        .where((item) => item['isSelected'] == true)
+        .toList())));
+  }//_toHomePage
 
 
-} //HomePage
+
+} //IngredientsPage
