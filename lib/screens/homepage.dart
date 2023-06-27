@@ -27,7 +27,7 @@ class _HomePageState extends State<HomePage> {
     return Scaffold(
       appBar: AppBar(
         title: Row(children: [
-          Image.asset("assets/images/logo.png", width: 50),
+          //Image.asset("assets/images/logo.png", width: 20),
           const Text(HomePage.routename, 
           style: const TextStyle(fontWeight: FontWeight.bold))]),
         centerTitle: true,
@@ -193,12 +193,12 @@ class _HomePageState extends State<HomePage> {
                           ElevatedButton.icon(
                             icon: Icon(MdiIcons.coffee, 
                               color: Color.fromARGB(255, 6, 90, 158),
-                              shadows: <Shadow>[Shadow(color: Color.fromARGB(255, 6, 90, 158), blurRadius: 1.0, offset: Offset(0,2))]),
+                              shadows: <Shadow>[Shadow(color: Colors.black, blurRadius: 1.0, offset: Offset(0,2))]),
                             label: Text('Breakfast'), 
                             onPressed: () {setState(() {_isShowBreakfast=!_isShowBreakfast;},);},
                             style: ElevatedButton.styleFrom(
                               //padding: EdgeInsets.fromLTRB(0, 20, 20, 20), 
-                              backgroundColor: Colors.lightGreen.shade400,
+                              backgroundColor: Colors.lightGreen,
                               fixedSize: Size(200, 40),
                               textStyle: TextStyle(fontSize: 22, fontWeight: FontWeight.bold),
                               elevation: 15,
@@ -263,7 +263,7 @@ class _HomePageState extends State<HomePage> {
                           ElevatedButton.icon(
                             icon: Icon(Icons.mode_night_rounded,
                               color: Color.fromARGB(255, 126, 125, 125),
-                              shadows: <Shadow>[Shadow(color: Colors.black, blurRadius: 15.0)]),
+                              shadows: <Shadow>[Shadow(color: Colors.black, blurRadius: 1.0, offset: Offset(0,2))]),
                             label: Text('Dinner'),
                             onPressed: () {setState(() {_isShowDinner=!_isShowDinner;},);},
                             style: ElevatedButton.styleFrom(
@@ -298,7 +298,7 @@ class _HomePageState extends State<HomePage> {
                           ElevatedButton.icon( 
                             icon: Icon(MdiIcons.foodApple, 
                               color: Color.fromARGB(255, 218, 26, 12),
-                              shadows: <Shadow>[Shadow(color: Colors.black, blurRadius: 15.0)]),
+                              shadows: <Shadow>[Shadow(color: Colors.black, blurRadius: 1.0, offset: Offset(0,2))]),
                             label: Text('Snack'),
                             onPressed: () {setState(() {_isShowSnack=!_isShowSnack;},);},
                             style: ElevatedButton.styleFrom(
