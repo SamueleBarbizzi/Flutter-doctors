@@ -15,7 +15,7 @@ class MyApp extends StatelessWidget {
     //Moreover, everyone will be able to perform action over this instance. 
     return ChangeNotifierProvider<Favorites>(
       create: (context) => Favorites(),
-      child: const MaterialApp(
+      child: MaterialApp(
       theme: ThemeData(
         primarySwatch: Colors.green,
         appBarTheme: AppBarTheme(color: Color.fromARGB(255, 14, 75, 16),),
