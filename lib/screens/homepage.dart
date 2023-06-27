@@ -195,7 +195,8 @@ class _HomePageState extends State<HomePage> {
                               color: Color.fromARGB(255, 6, 90, 158),
                               shadows: <Shadow>[Shadow(color: Colors.black, blurRadius: 1.0, offset: Offset(0,2))]),
                             label: Text('Breakfast'), 
-                            onPressed: () {setState(() {_isShowBreakfast=!_isShowBreakfast;},);},
+                            onPressed: (){},
+                           // onPressed: () => _toIngredientsPage(context) {setState(() {_isShowBreakfast=!_isShowBreakfast;},);},
                             style: ElevatedButton.styleFrom(
                               //padding: EdgeInsets.fromLTRB(0, 20, 20, 20), 
                               backgroundColor: Colors.lightGreen,
@@ -340,5 +341,9 @@ class _HomePageState extends State<HomePage> {
     //Then pop the HomePage
     Navigator.of(context).push(MaterialPageRoute(builder: (context) => InfoPage()));
   }//_toInfoPage
+
+//  void_toIngredientsPage(BuildContext context){
+//    Navigator.of(context).pushReplacement(MaterialPageRoute(builder: (context) => const IngredientsPage()));
+//  }
 
 } //HomePage
