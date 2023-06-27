@@ -16,6 +16,10 @@ class MyApp extends StatelessWidget {
     return ChangeNotifierProvider<Favorites>(
       create: (context) => Favorites(),
       child: const MaterialApp(
+      theme: ThemeData(
+        primarySwatch: Colors.green,
+        appBarTheme: AppBarTheme(color: Color.fromARGB(255, 14, 75, 16),),
+      ),
       home: LoginPage(),)
     );
   } //build
