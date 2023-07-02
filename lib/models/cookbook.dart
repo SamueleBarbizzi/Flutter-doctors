@@ -277,25 +277,25 @@ class CookBook{
     },
 
     {'id': 15,
-      'isSelected': false,
-      'isSaved' : false,
-      'name': 'Baked salmon',
-      'calories': 435,
-      'course': ['Main2'],
-      'meal': ['Lunch', 'Dinner'],
-      'ingredients': {
-        'Salmon steaks': '170g',
-        'Potatoes': '50g',
-        'Lemon peel': '1/2 lemon',
-        'Lemon juice': '10g',
-        'Dry white wine': '15g',
-        'Extra virgin olive oil': '1/2 spoon',
-        'Parsley': 'to taste',
-        'Fine salt': 'to taste',
-        'Black pepper': 'to taste',
-      },
-      'preparation': 'To cook the baked salmon fillet, first remove the fish bones with tweezers and check that there are no bones left by running a fingertip over the flesh. Remove the backbone with a knife, then roll one end onto itself and wrap the other end around the fillet to form a medallion. Tie the medallion with kitchen string so that it keeps its shape even when cooking and transfer the medallions to a baking tray lined with baking paper. Take a fairly regular shaped potato, wash it and cut it into thin slices with a mandoline, without peeling it: the slices must be no more than 1 mm thick otherwise they will not be cooked enough. Now deal with the emulsion: grate the zest of one lemon into a bowl, then add 15 g lemon juice, oil, white wine, chopped parsley, salt and pepper and mix well with a fork. Season the salmon medallions with some of the emulsion, then cover them with the slightly overlapping potato discs and sprinkle the potatoes with the remaining emulsion. When the medallions are ready, bake in a static oven preheated to 180° for about 20 minutes, then turn the grill to 240° and continue cooking for another 3-4 minutes, until the potatoes are golden brown. When the cooking time has elapsed, remove the cooking string and serve your delicious baked salmon with potatoes immediately!'
-      },
+    'isSelected': false,
+    'isSaved' : false,
+    'name': 'Baked salmon',
+    'calories': 435,
+    'course': ['Main2'],
+    'meal': ['Lunch', 'Dinner'],
+    'ingredients': {
+      'Salmon steaks': '170g',
+      'Potatoes': '50g',
+      'Lemon peel': '1/2 lemon',
+      'Lemon juice': '10g',
+      'Dry white wine': '15g',
+      'Extra virgin olive oil': '1/2 spoon',
+      'Parsley': 'to taste',
+      'Fine salt': 'to taste',
+      'Black pepper': 'to taste',
+    },
+    'preparation': 'To cook the baked salmon fillet, first remove the fish bones with tweezers and check that there are no bones left by running a fingertip over the flesh. Remove the backbone with a knife, then roll one end onto itself and wrap the other end around the fillet to form a medallion. Tie the medallion with kitchen string so that it keeps its shape even when cooking and transfer the medallions to a baking tray lined with baking paper. Take a fairly regular shaped potato, wash it and cut it into thin slices with a mandoline, without peeling it: the slices must be no more than 1 mm thick otherwise they will not be cooked enough. Now deal with the emulsion: grate the zest of one lemon into a bowl, then add 15 g lemon juice, oil, white wine, chopped parsley, salt and pepper and mix well with a fork. Season the salmon medallions with some of the emulsion, then cover them with the slightly overlapping potato discs and sprinkle the potatoes with the remaining emulsion. When the medallions are ready, bake in a static oven preheated to 180° for about 20 minutes, then turn the grill to 240° and continue cooking for another 3-4 minutes, until the potatoes are golden brown. When the cooking time has elapsed, remove the cooking string and serve your delicious baked salmon with potatoes immediately!'
+    },
 
 
     {'id': 16,
@@ -314,12 +314,357 @@ class CookBook{
     'preparation': 'To prepare the omelettes, first break the eggs in a bowl. Add the milk and a pinch of salt. Then beat the eggs using a whisk, so that they are mixed with the milk. They will be ready when you lift up the whisk and the mixture comes down in a flush. Heat a pan on the stove and add a little extra virgin olive oil. As soon as it is hot, pour the egg mixture into it; to see if the oil is hot enough, try pouring in a few drops first. Cook the omelette over a moderate flame: with slow cooking, the egg will remain softer. The outside should be golden brown but not too much, as soon as it starts to set on the edges, cover with a lid 8. If the temperature seems too high, remove the pan from the heat for a few seconds, still keeping the lid on. Rotate the pan gently to prevent the omelette from remaining in one place for too long. As soon as the omelette is soft on the surface (i.e. slobbery) and the underside is golden brown when you lift the edge with a spatula, fold the omelette into a crescent shape, wait a few seconds more in the pan and serve your omelette piping hot.'
     },
 
+
+    {'id': 17,
+    'isSelected': false,
+    'isSaved' : false,
+    'name': 'Chicken cacciatore',
+    'calories': 518,
+    'course': ['Main2'],
+    'meal': ['Lunch', 'Dinner'],
+    'ingredients': {
+      'Whole chicken': '1.3kg',
+      'Peeled tomatoes': '400g',
+      'Golden onions': '1',
+      'Carrots': '1',
+      'Celery': '1 rib',
+      'Garlic': '1 clove',
+      'Red Wine': '100g',
+      'Extra virgin olive oil': 'to taste',
+      'Rosemary': '1 sprig',
+      'Chopped parsley': '1 tuft',
+      'Fine salt': 'to taste',
+      'Black pepper': 'to taste',
+
+    },
+    'preparation': 'To prepare chicken cacciatore, start by chopping the vegetables. After peeling the onion, peel and trim the carrot as well, and finally remove the tuft from the celery and chop it all until you get 2-3 mm cubes. Then move on to cleaning the chicken. Cut it into pieces by separating thighs, breast and wings. At this point you have everything you need, move to the stove. In a saucepan heat a drop of oil, do not overdo it because the skin of the chicken will release a lot of fat. Turn on the flame and let it heat for a few moments, after which pour in the chicken pieces, always starting on the skin side. Let them brown for about 10 minutes, turning after a while. When the chicken is well browned add the chopped celery, carrot and onion and then the hulled garlic clove. Then salt, pepper and rosemary, stir and let it season for another 5 minutes. Deglaze with the red wine and let the alcohol part evaporate completely. Remove the rosemary and garlic clove and then add the chopped peeled tomatoes. Stir it all together and cover with a lid, let it cook over moderate heat for 30-35 minutes. Remember that if the chicken is larger then you will need to increase the cooking time a little more, vice versa if smaller. In any case, the chicken is considered ready as soon as the meat comes off the bones. At the end of cooking make sure it is just right with salt and finally sprinkle with parsley. One last stir and your chicken cacciatore is ready, enjoy!'
+    },
+
+
+    {'id': 18,
+    'isSelected': false,
+    'isSaved' : false,
+    'name': 'Cuttlefish with peas',
+    'calories': 276,
+    'course': ['Main2'],
+    'meal': ['Lunch', 'Dinner'],
+    'ingredients': {
+      'Baby peas': '250g',
+      'Cleaned cuttlefish': '0.5kg',
+      'White onions': '1',
+      'Extra virgin olive oil': '2 tbsp',
+      'Fine salt': 'to taste',
+      'Parsley': 'to taste',
+      'Vegetable stock': 'to taste',
+      'Peeled tomatoes': '250g',
+      'White wine': '25g',
+      'Black pepper': 'to taste',
+    },
+    'preparation': 'To make cuttlefish with peas as first thing make the vegetable broth. Once strained keep it warm; then hull the onion and chop it with a knife. Now take your already cleaned cuttlefish (if not you can follow our directions found in the tab how to clean cuttlefish). Peel off the tentacles, remove the eye and chop them into small pieces. Cut the mantle into fairly wide strips. Heat the olive oil in a large saucepan, pour in the chopped onion and stew over medium heat for about 10 minutes, adding hot vegetable broth as needed so the onion does not dry out too much. When the onion is soft and translucent, pour in the cuttlefish, season with salt and pepper. The cuttlefish may release some water so you can turn up the heat to dry them out. When they have lost their water, deglaze with the white wine and let it evaporate. Finally add the peas, peeled tomatoes previously crushed and stripped of their stems; add a ladleful of broth and continue cooking over a gentle heat for 15 to 20 minutes. Meanwhile, wash, dry and chop the parsley as well. When the cuttlefish with peas are soft, turn off the heat, flavor with fresh parsley and serve immediately.'
+    },
+
+
+    {'id': 19,
+    'isSelected': false,
+    'isSaved' : false,
+    'name': 'Roast veal in the oven with potatoes',
+    'calories': 445,
+    'course': ['Main2'],
+    'meal': ['Lunch', 'Dinner'],
+    'ingredients': {
+      'Veal undercut': '300g',
+      'Potatoes': '0.5kg',
+      'White wine': '25g',
+      'Rosemary': '1 sprig',
+      'Garlic': '1 clove',
+      'Extra virgin olive oil': '20g',
+      'Fine salt': 'to taste',
+      'Black pepper': 'to taste',
+    },
+    'preparation': 'To prepare roast veal with potatoes, start with the potatoes. After washing and drying them well, peel them and then cut them into chunks of about a couple of centimeters, or at any rate the important thing is that they are all the same thickness. Pour the chunks into a bowl and adjust the oil, salt and pepper and also add the peeled garlic. Add a sprig of chopped rosemary and mix everything together, with your hands or a wooden spoon, then transfer to a drip pan greased with oil and bake, in a preheated oven on static mode, at 200° for 20 minutes. Meanwhile, take care of the meat tying. The first thing to do, however, is to remove the whitish tissues that may become tough during cooking, making the meat not very tender. So with one hand hold up a flap while with the other hand in which you hold a sharp blade, the one for filleting fish will do, go and discard these parts until the piece of meat is completely clean. Now move on to tying it up. Unroll a good bit of kitchen twine and let it go underneath the meat arranged horizontally on the cutting board. Join the two ends together until they form a double knot placed on the outer side: for convenience we start from the left side all the way to the end. Now pass the twine around your hand twice (if you think you can also rotate your hand, so it will knot automatically), until it forms a loop. Then pass the meat inside, tighten the twine by pulling the top or bottom end, until you reach the center. Here is the first knot, repeat like this until the piece of veal is completely caged: meanwhile, remember to leave about an inch of space between each knot. When you reach the end, flip the meat over to the other side, still holding the ends in place, and weld it all together again by making a double knot, obviously on the opposite side from the first. Splint the meat by passing the other sprig of rosemary under the knots and then salt and pepper the cutting board. Place the piece of meat on it and begin massaging it, making the aromatics adhere in all places. Heat the oil in a frying pan and add the meat, letting it seal over medium-high heat on all sides: so every minute or so you will have to turn it with tongs or wooden spoons making sure that the meat browns nicely. When all sides of the piece of meat are well sealed, deglaze with the white wine and let it evaporate for a few moments, after which turn off the flame. Bring the meat to the center of the drip pan making space between the potatoes. Sprinkle the piece of veal with the gravy and stick a roasting thermometer into the center of the meat. Continue cooking, still at 200°, until the thermometer reaches 65°, roughly it will take about 35 minutes. After that time has elapsed, your baked veal roast with potatoes  will be ready: wait a few minutes before removing the string and slicing this goodness!'
+    },
+
+
+    {'id': 20,
+    'isSelected': false,
+    'isSaved' : false,
+    'name': 'Potato omelette',
+    'calories': 252,
+    'course': ['Main2'],
+    'meal': ['Lunch', 'Dinner'],
+    'ingredients': {
+      'Eggs': '3',
+      'Potatoes': '250g',
+      'Parmesan cheese DOP': '50g',
+      'Parsley': 'to taste',
+      'Fine salt': 'to taste',
+      'Black pepper': 'to taste',
+      'Seed oil': 'to taste',
+    },
+    'preparation': 'To make the potato frittata first finely chop the parsley with a knife. Then peel the potatoes and cut them into 1 cm thick slices. Bring a pot filled with water to a boil and then blanch the sliced potatoes for 4-5 minutes. Now pour the eggs into a bowl, add the grated cheese, chopped parsley and then season with salt and pepper. At this point stir to combine the ingredients. Drain the potatoes that will have finished cooking, let them cool and then add them to the egg mixture. Then move on to cooking: heat a drizzle of seed oil in a frying pan, and once it is hot, pour in the mixture. Cover with the lid and cook over moderate heat for 15 minutes, turning the pan occasionally. When the surface is slightly soft but still moist, invert the frittata onto the lid by flipping the pan over with a firm, quick motion. Slide the omelet back into the pan so that the other side is also cooked, cover again with the lid and continue cooking for another 5 minutes. After this time has elapsed, the frittata will be ready; you can serve it piping hot or even cold.'
+    },
+
+
+    {'id': 21,
+    'isSelected': false,
+    'isSaved' : false,
+    'name': 'Baked sea bream',
+    'calories': 195,
+    'course': ['Main2'],
+    'meal': ['Lunch', 'Dinner'],
+    'ingredients': {
+      'Sea bream': '450g',
+      'Garlic': '1 clove',
+      'Fine salt': 'to taste',
+      'Black pepper': 'to taste',
+      'Parsley': '1 clump',
+      'Thyme': '1 sprig',
+      'Extra virgin olive oil': '10g',
+      'Lemons': '1 slice',
+    },
+    'preparation': 'To make sea bream baked in foil, if you have uncleaned sea bream on hand, proceed as indicated below: use scissors to make a cut on the belly and proceed straight down to under the head, then remove the entrails. Wash the belly of the fish well under running water to remove any remaining traces of blood. Again using scissors, first cut off the side fin near the head, then cut off the caudal fin located under the belly and the dorsal fin. Flip the fish over on the opposite side and remove the other side fin and the caudal fin. Using the scaling tool, or the blade of a knife, carefully scale the sea bream, repeatedly passing the tool from the tail toward the head. Pass the sea bream again under running water, washing it carefully on the outside as well. Wash and chop the parsley. Place a sheet of baking paper on a baking sheet lay each cleaned sea bream in the center, salt and pepper the inside. then stuff with the aromatics: sprigs of thyme previously washed and dried, half a peeled clove of garlic for each sea bream, half a slice of lemon and the extra virgin olive oil. Pour in drizzle of olive oil over the bream as well then close the sheet of baking paper by rolling up the two ends. Then wrap it in foil, again curling the ends to seal. Lay the bream on a baking sheet and bake in a static oven preheated to 180° for about 40 minutes. When cooked, take the sea bream out of the oven, let it cool and then serve in the foil itself, sprinkling it with fresh parsley if you like.'
+    },
+
+
+    {'id': 22,
+    'isSelected': false,
+    'isSaved' : false,
+    'name': 'Sicilian-style swordfish',
+    'calories': 381,
+    'course': ['Main2'],
+    'meal': ['Lunch', 'Dinner'],
+    'ingredients': {
+      'Sliced swordfish': '150g',
+      'Cherry tomatoes': '150g',
+      'Pitted green olives': '25g',
+      'Extra virgin olive oil': '15g',
+      'Garlic': '1 clove',
+      'Pine nuts': '10g',
+      'Oregano': 'to taste',
+      'Fine salt': 'to taste',
+      'Black pepper': 'to taste',
+    },
+    'preparation': 'To prepare Sicilian-style swordfish, start with the cherry tomatoes. Peel them off the sprig, rinse and dry them, after which cut them in half. In a large frying pan pour the oil and flavour a whole clove of garlic, already peeled. After a couple of minutes you can pour in the chopped cherry tomatoes. Sprinkle with a pinch of salt and a little oregano and cook for about 10 minutes. In the meantime you can take care of the pitted olives, cut them into rounds of a few millimeters. When you are done, add them to the sauce. Remove the garlic clove and then add the swordfish as well, letting it cook for a couple of minutes on one side. Turn on the other, cover with the lid and cook for another 2 to 3 minutes; when cooked, sprinkle with a pinch of black pepper. In the meantime that the swordfish is cooking, you can pour the pine nuts into the pan and toast them for a few moments over high heat making sure they do not burn, then stir often. When the swordfish is cooked arrange it on a serving plate and add the pine nuts. Your Sicilian-style swordfish is ready, serve it still steaming hot and ... enjoy!'
+    },
+
+
+    {'id': 23,
+    'isSelected': false,
+    'isSaved' : false,
+    'name': 'Zucchini omelette',
+    'calories': 349,
+    'course': ['Main2'],
+    'meal': ['Lunch', 'Dinner'],
+    'ingredients': {
+      'Medium eggs': '3',
+      'Nutmeg': 'to taste',
+      'Grana Padano DOP to grate': '25g',
+      'Medium zucchini': '225g',
+      'Extra virgin olive oil': '25g',
+      'Garlic': '1 clove',
+      'Fine salt': 'to taste',
+      'Black pepper': 'to taste',
+    },
+    'preparation': 'To prepare the zucchini frittata, start by preparing the vegetables: wash and dry them. Take the small ones, cut them into very thin rounds and pour them into a bowl. Season them with a drizzle of oil. Season with coarsely chopped mint leaves. Season with salt and pepper. Keep them aside. Turn to the medium-sized zucchini and slice them lengthwise. Then cut them into small cubes. Now take a 28-cm-diameter bottomed nonstick skillet (the skillet will have an overall diameter of 33.5 cm) and sauté a clove of garlic with a drizzle of oil. When the garlic has achieved a golden color, remove it. Cook the diced zucchini on high heat for 7 to 8 minutes. Adjust for salt and pepper. Once they are ready, set them aside and turn to the eggs for the omelet. Beat the eggs with a hand whisk or fork. Adjust the salt and pepper, then add the grated cheese a little at a time to incorporate it well into the eggs. As you continue beating, sprinkle in the nutmeg. You should get a smooth mixture. Add the beaten eggs to the pan with the chopped zucchini and cover with the lid, cooking for 8 minutes over moderate heat. After the time has elapsed, place a plate on top of the nonstick skillet. Turn the skillet upside down on the plate. Then place the skillet back on the heat and evenly arrange the sliced zucchini on its surface. Slide the frittata back into the pan to cook it on the opposite side and have the sliced zucchini incorporated into the preparation. Let it cook like this for 2-3 minutes, and now the zucchini frittata is ready to be enjoyed!'
+    },
+
+
+    {'id': 24,
+    'isSelected': false,
+    'isSaved' : false,
+    'name': 'Stuffed Zucchini Ligurian Style',
+    'calories': 340,
+    'course': ['Main2'],
+    'meal': ['Lunch', 'Dinner'],
+    'ingredients': {
+      'Zucchini': '350g',
+      'White onions': '30g',
+      'Medium eggs': '1',
+      'Stale bread': '20g',
+      'Salted capers': '4g',
+      'Pine nuts': '10g',
+      'Parmesan cheese DOP to grate': '25g',
+      'Extra virgin olive oil': '15g',
+      'Black pepper': '1 pinch',
+      'Anchovies': '5g',
+      'Whole milk': '30g',
+      'Drained tuna in oil': '75g',
+      'Thyme': 'to taste',
+      'Breadcrumbs': '30g',
+    },
+    'preparation': 'To prepare Ligurian-style stuffed zucchini, first wash the zucchini and boil them according to their consistency: if they are nice and firm you can boil them in boiling water for about 6-7 minutes. If, on the other hand, they were a bit soft then you can reduce the time by 1-2 minutes. Drain the zucchini place them in a bowl with ice so that they cool quickly without losing their nice bright green color. When they are cold then remove the ends of the zucchini, then cut them in half lengthwise and hollow them out with a small digger; set aside for a moment. Meanwhile, cut the stale bread into small cubes. Pour it into a small bowl and add the milk and let it soften. Peel and carve the onion first horizontally and then vertically. After that chop finely and move to the stove. In a frying pan, heat the oil along with the onion and anchovies, let the anchovies break up, stirring often with a spatula, after which add the zucchini flesh. Saute for a few minutes over high heat and transfer to a bowl. Meanwhile, toast the pine nuts in another pan, being careful not to burn them. Now that everything is ready, make the mixture :in the blender pour the drained tuna, toasted pine nuts and desalted capers. Finally, add the soaked bread and blend to make a firm, homogeneous mixture. Add the mixture to the base of onions, anchovies, and zucchini flesh. Also add the grated Parmesan cheese, beaten eggs and then season with salt, pepper and flaked thyme, then add the breadcrumbs as well and mix everything well with a spatula. Grease a baking dish that can hold the zucchini then proceed to stuff them with the mixture and then lay them inside the dish. Sprinkle the surface with breadcrumbs and bake in a preheated oven, in grill mode, at 250° for about 10 to 12 minutes. Once cooked, wait 5 minutes before serving your Ligurian-style stuffed zucchini.'
+    },
+
+
+    {'id': 25,
+    'isSelected': false,
+    'isSaved' : false,
+    'name': 'Baked potatoes',
+    'calories': 261,
+    'course': ['Side'],
+    'meal': ['Lunch', 'Dinner'],
+    'ingredients': {
+      'Potatoes': '0.5kg',
+      'Rosemary': '1 sprig',
+      'Garlic': '1 clove',
+      'Extra virgin olive oil': '15g',
+      'Fine salt': 'to taste',
+      'Black pepper': 'to taste',
+      'Thyme': '1 sprig',
+    },
+    'preparation': 'To prepare the baked potatoes first wash them well and peel them. Divide the potatoes in half lengthwise and then into quarters. From these cut out cubes a couple of cm in size and gradually transfer them to a bowl. In a pot bring plenty of water to a boil and submerge the potatoes. Blanch them for 7 minutes then drain and transfer them back to a bowl. Season with the thyme leaves. Add salt, pepper and oil and mix well with a spoon. Transfer the potatoes to a previously greased low-sided aluminum baking dish. Add rosemary sprigs and two garlic cloves. Bake the potatoes in a preheated ventilated oven at 220°, on the middle rack, for 40 minutes or until the potatoes are nicely browned. Halfway through cooking it is recommended to gently stir the potatoes for even browning. When cooked, take your baked potatoes out of the oven, remove the garlic cloves and serve.'
+    },
+
+
+    {'id': 26,
+    'isSelected': false,
+    'isSaved' : false,
+    'name': 'Ratatouille',
+    'calories': 162,
+    'course': ['Side'],
+    'meal': ['Lunch', 'Dinner'],
+    'ingredients': {
+      'Long eggplant': '140g',
+      'Zucchini': '100g',
+      'Green peppers': '75g',
+      'Yellow peppers': '75g',
+      'Perini tomatoes': '125g',
+      'White onions': '60g',
+      'Garlic': '1 clove',
+      'Extra virgin olive oil': 'to taste',
+      'Fine salt': 'to taste',
+      'Thyme': 'to taste',
+      'Parsley': 'to taste',
+      'Basil': 'to taste',
+    },
+    'preparation': 'To prepare the ratatouille first wash all the vegetables. Then take the yellow peppers, remove the stalk and divide them in half. Also remove any seeds and inner filaments. Then divide each half in half again lengthwise and make strips from the strips. Repeat the same operation for the green peppers as well. Next turn to the eggplants, peel and split them in half. Then with a knife remove only the outermost part with the skin, thus avoiding the central part containing more seeds. Then cut out rectangles of a couple of cm. Then take the zucchini as well: trim them and cut them in half. As just done for the eggplant, take only the outer part of the zucchini and also from this cut out rectangles a couple of cm large. Turn to the tomatoes, trim them and cut them into 4 wedges. From each one then cut out cubes. Take the onion, peel it and cut it into thin slices. Then chop the garlic finely as well and add it to the onion. At this point, flake the thyme, chop the basil with your hands and chop the parsley. Now you can take care of the cooking. Pour a drizzle of oil into the pan and add both the eggplant and zucchini. Cook for about 10 minutes, stirring occasionally. Meanwhile, in another skillet pour a drizzle of oil, add the onion along with the garlic and let it wilt over medium heat. After a few minutes add the peppers as well. Add the tomatoes, a little water and the thyme. Cook everything over medium heat and as soon as the 10 minutes are up add zucchini and eggplant inside the peppers. Adjust the salt, cover with a lid and continue cooking for another 10-12 minutes. If the water dries out too much, add a little more so that at the end of cooking you will retain some of the sauce. Add the parsley, basil, stir everything together and serve your ratatouille.'
+    },
     
+
+    {'id': 27,
+    'isSelected': false,
+    'isSaved' : false,
+    'name': 'Piattoni with tomato sauce',
+    'calories': 90,
+    'course': ['Side'],
+    'meal': ['Lunch', 'Dinner'],
+    'ingredients': {
+      'Piattoni green beans': '100g',
+      'Ramato tomatoes': '1',
+      'Red onions': '1/2',
+      'Tomato puree': '25g',
+      'Extra virgin olive oil': 'to taste',
+      'Fine salt': 'to taste',
+      'Black pepper': 'to taste',
+    },
+    'preparation': 'To make tomato piattoni cut a cross in the base of the auburn tomatoes with a knife, then blanch them in hot water for about 1 minute 1. Drain them How to Make Tomato Piattoni and let them cool by immersing them in a bowl full of cold water. Wash the piattoni under running water, then peel them How to Make Tomato Piattoni Recipe and cut them into lozenges. Retrieve the tomatoes and peel them by pulling the skin at the incisions made earlier. Divide the tomatoes into wedges How to Prepare Piattoni with Tomato and remove the inner part with the seeds. Peel and slice the red onion, heat the oil in a saucepan, Piattoni al pomodoro recipe add the onion, let it stew on low heat for 5 minutes, then pour in the tomatoes, let it flavor for a couple of minutes, then pour in the piattoni as well. How to cook Piattoni with tomato sauce Add a little hot water, about 2 ladles, season with salt and pepper, cover with a lid How to accompany Piattoni with tomato sauce Cook the piattoni for about 10 minutes, then pour in the tomato puree and continue cooking for about 5 minutes or as long as it takes for the sauce to reduce. Serve your piattoni al pomodoro seasoned to taste a drizzle of extra virgin olive oil!'
+    },
+
+
+    {'id': 28,
+    'isSelected': false,
+    'isSaved' : false,
+    'name': 'Baked onions',
+    'calories': 144,
+    'course': ['Side'],
+    'meal': ['Lunch', 'Dinner'],
+    'ingredients': {
+      'White onions': '300g',
+      'Red onions': '300g',
+      'Fine salt': 'to taste',
+      'Parsley': '1 clump',
+      'Breadcrumbs': '1 tbsp',
+      'Extra virgin olive oil': 'to taste',
+      'Black pepper': 'to taste',
+    },
+    'preparation': ''
+    },
+
+
+    {'id': 29,
+    'isSelected': false,
+    'isSaved' : false,
+    'name': 'Artichokes trifoliated',
+    'calories': 122,
+    'course': ['Side'],
+    'meal': ['Lunch', 'Dinner'],
+    'ingredients': {
+      'Artichokes': '4',
+      'Garlic': '1 clove',
+      'Extra virgin olive oil': '3 tbsp',
+      'Parsley to chop': '2 tbsp',
+      'Vegetable stock': 'to taste',
+      'Fine salt': 'to taste',
+      'Black pepper': 'to taste',
+    },
+    'preparation': 'The first thing you need to do when you are getting ready to handle artichokes is to protect your hands with gloves to prevent them from turning black or to rub them well with lemon juice; keep half a lemon on hand, and rub your hands occasionally-it will help safeguard them! Next, clean the artichokes ( to see how to do it click here) and place them hand by hand in a container with acidulated water (added lemon juice), preventing them from turning black. In a saucepan, crush 2 cloves of garlic, lightly brown them in oil, add the artichokes in wedges and the well-drained stems and sauté them a few moments. Add some chopped parsley, keeping a handful aside (which you will use to sprinkle over the artichokes when the cooking is finished); Also prepare some vegetable broth with which you are going to bathe the artichokes whenever they get too dry, then pepper and salt to your taste. Cooking should go on for about 15 to 20 minutes depending on the size of the artichokes; you will be able to know when it is time to turn off the heat by poking a stem with a fork; it should be tender but not mushy. Serve the artichokes trifoliated as soon as they are ready!'
+    },
+
+
+    {'id': 30,
+    'isSelected': false,
+    'isSaved' : false,
+    'name': 'Sardinian-style eggplant',
+    'calories': 63,
+    'course': ['Side'],
+    'meal': ['Lunch', 'Dinner'],
+    'ingredients': {
+      'Garlic': '1 clove',
+      'Extra virgin olive oil': 'to taste',
+      'Fine salt': 'to taste',
+      'Black pepper': 'to taste',
+      'Eggplant': '250g',
+      'Ramato tomatoes': '125g',
+      'Chopped parsley': '1 tbsp',
+    },
+    'preparation': 'To prepare eggplant Sardinian style, you can use either the elongated violet variety or the round variety. First wash the eggplants and cut them into half-inch slices . Using the blade of a knife, carve each slice of eggplant by making vertical, horizontal and transverse lines to form a checkerboard pattern. This will help the eggplant lose its bitter mood more easily and facilitate even cooking. Salt the eggplant slices and lay them in a colander. Cover them with a plate on which you will place a weight so as to compress them and leave them like this for half an hour so that they lose their bitter liquid. Meanwhile, wash the tomatoes, cut them in half and gently hollow out the inside with a small knife to remove the seeds. Now cut them into half-inch pieces and pour them into a bowl. Now season the tomatoes: add the garlic cloves and the three tablespoons of finely chopped parsley, the salt and finally the oil. Stir and let the chunks of tomatoes soak with the seasoning for a few minutes. Meanwhile, after the half-hour has passed, take back the eggplant slices and check that they have released their bitter water. Rinse them under cold running water and then dry them thoroughly with kitchen paper or a cloth. Then, heat the static oven to 180°-200°. Grease a 34-cm, high-sided baking dish with olive oil and begin by forming a layer of eggplant. Then cover with a layer of chopped cherry tomatoes. Continue in this way until you have used up all the eggplant, as shown in the photo. Then bake the dish, in a preheated static oven and bake at 200° for at least 40 minutes. Remove from the oven and serve the eggplants hot or cold according to your taste.'
+    },
+
+
+    {'id': 31,
+    'isSelected': false,
+    'isSaved' : false,
+    'name': 'Eggplant carpaccio',
+    'calories': 370,
+    'course': ['Side'],
+    'meal': ['Lunch', 'Dinner'],
+    'ingredients': {
+      'Eggplant': '200g',
+      'Extra virgin olive oil': '40g',
+      'Lemon juice': '10ml',
+      'Mint': '3 leaves',
+      'Basil': '2 leaves',
+      'Garlic': '1 clove',
+      'Fine salt': 'to taste',
+      'Black pepper': 'to taste',
+    },
+    'preparation': 'To prepare the eggplant carpaccio, start by washing the eggplants under running water and dry them well with a dish towel. Now remove the stalk with a knife and thinly slice the eggplant lengthwise, helping yourself with a mandoline so that you get regular slices of the same thickness, each slice should be about 2-3 mm thick. When finished, place a griddle on the stove and heat it, place the eggplant slices on the griddle, salt them and turn them so that they are cooked on both sides (cook a couple of minutes or until they are well colored with the typical dark grill streaks). Once cooked, lay the eggplants on a plate and let them cool. Now deal with the marinade: take an ovenproof dish that measures 28 cm x 18 cm (alternatively, you can use a larger or smaller dish, making sure that the eggplant is always in contact with the marinade so that it absorbs the aromatic seasoning). Pour the oil and lemon juice into the dish, add the garlic, season with salt and pepper and finally flavor with the mint leaves and basil. The marinade is ready. Now dip the eggplant into the marinade, cover the dish with plastic wrap and let it season in the refrigerator for a couple of hours. Serve the eggplant carpaccio cold as an appetizer or side dish.'
+    },
+
+
+    {'id': 32,
+    'isSelected': false,
+    'isSaved' : false,
+    'name': 'Friar beard with anchovies',
+    'calories': 117,
+    'course': ['Side'],
+    'meal': ['Lunch', 'Dinner'],
+    'ingredients': {
+      'Monk beard (agretti)': '125g',
+      'Garlic': '1 cloves',
+      'Anchovies': '3',
+      'Fine salt': 'to taste',
+      'Extra virgin olive oil': '2 tbsp',
+    },
+    'preparation': 'To prepare the anchovy friar beard, start by removing the reddish ends from the friar beard, breaking them off with your fingers and removing them. After carefully washing the friar beard, boil it for about 7 to 8 minutes in plenty of salted water. Let the friar beard drain thoroughly. Meanwhile, in a large skillet, brown the garlic with the extra virgin olive oil over high heat. When the garlic has taken on color remove it from the oil. Now put the chopped anchovy fillets into the oil and let them cook until the anchovies have dissolved in the oil. At this point, add the boiled and well-drained friar beard. Sauté it for a few minutes, until the cooking liquid in the bottom has dried up. Your friar beard with anchovies is ready to be served!'
+    },
+
+
   ];
 
 }//Ingredients
 
-/*{'id': num,
+/*     {'id': num,
     'isSelected': false,
     'isSaved' : false,
     'name': '',
@@ -332,6 +677,8 @@ class CookBook{
       'ingredient3': 'quantity3',
       'ingredient4': 'quantity4',
       'ingredient5': 'quantity5',
+      'ingredient6': 'quantity6',
+      'ingredient7': 'quantity7',
     },
     'preparation': ''
-    },*/
+    }, */
