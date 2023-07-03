@@ -22,17 +22,35 @@ class CookBookPage extends StatefulWidget {
 class _CookBookPageState extends State<CookBookPage> {
   //List of recipes
   final List<Map> recipes = CookBook().recipeslist;
-  
-  List<Map> items = [];
+
+  List ingredients = []; //selected ingredient
+
+  List<Map> possibleRecipes = []; //used to create the list of shown recipes
+
+  List<Map> items = []; //shown recipes
 
   // This controller will store the value of the search bar
   TextEditingController editingController = TextEditingController();
 
   @override
-  void initState() {
-    items = widget.selected;
+
+  void initState() { 
+    
+    
+    for (var element in widget.selected){
+      ingredients.add(element['name']); //list of selected ingredients (by name)
+    }
+    ingredients.sort();
+    //ingredients = widget.selected; 
+    //ingredients.sort((a, b) => a["name"].compareTo(b["name"]));
+
+    possibleRecipes = recipes.where((item) => item['ingredients'].keys.toList().any(ingredients.contains)).toList();
+    //this line creates items as a list of the recipes that contain at least one of the selected ingredients
+    items = possibleRecipes;
     items.sort((a, b) => a["name"].compareTo(b["name"]));
+
     super.initState();
+    
   }
 
 
@@ -132,7 +150,7 @@ class _CookBookPageState extends State<CookBookPage> {
 
   void _filterSearchResults(String query) {
   setState(() {
-    items = recipes
+    items = possibleRecipes
         .where((item) => item['name'].toLowerCase().contains(query.toLowerCase()))
         .toList();
     });

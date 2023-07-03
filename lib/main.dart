@@ -18,9 +18,9 @@ class MyApp extends StatelessWidget {
       child: MaterialApp(
       theme: ThemeData(
         primarySwatch: Colors.green,
-        appBarTheme: AppBarTheme(color: Color.fromARGB(255, 14, 75, 16),),
+        appBarTheme: const AppBarTheme(color: Color.fromARGB(255, 14, 75, 16),),
       ),
-      home: LoginPage(),)
+      home: const LoginPage(),)
     );
   } //build
 }//MyApp
