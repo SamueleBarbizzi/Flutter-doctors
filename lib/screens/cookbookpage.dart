@@ -26,12 +26,12 @@ class _CookBookPageState extends State<CookBookPage> {
 
   List<List> ingredients = [[],[],[]]; //selected ingredient
 
-  List<List> possibleRecipes = [[],[],[]]; //shown recipes
+  List<List> possibleRecipes = [[],[],[],[]]; //shown recipes
 
   // This controller will store the value of the search bar
   // TextEditingController editingController = TextEditingController();
 
-  final List<String> groupsName = ['FIRST MAIN DISH','SECOND MAIN DISH','SIDE'];
+  final List<String> groupsName = ['FIRST MAIN DISH','SECOND MAIN DISH','SIDE','DESSERT'];
 
   @override
 
@@ -55,12 +55,14 @@ class _CookBookPageState extends State<CookBookPage> {
       }
       //ingredients = widget.selected; 
       //ingredients.sort((a, b) => a["name"].compareTo(b["name"]));
-      for (var i=0; i<possibleRecipes.length; i++){
+      for (var i=0; i<possibleRecipes.length-1; i++){
         possibleRecipes[i] = recipes.where((item) => item['ingredients'].keys.toList().any(ingredients[i].contains)).toList();
         //this line creates possibleRecipes as a list of the recipes that contain at least one of the selected ingredients
         //we want to sort the list of recipes
         possibleRecipes[i].sort((a, b) => a["name"].compareTo(b["name"]));
-      }   
+      }
+      possibleRecipes[3] = Groups().getDessertDishes();
+
     }
 
     super.initState();
@@ -252,6 +254,48 @@ class _CookBookPageState extends State<CookBookPage> {
                     },
                   ),  
 
+                  ListView.builder(
+                    shrinkWrap: true,
+                    itemCount: possibleRecipes[3].length,
+                    itemBuilder: (BuildContext ctx, index) {
+                      return Card(
+                          key: ValueKey(possibleRecipes[3][index]['name']),
+                          margin: const EdgeInsets.all(1),
+                          shape: RoundedRectangleBorder(
+                              borderRadius: BorderRadius.circular(5)),
+
+                          // The color depends on this is selected or not
+                          color: possibleRecipes[3][index]['isSelected'] == true
+                              ? Colors.lightGreen
+                              : Colors.white,
+                          child: ListTile(
+                            onTap: () {
+                              // if this item isn't selected yet, "isSelected": false -> true
+                              // If this item already is selected: "isSelected": true -> false
+                              setState(() {
+                                possibleRecipes[3][index]['isSelected'] = !possibleRecipes[3][index]['isSelected'];
+                              });
+                            },
+
+                            //leading: CircleAvatar(
+                            //    backgroundColor: Colors.green,
+                            //    child: Text(possibleRecipes[index]['id'].toString())),
+                            title: Text(possibleRecipes[3][index]['name']),
+                            trailing:  IconButton(
+                              icon: Provider.of<Favorites>(context).isExist(recipes[index])
+                                ? const Icon(Icons.favorite, color: Colors.red)
+                                : const Icon(Icons.favorite_border),
+
+                              onPressed: () {
+                              // if this item isn't selected yet, "isSaved": false -> true
+                              // If this item already is selected: "isSaved": true -> false
+                                
+                              Provider.of<Favorites>(context, listen: false).toggleFavorite(recipes[index]);
+                            
+                            },
+                          )));
+                    },
+                  ), 
 
                 ],  
               ),

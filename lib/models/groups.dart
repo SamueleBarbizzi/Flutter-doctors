@@ -31,8 +31,15 @@ class Groups {
   final List<Map> SideDishes = CookBook().recipeslist
   .where((element) => element['course'].contains('Side')).toList();
 
+  final List<Map> DessertDishes = CookBook().recipeslist
+  .where((element) => element['course'].contains('Dessert')).toList();
+
   List<List> createDishesGroups(){
-    return [FirstMainDishes,SecondMainDishes,SideDishes];
+    return [FirstMainDishes,SecondMainDishes,SideDishes,DessertDishes];
+  }
+
+  List getDessertDishes(){
+    return [DessertDishes];
   }
 
 }
