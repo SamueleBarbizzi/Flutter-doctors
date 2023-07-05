@@ -25,7 +25,7 @@ class ScoreCircularProgress extends CustomPainter {
       ..style = PaintingStyle.stroke
       ..strokeCap = StrokeCap.round;
     final r =
-        Rect.fromCenter(center: Offset(w / 2, h / 2), width: w, height: h);
+        Rect.fromCenter(center: Offset(w / 2, h / 1.5), width: w, height: h);
     canvas.drawArc(r, radians(180), radians(180), false, paint1);
     canvas.drawArc(r, radians(180), radians(180 * value), false, paint2);
   }

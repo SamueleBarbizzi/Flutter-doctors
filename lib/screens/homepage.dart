@@ -6,6 +6,8 @@ import 'package:flutter_doctors/screens/loginpage.dart';
 import 'package:flutter_doctors/screens/infopage.dart';
 import 'package:flutter_doctors/screens/score_circular_progress.dart';
 import 'package:flutter_doctors/screens/ingredientspage.dart';
+import 'package:flutter_doctors/screens/recipepage.dart';
+
 
 
 class HomePage extends StatefulWidget {
@@ -41,12 +43,12 @@ class _HomePageState extends State<HomePage> {
           ),
         ],
       ),
-        body: 
-          Column(
+        body: SingleChildScrollView(
+          child: Column(
             children: [
               Align( alignment: Alignment.center,
-              child: Container( height: 230, width: 350,
-                  margin: EdgeInsets.only(top: 10),
+              child: Container( height: 230, width: 380,
+                  margin: EdgeInsets.only(top: 30),
                   decoration: BoxDecoration(
                     color: Colors.white,
                     border: Border.all(color: Colors.grey.shade400, width: 1.0),
@@ -63,7 +65,7 @@ class _HomePageState extends State<HomePage> {
                 child:  Text("Calories",
                   style: const TextStyle(
                   fontWeight: FontWeight.bold,
-                  fontSize: 20,
+                  fontSize: 24,
                   color: Color.fromARGB(255, 76, 175, 80))
                 )
               ),
@@ -74,12 +76,12 @@ class _HomePageState extends State<HomePage> {
                   color: Colors.black)
                 )
               ),
-              SizedBox(height: 15),
+              SizedBox(height: 10),
               Align( alignment: Alignment(1,-1),
-              child: Container( 
-              child: Row( mainAxisAlignment: MainAxisAlignment.end, crossAxisAlignment: CrossAxisAlignment.end,
+              child: Container(
+              child: Row( mainAxisAlignment: MainAxisAlignment.center, crossAxisAlignment: CrossAxisAlignment.end,
                 children: [ 
-                  SizedBox(
+                  Container(
                   width: 150,
                   height: 150,
                   child: CustomPaint(
@@ -91,7 +93,7 @@ class _HomePageState extends State<HomePage> {
                     ),
                     child: Center( 
                       child: Padding(
-                        padding: const EdgeInsets.only(top: 35.0),
+                        padding: const EdgeInsets.only(top: 60.0),
                         child: Column(
                           mainAxisAlignment: MainAxisAlignment.start,
                           children: [
@@ -109,20 +111,20 @@ class _HomePageState extends State<HomePage> {
                   ),
                 ),
                 
-                SizedBox(width: 30, height: 150),
+                SizedBox(width: 40, height: 150),
 
                 Align( alignment: Alignment(1,0),
-                child: SizedBox(
+                child: Container( 
                   width: 150,
                   height: 150,
-                child: Column( crossAxisAlignment: CrossAxisAlignment.end,
-                  children: [
+                child: Column( crossAxisAlignment: CrossAxisAlignment.end, //mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                  children: [ SizedBox(height: 20),
                   Row(
-                    children: [
+                    children: [ 
                     Icon(MdiIcons.bullseyeArrow, color: Colors.red),
                     Text("Base Target   ",
                       style: const TextStyle(
-                      fontSize: 12,
+                      fontSize: 14,
                       color: Colors.black)
                     ),
                     Text("2387",
@@ -131,13 +133,13 @@ class _HomePageState extends State<HomePage> {
                       fontSize: 12,
                       color: Color.fromARGB(255, 76, 175, 80))
                     ), // inserire dati aggiornati
-                  ],),
+                  ],), SizedBox(height: 10),
                   Row(
                     children: [
                     Icon(MdiIcons.silverwareForkKnife, color: Colors.blue),
                     Text("Food   ",
                       style: const TextStyle(
-                      fontSize: 12,
+                      fontSize: 14,
                       color: Colors.black)
                     ),
                     Text("1099",
@@ -146,13 +148,13 @@ class _HomePageState extends State<HomePage> {
                       fontSize: 12,
                       color: Color.fromARGB(255, 76, 175, 80))
                     ), // inserire dati aggiornati
-                  ],),
+                  ],), SizedBox(height: 10),
                   Row(
                     children: [
                     Icon(MdiIcons.fire, color: Colors.orange),
                     Text("Exercise   ",
                       style: const TextStyle(
-                      fontSize: 12,
+                      fontSize: 14,
                       color: Colors.black)
                     ),
                     Text("503",
@@ -165,9 +167,9 @@ class _HomePageState extends State<HomePage> {
                 ],),),)
               ],),),),]))),
               
-              SizedBox(height: 15),
+              SizedBox(height: 30),
 
-              Container( height: 250, width: 350,
+              Container( height: 330, width: 380,
                   //margin: EdgeInsets.only(bottom: 10),
                   decoration: BoxDecoration(
                     color: Colors.white,
@@ -182,14 +184,14 @@ class _HomePageState extends State<HomePage> {
                   ),
                   child: Column( mainAxisAlignment: MainAxisAlignment.center,
                     children: [
-                      Container( height: 25, alignment: Alignment(-0.95, 0.5), padding: EdgeInsets.only(left: 5),
+                      Container( height: 30, alignment: Alignment(-0.95, -1), padding: EdgeInsets.only(left: 5), //color:Colors.red,
                         child: Text("Meal Selection", 
                         style: const TextStyle(
                           fontWeight: FontWeight.bold,
-                          fontSize: 20,
+                          fontSize: 24,
                           color: Color.fromARGB(255, 76, 175, 80))),
                       ),
-                      const SizedBox(height: 14),
+                      const SizedBox(height: 25),
                       Row( mainAxisAlignment: MainAxisAlignment.center,
                         children: [
                           ElevatedButton.icon(
@@ -227,7 +229,7 @@ class _HomePageState extends State<HomePage> {
                           ), 
                         ],
                       ),
-                      const SizedBox(height: 12),
+                      const SizedBox(height: 15),
                       Row( mainAxisAlignment: MainAxisAlignment.center,
                         children: [
                           ElevatedButton.icon(
@@ -262,7 +264,7 @@ class _HomePageState extends State<HomePage> {
                           ),
                         ],
                       ),
-                      const SizedBox(height: 12),
+                      const SizedBox(height: 15),
                       Row( mainAxisAlignment: MainAxisAlignment.center,
                         children: [                
                           ElevatedButton.icon(
@@ -297,7 +299,7 @@ class _HomePageState extends State<HomePage> {
                           ), 
                         ],
                       ),
-                      const SizedBox(height: 12),
+                      const SizedBox(height: 15),
                       Row( mainAxisAlignment: MainAxisAlignment.center,
                         children: [
                           ElevatedButton.icon( 
@@ -336,7 +338,7 @@ class _HomePageState extends State<HomePage> {
                   ),
                 ),
             ],
-          ),
+          ),),
       );
       /*body: Center(
           child:
@@ -357,7 +359,7 @@ class _HomePageState extends State<HomePage> {
 
 
   void _toIngredientsPage(BuildContext context){
-    Navigator.of(context).pushReplacement(MaterialPageRoute(builder: (context) => const IngredientsPage()));
+    Navigator.of(context).pushReplacement(MaterialPageRoute(builder: (context) => const RecipePage()));
   }//_toIngredientsPage
 
 
