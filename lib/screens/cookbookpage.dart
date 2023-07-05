@@ -11,7 +11,7 @@ import 'package:provider/provider.dart';
 class CookBookPage extends StatefulWidget {
   const CookBookPage({Key? key, required this.selected}) : super(key: key);
 
-  final List<Map> selected;
+  final List<List> selected;
 
   static const routename = 'CookBookPage';
 
@@ -35,12 +35,16 @@ class _CookBookPageState extends State<CookBookPage> {
   @override
 
   void initState() { 
+
+    if (ingredients.isEmpty){
+      items = recipes;
+      items.sort((a, b) => a["name"].compareTo(b["name"]));
+    }
     
     
-    for (var element in widget.selected){
+    for (var element in widget.selected[0]){
       ingredients.add(element['name']); //list of selected ingredients (by name)
     }
-    ingredients.sort();
     //ingredients = widget.selected; 
     //ingredients.sort((a, b) => a["name"].compareTo(b["name"]));
 
@@ -48,6 +52,8 @@ class _CookBookPageState extends State<CookBookPage> {
     //this line creates items as a list of the recipes that contain at least one of the selected ingredients
     items = possibleRecipes;
     items.sort((a, b) => a["name"].compareTo(b["name"]));
+
+    //we want to sort the list of recipes, 
 
     super.initState();
     
