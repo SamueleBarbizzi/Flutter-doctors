@@ -1,11 +1,11 @@
 // ignore_for_file: depend_on_referenced_packages, library_private_types_in_public_api, avoid_print, unused_import
 
 import 'package:flutter/material.dart';
+import 'package:flutter_doctors/models/groups.dart';
 import 'package:material_design_icons_flutter/material_design_icons_flutter.dart';
 import 'package:flutter_doctors/screens/mainnavigator.dart';
 import 'package:flutter_doctors/screens/cookbookpage.dart';
 import 'package:flutter_doctors/models/ingredientslist.dart';
-import 'package:flutter_doctors/models/groups.dart';
 
 
 class IngredientsPage extends StatefulWidget {
@@ -276,10 +276,10 @@ class _IngredientsPageState extends State<IngredientsPage> {
   void _toCookBookPage(BuildContext context){
 
     for (int i=0; i<groups.length;i++){
-      chosen[i] = groups[i].where((item) => item['isSelected'] == true).toList();
+      chosen.add(groups[i].where((item) => item['isSelected'] == true).toList());
     }
 
-    Navigator.of(context).pushReplacement(MaterialPageRoute(builder: (context) => CookBookPage( selected: chosen )));
+    Navigator.of(context).pushReplacement(MaterialPageRoute(builder: (context) => CookBookPage( selected: chosen)));
   }//_toHomePage
 
   /* void _filterSearchResults(String query) {

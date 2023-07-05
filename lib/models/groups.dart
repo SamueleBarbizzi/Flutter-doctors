@@ -1,24 +1,38 @@
 // ignore_for_file: non_constant_identifier_names
 
+import 'package:flutter_doctors/models/cookbook.dart';
 import 'package:flutter_doctors/models/ingredientslist.dart';
 
 class Groups {
 
-  // this class creates the groups in which the ingredients are displayed,
+  // here we creates the groups in which the ingredients are displayed,
   // based on the course they are used for
-  final ingredients = IngredientsList().ingredientslist.sort((a, b) => a["name"].compareTo(b["name"]));
-
   final List<Map> FirstMainDishIngredients = IngredientsList().ingredientslist
-  .where((element) => element['course'] == 'Main1').toList();
+  .where((element) => element['course'].contains('Main1')).toList();
 
   final List<Map> SecondMainDishIngredients = IngredientsList().ingredientslist
-  .where((element) => element['course'] == 'Main2').toList();
+  .where((element) => element['course'].contains('Main2')).toList();
 
   final List<Map> SideIngredients = IngredientsList().ingredientslist
-  .where((element) => element['course'] == 'Side').toList();
+  .where((element) => element['course'].contains('Side')).toList();
 
   List<List> createIngredientsGroups(){
     return [FirstMainDishIngredients,SecondMainDishIngredients,SideIngredients];
+  }
+
+  // here we creates the groups in which the recipes are displayed,
+  // based on the course  in which they are used
+  final List<Map> FirstMainDishes = CookBook().recipeslist
+  .where((element) => element['course'].contains('Main1')).toList();
+
+  final List<Map> SecondMainDishes = CookBook().recipeslist
+  .where((element) => element['course'].contains('Main2')).toList();
+
+  final List<Map> SideDishes = CookBook().recipeslist
+  .where((element) => element['course'].contains('Side')).toList();
+
+  List<List> createDishesGroups(){
+    return [FirstMainDishes,SecondMainDishes,SideDishes];
   }
 
 }
