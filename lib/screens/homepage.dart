@@ -4,7 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:material_design_icons_flutter/material_design_icons_flutter.dart';
 import 'package:flutter_doctors/screens/loginpage.dart';
 import 'package:flutter_doctors/screens/infopage.dart';
-import 'package:flutter_doctors/screens/score_circular_progress.dart';
+import 'package:flutter_doctors/models/score_circular_progress.dart';
 import 'package:flutter_doctors/screens/ingredientspage.dart';
 
 

@@ -152,6 +152,8 @@ class _CookBookPageState extends State<CookBookPage> {
                             //    backgroundColor: Colors.green,
                             //    child: Text(possibleRecipes[index]['id'].toString())),
                             title: Text(possibleRecipes[0][index]['name']),
+
+                            /*
                             trailing:  IconButton(
                               icon: Provider.of<Favorites>(context).isExist(recipes[index])
                                 ? const Icon(Icons.favorite, color: Colors.red)
@@ -164,7 +166,8 @@ class _CookBookPageState extends State<CookBookPage> {
                               Provider.of<Favorites>(context, listen: false).toggleFavorite(recipes[index]);
                             
                             },
-                          )));
+                          )*/
+                          ));
                     },
                   ),  
 
@@ -190,11 +193,13 @@ class _CookBookPageState extends State<CookBookPage> {
                                 possibleRecipes[1][index]['isSelected'] = !possibleRecipes[1][index]['isSelected'];
                               });
                             },
-
+                            
                             //leading: CircleAvatar(
                             //    backgroundColor: Colors.green,
                             //    child: Text(possibleRecipes[index]['id'].toString())),
                             title: Text(possibleRecipes[1][index]['name']),
+
+                            /*
                             trailing:  IconButton(
                               icon: Provider.of<Favorites>(context).isExist(recipes[index])
                                 ? const Icon(Icons.favorite, color: Colors.red)
@@ -207,7 +212,8 @@ class _CookBookPageState extends State<CookBookPage> {
                               Provider.of<Favorites>(context, listen: false).toggleFavorite(recipes[index]);
                             
                             },
-                          )));
+                          )*/
+                          ));
                     },
                   ),  
 
@@ -238,6 +244,8 @@ class _CookBookPageState extends State<CookBookPage> {
                             //    backgroundColor: Colors.green,
                             //    child: Text(possibleRecipes[index]['id'].toString())),
                             title: Text(possibleRecipes[2][index]['name']),
+
+                            /*
                             trailing:  IconButton(
                               icon: Provider.of<Favorites>(context).isExist(recipes[index])
                                 ? const Icon(Icons.favorite, color: Colors.red)
@@ -250,7 +258,8 @@ class _CookBookPageState extends State<CookBookPage> {
                               Provider.of<Favorites>(context, listen: false).toggleFavorite(recipes[index]);
                             
                             },
-                          )));
+                          )*/
+                          ));
                     },
                   ),  
 
