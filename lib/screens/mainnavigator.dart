@@ -81,7 +81,7 @@ class _MainNavigatorState extends State<MainNavigator> {
             label: 'Profile',
           ),
         ],
-        backgroundColor:  Color.fromARGB(255, 14, 75, 16),
+        backgroundColor: const Color.fromARGB(255, 14, 75, 16),
         // selectedFontSize: 10,
         type: BottomNavigationBarType.fixed,
         selectedIconTheme: const IconThemeData(color: Colors.white),

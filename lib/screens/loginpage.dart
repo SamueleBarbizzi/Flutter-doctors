@@ -70,7 +70,7 @@ class _LoginPageState extends State<LoginPage> {
       title: 'Welcome!',
 
 
-      //logo: AssetImage('assets/images/ecorp-lightblue.png'),
+      logo: const AssetImage('assets/images/logo.png'),
 
       theme: LoginTheme(
         primaryColor: Colors.green,

@@ -1,7 +1,12 @@
 // ignore_for_file: file_names
 
+
+//import 'package:flutter/material.dart';
+//class IngredientsList extends ChangeNotifier{
+
 class IngredientsList{
 
+// List of all ingredients
   final List<Map> ingredientslist = [
     {'id': 1,
     'name': '00 flour',
@@ -464,11 +469,13 @@ class IngredientsList{
     'course':['Main1', 'Main2', 'Side']},
 
   ];
-  
+
+
 }//Ingredients
 
 /*
 {'id': 1,
     'name': 'ingredient',
+    'course': 'course#'
     'isSelected': false},
 */ 
