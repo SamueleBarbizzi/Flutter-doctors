@@ -28,7 +28,7 @@ class _IngredientsPageState extends State<IngredientsPage> {
   //TextEditingController editingController = TextEditingController();
 
   // Specify the name of the groups in which the ingredients are divided, and create those groups
-  final List<String> groupsName = ['FIRST MAIN DISH','SECOND MAIN DISH','SIDE'];
+  final List<String> groupsName = ['FIRST MAIN DISH','SECOND MAIN DISH','SIDE','DESSERT'];
   List<List> groups = Groups().createIngredientsGroups();
 
   @override
@@ -73,6 +73,7 @@ class _IngredientsPageState extends State<IngredientsPage> {
               Tab(child: Text('First main dish')),
               Tab(child: Text('Second main dish')),
               Tab(child: Text('Side dish')),
+              Tab(child: Text('Dessert')),
             ],
           ),
         ),
@@ -166,6 +167,36 @@ class _IngredientsPageState extends State<IngredientsPage> {
                                     //    backgroundColor: Colors.green,
                                     //    child: Text(items[index]['id'].toString())),
                                     title: Text(groups[2][index]['name']),
+                                  )
+                              );
+                          },
+                        ),
+              ListView.builder(
+                            shrinkWrap: true,
+                            itemCount: groups[3].length,
+                            itemBuilder: (BuildContext ctx, index) {
+                              return Card(
+                                  key: ValueKey(groups[3][index]['name']),
+                                  margin: const EdgeInsets.all(1),
+                                  shape: RoundedRectangleBorder(
+                                      borderRadius: BorderRadius.circular(5)),
+
+                                  // The color depends on this is selected or not
+                                  color: groups[3][index]['isSelected'] == true
+                                      ? Colors.lightGreen
+                                      : Colors.white,
+                                  child: ListTile(
+                                    onTap: () {
+                                      // if this item isn't selected yet, "isSelected": false -> true
+                                      // If this item already is selected: "isSelected": true -> false
+                                      setState(() {
+                                        groups[3][index]['isSelected'] = !groups[3][index]['isSelected'];
+                                      });
+                                    },
+                                    //leading: CircleAvatar(
+                                    //    backgroundColor: Colors.green,
+                                    //    child: Text(items[index]['id'].toString())),
+                                    title: Text(groups[3][index]['name']),
                                   )
                               );
                           },

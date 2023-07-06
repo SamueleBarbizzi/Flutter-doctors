@@ -24,7 +24,7 @@ class _CookBookPageState extends State<CookBookPage> {
   //List of recipes
   final List<Map> recipes = CookBook().recipeslist;
 
-  List<List> ingredients = [[],[],[]]; //selected ingredient
+  List<List> ingredients = [[],[],[],[]]; //selected ingredient
 
   List<List> possibleRecipes = [[],[],[],[]]; //shown recipes
 
@@ -95,6 +95,7 @@ class _CookBookPageState extends State<CookBookPage> {
               Tab(child: Text('First main dish')),
               Tab(child: Text('Second main dish')),
               Tab(child: Text('Side dish')),
+              Tab(child: Text('Dessert')),
             ],
           ),
       ),
@@ -290,6 +291,8 @@ class _CookBookPageState extends State<CookBookPage> {
                             //    backgroundColor: Colors.green,
                             //    child: Text(possibleRecipes[index]['id'].toString())),
                             title: Text(possibleRecipes[3][index]['name']),
+
+                            /*
                             trailing:  IconButton(
                               icon: Provider.of<Favorites>(context).isExist(recipes[index])
                                 ? const Icon(Icons.favorite, color: Colors.red)
@@ -302,7 +305,8 @@ class _CookBookPageState extends State<CookBookPage> {
                               Provider.of<Favorites>(context, listen: false).toggleFavorite(recipes[index]);
                             
                             },
-                          )));
+                          )
+                          */));
                     },
                   ), 
 

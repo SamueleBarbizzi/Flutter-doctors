@@ -16,8 +16,11 @@ class Groups {
   final List<Map> SideIngredients = IngredientsList().ingredientslist
   .where((element) => element['course'].contains('Side')).toList();
 
+    final List<Map> DessertIngredients = IngredientsList().ingredientslist
+  .where((element) => element['course'].contains('Dessert')).toList();
+
   List<List> createIngredientsGroups(){
-    return [FirstMainDishIngredients,SecondMainDishIngredients,SideIngredients];
+    return [FirstMainDishIngredients,SecondMainDishIngredients,SideIngredients,DessertIngredients];
   }
 
   // here we creates the groups in which the recipes are displayed,
