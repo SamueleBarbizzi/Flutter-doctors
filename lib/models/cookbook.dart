@@ -1051,7 +1051,7 @@ class CookBook{
     'isSaved' : false,
     'name': 'Two-ingredient cookies',
     'calories': 112,
-    'course': ['Sweet'],
+    'course': ['Dessert'],
     'meal': ['Breakfast', 'Lunch', 'Dinner'],
     'ingredients': {
       'Banana': '330 g',
@@ -1104,6 +1104,241 @@ class CookBook{
     'url': ''
     },
 
+
+  {'id': 52,
+    'isSelected': false,
+    'isSaved' : false,
+    'name': 'Banana smoothie',
+    'calories': 59,
+    'course': ['Dessert'],
+    'meal': ['Launch','Dinner'],
+    'ingredients': {
+      'Bananas': '80g',
+      'Lemon juice': '10g',
+      'Water': '50g',
+    },
+    'preparation': 'To prepare the banana smoothie, start by taking the lemon. Cut it in half and squeeze the juice from one half. Now, take a banana, peel it, and slice it into rounds. Place the banana slices in a bowl and sprinkle them with the juice from half a lemon. Next, take the banana that you added the lemon juice to and put it in a blender. Add the water. Blend well until you obtain a smooth and homogeneous mixture. Now, serve your banana smoothie in a glass or a pitcher.',
+    'url': ''
+    },
+
+    {'id': 53,
+    'isSelected': false,
+    'isSaved' : false,
+    'name': 'Green bean, carrot, corn and tuna salad',
+    'calories': 205,
+    'course': ['Main2'],
+    'meal': ['Launch','Dinner'],
+    'ingredients': {
+      'Green beans': '120g',
+      'Tuna in oil': '60g',
+      'Carrots': '100g',
+      'Corn': '40g',
+      'Fine salt': 'to taste',
+      'Extra virgin olive oil': 'to taste',
+    },
+    'preparation': 'To make the green bean salad with carrots, corn, and tuna, first place a pot of water on the stove and bring it to a boil. Wash and dry the green beans, trim the ends, and boil them in the hot water for 7 minutes. Once boiled, drain them and transfer to a bowl of ice water to stop the cooking process. Once cooled, cut the green beans in half and place them in a large bowl. Now, trim and peel the carrots, cut them into quarters lengthwise, and then slice them into small triangles. Take the bowl with the cooked green beans, add the drained corn and the tuna, also drained from its oil, and then add the carrots. Season with salt and oil, and mix well. Your green bean salad with carrots, corn, and tuna is ready to be served.',
+    'url': ''
+    },
+
+    {'id': 54,
+    'isSelected': false,
+    'isSaved' : false,
+    'name': 'Yougurt Smoothie',
+    'calories': 71,
+    'course': ['Dessert'],
+    'meal': ['Launch','Dinner'],
+    'ingredients': {      
+      'Yogurt': '60g',
+      'Lemon juice': '10g',
+      'Melon pulp': '100g',
+      'Peach pulp': '90g',
+    },
+    'preparation': "To prepare the yogurt smoothie, first wash the peaches (you will need about 3), peel them, and remove the pits. Then roughly chop them into pieces and set aside. Now, let's deal with the melon: cut it in half, remove the seeds and the rind, then cut it into pieces. Cut the lime in half and juice it using a juicer. Collect the juice in a glass and set it aside. Now, take a blender and add the melon and peaches to it. Pour in the yogurt and the lime juice, then close the blender and blend until you obtain a creamy mixture. There you have it, your fresh yogurt smoothie is ready!",
+    'url': ''
+    },
+
+    {'id': 55,
+    'isSelected': false,
+    'isSaved' : false,
+    'name': 'Ice cream melon',
+    'calories': 108,
+    'course': ['Dessert'],
+    'meal': ['Launch','Dinner'],
+    'ingredients': {
+      'Melon': '500 g',
+    },
+    'preparation': 'Start by cleaning the melon: cut off the ends of the melon to create a stable base, then halve it and remove the seeds from the inside using a spoon. Slice each half into moderately thick slices, remove the rind from each slice, and finally cut them into cubes about 2 cm thick. Spread the cubes on a tray, making sure not to overlap them, cover with plastic wrap, and transfer it to the freezer. Allow the fruit to harden, which usually takes at least 12 hours. Once the fruit is frozen, you can blend it to create your refreshing dessert: pour the frozen melon into a blender or a mixer with steel blades and blend until it becomes creamy. Then, transfer it to a bowl. Transfer your frozen fruit into separate bowls or cups and serve immediately!',
+    'url': ''
+    },
+
+    {'id': 56,
+    'isSelected': false,
+    'isSaved' : false,
+    'name': 'Pineapple ice cream',
+    'calories': 108,
+    'course': ['Dessert'],
+    'meal': ['Launch','Dinner'],
+    'ingredients': {
+      'Ananas': '500g',
+    },    'preparation': 'To clean the pineapple, remove the base and the top by cutting them off with a knife. Then, divide the pineapple into 4 wedges, remove the woody core, and peel off the skin. Cut each wedge in half lengthwise and slice the resulting pieces into chunks about 1 cm thick. Spread the pineapple chunks on a tray, cover them with plastic wrap, and transfer them to the freezer. Once the pineapple has hardened, transfer it to a freezer bag and keep it in the freezer for at least 12 hours. When the fruit is frozen, you can blend it to create your refreshing dessert: pour the frozen pineapple into a blender or a mixer with steel blades and blend until it becomes creamy. Then, transfer it to a bowl. Transfer your frozen fruit into separate bowls or cups and serve immediately!',
+    'url': ''
+    },
+
+    {'id': 57,
+    'isSelected': false,
+    'isSaved' : false,
+    'name': 'Ice cream strawberries',
+    'calories': 108,
+    'course': ['Dessert'],
+    'meal': ['Launch','Dinner'],
+    'ingredients': {
+      'Strawberries': '500g',
+    },
+    'preparation': 'To clean the strawberries, wash and dry them, then remove the stems and cut them in half. At this point, you can transfer them to a tray without overlapping and freeze them for at least 12 hours. When the fruit is frozen, you can blend it to create your refreshing dessert: pour the frozen strawberries into a blender or a mixer with steel blades and blend until they become creamy. Then, transfer them to a bowl. Transfer your frozen fruit into separate bowls or cups and serve immediately!',
+    'url': ''
+    },
+
+    {'id': 58,
+    'isSelected': false,
+    'isSaved' : false,
+    'name': 'Fruit porridge',
+    'calories': 100,
+    'course': ['Breakfast'],
+    'meal': ['Breakfast'],
+    'ingredients': {
+      'Oat flakes': '30g',
+      'Whole milk': '150ml',
+      'Water': '50ml',
+      'Honey': '2 tbsp',
+      'Cinnamon':'1 pinch',
+    },
+    'preparation': 'In a small saucepan, mix the oatmeal with the milk and water, bringing slowly to a boil. Simmer the mixture over low heat for about 15 minutes, stirring occasionally to keep it from sticking, until the water has evaporated and the mixture has become creamy. At this point, turn off the heat and transfer the porridge to a bowl; stuff it to your liking by adding fresh fruit to taste (150 grams) or honey. For example, you can add 1 tbsp of honey and some fruit (including dried fruit) and various seeds, finally scenting it with a pinch of cinnamon. Or you can enrich it with dark chocolate chips and coconut flour. Your satiating and nutritious super breakfast is served!',
+    'url': ''
+    },
+
+    {'id': 59,
+    'isSelected': false,
+    'isSaved' : false,
+    'name': 'Pancakes fit',
+    'calories': 100,
+    'course': ['Breakfast'],
+    'meal': ['Breakfast'],
+    'ingredients': {
+      'Oatmeal': '40g',
+      'Eggs': '1',
+      'Dark chocolate': '10g',
+      'Yeast': '5g',
+    },
+    'preparation': 'Preheat a nonstick skillet over low heat. Chop the dark chocolate finely. Combine the oat flour, egg white and baking powder in a bowl and mix well, avoiding lumps. Finally, add the chopped dark chocolate, keeping a few grains aside for the final topping. Grease a washcloth with a little oil and wipe it over the hot pan to lightly grease it. Pour the pancakes mixture in small circles onto the pan and, when you see bubbles, flip it to the other side until it too is golden brown. Repeat the process until the batter is done. When ready, stack them to form a turret, and if you have any, garnish them using berries.',
+    'url': ''
+    },
+
+    {'id': 60,
+    'isSelected': false,
+    'isSaved' : false,
+    'name': 'French Toast',
+    'calories': 300,
+    'course': ['Breakfast'],
+    'meal': ['Breakfast'],
+    'ingredients': {
+      'Whole wheat bread': '4 slices',
+      'Eggs': '2',
+      'Milk': '40ml',
+      'Cinnamon': '1 tbsp',
+      'Yogurt': '4 tbsp',
+      'Marmalade': 'to taste',
+    },
+    'preparation': 'Mix egg whites, milk and cinnamon in a bowl. Pass the slices of whole wheat bread into the mixture on both sides. Put a drizzle of oil in a skillet and cook the bread for 3 minutes per side. Remove it from the pan and spread the white yogurt and jam on top. If you have any, complete your French Toast with fresh berries and top with the second slice of whole wheat bread.',
+    'url': ''
+    },
+
+    {'id': 61,
+    'isSelected': false,
+    'isSaved' : false,
+    'name': 'Toasted bread with marmalade and walnuts',
+    'calories': 300,
+    'course': ['Breakfast'],
+    'meal': ['Breakfast'],
+    'ingredients': {
+      'Toast': '4 slices',
+      'Marmalade': 'to taste',
+      'Walnuts': '3',
+      'Yogurt': 'to taste',
+    },
+    'preparation': 'Spread a layer of 100% fruit jam (no added sugar) on a slice of toast and add two or three nuts. This combination makes for a super energetic and nutritious breakfast. "Toast is an excellent source of complex carbohydrates with fiber, while walnuts provide polyunsaturated lipids that can add satiety and minerals that promote nervous system balance. Jam is a source of fast-absorbing simple sugars that give ready energy. Adding a white yogurt or a glass of milk will ensure the protein quota."',
+    'url': ''
+    },
+
+    {'id': 62,
+    'isSelected': false,
+    'isSaved' : false,
+    'name': 'Bread, tomato and aged cheese',
+    'calories': 250,
+    'course': ['Breakfast'],
+    'meal': ['Breakfast'],
+    'ingredients': {
+      'Bread': '4 slices',
+      'Tomato': 'to taste',
+      'Matured cheese': 'to taste',
+    },
+    'preparation': 'For those who prefer a savory breakfast to a sweet one, bread, tomato and aged cheese is a combination that can be prepared in a jiffy and ensures a nutritionally balanced meal. "Aged cheese is rich in vitamin D and calcium, which are necessary for bone health, and phosphorus and other minerals valuable for memory and proper brain function. Tomatoes, on the other hand, are a source of antioxidants and fiber, which help keep cholesterol levels down."',
+    'url': ''
+    },
+
+    {'id': 63,
+    'isSelected': false,
+    'isSaved' : false,
+    'name': 'Ricotta cheese mousse, cocoa, orange',
+    'calories': 220,
+    'course': ['Breakfast'],
+    'meal': ['Breakfast'],
+    'ingredients': {
+      'Ricotta': '100g',
+      'Cocoa': 'to taste',
+      'Orange': '1',
+    },
+    'preparation': 'Pour the ricotta cheese into a glass. Sprinkle some bitter cocoa on top and add orange segments. "With cottage cheese you ensure that in addition to essential fats, calcium and vitamin D, you also get glutamic acid, the precursor of GABA, the hormone that helps you feel more relaxed and in harmony. Orange, on the other hand, gives the first meal of the day high amounts of vitamin C and carotenoids that defend the body from external aggressions, while cocoa guarantees many flavonoids that protect the cardiovascular system and good amounts of iron that is easily assimilated by the body thanks to the presence of ascorbic acid in the fruit."',
+    'url': ''
+    },
+
+    {'id': 64,
+    'isSelected': false,
+    'isSaved' : false,
+    'name': 'Milk, cookies, fruit',
+    'calories': 400,
+    'course': ['Breakfast'],
+    'meal': ['Breakfast'],
+    'ingredients': {
+      'Milk': '250ml',
+      'Whole grain cookies': '4',
+      'Fruit': '1',
+    },
+    'preparation': 'Classic breakfast of milk and cookies. Also supplement with a fruit of your choice (apple, banana, pear, peach....)',
+    'url': ''
+    },
+
+    {'id': 65,
+    'isSelected': false,
+    'isSaved' : false,
+    'name': 'Porcini mushroom risotto',
+    'calories': 488,
+    'course': ['Main1'],
+    'meal': ['Launch','Dinner'],
+    'ingredients': {
+      'Rice': '70g',
+      'Porcini mushrooms': '100g',
+      'Onion': '1/2',
+      'Butter': '20g',
+      'Parmesan cheese': '20g',
+      'Fine salt': 'to taste',
+      'Parsley': 'to taste',
+      'White wine': '20g',
+      'White pepper': 'to taste',
+      'Extra virgin olive oil': 'to taste',
+    },
+    'preparation': 'To prepare the mushroom risotto, start by cleaning the Porcini mushrooms. Remove the end part of the stem, then peel them using a small knife, to do this start from the base of the cap and gently pull the skin to the center. Then remove the stems as well and keep the scraps aside that will be used to make the broth. At this point take care of making the mushroom broth. Pour the scraps into a saucepan, add water and let them simmer for about 30 minutes. Meanwhile, dice the mushroom heads as well and finely chop a half onion. Take a large saucepan that will be used for cooking the risotto, add half the amount of butter (40 g) and let it melt gently. Then add the onion and let it brown before adding the mushrooms. Cook over medium-high heat for 5 minutes, stirring occasionally and making sure that the mushrooms do not release liquid. At this point add the rice and stir often so that it is toasted. After a few minutes, deglaze with the white wine and only when the alcohol part has completely evaporated add a couple of ladles of broth, straining it through a colander directly inside the pan. Adjust the salt and continue cooking for about 13 minutes, basting occasionally with the hot strained broth, until it is cooked through. Then turn off the heat and take care of stirring the risotto: first add the remaining 40 g of butter and stir until it is completely melted; then add the Parmigiano and stir again. Now finely chop the parsley; season the rice with ground white pepper, parsley and a drizzle of oil. Stir to blend the flavors and adjust the density of the risotto by adding more broth if necessary, stir again, and serve your mushroom risotto still hot.',
+    'url': ''
+    },
 
   ];
 
