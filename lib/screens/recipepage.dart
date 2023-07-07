@@ -17,11 +17,6 @@ class RecipePage extends StatelessWidget {
             onPressed: (){}
           ),
         title: Text(RecipePage.routename), centerTitle: true),
-      floatingActionButton: FloatingActionButton(
-        elevation: 10,
-        child: Icon(Icons.check),
-        onPressed: (){},
-      ),
       body: SingleChildScrollView( 
         child: Container( padding: EdgeInsets.all(5),
           child: Column( crossAxisAlignment: CrossAxisAlignment.start,
