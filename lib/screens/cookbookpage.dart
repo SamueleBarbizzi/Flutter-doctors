@@ -37,7 +37,7 @@ class _CookBookPageState extends State<CookBookPage> {
 
   void initState() { 
     
-    if (widget.selected[0].isEmpty & widget.selected[1].isEmpty & widget.selected[2].isEmpty){
+    if (widget.selected[0].isEmpty & widget.selected[1].isEmpty & widget.selected[2].isEmpty & widget.selected[3].isEmpty){
       possibleRecipes = Groups().createDishesGroups();
 
       for (int i=0; i<possibleRecipes.length;i++){
@@ -55,13 +55,14 @@ class _CookBookPageState extends State<CookBookPage> {
       }
       //ingredients = widget.selected; 
       //ingredients.sort((a, b) => a["name"].compareTo(b["name"]));
-      for (var i=0; i<possibleRecipes.length-1; i++){
+
+      for (var i=0; i<possibleRecipes.length; i++){
         possibleRecipes[i] = recipes.where((item) => item['ingredients'].keys.toList().any(ingredients[i].contains)).toList();
         //this line creates possibleRecipes as a list of the recipes that contain at least one of the selected ingredients
         //we want to sort the list of recipes
         possibleRecipes[i].sort((a, b) => a["name"].compareTo(b["name"]));
       }
-      possibleRecipes[3] = Groups().getDessertDishes();
+      //possibleRecipes[3] = Groups().getDessertDishes();
 
     }
 

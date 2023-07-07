@@ -8,13 +8,21 @@ class IngredientsList{
 
 // List of all ingredients
   final List<Map> ingredientslist = [
+
+/*
+{'id': num,
+    'name': 'ingredient',
+    'course': 'course#'
+    'isSelected': false},
+*/ 
+
     {'id': 1,
     'name': '00 flour',
     'isSelected': false,
     'course':['Main2']},
 
     {'id': 2,
-    'name': 'Ananas',
+    'name': 'Pineapple',
     'isSelected': false,
     'course':['Dessert']},
 
@@ -49,7 +57,7 @@ class IngredientsList{
     'course':['Main2', 'Side']},
     
     {'id': 9,
-    'name': 'Broccoli ',
+    'name': 'Broccoli',
     'isSelected': false,
     'course':['Main1']},
 
@@ -69,12 +77,12 @@ class IngredientsList{
     'course':['Main1', 'Main2']},
 
     {'id': 13,
-    'name': 'Celery ',
+    'name': 'Celery',
     'isSelected': false,
     'course':['Main1', 'Main2']},
 
     {'id': 14,
-    'name': 'Chicken ',
+    'name': 'Chicken',
     'isSelected': false,
     'course':['Main2']},
 
@@ -224,7 +232,7 @@ class IngredientsList{
     'course':['Side']},
 
     {'id': 44,
-    'name': 'Mozzarella ',
+    'name': 'Mozzarella',
     'isSelected': false,
     'course':['Main1']},
 
@@ -329,7 +337,7 @@ class IngredientsList{
     'course':[]},
 
     {'id': 65,
-    'name': 'Saffron ',
+    'name': 'Saffron',
     'isSelected': false,
     'course':['Main1']},
 
@@ -472,10 +480,3 @@ class IngredientsList{
 
 
 }//Ingredients
-
-/*
-{'id': 1,
-    'name': 'ingredient',
-    'course': 'course#'
-    'isSelected': false},
-*/ 
