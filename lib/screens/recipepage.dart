@@ -1,17 +1,35 @@
+// ignore_for_file: avoid_print
+
 import 'package:flutter/material.dart';
 import 'package:flutter_doctors/screens/mainnavigator.dart';
-import 'package:material_design_icons_flutter/material_design_icons_flutter.dart';
+import 'package:flutter_doctors/models/mealchoice.dart';
+import 'package:provider/provider.dart';
 
 
-class RecipePage extends StatelessWidget {
-  const RecipePage({Key? key}) : super(key: key);
+class RecipePage extends StatefulWidget {
+  RecipePage({Key? key}) : super(key: key);
 
   static const routename = 'RecipePage';
+
+  @override
+  _RecipePageState createState() => _RecipePageState();
+}
+
+class _RecipePageState extends State<RecipePage> {
+
+  Map items = {};
+
+    @override
+  void initState() {
+    items = Provider.of<MealChoiche>(context, listen: false).chosen;
+    super.initState();
+  }
 
   // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {
     print('${RecipePage.routename} built');
+
     return Scaffold(
       appBar: AppBar(
         leading: BackButton(
@@ -24,13 +42,37 @@ class RecipePage extends StatelessWidget {
             onPressed: () => _toMainNavigator(context),
           ),
         ],
-        title: Text(RecipePage.routename), centerTitle: true),
+        title: const Text(RecipePage.routename), centerTitle: true),
       floatingActionButton: FloatingActionButton(
         elevation: 10,
-        child: Icon(Icons.check),
+        child: const Icon(Icons.check),
         onPressed: (){},
       ),
-      body: Center(child: Text('Recipe Here')),
+      body: Column(
+          children: <Widget>[
+            const Padding(
+              padding: EdgeInsets.all(10),
+            ),
+            Expanded(
+              child:
+              ListView.builder(
+                itemCount: items.length,
+                itemBuilder: (BuildContext context, int index) {
+                  String key = items.keys.elementAt(index);
+                  return Column(
+                    children: <Widget>[
+                      ListTile(
+                        title: Text('$key'),
+                        subtitle: Text('${items[key]['name']}'),
+                      ),
+                      const Divider(
+                        height: 2.0,
+                      ),
+                    ],
+                  );
+                },
+              )
+      ),],),
     );
   }
 

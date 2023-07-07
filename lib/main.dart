@@ -17,7 +17,7 @@ class MyApp extends StatelessWidget {
   return MultiProvider(
     providers: [
     Provider<Favorites>(create: (context) => Favorites()),
-    Provider<MealChoiche>(create: (_) => MealChoiche()),
+    ListenableProvider<MealChoiche>(create: (_) => MealChoiche()),
   ],
       child: MaterialApp(
       theme: ThemeData(

@@ -303,7 +303,7 @@ class _IngredientsPageState extends State<IngredientsPage> {
 
   void _toMainNavigator(BuildContext context){
     Navigator.of(context).pushReplacement(MaterialPageRoute(builder: (context) => const MainNavigator()));
-  }//_toHomePage
+  }//_toMainNavigator
 
   void _toCookBookPage(BuildContext context){
 
@@ -312,7 +312,7 @@ class _IngredientsPageState extends State<IngredientsPage> {
     }
 
     Navigator.of(context).pushReplacement(MaterialPageRoute(builder: (context) => CookBookPage( selected: chosen, meal: widget.meal)));
-  }//_toHomePage
+  }//_toCookBookPage
 
   /* void _filterSearchResults(String query) {
   setState(() {

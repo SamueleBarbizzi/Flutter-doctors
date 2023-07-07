@@ -1,6 +1,7 @@
 // ignore_for_file: depend_on_referenced_packages, library_private_types_in_public_api, avoid_print, unused_import
 
 import 'package:flutter/material.dart';
+import 'package:flutter_doctors/models/mealchoice.dart';
 import 'package:material_design_icons_flutter/material_design_icons_flutter.dart';
 import 'package:flutter_doctors/screens/mainnavigator.dart';
 import 'package:flutter_doctors/screens/ingredientspage.dart';
@@ -34,6 +35,11 @@ class _CookBookPageState extends State<CookBookPage> {
   // TextEditingController editingController = TextEditingController();
 
   final List<String> groupsName = ['FIRST MAIN DISH','SECOND MAIN DISH','SIDE','DESSERT'];
+  List<List> groups = Groups().createDishesGroups();
+  List<String> chosenName = ['main1','main2','side','dessert'];
+
+  List<List> chosen = []; // list of the selected recipes
+
 
   @override
 
@@ -339,10 +345,26 @@ class _CookBookPageState extends State<CookBookPage> {
 
   void _toMainNavigator(BuildContext context){
     Navigator.of(context).pushReplacement(MaterialPageRoute(builder: (context) => const MainNavigator()));
-  }//_toHomePage
+  }//_toMainNavigator
 
   void _toRecipePage(BuildContext context){
+
+    for (int i=0; i<groups.length;i++){
+      chosen.add(possibleRecipes[i].where((item) => item['isSelected'] == true).toList());
+    }
+
+    for (int i=0; i<chosen.length; i++){
+      for (int j=0; j<chosen[i].length; j++){
+
+        String dish = '${widget.meal.toUpperCase()}_${chosenName[i].toLowerCase()}_${(j+1).toString()}';
+        Map item = chosen[i][j];
+
+        Provider.of<MealChoiche>(context, listen: false).ChooseAndReplace(dish,item);
+        
+      }
+    }
+
     Navigator.of(context).push(MaterialPageRoute(builder: (context) => RecipePage()));
-  }//_toHomePage
+  }//_toCookBookPage
 
 } //HomePage
