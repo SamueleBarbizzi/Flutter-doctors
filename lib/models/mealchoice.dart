@@ -6,12 +6,12 @@ class MealChoiche extends ChangeNotifier{
   Map chosen = {
 
     'BREAKFAST': {},
-    'LAUNCH_meal1': {},
-    'LAUNCH_meal2': {},
-    'LAUNCH_side': {},
-    'LAUNCH_dessert': {},
-    'DINNER_meal1': {},
-    'DINNER_meal2': {},
+    'LUNCH_main1': {},
+    'LUNCH_main2': {},
+    'LUNCH_side': {},
+    'LUNCH_dessert': {},
+    'DINNER_main1': {},
+    'DINNER_main2': {},
     'DINNER_side': {},
     'DINNER_dessert': {},
 
@@ -34,15 +34,15 @@ class MealChoiche extends ChangeNotifier{
 
   void clearFavorite() =>   chosen = {
 
-    'Breakfast': {},
-    'LAUNCH_Meal1': {},
-    'LAUNCH_Meal2': {},
-    'LAUNCH_Side': {},
-    'LAUNCH_Dessert': {},
-    'DINNER_Meal1': {},
-    'DINNER_Meal2': {},
-    'DINNER_Side': {},
-    'DINNER_Dessert': {},
+    'BREAKFAST': {},
+    'LUNCH_main1': {},
+    'LUNCH_main2': {},
+    'LUNCH_side': {},
+    'LUNCH_dessert': {},
+    'DINNER_main1': {},
+    'DINNER_main2': {},
+    'DINNER_side': {},
+    'DINNER_dessert': {},
 
   };
 

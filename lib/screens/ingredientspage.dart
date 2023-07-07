@@ -9,7 +9,9 @@ import 'package:flutter_doctors/models/ingredientslist.dart';
 
 
 class IngredientsPage extends StatefulWidget {
-  const IngredientsPage({Key? key}) : super(key: key);
+  const IngredientsPage({Key? key, required this.meal}) : super(key: key);
+
+   final String meal;
 
   static const routename = 'IngredientsPage';
 
@@ -44,7 +46,6 @@ class _IngredientsPageState extends State<IngredientsPage> {
     print('${IngredientsPage.routename} built');
     return DefaultTabController(
       length: groups.length,
-      
       child: Scaffold(
         floatingActionButton:FloatingActionButton(
           onPressed: () {
@@ -310,7 +311,7 @@ class _IngredientsPageState extends State<IngredientsPage> {
       chosen.add(groups[i].where((item) => item['isSelected'] == true).toList());
     }
 
-    Navigator.of(context).pushReplacement(MaterialPageRoute(builder: (context) => CookBookPage( selected: chosen)));
+    Navigator.of(context).pushReplacement(MaterialPageRoute(builder: (context) => CookBookPage( selected: chosen, meal: widget.meal)));
   }//_toHomePage
 
   /* void _filterSearchResults(String query) {
