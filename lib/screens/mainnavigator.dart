@@ -8,7 +8,9 @@ import 'package:flutter_doctors/screens/favoritespage.dart';
 import 'package:flutter_doctors/screens/homepage.dart';
 
 class MainNavigator extends StatefulWidget {
-  const MainNavigator({Key? key}) : super(key: key);
+
+  const MainNavigator({super.key});
+  
 
   static const routename = 'MainNavigator';
 
