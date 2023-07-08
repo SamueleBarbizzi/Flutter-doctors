@@ -37,6 +37,7 @@ dependencies:
   intl: ^0.18.1
   floor: ^1.4.2
   http: ^1.0.0
+  material_design_icons_flutter: ^6.0.7096
   
 
   # The following adds the Cupertino Icons font to your application.
@@ -46,7 +47,6 @@ dependencies:
 dev_dependencies:
   flutter_test:
     sdk: flutter
-  material_design_icons_flutter: ^6.0.7096
   floor_generator: ^1.4.2
   build_runner: ^2.1.2
 
