@@ -9,7 +9,8 @@ import 'package:flutter_doctors/models/ingredientslist.dart';
 
 
 class IngredientsPage extends StatefulWidget {
-  const IngredientsPage({Key? key}) : super(key: key);
+  final bool firstDatabaseEntry;
+  const IngredientsPage({super.key, required this.firstDatabaseEntry});
 
   static const routename = 'IngredientsPage';
 
@@ -58,7 +59,7 @@ class _IngredientsPageState extends State<IngredientsPage> {
           backgroundColor: Colors.green,
           title: const Text(IngredientsPage.routename),
           leading: BackButton(
-              onPressed: () => Navigator.of(context).pushReplacement(MaterialPageRoute(builder: (context) => const MainNavigator())),
+              onPressed: () => Navigator.of(context).pushReplacement(MaterialPageRoute(builder: (context) => MainNavigator(firstDatabaseEntry: widget.firstDatabaseEntry))),
             ),
           actions: [
             IconButton(
@@ -301,7 +302,7 @@ class _IngredientsPageState extends State<IngredientsPage> {
 
 
   void _toMainNavigator(BuildContext context){
-    Navigator.of(context).pushReplacement(MaterialPageRoute(builder: (context) => const MainNavigator()));
+    Navigator.of(context).pushReplacement(MaterialPageRoute(builder: (context) => MainNavigator(firstDatabaseEntry: widget.firstDatabaseEntry,)));
   }//_toHomePage
 
   void _toCookBookPage(BuildContext context){
@@ -310,7 +311,7 @@ class _IngredientsPageState extends State<IngredientsPage> {
       chosen.add(groups[i].where((item) => item['isSelected'] == true).toList());
     }
 
-    Navigator.of(context).pushReplacement(MaterialPageRoute(builder: (context) => CookBookPage( selected: chosen)));
+    Navigator.of(context).pushReplacement(MaterialPageRoute(builder: (context) => CookBookPage(selected: chosen, firstDatabaseEntry: widget.firstDatabaseEntry)));
   }//_toHomePage
 
   /* void _filterSearchResults(String query) {

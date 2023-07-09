@@ -10,7 +10,8 @@ import 'package:flutter_doctors/models/groups.dart';
 import 'package:provider/provider.dart';
 
 class CookBookPage extends StatefulWidget {
-  const CookBookPage({Key? key, required this.selected}) : super(key: key);
+  final bool firstDatabaseEntry;
+  const CookBookPage({super.key, required this.selected, required this.firstDatabaseEntry});
 
   final List<List> selected;
 
@@ -80,7 +81,7 @@ class _CookBookPageState extends State<CookBookPage> {
         backgroundColor: Colors.green,
         title: const Text(CookBookPage.routename),
         leading: BackButton(
-            onPressed: () => Navigator.of(context).pushReplacement(MaterialPageRoute(builder: (context) => const IngredientsPage())),
+            onPressed: () => Navigator.of(context).pushReplacement(MaterialPageRoute(builder: (context) => IngredientsPage(firstDatabaseEntry: widget.firstDatabaseEntry,))),
           ),
         actions: [
           IconButton(
@@ -327,7 +328,7 @@ class _CookBookPageState extends State<CookBookPage> {
   */
 
   void _toMainNavigator(BuildContext context){
-    Navigator.of(context).pushReplacement(MaterialPageRoute(builder: (context) => const MainNavigator()));
+    Navigator.of(context).pushReplacement(MaterialPageRoute(builder: (context) => MainNavigator(firstDatabaseEntry: widget.firstDatabaseEntry,)));
   }//_toHomePage
 
 

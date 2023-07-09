@@ -9,7 +9,9 @@ import 'package:flutter_doctors/screens/ingredientspage.dart';
 
 
 class HomePage extends StatefulWidget {
-  const HomePage({Key? key}) : super(key: key);
+  final bool firstDatabaseEntry;
+  const HomePage({super.key, required this.firstDatabaseEntry});
+  
   static const routename = 'Homepage';
 
   @override
@@ -357,7 +359,7 @@ class _HomePageState extends State<HomePage> {
 
 
   void _toIngredientsPage(BuildContext context){
-    Navigator.of(context).pushReplacement(MaterialPageRoute(builder: (context) => const IngredientsPage()));
+    Navigator.of(context).pushReplacement(MaterialPageRoute(builder: (context) => IngredientsPage(firstDatabaseEntry: widget.firstDatabaseEntry)));
   }//_toIngredientsPage
 
 
