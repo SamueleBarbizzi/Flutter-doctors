@@ -56,4 +56,27 @@ class Groups {
     return [DessertDishes];
   }
 
+/*
+  // here we creates the groups in which the personal recipes are displayed,
+  // based on the course  in which they are used
+
+    final List<Map> BreakfastPersonal = CookBook().recipeslist
+  .where((element) => element['course'].contains('Breakfast')).toList();
+
+  final List<Map> FirstMainPersonal = CookBook().recipeslist
+  .where((element) => element['course'].contains('Main1')).toList();
+
+  final List<Map> SecondMainPersonal = CookBook().recipeslist
+  .where((element) => element['course'].contains('Main2')).toList();
+
+  final List<Map> SidePersonal = CookBook().recipeslist
+  .where((element) => element['course'].contains('Side')).toList();
+
+  final List<Map> DessertPersonal = CookBook().recipeslist
+  .where((element) => element['course'].contains('Dessert')).toList();
+
+  List<List> createPersonalGroups(){
+    return [FirstMainPersonal,SecondMainPersonal,SidePersonal,DessertPersonal];
+  }
+*/
 }

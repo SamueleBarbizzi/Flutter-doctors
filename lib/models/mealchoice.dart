@@ -24,16 +24,6 @@ class MealChoiche extends ChangeNotifier{
   };
   */
 
-  bool keyExist(String meal, String course){
-    final isExist = chosen.containsKey('${meal.toUpperCase()}_${course.toLowerCase()}');
-    return isExist;
-  }
-
-  bool recipeExist(String dish, Map item){
-    final isExist = chosen[dish].contains(item);
-    return isExist;
-  }
-
   void ChooseAndReplace(String dish, Map item){
     // this wants to alternate between inserting the recipe in the chosen Map,
     // or substitute the actual chosen recipe, or either delete it
@@ -51,7 +41,7 @@ class MealChoiche extends ChangeNotifier{
     notifyListeners();
   }
 
-  void clearFavorite(){chosen = {};notifyListeners();}
+  void clearChosen(){chosen = {};notifyListeners();}
 
   Map getRecipe(String meal, String course){
     return chosen['${meal.toUpperCase()}_${course.toLowerCase()}'];
@@ -61,4 +51,5 @@ class MealChoiche extends ChangeNotifier{
     return chosen;
   }
 
-}//Favorites
+
+}//MealChoice

@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_doctors/models/favorites.dart';
 import 'package:flutter_doctors/models/mealchoice.dart';
+import 'package:flutter_doctors/models/personalmeals.dart';
 import 'package:flutter_doctors/screens/loginpage.dart';
 import 'package:provider/provider.dart';
 
@@ -18,6 +19,7 @@ class MyApp extends StatelessWidget {
     providers: [
     Provider<Favorites>(create: (context) => Favorites()),
     ListenableProvider<MealChoiche>(create: (_) => MealChoiche()),
+    ListenableProvider<PersonalMeals>(create: (_) => PersonalMeals()),
   ],
       child: MaterialApp(
       theme: ThemeData(
