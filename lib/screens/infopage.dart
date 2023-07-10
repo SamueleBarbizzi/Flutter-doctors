@@ -69,6 +69,10 @@ class InfoPage extends StatelessWidget {
             Text('Name: Samuele Barbizzi'),
             Text('Email: samuele.barbizzi@studenti.unipd.it'),
 
+            SizedBox(height: 8.0),
+            Text('Name: Christian Dragonetti'),
+            Text('Email: christian.dragonetti@studenti.unipd.it'),
+
            SizedBox(height: 16.0),
             Text(
               'Legal information',
