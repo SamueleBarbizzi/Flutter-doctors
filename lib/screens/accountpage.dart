@@ -27,6 +27,7 @@ class _AccountPageState extends State<AccountPage> {
   final TextEditingController _ageController = TextEditingController();
   final TextEditingController _improvementGoalController = TextEditingController();
   final TextEditingController _foodIntoleranceController = TextEditingController();
+  final TextEditingController  _dailycalorieintakeController = TextEditingController();
 
   @override
   void initState() {
@@ -44,6 +45,7 @@ class _AccountPageState extends State<AccountPage> {
       _ageController.text = prefs.getString('age') ?? '';
       _improvementGoalController.text = prefs.getString('improvementGoal') ?? '';
       _foodIntoleranceController.text = prefs.getString('foodIntolerance') ?? '';
+      _dailycalorieintakeController.text = prefs.getString('dailycalorieintake') ?? '';
     });
   }
 
@@ -56,6 +58,7 @@ class _AccountPageState extends State<AccountPage> {
     await prefs.setString('age', _ageController.text);
     await prefs.setString('improvementGoal', _improvementGoalController.text);
     await prefs.setString('foodIntolerance', _foodIntoleranceController.text);
+    await prefs.setString('dailycalorieintake', _dailycalorieintakeController.text);
   }
   
   
@@ -138,7 +141,8 @@ class _AccountPageState extends State<AccountPage> {
            buildTextField('Gender', 'Enter your gender', false, _genderController),
            buildTextField('Age', 'Enter your age', false, _ageController),
            buildTextField('Improvement goal', 'Enter your improvement goal', false,  _improvementGoalController),
-           buildTextField('Food intolerances/allergy', 'Enter your food intolerances/allergy', false,  _foodIntoleranceController),           
+           buildTextField('Daily calorie intake', 'Enter your daily calorie intake', false,  _dailycalorieintakeController), 
+           buildTextField('Food intolerances/allergy', 'Enter your food intolerances/allergy', false,  _foodIntoleranceController),          
           
                 const Center(
                   child: SizedBox(
