@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:material_design_icons_flutter/material_design_icons_flutter.dart';
+import 'package:flutter_doctors/screens/mainnavigator.dart';
 
 
 class RecipePage extends StatelessWidget {
@@ -14,14 +15,9 @@ class RecipePage extends StatelessWidget {
     return Scaffold(
       appBar: AppBar(
         leading: BackButton(
-            onPressed: (){}
+            onPressed: () => Navigator.of(context).pushReplacement(MaterialPageRoute(builder: (context) => const MainNavigator())),
           ),
         title: Text(RecipePage.routename), centerTitle: true),
-      floatingActionButton: FloatingActionButton(
-        elevation: 10,
-        child: Icon(Icons.check),
-        onPressed: (){},
-      ),
       body: SingleChildScrollView( 
         child: Container( padding: EdgeInsets.all(5),
           child: Column( crossAxisAlignment: CrossAxisAlignment.start,
@@ -181,3 +177,9 @@ class RecipePage extends StatelessWidget {
     );
   }
 }
+
+
+
+  void _toMainNavigator(BuildContext context){
+    Navigator.of(context).pushReplacement(MaterialPageRoute(builder: (context) => const MainNavigator()));
+  }//_toHomePage
