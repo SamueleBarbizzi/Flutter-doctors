@@ -16,18 +16,19 @@ class AccountPage extends StatefulWidget {
 }
 
 class _AccountPageState extends State<AccountPage> {
-  
-  bool isObscurePassword =true;
-  
+  bool isObscurePassword = true;
 
   final TextEditingController _fullNameController = TextEditingController();
-   final TextEditingController _emailController = TextEditingController();
+  final TextEditingController _emailController = TextEditingController();
   final TextEditingController _passwordController = TextEditingController();
   final TextEditingController _genderController = TextEditingController();
   final TextEditingController _ageController = TextEditingController();
-  final TextEditingController _improvementGoalController = TextEditingController();
-  final TextEditingController _foodIntoleranceController = TextEditingController();
-  final TextEditingController  _dailycalorieintakeController = TextEditingController();
+  final TextEditingController _improvementGoalController =
+      TextEditingController();
+  final TextEditingController _foodIntoleranceController =
+      TextEditingController();
+  final TextEditingController _dailycalorieintakeController =
+      TextEditingController();
 
   @override
   void initState() {
@@ -43,9 +44,12 @@ class _AccountPageState extends State<AccountPage> {
       _passwordController.text = prefs.getString('password') ?? '';
       _genderController.text = prefs.getString('gender') ?? '';
       _ageController.text = prefs.getString('age') ?? '';
-      _improvementGoalController.text = prefs.getString('improvementGoal') ?? '';
-      _foodIntoleranceController.text = prefs.getString('foodIntolerance') ?? '';
-      _dailycalorieintakeController.text = prefs.getString('dailycalorieintake') ?? '';
+      _improvementGoalController.text =
+          prefs.getString('improvementGoal') ?? '';
+      _foodIntoleranceController.text =
+          prefs.getString('foodIntolerance') ?? '';
+      _dailycalorieintakeController.text =
+          prefs.getString('dailycalorieintake') ?? '';
     });
   }
 
@@ -58,10 +62,10 @@ class _AccountPageState extends State<AccountPage> {
     await prefs.setString('age', _ageController.text);
     await prefs.setString('improvementGoal', _improvementGoalController.text);
     await prefs.setString('foodIntolerance', _foodIntoleranceController.text);
-    await prefs.setString('dailycalorieintake', _dailycalorieintakeController.text);
+    await prefs.setString(
+        'dailycalorieintake', _dailycalorieintakeController.text);
   }
-  
-  
+
   @override
   Widget build(BuildContext context) {
     print('${AccountPage.routename} built');
@@ -76,104 +80,106 @@ class _AccountPageState extends State<AccountPage> {
           ),
         ],
       ),
-
       body: Container(
-        padding: const EdgeInsets.only(left: 15, top: 20, right: 15),
-        child: GestureDetector(
-          onTap: (){
-            FocusScope.of(context).unfocus();
-          },
-        child: ListView(
-          children: [
-            Center(
-              child: Stack(
+          padding: const EdgeInsets.only(left: 15, top: 20, right: 15),
+          child: GestureDetector(
+              onTap: () {
+                FocusScope.of(context).unfocus();
+              },
+              child: ListView(
                 children: [
-                  Container(
-                    width: 130,
-                    height: 130,
-                    decoration: BoxDecoration(
-                      border: Border.all(width: 4, color: Colors.white),
-                      boxShadow: [
-                        BoxShadow(
-                          spreadRadius: 2,
-                          blurRadius: 10,
-                          color: Colors.black.withOpacity(0.1)
-                        )
+                  Center(
+                    child: Stack(
+                      children: [
+                        Container(
+                            width: 130,
+                            height: 130,
+                            decoration: BoxDecoration(
+                                border:
+                                    Border.all(width: 4, color: Colors.white),
+                                boxShadow: [
+                                  BoxShadow(
+                                      spreadRadius: 2,
+                                      blurRadius: 10,
+                                      color: Colors.black.withOpacity(0.1))
+                                ],
+                                shape: BoxShape.circle,
+                                image: const DecorationImage(
+                                  fit: BoxFit.cover,
+                                  image: AssetImage('assets/images/apples.jpg'),
+                                ))),
+                        Positioned(
+                          bottom: 0,
+                          right: 0,
+                          child: Container(
+                            height: 40,
+                            width: 40,
+                            decoration: BoxDecoration(
+                                shape: BoxShape.circle,
+                                border:
+                                    Border.all(width: 4, color: Colors.white),
+                                color: Colors.green),
+                            child: const Icon(
+                              Icons.edit,
+                              color: Colors.white,
+                            ),
+                          ),
+                        ),
                       ],
-                      shape: BoxShape.circle,
-                      image: const DecorationImage(
-                        fit: BoxFit.cover,
-                        image: AssetImage('assets/images/apples.jpg'),
-                      )
-
-                    )
+                    ),
                   ),
-
-                  Positioned(
-                    bottom: 0,
-                    right: 0, 
-                   child: Container(
-                     height: 40,
-                     width: 40,
-                     decoration: BoxDecoration(
-                      shape: BoxShape.circle,
-                      border: Border.all(
-                        width: 4,
-                        color: Colors.white
+                  const SizedBox(height: 30),
+                  buildTextField('Full Name', 'Enter your full name', false,
+                      _fullNameController),
+                  buildTextField(
+                      'Email', 'Enter your email', false, _emailController),
+                  buildTextField('Password', 'Enter your password', true,
+                      _passwordController),
+                  buildTextField(
+                      'Gender', 'Enter your gender', false, _genderController),
+                  buildTextField(
+                      'Age', 'Enter your age', false, _ageController),
+                  buildTextField(
+                      'Improvement goal',
+                      'Enter your improvement goal',
+                      false,
+                      _improvementGoalController),
+                  buildTextField(
+                      'Daily calorie intake',
+                      'Enter your daily calorie intake',
+                      false,
+                      _dailycalorieintakeController),
+                  buildTextField(
+                      'Food intolerances/allergy',
+                      'Enter your food intolerances/allergy',
+                      false,
+                      _foodIntoleranceController),
+                  const Center(
+                    child: SizedBox(
+                      height: 20,
+                    ),
+                  ),
+                  Center(
+                    child: ElevatedButton(
+                      onPressed: () {
+                        saveUserData();
+                      },
+                      style: ElevatedButton.styleFrom(
+                          backgroundColor: Colors.green,
+                          padding: const EdgeInsets.symmetric(horizontal: 80),
+                          shape: RoundedRectangleBorder(
+                              borderRadius: BorderRadius.circular(20))),
+                      child: const Text(
+                        "SAVE",
+                        style: TextStyle(
+                            fontSize: 15,
+                            letterSpacing: 2,
+                            color: Colors.white),
                       ),
-                      color: Colors.green
-                     ),
-
-                    child: const Icon(
-                      Icons.edit,
-                      color: Colors.white,
-                     ),
-                  
                     ),
-                    ),
+                  )
                 ],
-              ),
-            ),
-           const SizedBox(height: 30),
-           buildTextField('Full Name', 'Enter your full name', false, _fullNameController),
-           buildTextField('Email', 'Enter your email', false, _emailController),
-           buildTextField('Password', 'Enter your password', true, _passwordController),         
-           buildTextField('Gender', 'Enter your gender', false, _genderController),
-           buildTextField('Age', 'Enter your age', false, _ageController),
-           buildTextField('Improvement goal', 'Enter your improvement goal', false,  _improvementGoalController),
-           buildTextField('Daily calorie intake', 'Enter your daily calorie intake', false,  _dailycalorieintakeController), 
-           buildTextField('Food intolerances/allergy', 'Enter your food intolerances/allergy', false,  _foodIntoleranceController),          
-          
-                const Center(
-                  child: SizedBox(
-                  height:20,
-                  ),
-                ),
-
-                Center(
-                  child: ElevatedButton(
-                onPressed: () {
-                  saveUserData();
-
-               },
-                style: ElevatedButton.styleFrom(
-                  backgroundColor: Colors.green,
-                  padding: const EdgeInsets.symmetric(horizontal: 80),
-                  shape: RoundedRectangleBorder(borderRadius : BorderRadius.circular(20))
-                ),
-                
-                  child: const Text("SAVE", style: TextStyle(
-                  fontSize:15,
-                  letterSpacing: 2,
-                  color: Colors.white
-                ),),
-                ),
-               )             
-         ],
-        )
-        )
-      ),
-
+              ))),
       drawer: Drawer(
         child: ListView(
           padding: EdgeInsets.zero,
@@ -193,54 +199,60 @@ class _AccountPageState extends State<AccountPage> {
         ),
       ),
     );
-    
-  } 
- //build
-  Widget buildTextField( String labelText, String placeholder, bool isPasswordtextField, TextEditingController controller,) {
+  }
+
+  //build
+  Widget buildTextField(
+    String labelText,
+    String placeholder,
+    bool isPasswordtextField,
+    TextEditingController controller,
+  ) {
     return Padding(
       padding: const EdgeInsets.only(bottom: 30),
-      child:    TextField( 
-      controller: controller, 
-      obscureText: isPasswordtextField ? isObscurePassword : false,
-      decoration: InputDecoration(
-      suffixIcon: isPasswordtextField ?  
-        IconButton(
-          icon: const Icon( Icons.remove_red_eye, color: Colors.grey),
-            onPressed: () {
-              setState((){
-                isObscurePassword = !isObscurePassword;
-              });
-            }      
-        ): null, 
-      contentPadding: const EdgeInsets.only(bottom: 5),
-      labelText: labelText,
-      floatingLabelBehavior: FloatingLabelBehavior.always,
-      hintText: placeholder,
-      hintStyle: const TextStyle(
-        fontSize: 16,
-        fontWeight: FontWeight.bold,
-        color: Colors.grey
-      )
-
-      )
-    ),
+      child: TextField(
+          controller: controller,
+          obscureText: isPasswordtextField ? isObscurePassword : false,
+          decoration: InputDecoration(
+              suffixIcon: isPasswordtextField
+                  ? IconButton(
+                      icon:
+                          const Icon(Icons.remove_red_eye, color: Colors.grey),
+                      onPressed: () {
+                        setState(() {
+                          isObscurePassword = !isObscurePassword;
+                        });
+                      })
+                  : null,
+              contentPadding: const EdgeInsets.only(bottom: 5),
+              labelText: labelText,
+              floatingLabelBehavior: FloatingLabelBehavior.always,
+              hintText: placeholder,
+              hintStyle: const TextStyle(
+                  fontSize: 16,
+                  fontWeight: FontWeight.bold,
+                  color: Colors.grey))),
     );
   }
 
-  void _toLoginPage(BuildContext context) async{
+  void _toLoginPage(BuildContext context) async {
     await DatabaseCall.deleteAll(context);
     SharedPreferences sp = await SharedPreferences.getInstance();
     await sp.remove('username');
     await sp.remove('access');
     await sp.remove('refresh');
     await sp.remove('selectedIndex');
-    //Pop the drawer first 
+    //Pop the drawer first
     Navigator.pop(context);
     //Then pop the HomePage
-    Navigator.of(context).pushReplacement(MaterialPageRoute(builder: (context) => const LoginPage()));
+    Navigator.of(context).pushReplacement(
+        MaterialPageRoute(builder: (context) => const LoginPage()));
   }
+
 //_toLoginPage
-    void _toInfoPage(BuildContext context){
+  void _toInfoPage(BuildContext context) {
     //Then pop the AccountPage
-    Navigator.of(context).push(MaterialPageRoute(builder: (context) => InfoPage()));
-  }} //AccountPage
+    Navigator.of(context)
+        .push(MaterialPageRoute(builder: (context) => InfoPage()));
+  }
+} //AccountPage

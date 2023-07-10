@@ -15,7 +15,7 @@ import 'package:provider/provider.dart';
 
 class CookBookPage extends StatefulWidget {
 
-  const CookBookPage({Key? key, required this.selected, required this.meal, required this.firstDatabaseEntry}}) : super(key: key);
+  const CookBookPage({Key? key, required this.selected, required this.meal, required this.firstDatabaseEntry}) : super(key: key);
 
   final bool firstDatabaseEntry;
   final List<List> selected;
@@ -984,7 +984,7 @@ class _CookBookPageState extends State<CookBookPage> {
       }
     }
 
-    Navigator.of(context).pushReplacement(MaterialPageRoute(builder: (context) => const MainNavigator()));
+    Navigator.of(context).pushReplacement(MaterialPageRoute(builder: (context) => MainNavigator(flag: false, firstDatabaseEntry: widget.firstDatabaseEntry)));
   }//_Done
 
  void _showRecipe (BuildContext context, String dish, Map recipe){

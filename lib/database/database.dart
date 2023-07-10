@@ -1,4 +1,6 @@
 //Imports that are necessary to the code generator of floor
+// ignore_for_file: depend_on_referenced_packages
+
 import 'dart:async';
 import 'package:floor/floor.dart';
 import 'package:flutter_doctors/database/typeconverters/datetimeconverter.dart';
@@ -21,5 +23,4 @@ abstract class AppDatabase extends FloorDatabase {
   /* Future<void> deleteDatabase(String path) async {
    await sqflite.deleteDatabase(path);
   } */
-
 }

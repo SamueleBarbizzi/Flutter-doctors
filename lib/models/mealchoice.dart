@@ -2,8 +2,7 @@
 
 import 'package:flutter/material.dart';
 
-class MealChoiche extends ChangeNotifier{
-
+class MealChoiche extends ChangeNotifier {
   //Initialize list of choosen recipes
   Map chosen = {};
 
@@ -24,32 +23,37 @@ class MealChoiche extends ChangeNotifier{
   };
   */
 
-  void ChooseAndReplace(String dish, Map item){
+  void ChooseAndReplace(String dish, Map item) {
     // this wants to alternate between inserting the recipe in the chosen Map,
     // or substitute the actual chosen recipe, or either delete it
 
     final isExist = chosen.containsKey(dish);
 
-    if(isExist){
+    if (isExist) {
       final recipeExist = chosen[dish].contains(item);
-      if(recipeExist){chosen[dish] = {};}
-      else{chosen[dish] = item;}
+      if (recipeExist) {
+        chosen[dish] = {};
+      } else {
+        chosen[dish] = item;
+      }
+    } else {
+      chosen[dish] = item;
     }
-    else{chosen[dish] = item;}
 
     //Call the notifyListeners() method to alert that something happened.
     notifyListeners();
   }
 
-  void clearChosen(){chosen = {};notifyListeners();}
+  void clearChosen() {
+    chosen = {};
+    notifyListeners();
+  }
 
-  Map getRecipe(String meal, String course){
+  Map getRecipe(String meal, String course) {
     return chosen['${meal.toUpperCase()}_${course.toLowerCase()}'];
   }
 
-  Map getChosenRecipes(){
+  Map getChosenRecipes() {
     return chosen;
   }
-
-
 }//MealChoice

@@ -1,17 +1,15 @@
 import 'package:flutter/material.dart';
 
-class Favorites extends ChangeNotifier{
-
+class Favorites extends ChangeNotifier {
   //Initialize list of favorites recipes
   List<Map> favorites = [];
 
-  void toggleFavorite(Map item){
+  void toggleFavorite(Map item) {
     // this wants to alternate between favorite and not favorite
     final isExist = favorites.contains(item);
-    if(isExist){
+    if (isExist) {
       favorites.remove(item);
-    }
-    else{
+    } else {
       favorites.add(item);
 
       //sort by alphabet order
@@ -27,7 +25,7 @@ class Favorites extends ChangeNotifier{
 
   void clearFavorite() => favorites = [];
 
-  bool isExist(Map item){
+  bool isExist(Map item) {
     final isExist = favorites.contains(item);
     return isExist;
   }
@@ -53,6 +51,4 @@ class Favorites extends ChangeNotifier{
   }//deleteRecipe
   
   */
-
-
 }//Favorites

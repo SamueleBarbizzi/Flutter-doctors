@@ -7,13 +7,13 @@ import 'package:flutter_doctors/screens/mainnavigator.dart';
 import 'package:flutter_doctors/screens/cookbookpage.dart';
 import 'package:flutter_doctors/models/ingredientslist.dart';
 
-
 class IngredientsPage extends StatefulWidget {
-  const IngredientsPage({Key? key, required this.meal, required this.firstDatabaseEntry}}) : super(key: key);
+  const IngredientsPage(
+      {Key? key, required this.meal, required this.firstDatabaseEntry})
+      : super(key: key);
 
-   final String meal;
+  final String meal;
   final bool firstDatabaseEntry;
-
 
   static const routename = 'IngredientsPage';
 
@@ -24,7 +24,7 @@ class IngredientsPage extends StatefulWidget {
 class _IngredientsPageState extends State<IngredientsPage> {
   //List of ingredients
   final ingredients = IngredientsList().ingredientslist;
-  
+
   // list of selected ingredients to send to the next page
   List<List> chosen = [];
 
@@ -32,12 +32,17 @@ class _IngredientsPageState extends State<IngredientsPage> {
   //TextEditingController editingController = TextEditingController();
 
   // Specify the name of the groups in which the ingredients are divided, and create those groups
-  final List<String> groupsName = ['FIRST MAIN DISH','SECOND MAIN DISH','SIDE','DESSERT'];
+  final List<String> groupsName = [
+    'FIRST MAIN DISH',
+    'SECOND MAIN DISH',
+    'SIDE',
+    'DESSERT'
+  ];
   List<List> groups = Groups().createIngredientsGroups();
 
   @override
   void initState() {
-    for (int i=0; i<groups.length;i++){
+    for (int i = 0; i < groups.length; i++) {
       groups[i].sort((a, b) => a["name"].compareTo(b["name"]));
     }
     super.initState();
@@ -49,7 +54,7 @@ class _IngredientsPageState extends State<IngredientsPage> {
     return DefaultTabController(
       length: groups.length,
       child: Scaffold(
-        floatingActionButton:FloatingActionButton(
+        floatingActionButton: FloatingActionButton(
           onPressed: () {
             //go to recipes page
             _toCookBookPage(context);
@@ -61,8 +66,12 @@ class _IngredientsPageState extends State<IngredientsPage> {
           backgroundColor: Colors.green,
           title: const Text(IngredientsPage.routename),
           leading: BackButton(
-              onPressed: () => Navigator.of(context).pushReplacement(MaterialPageRoute(builder: (context) => MainNavigator(firstDatabaseEntry: widget.firstDatabaseEntry, flag: false))),
-            ),
+            onPressed: () => Navigator.of(context).pushReplacement(
+                MaterialPageRoute(
+                    builder: (context) => MainNavigator(
+                        firstDatabaseEntry: widget.firstDatabaseEntry,
+                        flag: false))),
+          ),
           actions: [
             IconButton(
               icon: const Icon(Icons.home),
@@ -83,136 +92,132 @@ class _IngredientsPageState extends State<IngredientsPage> {
         body: TabBarView(
           children: [
             ListView.builder(
-                            shrinkWrap: true,
-                            itemCount: groups[0].length,
-                            itemBuilder: (BuildContext ctx, index) {
-                              return Card(
-                                  key: ValueKey(groups[0][index]['name']),
-                                  margin: const EdgeInsets.all(1),
-                                  shape: RoundedRectangleBorder(
-                                      borderRadius: BorderRadius.circular(5)),
+              shrinkWrap: true,
+              itemCount: groups[0].length,
+              itemBuilder: (BuildContext ctx, index) {
+                return Card(
+                    key: ValueKey(groups[0][index]['name']),
+                    margin: const EdgeInsets.all(1),
+                    shape: RoundedRectangleBorder(
+                        borderRadius: BorderRadius.circular(5)),
 
-                                  // The color depends on this is selected or not
-                                  color: groups[0][index]['isSelected'] == true
-                                      ? Colors.lightGreen
-                                      : Colors.white,
-                                  child: ListTile(
-                                    onTap: () {
-                                      // if this item isn't selected yet, "isSelected": false -> true
-                                      // If this item already is selected: "isSelected": true -> false
-                                      setState(() {
-                                        groups[0][index]['isSelected'] = !groups[0][index]['isSelected'];
-                                      });
-                                    },
-                                    //leading: CircleAvatar(
-                                    //    backgroundColor: Colors.green,
-                                    //    child: Text(items[index]['id'].toString())),
-                                    title: Text(groups[0][index]['name']),
-                                  )
-                              );
-                          },
-                        ),
-
+                    // The color depends on this is selected or not
+                    color: groups[0][index]['isSelected'] == true
+                        ? Colors.lightGreen
+                        : Colors.white,
+                    child: ListTile(
+                      onTap: () {
+                        // if this item isn't selected yet, "isSelected": false -> true
+                        // If this item already is selected: "isSelected": true -> false
+                        setState(() {
+                          groups[0][index]['isSelected'] =
+                              !groups[0][index]['isSelected'];
+                        });
+                      },
+                      //leading: CircleAvatar(
+                      //    backgroundColor: Colors.green,
+                      //    child: Text(items[index]['id'].toString())),
+                      title: Text(groups[0][index]['name']),
+                    ));
+              },
+            ),
             ListView.builder(
-                            shrinkWrap: true,
-                            itemCount: groups[1].length,
-                            itemBuilder: (BuildContext ctx, index) {
-                              return Card(
-                                  key: ValueKey(groups[1][index]['name']),
-                                  margin: const EdgeInsets.all(1),
-                                  shape: RoundedRectangleBorder(
-                                      borderRadius: BorderRadius.circular(5)),
+              shrinkWrap: true,
+              itemCount: groups[1].length,
+              itemBuilder: (BuildContext ctx, index) {
+                return Card(
+                    key: ValueKey(groups[1][index]['name']),
+                    margin: const EdgeInsets.all(1),
+                    shape: RoundedRectangleBorder(
+                        borderRadius: BorderRadius.circular(5)),
 
-                                  // The color depends on this is selected or not
-                                  color: groups[1][index]['isSelected'] == true
-                                      ? Colors.lightGreen
-                                      : Colors.white,
-                                  child: ListTile(
-                                    onTap: () {
-                                      // if this item isn't selected yet, "isSelected": false -> true
-                                      // If this item already is selected: "isSelected": true -> false
-                                      setState(() {
-                                        groups[1][index]['isSelected'] = !groups[1][index]['isSelected'];
-                                      });
-                                    },
-                                    //leading: CircleAvatar(
-                                    //    backgroundColor: Colors.green,
-                                    //    child: Text(items[index]['id'].toString())),
-                                    title: Text(groups[1][index]['name']),
-                                  )
-                              );
-                          },
-                        ),
-
+                    // The color depends on this is selected or not
+                    color: groups[1][index]['isSelected'] == true
+                        ? Colors.lightGreen
+                        : Colors.white,
+                    child: ListTile(
+                      onTap: () {
+                        // if this item isn't selected yet, "isSelected": false -> true
+                        // If this item already is selected: "isSelected": true -> false
+                        setState(() {
+                          groups[1][index]['isSelected'] =
+                              !groups[1][index]['isSelected'];
+                        });
+                      },
+                      //leading: CircleAvatar(
+                      //    backgroundColor: Colors.green,
+                      //    child: Text(items[index]['id'].toString())),
+                      title: Text(groups[1][index]['name']),
+                    ));
+              },
+            ),
             ListView.builder(
-                            shrinkWrap: true,
-                            itemCount: groups[2].length,
-                            itemBuilder: (BuildContext ctx, index) {
-                              return Card(
-                                  key: ValueKey(groups[2][index]['name']),
-                                  margin: const EdgeInsets.all(1),
-                                  shape: RoundedRectangleBorder(
-                                      borderRadius: BorderRadius.circular(5)),
+              shrinkWrap: true,
+              itemCount: groups[2].length,
+              itemBuilder: (BuildContext ctx, index) {
+                return Card(
+                    key: ValueKey(groups[2][index]['name']),
+                    margin: const EdgeInsets.all(1),
+                    shape: RoundedRectangleBorder(
+                        borderRadius: BorderRadius.circular(5)),
 
-                                  // The color depends on this is selected or not
-                                  color: groups[2][index]['isSelected'] == true
-                                      ? Colors.lightGreen
-                                      : Colors.white,
-                                  child: ListTile(
-                                    onTap: () {
-                                      // if this item isn't selected yet, "isSelected": false -> true
-                                      // If this item already is selected: "isSelected": true -> false
-                                      setState(() {
-                                        groups[2][index]['isSelected'] = !groups[2][index]['isSelected'];
-                                      });
-                                    },
-                                    //leading: CircleAvatar(
-                                    //    backgroundColor: Colors.green,
-                                    //    child: Text(items[index]['id'].toString())),
-                                    title: Text(groups[2][index]['name']),
-                                  )
-                              );
-                          },
-                        ),
-              ListView.builder(
-                            shrinkWrap: true,
-                            itemCount: groups[3].length,
-                            itemBuilder: (BuildContext ctx, index) {
-                              return Card(
-                                  key: ValueKey(groups[3][index]['name']),
-                                  margin: const EdgeInsets.all(1),
-                                  shape: RoundedRectangleBorder(
-                                      borderRadius: BorderRadius.circular(5)),
+                    // The color depends on this is selected or not
+                    color: groups[2][index]['isSelected'] == true
+                        ? Colors.lightGreen
+                        : Colors.white,
+                    child: ListTile(
+                      onTap: () {
+                        // if this item isn't selected yet, "isSelected": false -> true
+                        // If this item already is selected: "isSelected": true -> false
+                        setState(() {
+                          groups[2][index]['isSelected'] =
+                              !groups[2][index]['isSelected'];
+                        });
+                      },
+                      //leading: CircleAvatar(
+                      //    backgroundColor: Colors.green,
+                      //    child: Text(items[index]['id'].toString())),
+                      title: Text(groups[2][index]['name']),
+                    ));
+              },
+            ),
+            ListView.builder(
+              shrinkWrap: true,
+              itemCount: groups[3].length,
+              itemBuilder: (BuildContext ctx, index) {
+                return Card(
+                    key: ValueKey(groups[3][index]['name']),
+                    margin: const EdgeInsets.all(1),
+                    shape: RoundedRectangleBorder(
+                        borderRadius: BorderRadius.circular(5)),
 
-                                  // The color depends on this is selected or not
-                                  color: groups[3][index]['isSelected'] == true
-                                      ? Colors.lightGreen
-                                      : Colors.white,
-                                  child: ListTile(
-                                    onTap: () {
-                                      // if this item isn't selected yet, "isSelected": false -> true
-                                      // If this item already is selected: "isSelected": true -> false
-                                      setState(() {
-                                        groups[3][index]['isSelected'] = !groups[3][index]['isSelected'];
-                                      });
-                                    },
-                                    //leading: CircleAvatar(
-                                    //    backgroundColor: Colors.green,
-                                    //    child: Text(items[index]['id'].toString())),
-                                    title: Text(groups[3][index]['name']),
-                                  )
-                              );
-                          },
-                        ),
-            ],
-          ),
+                    // The color depends on this is selected or not
+                    color: groups[3][index]['isSelected'] == true
+                        ? Colors.lightGreen
+                        : Colors.white,
+                    child: ListTile(
+                      onTap: () {
+                        // if this item isn't selected yet, "isSelected": false -> true
+                        // If this item already is selected: "isSelected": true -> false
+                        setState(() {
+                          groups[3][index]['isSelected'] =
+                              !groups[3][index]['isSelected'];
+                        });
+                      },
+                      //leading: CircleAvatar(
+                      //    backgroundColor: Colors.green,
+                      //    child: Text(items[index]['id'].toString())),
+                      title: Text(groups[3][index]['name']),
+                    ));
+              },
+            ),
+          ],
         ),
-      );
+      ),
+    );
+  } //build
 
-        } //build
-
-
-            /*Column(
+  /*Column(
             children: <Widget>[
               // Research bar
               Padding(
@@ -237,7 +242,7 @@ class _IngredientsPageState extends State<IngredientsPage> {
                         ),
                 ),
               ), */
-              /*Expanded(
+  /*Expanded(
                 child:
                 // Three groups of dishes: main1, main2 and sides
                 ListView.builder(
@@ -258,8 +263,8 @@ class _IngredientsPageState extends State<IngredientsPage> {
                             sectionNames,
                             style: const TextStyle(fontWeight: FontWeight.bold, fontSize: 20),),
                         ),*/
-                        //Ingredients for each dish
-                        /*Container(
+  //Ingredients for each dish
+  /*Container(
                           //height: 100,
                           child: ListView.builder(
                             controller: scrollController,
@@ -299,25 +304,26 @@ class _IngredientsPageState extends State<IngredientsPage> {
               },),),
             ],
             ),
-          ],*/     
+          ],*/
 
+  void _toMainNavigator(BuildContext context) {
+    Navigator.of(context).pushReplacement(MaterialPageRoute(
+        builder: (context) => MainNavigator(
+            firstDatabaseEntry: widget.firstDatabaseEntry, flag: false)));
+  } //_toMainNavigator
 
-
-  void _toMainNavigator(BuildContext context){
-    Navigator.of(context).pushReplacement(MaterialPageRoute(builder: (context) => MainNavigator(firstDatabaseEntry: widget.firstDatabaseEntry, flag: false)));
-  }//_toMainNavigator
-
-
-  void _toCookBookPage(BuildContext context){
-
-    for (int i=0; i<groups.length;i++){
-      chosen.add(groups[i].where((item) => item['isSelected'] == true).toList());
+  void _toCookBookPage(BuildContext context) {
+    for (int i = 0; i < groups.length; i++) {
+      chosen
+          .add(groups[i].where((item) => item['isSelected'] == true).toList());
     }
 
-
-    Navigator.of(context).pushReplacement(MaterialPageRoute(builder: (context) => CookBookPage( selected: chosen, meal: widget.meal, firstDatabaseEntry: widget.firstDatabaseEntry)));
-  }//_toCookBookPage
-
+    Navigator.of(context).pushReplacement(MaterialPageRoute(
+        builder: (context) => CookBookPage(
+            selected: chosen,
+            meal: widget.meal,
+            firstDatabaseEntry: widget.firstDatabaseEntry)));
+  } //_toCookBookPage
 
   /* void _filterSearchResults(String query) {
   setState(() {
@@ -326,7 +332,6 @@ class _IngredientsPageState extends State<IngredientsPage> {
         .toList();
     });
   } */
-
 } //IngredientsPage
 
 

@@ -7,7 +7,7 @@ import 'package:flutter_doctors/provider/databaseprovider.dart';
 import 'package:flutter_doctors/screens/loginpage.dart';
 import 'package:provider/provider.dart';
 
-void main() async{
+void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   final AppDatabase database =
       await $FloorAppDatabase.databaseBuilder('app_database.db').build();
@@ -21,7 +21,7 @@ void main() async{
           create: (context) => DatabaseProvider(database: database),
         ),
       ],
-      child: MyApp(),
+      child: const MyApp(),
     ),
   );
 } //main
@@ -31,19 +31,15 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     //Here we are injecting an instance of Favorites through the widget tree. As such, the instance will be shared through the application.
-    //Moreover, everyone will be able to perform action over this instance. 
-  return MultiProvider(
-    providers: [
-    Provider<Favorites>(create: (context) => Favorites()),
-    ListenableProvider<MealChoiche>(create: (_) => MealChoiche()),
-    ListenableProvider<PersonalMeals>(create: (_) => PersonalMeals()),
-  ],
-      child: MaterialApp(
+    //Moreover, everyone will be able to perform action over this instance.
+    return MaterialApp(
       theme: ThemeData(
         primarySwatch: Colors.green,
-        appBarTheme: const AppBarTheme(color: Color.fromARGB(255, 14, 75, 16),),
+        appBarTheme: const AppBarTheme(
+          color: Color.fromARGB(255, 14, 75, 16),
+        ),
       ),
       home: const LoginPage(),
-      );
+    );
   } //build
-}//MyApp
+} //MyApp

@@ -15,16 +15,11 @@ class FavoritesPage extends StatefulWidget {
 }
 
 class _FavoritesPageState extends State<FavoritesPage> {
-
   //IMPORTANTE: LA BARRA DI RICERCA HA UN BUG: SI SMINCHIA TUTTO QUANDO SI ELIMINA DAI PREFERITI UNA COSA CHE SI STA CERCANDO
   //COMMENTO LA BARRA DI RICERCA PER IL MOMENTO
 
-
   // This controller will store the value of the search bar
   //TextEditingController editingController = TextEditingController();
-
-
-  
 
   List<Map> items = [];
 
@@ -53,10 +48,10 @@ class _FavoritesPageState extends State<FavoritesPage> {
         ],
       ),
       body: Column(
-          children: <Widget>[
-            Padding(
-              padding: const EdgeInsets.all(10),
-              /*child: TextField(
+        children: <Widget>[
+          Padding(
+            padding: const EdgeInsets.all(10),
+            /*child: TextField(
               onChanged: (value) {
                 _filterSearchResults(value);
               },
@@ -75,10 +70,9 @@ class _FavoritesPageState extends State<FavoritesPage> {
                         }),    
                       ),
               ),*/
-            ),
-            Expanded(
-              child:
-              ListView.builder(
+          ),
+          Expanded(
+            child: ListView.builder(
               shrinkWrap: true,
               itemCount: items.length,
               itemBuilder: (BuildContext ctx, index) {
@@ -87,31 +81,31 @@ class _FavoritesPageState extends State<FavoritesPage> {
                     margin: const EdgeInsets.all(1),
                     shape: RoundedRectangleBorder(
                         borderRadius: BorderRadius.circular(5)),
-
                     color: Colors.white,
                     child: ListTile(
-                      onTap: () {
-                        //open the recipe on tap
-                        //TO BE IMPLEMENTED
-                      },
-                      //leading: CircleAvatar(
-                      //    backgroundColor: Colors.green,
-                      //    child: Text(context.watch<Favorites>().favorites[index]['id'].toString())),
-                      title: Text(items[index]['name']),
-                      trailing:  IconButton(
-                        icon: Provider.of<Favorites>(context).isExist(items[index])
-                          ? const Icon(Icons.favorite, color: Colors.red)
-                          : const Icon(Icons.favorite_border),
-                        onPressed: () {
-                          Provider.of<Favorites>(context, listen: false).toggleFavorite(favorites[index]);
-                      },
-                    )
-                    ));
+                        onTap: () {
+                          //open the recipe on tap
+                          //TO BE IMPLEMENTED
+                        },
+                        //leading: CircleAvatar(
+                        //    backgroundColor: Colors.green,
+                        //    child: Text(context.watch<Favorites>().favorites[index]['id'].toString())),
+                        title: Text(items[index]['name']),
+                        trailing: IconButton(
+                          icon: Provider.of<Favorites>(context)
+                                  .isExist(items[index])
+                              ? const Icon(Icons.favorite, color: Colors.red)
+                              : const Icon(Icons.favorite_border),
+                          onPressed: () {
+                            Provider.of<Favorites>(context, listen: false)
+                                .toggleFavorite(favorites[index]);
+                          },
+                        )));
               },
-            ),  
             ),
-          ],
-        ),
+          ),
+        ],
+      ),
     );
   } //build
 
@@ -123,10 +117,9 @@ class _FavoritesPageState extends State<FavoritesPage> {
     });
   }*/
 
-
-  void _toInfoPage(BuildContext context){
+  void _toInfoPage(BuildContext context) {
     //Then pop the FoodStoragePage
-    Navigator.of(context).push(MaterialPageRoute(builder: (context) => InfoPage()));
-  }//_toInfoPage
-
+    Navigator.of(context)
+        .push(MaterialPageRoute(builder: (context) => InfoPage()));
+  } //_toInfoPage
 } //FoodStorage

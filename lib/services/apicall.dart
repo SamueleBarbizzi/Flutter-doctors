@@ -1,3 +1,5 @@
+// ignore_for_file: use_build_context_synchronously, avoid_print
+
 import 'dart:convert';
 import 'dart:io';
 import 'package:flutter/material.dart';
@@ -20,7 +22,7 @@ class ApiCall {
       requestType = "access token";
     }
 
-    final url = Impact.baseUrl + Impact.tokenEndpoint;
+    const url = Impact.baseUrl + Impact.tokenEndpoint;
     final body = {
       "username": Impact.username,
       "password": Impact.password,
@@ -46,7 +48,8 @@ class ApiCall {
     return auth;
   }
 
-  static Future<void> requestData(BuildContext context, bool firstDatabaseEntry)async {
+  static Future<void> requestData(
+      BuildContext context, bool firstDatabaseEntry) async {
     String requestType = "data";
     // List<List<Calories>>? arrayDataCalories;
     List<List<dynamic>>? arraySumCalories;
@@ -66,7 +69,8 @@ class ApiCall {
     final Duration dateRange = intEndDate.difference(intStartDate);
     final int rangeInDays = dateRange.inDays;
 
-    final url = Impact.baseUrl + Impact.caloriesEndpoint + Impact.patientUsername +'/daterange/start_date/${Impact.startDate}/end_date/${Impact.endDate}/';
+    final url =
+        '${Impact.baseUrl}${Impact.caloriesEndpoint}${Impact.patientUsername}/daterange/start_date/${Impact.startDate}/end_date/${Impact.endDate}/';
     final headers = {HttpHeaders.authorizationHeader: 'Bearer $access'};
 
     print('Calling: $url');
@@ -98,9 +102,8 @@ class ApiCall {
         arraySumCalories[i].add(sumCaloriesDay);
       }
 
-    await DatabaseCall.saveData(context, arraySumCalories, firstDatabaseEntry);
-    
-
+      await DatabaseCall.saveData(
+          context, arraySumCalories, firstDatabaseEntry);
     } else {
       // arrayDataCalories = null;
       arraySumCalories = null;
@@ -108,14 +111,11 @@ class ApiCall {
 
     await showResponseDialog(context, response.statusCode, requestType);
     // await showCaloriesDialog(context, arraySumCalories!, firstDatabaseEntry);
-
-
-
   }
 
   static Future<void> pingServer(BuildContext context) async {
     String requestType = "ping";
-    final url = Impact.baseUrl + Impact.pingEndpoint;
+    const url = Impact.baseUrl + Impact.pingEndpoint;
     final response = await http.get(Uri.parse(url));
     await showResponseDialog(context, response.statusCode, requestType);
   }
@@ -146,9 +146,11 @@ Future<void> showResponseDialog(
   String message;
 
   if (statusCode == 200) {
-    message = "Successful $requestType request\nHTTP status code: 200 (AUTHORIZED)";
+    message =
+        "Successful $requestType request\nHTTP status code: 200 (AUTHORIZED)";
   } else {
-    message = "Unsuccessful $requestType request\nHTTP status code: $statusCode";
+    message =
+        "Unsuccessful $requestType request\nHTTP status code: $statusCode";
   }
 
   await showDialog(
@@ -159,39 +161,43 @@ Future<void> showResponseDialog(
           borderRadius: BorderRadius.circular(8.0),
         ),
         child: Container(
-          padding: EdgeInsets.all(16.0),
+          padding: const EdgeInsets.all(16.0),
           child: Column(
             mainAxisSize: MainAxisSize.min,
             children: [
-              Text(
+              const Text(
                 "API Call",
                 style: TextStyle(
                   fontWeight: FontWeight.bold,
                   fontSize: 18.0,
                 ),
               ),
-              SizedBox(height: 10.0),
+              const SizedBox(height: 10.0),
               Text(message),
-              SizedBox(height: 10.0),
+              const SizedBox(height: 10.0),
               TextButton(
-                child: Text("OK", style: TextStyle(color: Colors.black),),
-                 style: ButtonStyle(
-                  foregroundColor:MaterialStatePropertyAll<Color>(Colors.black),
-          backgroundColor: MaterialStateProperty.resolveWith<Color>(
-          (Set<MaterialState> states) {
-            if (states.contains(MaterialState.pressed)) {
-              return Color(0xFFF5F6F9).withOpacity(0.6);
-            }
-            return Color(0xFFF5F6F9);
-          }),
-              splashFactory: NoSplash.splashFactory,
-              shape: MaterialStatePropertyAll<OutlinedBorder>(
-                RoundedRectangleBorder(
-                    borderRadius: BorderRadius.circular(50.0)),
-              ),
-              padding: MaterialStateProperty.all(EdgeInsets.zero),
-              elevation: MaterialStateProperty.all(1.0),
-            ),
+                style: ButtonStyle(
+                  foregroundColor:
+                      const MaterialStatePropertyAll<Color>(Colors.black),
+                  backgroundColor: MaterialStateProperty.resolveWith<Color>(
+                      (Set<MaterialState> states) {
+                    if (states.contains(MaterialState.pressed)) {
+                      return const Color(0xFFF5F6F9).withOpacity(0.6);
+                    }
+                    return const Color(0xFFF5F6F9);
+                  }),
+                  splashFactory: NoSplash.splashFactory,
+                  shape: MaterialStatePropertyAll<OutlinedBorder>(
+                    RoundedRectangleBorder(
+                        borderRadius: BorderRadius.circular(50.0)),
+                  ),
+                  padding: MaterialStateProperty.all(EdgeInsets.zero),
+                  elevation: MaterialStateProperty.all(1.0),
+                ),
+                child: const Text(
+                  "OK",
+                  style: TextStyle(color: Colors.black),
+                ),
                 onPressed: () {
                   Navigator.pop(context);
                 },
@@ -203,4 +209,3 @@ Future<void> showResponseDialog(
     },
   );
 }
-
