@@ -48,7 +48,7 @@ class _HomePageState extends State<HomePage> {
             children: [
               Align( alignment: Alignment.center,
               child: Container( height: 230, width: 380,
-                  margin: EdgeInsets.only(top: 30),
+                  margin: EdgeInsets.fromLTRB(20, 30, 20, 0),
                   decoration: BoxDecoration(
                     color: Colors.white,
                     border: Border.all(color: Colors.grey.shade400, width: 1.0),
@@ -169,8 +169,8 @@ class _HomePageState extends State<HomePage> {
               
               SizedBox(height: 30),
 
-              Container( height: 330, width: 380,
-                  //margin: EdgeInsets.only(bottom: 10),
+              Container( height: 330,
+                  margin: EdgeInsets.fromLTRB(25, 0, 25, 0),
                   decoration: BoxDecoration(
                     color: Colors.white,
                     border: Border.all(color: Colors.grey.shade400, width: 1.0),
