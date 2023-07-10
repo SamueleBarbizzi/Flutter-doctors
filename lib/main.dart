@@ -1,12 +1,29 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_doctors/database/database.dart';
 import 'package:flutter_doctors/models/favorites.dart';
 import 'package:flutter_doctors/models/mealchoice.dart';
 import 'package:flutter_doctors/models/personalmeals.dart';
+import 'package:flutter_doctors/provider/databaseprovider.dart';
 import 'package:flutter_doctors/screens/loginpage.dart';
 import 'package:provider/provider.dart';
 
-void main() {
-  runApp(const MyApp());
+void main() async{
+  WidgetsFlutterBinding.ensureInitialized();
+  final AppDatabase database =
+      await $FloorAppDatabase.databaseBuilder('app_database.db').build();
+  runApp(
+    MultiProvider(
+      providers: [
+        Provider<Favorites>(create: (context) => Favorites()),
+        ListenableProvider<MealChoiche>(create: (_) => MealChoiche()),
+        ListenableProvider<PersonalMeals>(create: (_) => PersonalMeals()),
+        ChangeNotifierProvider<DatabaseProvider>(
+          create: (context) => DatabaseProvider(database: database),
+        ),
+      ],
+      child: MyApp(),
+    ),
+  );
 } //main
 
 class MyApp extends StatelessWidget {
@@ -26,7 +43,7 @@ class MyApp extends StatelessWidget {
         primarySwatch: Colors.green,
         appBarTheme: const AppBarTheme(color: Color.fromARGB(255, 14, 75, 16),),
       ),
-      home: const LoginPage(),)
-    );
+      home: const LoginPage(),
+      );
   } //build
 }//MyApp

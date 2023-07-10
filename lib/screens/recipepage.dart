@@ -2,6 +2,7 @@
 
 import 'package:flutter/material.dart';
 import 'package:material_design_icons_flutter/material_design_icons_flutter.dart';
+import 'package:flutter_doctors/screens/mainnavigator.dart';
 
 
 class RecipePage extends StatelessWidget {
@@ -27,6 +28,7 @@ class RecipePage extends StatelessWidget {
           child: Column( crossAxisAlignment: CrossAxisAlignment.start,
             children:  [
               Container( padding:const EdgeInsets.fromLTRB(10,5,5,5), margin: const EdgeInsets.only(top: 3),
+
                 decoration: BoxDecoration(
                   color: Colors.white,
                   border: Border.all(color: Colors.grey.shade400, width: 1.0),
@@ -52,6 +54,7 @@ class RecipePage extends StatelessWidget {
                               color: Color.fromARGB(255, 76, 175, 80))),
                         ),
                         Text(dish, textAlign: TextAlign.left,
+
                           style: TextStyle(
                           fontSize: 20,
                           color: Colors.grey[850])
@@ -70,7 +73,7 @@ class RecipePage extends StatelessWidget {
                               fontSize: 20,
                               color: Color.fromARGB(255, 76, 175, 80))
                               ),
-                              const Text(" kcal",
+                              const Text(" kcals",
                                 style: TextStyle(
                                 fontSize: 18,
                                 color: Colors.black)
@@ -185,4 +188,3 @@ class RecipePage extends StatelessWidget {
     Navigator.of(context).pop();
   }//_toMainNavigator
 
-}

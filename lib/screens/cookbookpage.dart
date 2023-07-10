@@ -14,8 +14,10 @@ import 'package:flutter_doctors/models/groups.dart';
 import 'package:provider/provider.dart';
 
 class CookBookPage extends StatefulWidget {
-  const CookBookPage({Key? key, required this.selected, required this.meal}) : super(key: key);
 
+  const CookBookPage({Key? key, required this.selected, required this.meal, required this.firstDatabaseEntry}}) : super(key: key);
+
+  final bool firstDatabaseEntry;
   final List<List> selected;
   final String meal;
 
@@ -108,7 +110,7 @@ class _CookBookPageState extends State<CookBookPage> {
         backgroundColor: Colors.green,
         title: const Text(CookBookPage.routename),
         leading: BackButton(
-            onPressed: () => Navigator.of(context).pushReplacement(MaterialPageRoute(builder: (context) => IngredientsPage(meal: widget.meal))),
+            onPressed: () => Navigator.of(context).pushReplacement(MaterialPageRoute(builder: (context) => IngredientsPage(firstDatabaseEntry: widget.firstDatabaseEntry,meal: widget.meal))),
           ),
         actions: [
           IconButton(
@@ -962,11 +964,11 @@ class _CookBookPageState extends State<CookBookPage> {
   */
 
   void _toMainNavigator(BuildContext context){
-    Navigator.of(context).pushReplacement(MaterialPageRoute(builder: (context) => const MainNavigator()));
+    Navigator.of(context).pushReplacement(MaterialPageRoute(builder: (context) => MainNavigator(firstDatabaseEntry: widget.firstDatabaseEntry, flag: false)));
   }//_toMainNavigator
 
+  
   void _Done(BuildContext context){
-
     for (int i=0; i<groups.length;i++){
       chosen.add(possibleRecipes[i].where((item) => item['isSelected'] == true).toList());
     }
