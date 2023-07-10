@@ -3,6 +3,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_doctors/screens/loginpage.dart';
 import 'package:flutter_doctors/screens/infopage.dart';
+import 'package:flutter_doctors/services/databasecall.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 class AccountPage extends StatefulWidget {
@@ -223,10 +224,12 @@ class _AccountPageState extends State<AccountPage> {
   }
 
   void _toLoginPage(BuildContext context) async{
-    //Unset the 'username' filed in SharedPreference 
-    final sp = await SharedPreferences.getInstance();
-    sp.remove('username'); 
-    
+    await DatabaseCall.deleteAll(context);
+    SharedPreferences sp = await SharedPreferences.getInstance();
+    await sp.remove('username');
+    await sp.remove('access');
+    await sp.remove('refresh');
+    await sp.remove('selectedIndex');
     //Pop the drawer first 
     Navigator.pop(context);
     //Then pop the HomePage

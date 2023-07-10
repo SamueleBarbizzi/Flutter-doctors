@@ -59,7 +59,7 @@ class _IngredientsPageState extends State<IngredientsPage> {
           backgroundColor: Colors.green,
           title: const Text(IngredientsPage.routename),
           leading: BackButton(
-              onPressed: () => Navigator.of(context).pushReplacement(MaterialPageRoute(builder: (context) => MainNavigator(firstDatabaseEntry: widget.firstDatabaseEntry))),
+              onPressed: () => Navigator.of(context).pushReplacement(MaterialPageRoute(builder: (context) => MainNavigator(firstDatabaseEntry: widget.firstDatabaseEntry, flag: false))),
             ),
           actions: [
             IconButton(
@@ -302,7 +302,7 @@ class _IngredientsPageState extends State<IngredientsPage> {
 
 
   void _toMainNavigator(BuildContext context){
-    Navigator.of(context).pushReplacement(MaterialPageRoute(builder: (context) => MainNavigator(firstDatabaseEntry: widget.firstDatabaseEntry,)));
+    Navigator.of(context).pushReplacement(MaterialPageRoute(builder: (context) => MainNavigator(firstDatabaseEntry: widget.firstDatabaseEntry, flag: false)));
   }//_toHomePage
 
   void _toCookBookPage(BuildContext context){

@@ -174,8 +174,16 @@ Future<void> showResponseDialog(
               Text(message),
               SizedBox(height: 10.0),
               TextButton(
-                child: Text("OK"),
+                child: Text("OK", style: TextStyle(color: Colors.black),),
                  style: ButtonStyle(
+                  foregroundColor:MaterialStatePropertyAll<Color>(Colors.black),
+          backgroundColor: MaterialStateProperty.resolveWith<Color>(
+          (Set<MaterialState> states) {
+            if (states.contains(MaterialState.pressed)) {
+              return Color(0xFFF5F6F9).withOpacity(0.6);
+            }
+            return Color(0xFFF5F6F9);
+          }),
               splashFactory: NoSplash.splashFactory,
               shape: MaterialStatePropertyAll<OutlinedBorder>(
                 RoundedRectangleBorder(
@@ -196,58 +204,3 @@ Future<void> showResponseDialog(
   );
 }
 
-
-/* Future<void> showCaloriesDialog(
-    BuildContext context, List<List<dynamic>> arrayCalories, bool firstDatabaseEntry) async {
-  await showDialog(
-    context: context,
-    builder: (BuildContext context) {
-      return Dialog(
-        shape: RoundedRectangleBorder(
-          borderRadius: BorderRadius.circular(8.0),
-        ),
-        child: Container(
-          padding: EdgeInsets.all(16.0),
-          child: Column(
-            mainAxisSize: MainAxisSize.min,
-            children: [
-              Text(
-                "Calories",
-                style: TextStyle(
-                  fontWeight: FontWeight.bold,
-                  fontSize: 18.0,
-                ),
-              ),
-              SizedBox(height: 10.0),
-              Text("Array Calories:"),
-              SizedBox(height: 8.0),
-              Column(
-                children: [
-                  for (int i = 0; i < arrayCalories.length; i++)
-                    Text("${arrayCalories[i][0]} || ${arrayCalories[i][1]}"),
-                  Text("$firstDatabaseEntry"),
-                ],
-              ),
-              SizedBox(height: 10.0),
-              TextButton(
-                child: Text("OK"),
-                 style: ButtonStyle(
-              splashFactory: NoSplash.splashFactory,
-              shape: MaterialStatePropertyAll<OutlinedBorder>(
-                RoundedRectangleBorder(
-                    borderRadius: BorderRadius.circular(50.0)),
-              ),
-              padding: MaterialStateProperty.all(EdgeInsets.zero),
-              elevation: MaterialStateProperty.all(1.0),
-            ),
-                onPressed: () {
-                  Navigator.pop(context);
-                },
-              ),
-            ],
-          ),
-        ),
-      );
-    },
-  );
-} */
