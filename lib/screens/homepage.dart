@@ -440,9 +440,8 @@ Future<void> _incrementDate(int dataLength) async {
                               shadows: <Shadow>[Shadow(color: Colors.black, blurRadius: 1.0, offset: Offset(0,2))]),
                             label: Text('Breakfast'), 
                             //onPressed: (){},
-                           onPressed: (){
-                             _toIngredientsPage(context); },
-                             //{setState(() {_isShowBreakfast=!_isShowBreakfast;},);}},
+                           onPressed: ()
+                             {setState(() {_isShowBreakfast=!_isShowBreakfast;},);},
                             style: ElevatedButton.styleFrom(
                               //padding: EdgeInsets.fromLTRB(0, 20, 20, 20), 
                               backgroundColor: Colors.lightGreen,
@@ -456,7 +455,9 @@ Future<void> _incrementDate(int dataLength) async {
                           ),
                           Visibility( visible: _isShowBreakfast,
                             child: ElevatedButton(
-                              onPressed: () {},
+                              onPressed: () {
+                                String mealName = 'BREAKFAST';
+                             _toIngredientsPage(context, mealName); },
                               child: Icon(MdiIcons.pencil, color: Color.fromARGB(255, 14, 75, 16), size: 27.5),
                               style: ElevatedButton.styleFrom(
                                 //padding: EdgeInsets.fromLTRB(0, 20, 20, 20), 
@@ -519,7 +520,9 @@ Future<void> _incrementDate(int dataLength) async {
                           ),
                           Visibility( visible: _isShowLunch,
                             child: ElevatedButton(
-                              onPressed: () {},
+                              onPressed: () {
+                                String mealName = 'LUNCH';
+                                _toIngredientsPage(context, mealName); },
                               child: Icon(MdiIcons.pencil, color: Color.fromARGB(255, 14, 75, 16), size: 27.5),
                               style: ElevatedButton.styleFrom(
                                 //padding: EdgeInsets.fromLTRB(0, 20, 50, 20), 
@@ -582,7 +585,9 @@ Future<void> _incrementDate(int dataLength) async {
                           ),
                           Visibility( visible: _isShowDinner,
                             child: ElevatedButton(
-                              onPressed: () {},
+                              onPressed: () {
+                                String mealName = 'DINNER';
+                                _toIngredientsPage(context, mealName); },
                               child: Icon(MdiIcons.pencil, color: Color.fromARGB(255, 14, 75, 16), size: 27.5),
                               style: ElevatedButton.styleFrom(
                                 shape: CircleBorder(),
@@ -716,9 +721,8 @@ Future<void> _incrementDate(int dataLength) async {
     Navigator.of(context).push(MaterialPageRoute(builder: (context) => InfoPage()));
   }//_toInfoPage
 
-
-  void _toIngredientsPage(BuildContext context){
-    Navigator.of(context).pushReplacement(MaterialPageRoute(builder: (context) => IngredientsPage(firstDatabaseEntry: widget.firstDatabaseEntry)));
+  void _toIngredientsPage(BuildContext context, String mealName){
+    Navigator.of(context).pushReplacement(MaterialPageRoute(builder: (context) => IngredientsPage(meal: mealName, firstDatabaseEntry: widget.firstDatabaseEntry)));
   }//_toIngredientsPage
 
 
