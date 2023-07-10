@@ -2,11 +2,12 @@
 
 import 'package:flutter/material.dart';
 import 'package:flutter_doctors/screens/mainnavigator.dart';
+import 'package:flutter_doctors/services/apicall.dart';
 import 'package:flutter_login/flutter_login.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 class LoginPage extends StatefulWidget {
-  const LoginPage({Key? key}) : super(key: key);
+  const LoginPage({super.key});
 
   static const routename = 'LoginPage';
 
@@ -16,6 +17,7 @@ class LoginPage extends StatefulWidget {
 
 class _LoginPageState extends State<LoginPage> {
 
+  
   @override
   void initState() {
     super.initState();
@@ -28,7 +30,7 @@ class _LoginPageState extends State<LoginPage> {
     final sp = await SharedPreferences.getInstance();
     if(sp.getString('username') != null){
       //If 'username' is set, go to MainNavigator
-      _toMainNavigator(context);
+      _toMainNavigator(context, firstDatabaseEntry: false);
     }//if
   }//_checkIfLogged
 
@@ -39,9 +41,13 @@ class _LoginPageState extends State<LoginPage> {
 
     if(data.name == email && data.password == password){
 
-      final sp = await SharedPreferences.getInstance();
-      sp.setString('username', data.name);
-
+      bool refreshedToken = false;
+      bool apiAuth = await ApiCall.requestTokens(context, refreshedToken);
+      if (apiAuth == true) {
+        final sp = await SharedPreferences.getInstance();
+        sp.setString('username', data.name);
+      } 
+      
       return '';
       
     } else {
@@ -154,8 +160,8 @@ class _LoginPageState extends State<LoginPage> {
     );
   } // build
 
-  void _toMainNavigator(BuildContext context){
-    Navigator.of(context).pushReplacement(MaterialPageRoute(builder: (context) => const MainNavigator()));
+  void _toMainNavigator(BuildContext context, {bool firstDatabaseEntry = true}){
+    Navigator.of(context).pushReplacement(MaterialPageRoute(builder: (context) => MainNavigator(firstDatabaseEntry: firstDatabaseEntry, flag: true)));
   }//_toHomePage
 
 } // LoginScreen
