@@ -1,13 +1,13 @@
 // ignore_for_file: depend_on_referenced_packages, library_private_types_in_public_api, avoid_print, unused_element, use_build_context_synchronously, no_leading_underscores_for_local_identifiers
 
 import 'package:flutter/material.dart';
+import 'package:flutter_doctors/screens/infopage.dart';
 import 'package:flutter_doctors/services/apicall.dart';
 import 'package:flutter_doctors/services/databasecall.dart';
 import 'package:jwt_decoder/jwt_decoder.dart';
 import 'package:material_design_icons_flutter/material_design_icons_flutter.dart';
 import 'package:flutter_doctors/screens/loginpage.dart';
 import 'package:flutter_doctors/screens/accountpage.dart';
-import 'package:flutter_doctors/screens/favoritespage.dart';
 import 'package:flutter_doctors/screens/homepage.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
@@ -69,7 +69,7 @@ class _MainNavigatorState extends State<MainNavigator> {
   Widget build(BuildContext context) {
     final List<Widget> _screens = [
       HomePage(firstDatabaseEntry: widget.firstDatabaseEntry),
-      FavoritesPage(),
+      InfoPage(),
       AccountPage(),
     ];
     print('${MainNavigator.routename} built');
@@ -100,8 +100,8 @@ class _MainNavigatorState extends State<MainNavigator> {
           ),
         ),
         bottomNavigationBar: BottomNavigationBar(
-          items: const [
-            BottomNavigationBarItem(
+          items: [
+            const BottomNavigationBarItem(
               icon: Icon(Icons.home),
               label: 'Home',
             ),
@@ -140,9 +140,4 @@ class _MainNavigatorState extends State<MainNavigator> {
     Navigator.of(context).pushReplacement(
         MaterialPageRoute(builder: (context) => const LoginPage()));
   } //_toCalendarPage
-
-  void _toInfoPage(BuildContext context) {
-    Navigator.push(
-        context, MaterialPageRoute(builder: ((context) => AccountPage())));
-  }
 } //MainNavigator

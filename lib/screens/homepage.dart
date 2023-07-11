@@ -222,42 +222,20 @@ class _HomePageState extends State<HomePage> {
                                                 crossAxisAlignment:
                                                     CrossAxisAlignment.end,
                                                 children: [
-                                                  const Row(
+                                                  const SizedBox(height: 20),
+                                                  Row(
                                                     children: [
                                                       Icon(
                                                           MdiIcons
                                                               .bullseyeArrow,
                                                           color: Colors.red),
-                                                      Text("Base Target   ",
+                                                      const Text(
+                                                          "Base Target   ",
                                                           style: TextStyle(
                                                               fontSize: 12,
                                                               color: Colors
                                                                   .black)),
-                                                      Text("2387",
-                                                          style: TextStyle(
-                                                              fontWeight:
-                                                                  FontWeight
-                                                                      .bold,
-                                                              fontSize: 12,
-                                                              color: Color.fromARGB(
-                                                                  255,
-                                                                  76,
-                                                                  175,
-                                                                  80))), // inserire dati aggiornati
-                                                    ],
-                                                  ),
-                                                  const Row(
-                                                    children: [
-                                                      Icon(
-                                                          MdiIcons
-                                                              .silverwareForkKnife,
-                                                          color: Colors.blue),
-                                                      Text("Food   ",
-                                                          style: TextStyle(
-                                                              fontSize: 12,
-                                                              color: Colors
-                                                                  .black)),
-                                                      Text("1099",
+                                                      const Text("2387",
                                                           style: TextStyle(
                                                               fontWeight:
                                                                   FontWeight
@@ -272,7 +250,31 @@ class _HomePageState extends State<HomePage> {
                                                   ),
                                                   Row(
                                                     children: [
-                                                      const Icon(MdiIcons.fire,
+                                                      Icon(
+                                                          MdiIcons
+                                                              .silverwareForkKnife,
+                                                          color: Colors.blue),
+                                                      const Text("Food   ",
+                                                          style: TextStyle(
+                                                              fontSize: 12,
+                                                              color: Colors
+                                                                  .black)),
+                                                      const Text("1099",
+                                                          style: TextStyle(
+                                                              fontWeight:
+                                                                  FontWeight
+                                                                      .bold,
+                                                              fontSize: 12,
+                                                              color: Color.fromARGB(
+                                                                  255,
+                                                                  76,
+                                                                  175,
+                                                                  80))), // inserire dati aggiornati
+                                                    ],
+                                                  ),
+                                                  Row(
+                                                    children: [
+                                                      Icon(MdiIcons.fire,
                                                           color: Colors.orange),
                                                       const Text(
                                                           "Rest + Exercise   ",
@@ -323,396 +325,282 @@ class _HomePageState extends State<HomePage> {
                                 )
                               ],
                             ),
-                            child: Column(
-                              mainAxisAlignment: MainAxisAlignment.center,
-                              children: [
-                                Container(
-                                  height: 30,
-                                  alignment: const Alignment(-0.95, -1),
-                                  padding: const EdgeInsets.only(
-                                      left: 5), //color:Colors.red,
-                                  child: const Text("Meal Selection",
-                                      style: TextStyle(
-                                          fontWeight: FontWeight.bold,
-                                          fontSize: 24,
-                                          color: Color.fromARGB(
-                                              255, 76, 175, 80))),
-                                ),
-                                const SizedBox(height: 25),
-                                Row(
-                                  mainAxisAlignment: MainAxisAlignment.center,
-                                  children: [
-                                    ElevatedButton.icon(
-                                      icon: const Icon(MdiIcons.coffee,
-                                          color:
-                                              Color.fromARGB(255, 6, 90, 158),
-                                          shadows: <Shadow>[
-                                            Shadow(
-                                                color: Colors.black,
-                                                blurRadius: 1.0,
-                                                offset: Offset(0, 2))
-                                          ]),
-                                      label: const Text('Breakfast'),
-                                      //onPressed: (){},
-                                      onPressed: () {
-                                        setState(
-                                          () {
-                                            _isShowBreakfast =
-                                                !_isShowBreakfast;
-                                          },
-                                        );
-                                      },
-                                      style: ElevatedButton.styleFrom(
-                                          //padding: EdgeInsets.fromLTRB(0, 20, 20, 20),
-                                          backgroundColor: Colors.lightGreen,
-                                          fixedSize: const Size(200, 40),
-                                          textStyle: const TextStyle(
-                                              fontSize: 22,
-                                              fontWeight: FontWeight.bold),
-                                          elevation: 15,
-                                          shadowColor: const Color.fromARGB(
-                                              255, 14, 75, 16),
-                                          shape: const StadiumBorder(),
-                                          side: const BorderSide(
-                                              color: Color.fromARGB(
-                                                  255, 14, 75, 16),
-                                              width: 2.5)),
-                                    ),
-                                    Visibility(
-                                      visible: _isShowBreakfast,
-                                      child: ElevatedButton(
-                                        onPressed: () {
-                                          String mealName = 'BREAKFAST';
-                                          _toIngredientsPage(context, mealName);
-                                        },
-                                        style: ElevatedButton.styleFrom(
-                                            //padding: EdgeInsets.fromLTRB(0, 20, 20, 20),
-                                            backgroundColor: Colors.lightGreen,
-                                            fixedSize: const Size(200, 40),
-                                            textStyle: const TextStyle(
-                                                fontSize: 22,
-                                                fontWeight: FontWeight.bold),
-                                            elevation: 15,
-                                            shadowColor: const Color.fromARGB(
-                                                255, 14, 75, 16),
-                                            shape: const StadiumBorder(),
-                                            side: const BorderSide(
-                                                color: Color.fromARGB(
-                                                    255, 14, 75, 16),
-                                                width: 2.5)),
-                                        child: const Icon(MdiIcons.pencil,
-                                            color:
-                                                Color.fromARGB(255, 14, 75, 16),
-                                            size: 27.5),
-                                      ),
-                                    ),
-                                    /*
-                            Visibility( visible: _isShowBreakfast,
-                              child: ElevatedButton(
-                                onPressed: () {},
-                                child: Icon(MdiIcons.pencil, color: Color.fromARGB(255, 14, 75, 16), size: 27.5),
-                                style: ElevatedButton.styleFrom(
-                                  shape: CircleBorder(),
-                                  padding: EdgeInsets.all(13),
-                                  backgroundColor: Colors.lightGreen,
-                                  shadowColor: Color.fromARGB(255, 14, 75, 16),
-                                  side: BorderSide(color: Color.fromARGB(255, 14, 75, 16), width: 3)                            
-                                ),
-                              ),
-                            ), */
-                                  ],
-                                ),
-                                /*
-                        const SizedBox(height: 12),
-                        Row( mainAxisAlignment: MainAxisAlignment.center,
-                          children: [
-                            ElevatedButton.icon(
-                              icon: Icon(MdiIcons.whiteBalanceSunny, 
-                                color: Color.fromARGB(255, 219, 200, 23), 
-                                shadows: <Shadow>[Shadow(color: Colors.black, blurRadius: 1.0, offset: Offset(0,2))]),
-                              label: Text('Lunch'),
-                              onPressed: () {setState(() {_isShowLunch=!_isShowLunch;},);},
-                          ), 
-                        ],
-                      ), */
-                                const SizedBox(height: 15),
-                                Row(
-                                  mainAxisAlignment: MainAxisAlignment.center,
-                                  children: [
-                                    ElevatedButton.icon(
-                                      icon: const Icon(
-                                          MdiIcons.whiteBalanceSunny,
-                                          color:
-                                              Color.fromARGB(255, 219, 200, 23),
-                                          shadows: <Shadow>[
-                                            Shadow(
-                                                color: Colors.black,
-                                                blurRadius: 1.0,
-                                                offset: Offset(0, 2))
-                                          ]),
-                                      label: const Text('Lunch'),
-                                      onPressed: () {
-                                        setState(
-                                          () {
-                                            _isShowLunch = !_isShowLunch;
-                                          },
-                                        );
-                                      },
-                                      style: ElevatedButton.styleFrom(
-                                          //padding: EdgeInsets.fromLTRB(0, 20, 50, 20),
-                                          backgroundColor: Colors.lightGreen,
-                                          fixedSize: const Size(200, 40),
-                                          textStyle: const TextStyle(
-                                              fontSize: 22,
-                                              fontWeight: FontWeight.bold),
-                                          elevation: 15,
-                                          shadowColor: const Color.fromARGB(
-                                              255, 14, 75, 16),
-                                          shape: const StadiumBorder(),
-                                          side: const BorderSide(
-                                              color: Color.fromARGB(
-                                                  255, 14, 75, 16),
-                                              width: 2.5)),
-                                    ),
-                                    Visibility(
-                                      visible: _isShowLunch,
-                                      child: ElevatedButton(
-                                        onPressed: () {
-                                          String mealName = 'LUNCH';
-                                          _toIngredientsPage(context, mealName);
-                                        },
-                                        style: ElevatedButton.styleFrom(
-                                            //padding: EdgeInsets.fromLTRB(0, 20, 50, 20),
-                                            backgroundColor: Colors.lightGreen,
-                                            fixedSize: const Size(200, 40),
-                                            textStyle: const TextStyle(
-                                                fontSize: 22,
-                                                fontWeight: FontWeight.bold),
-                                            elevation: 15,
-                                            shadowColor: const Color.fromARGB(
-                                                255, 14, 75, 16),
-                                            shape: const StadiumBorder(),
-                                            side: const BorderSide(
-                                                color: Color.fromARGB(
-                                                    255, 14, 75, 16),
-                                                width: 2.5)),
-                                        child: const Icon(MdiIcons.pencil,
-                                            color:
-                                                Color.fromARGB(255, 14, 75, 16),
-                                            size: 27.5),
-                                      ),
-                                    ),
-                                    /*
-                            Visibility( visible: _isShowLunch,
-                              child: ElevatedButton(
-                                onPressed: () {},
-                                child: Icon(MdiIcons.pencil, color: Color.fromARGB(255, 14, 75, 16), size: 27.5),
-                                style: ElevatedButton.styleFrom(
-                                  shape: CircleBorder(),
-                                  padding: EdgeInsets.all(13),
-                                  backgroundColor: Colors.lightGreen,
-                                  shadowColor: Color.fromARGB(255, 14, 75, 16),
-                                  side: BorderSide(color: Color.fromARGB(255, 14, 75, 16), width: 3)                            
-                                ),
-                              ),
-                            ),*/
-                                  ],
-                                ),
-                                /*
-                        const SizedBox(height: 12),
-                        Row( mainAxisAlignment: MainAxisAlignment.center,
-                          children: [                
-                            ElevatedButton.icon(
-                              icon: Icon(Icons.mode_night_rounded,
-                                color: Color.fromARGB(255, 126, 125, 125),
-                                shadows: <Shadow>[Shadow(color: Colors.black, blurRadius: 1.0, offset: Offset(0,2))]),
-                              label: Text('Dinner'),
-                              onPressed: () {setState(() {_isShowDinner=!_isShowDinner;},);},
                           ),
                         ],
-                      ),*/
-
-                                const SizedBox(height: 15),
-                                Row(
-                                  mainAxisAlignment: MainAxisAlignment.center,
-                                  children: [
-                                    ElevatedButton.icon(
-                                      icon: const Icon(Icons.mode_night_rounded,
-                                          color: Color.fromARGB(
-                                              255, 126, 125, 125),
-                                          shadows: <Shadow>[
-                                            Shadow(
-                                                color: Colors.black,
-                                                blurRadius: 1.0,
-                                                offset: Offset(0, 2))
-                                          ]),
-                                      label: const Text('Dinner'),
-                                      onPressed: () {
-                                        setState(
-                                          () {
-                                            _isShowDinner = !_isShowDinner;
-                                          },
-                                        );
-                                      },
-                                      style: ElevatedButton.styleFrom(
-                                          //padding: EdgeInsets.all(20.0),
-                                          backgroundColor: Colors.lightGreen,
-                                          fixedSize: const Size(200, 40),
-                                          textStyle: const TextStyle(
-                                              fontSize: 22,
-                                              fontWeight: FontWeight.bold),
-                                          elevation: 15,
-                                          shadowColor: const Color.fromARGB(
-                                              255, 14, 75, 16),
-                                          shape: const StadiumBorder(),
-                                          side: const BorderSide(
-                                              color: Color.fromARGB(
-                                                  255, 14, 75, 16),
-                                              width: 2.5)),
-                                    ),
-                                    Visibility(
-                                      visible: _isShowDinner,
-                                      child: ElevatedButton(
-                                        onPressed: () {
-                                          String mealName = 'DINNER';
-                                          _toIngredientsPage(context, mealName);
-                                        },
-                                        style: ElevatedButton.styleFrom(
-                                            shape: const CircleBorder(),
-                                            padding: const EdgeInsets.all(13),
-                                            backgroundColor: Colors.lightGreen,
-                                            shadowColor: const Color.fromARGB(
-                                                255, 14, 75, 16),
-                                            side: const BorderSide(
-                                                color: Color.fromARGB(
-                                                    255, 14, 75, 16),
-                                                width: 3)),
-                                        child: const Icon(MdiIcons.pencil,
-                                            color:
-                                                Color.fromARGB(255, 14, 75, 16),
-                                            size: 27.5),
-                                      ),
-                                    ),
-                                  ],
-                                ),
-                                const SizedBox(height: 15),
-                                Row(
-                                  mainAxisAlignment: MainAxisAlignment.center,
-                                  children: [
-                                    ElevatedButton.icon(
-                                      icon: const Icon(MdiIcons.foodApple,
+                      ),
+                      Column(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children: [
+                          Container(
+                            height: 30,
+                            alignment: const Alignment(-0.95, -1),
+                            padding: const EdgeInsets.only(
+                                left: 5), //color:Colors.red,
+                            child: const Text("Meal Selection",
+                                style: TextStyle(
+                                    fontWeight: FontWeight.bold,
+                                    fontSize: 24,
+                                    color: Color.fromARGB(255, 76, 175, 80))),
+                          ),
+                          const SizedBox(height: 25),
+                          Row(
+                            mainAxisAlignment: MainAxisAlignment.center,
+                            children: [
+                              ElevatedButton.icon(
+                                icon: Icon(MdiIcons.coffee,
+                                    color:
+                                        const Color.fromARGB(255, 6, 90, 158),
+                                    shadows: const <Shadow>[
+                                      Shadow(
+                                          color: Colors.black,
+                                          blurRadius: 1.0,
+                                          offset: Offset(0, 2))
+                                    ]),
+                                label: const Text('Breakfast'),
+                                //onPressed: (){},
+                                onPressed: () {
+                                  setState(
+                                    () {
+                                      _isShowBreakfast = !_isShowBreakfast;
+                                    },
+                                  );
+                                },
+                                style: ElevatedButton.styleFrom(
+                                    //padding: EdgeInsets.fromLTRB(0, 20, 20, 20),
+                                    backgroundColor: Colors.lightGreen,
+                                    fixedSize: const Size(200, 40),
+                                    textStyle: const TextStyle(
+                                        fontSize: 22,
+                                        fontWeight: FontWeight.bold),
+                                    elevation: 15,
+                                    shadowColor:
+                                        const Color.fromARGB(255, 14, 75, 16),
+                                    shape: const StadiumBorder(),
+                                    side: const BorderSide(
+                                        color: Color.fromARGB(255, 14, 75, 16),
+                                        width: 2.5)),
+                              ),
+                              Visibility(
+                                visible: _isShowBreakfast,
+                                child: ElevatedButton(
+                                  onPressed: () {
+                                    String mealName = 'BREAKFAST';
+                                    _toIngredientsPage(context, mealName);
+                                  },
+                                  style: ElevatedButton.styleFrom(
+                                      //padding: EdgeInsets.fromLTRB(0, 20, 20, 20),
+                                      backgroundColor: Colors.lightGreen,
+                                      fixedSize: const Size(200, 40),
+                                      textStyle: const TextStyle(
+                                          fontSize: 22,
+                                          fontWeight: FontWeight.bold),
+                                      elevation: 15,
+                                      shadowColor:
+                                          const Color.fromARGB(255, 14, 75, 16),
+                                      shape: const CircleBorder(),
+                                      side: const BorderSide(
                                           color:
-                                              Color.fromARGB(255, 218, 26, 12),
-                                          shadows: <Shadow>[
-                                            Shadow(
-                                                color: Colors.black,
-                                                blurRadius: 1.0,
-                                                offset: Offset(0, 2))
-                                          ]),
-                                      label: const Text('Snack'),
-                                      onPressed: () {
-                                        setState(
-                                          () {
-                                            _isShowSnack = !_isShowSnack;
-                                          },
-                                        );
-                                      },
-                                      style: ElevatedButton.styleFrom(
-                                          //padding: EdgeInsets.fromLTRB(0, 20, 50, 20),
-                                          backgroundColor: Colors.lightGreen,
-                                          fixedSize: const Size(200, 40),
-                                          textStyle: const TextStyle(
-                                              fontSize: 22,
-                                              fontWeight: FontWeight.bold),
-                                          elevation: 15,
-                                          shadowColor: const Color.fromARGB(
-                                              255, 14, 75, 16),
-                                          shape: const StadiumBorder(),
-                                          side: const BorderSide(
-                                              color: Color.fromARGB(
-                                                  255, 14, 75, 16),
-                                              width: 2.5)),
-                                    ),
-                                    Visibility(
-                                      visible: _isShowSnack,
-                                      child: ElevatedButton(
-                                        onPressed: () {},
-                                        style: ElevatedButton.styleFrom(
-                                            //padding: EdgeInsets.all(20.0),
-                                            backgroundColor: Colors.lightGreen,
-                                            fixedSize: const Size(200, 40),
-                                            textStyle: const TextStyle(
-                                                fontSize: 22,
-                                                fontWeight: FontWeight.bold),
-                                            elevation: 15,
-                                            shadowColor: const Color.fromARGB(
-                                                255, 14, 75, 16),
-                                            shape: const StadiumBorder(),
-                                            side: const BorderSide(
-                                                color: Color.fromARGB(
-                                                    255, 14, 75, 16),
-                                                width: 2.5)),
-                                        child: const Icon(MdiIcons.pencil,
-                                            color:
-                                                Color.fromARGB(255, 14, 75, 16),
-                                            size: 27.5),
-                                      ),
-                                    ),
-                                    /*
-                            Visibility( visible: _isShowDinner,
-                              child: ElevatedButton(
-                                onPressed: () {},
-                                child: Icon(MdiIcons.pencil, color: Color.fromARGB(255, 14, 75, 16), size: 27.5),
+                                              Color.fromARGB(255, 14, 75, 16),
+                                          width: 2.5)),
+                                  child: Icon(MdiIcons.pencil,
+                                      color:
+                                          const Color.fromARGB(255, 14, 75, 16),
+                                      size: 27.5),
+                                ),
+                              ),
+                            ],
+                          ),
+                          const SizedBox(height: 15),
+                          Row(
+                            mainAxisAlignment: MainAxisAlignment.center,
+                            children: [
+                              ElevatedButton.icon(
+                                icon: Icon(MdiIcons.whiteBalanceSunny,
+                                    color:
+                                        const Color.fromARGB(255, 219, 200, 23),
+                                    shadows: const <Shadow>[
+                                      Shadow(
+                                          color: Colors.black,
+                                          blurRadius: 1.0,
+                                          offset: Offset(0, 2))
+                                    ]),
+                                label: const Text('Lunch'),
+                                onPressed: () {
+                                  setState(
+                                    () {
+                                      _isShowLunch = !_isShowLunch;
+                                    },
+                                  );
+                                },
                                 style: ElevatedButton.styleFrom(
-                                  shape: CircleBorder(),
-                                  padding: EdgeInsets.all(13),
-                                  backgroundColor: Colors.lightGreen,
-                                  shadowColor: Color.fromARGB(255, 14, 75, 16),
-                                  side: BorderSide(color: Color.fromARGB(255, 14, 75, 16), width: 3)                            
+                                    //padding: EdgeInsets.fromLTRB(0, 20, 50, 20),
+                                    backgroundColor: Colors.lightGreen,
+                                    fixedSize: const Size(200, 40),
+                                    textStyle: const TextStyle(
+                                        fontSize: 22,
+                                        fontWeight: FontWeight.bold),
+                                    elevation: 15,
+                                    shadowColor:
+                                        const Color.fromARGB(255, 14, 75, 16),
+                                    shape: const StadiumBorder(),
+                                    side: const BorderSide(
+                                        color: Color.fromARGB(255, 14, 75, 16),
+                                        width: 2.5)),
+                              ),
+                              Visibility(
+                                visible: _isShowLunch,
+                                child: ElevatedButton(
+                                  onPressed: () {
+                                    String mealName = 'LUNCH';
+                                    _toIngredientsPage(context, mealName);
+                                  },
+                                  style: ElevatedButton.styleFrom(
+                                      //padding: EdgeInsets.fromLTRB(0, 20, 50, 20),
+                                      backgroundColor: Colors.lightGreen,
+                                      fixedSize: const Size(200, 40),
+                                      textStyle: const TextStyle(
+                                          fontSize: 22,
+                                          fontWeight: FontWeight.bold),
+                                      elevation: 15,
+                                      shadowColor:
+                                          const Color.fromARGB(255, 14, 75, 16),
+                                      shape: const CircleBorder(),
+                                      side: const BorderSide(
+                                          color:
+                                              Color.fromARGB(255, 14, 75, 16),
+                                          width: 2.5)),
+                                  child: Icon(MdiIcons.pencil,
+                                      color:
+                                          const Color.fromARGB(255, 14, 75, 16),
+                                      size: 27.5),
                                 ),
                               ),
-                            ), 
-                          ],
-                        ),
-                        const SizedBox(height: 12),
-                        Row( mainAxisAlignment: MainAxisAlignment.center,
-                          children: [
-                            ElevatedButton.icon( 
-                              icon: Icon(MdiIcons.foodApple, 
-                                color: Color.fromARGB(255, 218, 26, 12),
-                                shadows: <Shadow>[Shadow(color: Colors.black, blurRadius: 1.0, offset: Offset(0,2))]),
-                              label: Text('Snack'),
-                              onPressed: () {setState(() {_isShowSnack=!_isShowSnack;},);},
-                              style: ElevatedButton.styleFrom(
-                                //padding: EdgeInsets.fromLTRB(0, 20, 50, 20), 
-                                backgroundColor:  Colors.lightGreen,
-                                fixedSize: Size(200, 40),
-                                textStyle: TextStyle(fontSize: 22, fontWeight: FontWeight.bold),
-                                elevation: 15,
-                                shadowColor:  Color.fromARGB(255, 14, 75, 16),
-                                shape: StadiumBorder(),
-                                side: BorderSide(color: Color.fromARGB(255, 14, 75, 16), width: 2.5)
-                              ),
-                            ),
-                            Visibility( visible: _isShowSnack,
-                              child: ElevatedButton(
-                                onPressed: () {},
-                                child: Icon(MdiIcons.pencil, color: Color.fromARGB(255, 14, 75, 16), size: 27.5),
+                            ],
+                          ),
+                          const SizedBox(height: 15),
+                          Row(
+                            mainAxisAlignment: MainAxisAlignment.center,
+                            children: [
+                              ElevatedButton.icon(
+                                icon: const Icon(Icons.mode_night_rounded,
+                                    color: Color.fromARGB(255, 126, 125, 125),
+                                    shadows: <Shadow>[
+                                      Shadow(
+                                          color: Colors.black,
+                                          blurRadius: 1.0,
+                                          offset: Offset(0, 2))
+                                    ]),
+                                label: const Text('Dinner'),
+                                onPressed: () {
+                                  setState(
+                                    () {
+                                      _isShowDinner = !_isShowDinner;
+                                    },
+                                  );
+                                },
                                 style: ElevatedButton.styleFrom(
-                                  shape: CircleBorder(),
-                                  padding: EdgeInsets.all(13),
-                                  backgroundColor: Colors.lightGreen,
-                                  shadowColor: Color.fromARGB(255, 14, 75, 16),
-                                  side: BorderSide(color: Color.fromARGB(255, 14, 75, 16), width: 3)                            
+                                    //padding: EdgeInsets.all(20.0),
+                                    backgroundColor: Colors.lightGreen,
+                                    fixedSize: const Size(200, 40),
+                                    textStyle: const TextStyle(
+                                        fontSize: 22,
+                                        fontWeight: FontWeight.bold),
+                                    elevation: 15,
+                                    shadowColor:
+                                        const Color.fromARGB(255, 14, 75, 16),
+                                    shape: const StadiumBorder(),
+                                    side: const BorderSide(
+                                        color: Color.fromARGB(255, 14, 75, 16),
+                                        width: 2.5)),
+                              ),
+                              Visibility(
+                                visible: _isShowDinner,
+                                child: ElevatedButton(
+                                  onPressed: () {
+                                    String mealName = 'DINNER';
+                                    _toIngredientsPage(context, mealName);
+                                  },
+                                  style: ElevatedButton.styleFrom(
+                                      shape: const CircleBorder(),
+                                      padding: const EdgeInsets.all(13),
+                                      backgroundColor: Colors.lightGreen,
+                                      shadowColor:
+                                          const Color.fromARGB(255, 14, 75, 16),
+                                      side: const BorderSide(
+                                          color:
+                                              Color.fromARGB(255, 14, 75, 16),
+                                          width: 3)),
+                                  child: Icon(MdiIcons.pencil,
+                                      color:
+                                          const Color.fromARGB(255, 14, 75, 16),
+                                      size: 27.5),
                                 ),
                               ),
-                            ), 
-                          ],
-                        ),*/
-                                  ],
+                            ],
+                          ),
+                          const SizedBox(height: 15),
+                          Row(
+                            mainAxisAlignment: MainAxisAlignment.center,
+                            children: [
+                              ElevatedButton.icon(
+                                icon: Icon(MdiIcons.foodApple,
+                                    color:
+                                        const Color.fromARGB(255, 218, 26, 12),
+                                    shadows: const <Shadow>[
+                                      Shadow(
+                                          color: Colors.black,
+                                          blurRadius: 1.0,
+                                          offset: Offset(0, 2))
+                                    ]),
+                                label: const Text('Snack'),
+                                onPressed: () {
+                                  setState(
+                                    () {
+                                      _isShowSnack = !_isShowSnack;
+                                    },
+                                  );
+                                },
+                                style: ElevatedButton.styleFrom(
+                                    //padding: EdgeInsets.fromLTRB(0, 20, 50, 20),
+                                    backgroundColor: Colors.lightGreen,
+                                    fixedSize: const Size(200, 40),
+                                    textStyle: const TextStyle(
+                                        fontSize: 22,
+                                        fontWeight: FontWeight.bold),
+                                    elevation: 15,
+                                    shadowColor:
+                                        const Color.fromARGB(255, 14, 75, 16),
+                                    shape: const StadiumBorder(),
+                                    side: const BorderSide(
+                                        color: Color.fromARGB(255, 14, 75, 16),
+                                        width: 2.5)),
+                              ),
+                              Visibility(
+                                visible: _isShowSnack,
+                                child: ElevatedButton(
+                                  onPressed: () {},
+                                  style: ElevatedButton.styleFrom(
+                                      //padding: EdgeInsets.all(20.0),
+                                      backgroundColor: Colors.lightGreen,
+                                      fixedSize: const Size(200, 40),
+                                      textStyle: const TextStyle(
+                                          fontSize: 22,
+                                          fontWeight: FontWeight.bold),
+                                      elevation: 15,
+                                      shadowColor:
+                                          const Color.fromARGB(255, 14, 75, 16),
+                                      shape: const StadiumBorder(),
+                                      side: const BorderSide(
+                                          color:
+                                              Color.fromARGB(255, 14, 75, 16),
+                                          width: 2.5)),
+                                  child: Icon(MdiIcons.pencil,
+                                      color:
+                                          const Color.fromARGB(255, 14, 75, 16),
+                                      size: 27.5),
                                 ),
-                              ],
-                            ),
+                              ),
+                            ],
                           ),
                         ],
                       ),

@@ -153,6 +153,6 @@ class _LoginPageState extends State<LoginPage> {
       {bool firstDatabaseEntry = true}) {
     Navigator.of(context).pushReplacement(MaterialPageRoute(
         builder: (context) =>
-            MainNavigator(firstDatabaseEntry: firstDatabaseEntry, flag: true)));
+            const MainNavigator(flag: false, firstDatabaseEntry: true,)));
   } //_toHomePage
 } // LoginScreen

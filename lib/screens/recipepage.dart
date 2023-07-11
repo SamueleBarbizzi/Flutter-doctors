@@ -69,7 +69,7 @@ class RecipePage extends StatelessWidget {
                       child: Column(
                         mainAxisAlignment: MainAxisAlignment.end,
                         children: [
-                          const Icon(MdiIcons.fire,
+                          Icon(MdiIcons.fire,
                               color: Colors.orange, size: 30),
                           Row(children: [
                             Text(recipe['calories'].toString(),

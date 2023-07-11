@@ -70,7 +70,8 @@ class _IngredientsPageState extends State<IngredientsPage> {
                 MaterialPageRoute(
                     builder: (context) => MainNavigator(
                         firstDatabaseEntry: widget.firstDatabaseEntry,
-                        flag: false))),
+                        flag: false
+                        ))),
           ),
           actions: [
             IconButton(
@@ -309,7 +310,8 @@ class _IngredientsPageState extends State<IngredientsPage> {
   void _toMainNavigator(BuildContext context) {
     Navigator.of(context).pushReplacement(MaterialPageRoute(
         builder: (context) => MainNavigator(
-            firstDatabaseEntry: widget.firstDatabaseEntry, flag: false)));
+            firstDatabaseEntry: widget.firstDatabaseEntry, flag: false
+            )));
   } //_toMainNavigator
 
   void _toCookBookPage(BuildContext context) {
