@@ -77,10 +77,6 @@ class _HomePageState extends State<HomePage> {
     });
   }
 
-  bool _isShowBreakfast = false;
-  bool _isShowLunch = false;
-  bool _isShowDinner = false;
-  bool _isShowSnack = false;
 
   @override
   Widget build(BuildContext context) {
@@ -374,11 +370,8 @@ class _HomePageState extends State<HomePage> {
                                 label: const Text('Breakfast'),
                                 //onPressed: (){},
                                 onPressed: () {
-                                  setState(
-                                    () {
-                                      _isShowBreakfast = !_isShowBreakfast;
-                                    },
-                                  );
+                                  String mealName = 'LUNCH';
+                                  _toIngredientsPage(context, mealName);
                                 },
                                 style: ElevatedButton.styleFrom(
                                     //padding: EdgeInsets.fromLTRB(0, 20, 20, 20),
@@ -394,34 +387,6 @@ class _HomePageState extends State<HomePage> {
                                     side: const BorderSide(
                                         color: Color.fromARGB(255, 14, 75, 16),
                                         width: 2.5)),
-                              ),
-                              Visibility(
-                                visible: _isShowBreakfast,
-                                child: ElevatedButton(
-                                  onPressed: () {
-                                    String mealName = 'BREAKFAST';
-                                    _toIngredientsPage(context, mealName);
-                                  },
-                                  style: ElevatedButton.styleFrom(
-                                      //padding: EdgeInsets.fromLTRB(0, 20, 20, 20),
-                                      backgroundColor: Colors.lightGreen,
-                                      fixedSize: const Size(200, 40),
-                                      textStyle: const TextStyle(
-                                          fontSize: 22,
-                                          fontWeight: FontWeight.bold),
-                                      elevation: 15,
-                                      shadowColor:
-                                          const Color.fromARGB(255, 14, 75, 16),
-                                      shape: const CircleBorder(),
-                                      side: const BorderSide(
-                                          color:
-                                              Color.fromARGB(255, 14, 75, 16),
-                                          width: 2.5)),
-                                  child: Icon(MdiIcons.pencil,
-                                      color:
-                                          const Color.fromARGB(255, 14, 75, 16),
-                                      size: 27.5),
-                                ),
                               ),
                             ],
                           ),
@@ -441,11 +406,8 @@ class _HomePageState extends State<HomePage> {
                                     ]),
                                 label: const Text('Lunch'),
                                 onPressed: () {
-                                  setState(
-                                    () {
-                                      _isShowLunch = !_isShowLunch;
-                                    },
-                                  );
+                                  String mealName = 'LUNCH';
+                                    _toIngredientsPage(context, mealName);
                                 },
                                 style: ElevatedButton.styleFrom(
                                     //padding: EdgeInsets.fromLTRB(0, 20, 50, 20),
@@ -461,34 +423,6 @@ class _HomePageState extends State<HomePage> {
                                     side: const BorderSide(
                                         color: Color.fromARGB(255, 14, 75, 16),
                                         width: 2.5)),
-                              ),
-                              Visibility(
-                                visible: _isShowLunch,
-                                child: ElevatedButton(
-                                  onPressed: () {
-                                    String mealName = 'LUNCH';
-                                    _toIngredientsPage(context, mealName);
-                                  },
-                                  style: ElevatedButton.styleFrom(
-                                      //padding: EdgeInsets.fromLTRB(0, 20, 50, 20),
-                                      backgroundColor: Colors.lightGreen,
-                                      fixedSize: const Size(200, 40),
-                                      textStyle: const TextStyle(
-                                          fontSize: 22,
-                                          fontWeight: FontWeight.bold),
-                                      elevation: 15,
-                                      shadowColor:
-                                          const Color.fromARGB(255, 14, 75, 16),
-                                      shape: const CircleBorder(),
-                                      side: const BorderSide(
-                                          color:
-                                              Color.fromARGB(255, 14, 75, 16),
-                                          width: 2.5)),
-                                  child: Icon(MdiIcons.pencil,
-                                      color:
-                                          const Color.fromARGB(255, 14, 75, 16),
-                                      size: 27.5),
-                                ),
                               ),
                             ],
                           ),
@@ -507,11 +441,8 @@ class _HomePageState extends State<HomePage> {
                                     ]),
                                 label: const Text('Dinner'),
                                 onPressed: () {
-                                  setState(
-                                    () {
-                                      _isShowDinner = !_isShowDinner;
-                                    },
-                                  );
+                                  String mealName = 'DINNER';
+                                  _toIngredientsPage(context, mealName);
                                 },
                                 style: ElevatedButton.styleFrom(
                                     //padding: EdgeInsets.all(20.0),
@@ -527,29 +458,6 @@ class _HomePageState extends State<HomePage> {
                                     side: const BorderSide(
                                         color: Color.fromARGB(255, 14, 75, 16),
                                         width: 2.5)),
-                              ),
-                              Visibility(
-                                visible: _isShowDinner,
-                                child: ElevatedButton(
-                                  onPressed: () {
-                                    String mealName = 'DINNER';
-                                    _toIngredientsPage(context, mealName);
-                                  },
-                                  style: ElevatedButton.styleFrom(
-                                      shape: const CircleBorder(),
-                                      padding: const EdgeInsets.all(13),
-                                      backgroundColor: Colors.lightGreen,
-                                      shadowColor:
-                                          const Color.fromARGB(255, 14, 75, 16),
-                                      side: const BorderSide(
-                                          color:
-                                              Color.fromARGB(255, 14, 75, 16),
-                                          width: 3)),
-                                  child: Icon(MdiIcons.pencil,
-                                      color:
-                                          const Color.fromARGB(255, 14, 75, 16),
-                                      size: 27.5),
-                                ),
                               ),
                             ],
                           ),
@@ -569,11 +477,8 @@ class _HomePageState extends State<HomePage> {
                                     ]),
                                 label: const Text('Snack'),
                                 onPressed: () {
-                                  setState(
-                                    () {
-                                      _isShowSnack = !_isShowSnack;
-                                    },
-                                  );
+                                  String mealName = 'DINNER';
+                                  _toIngredientsPage(context, mealName);
                                 },
                                 style: ElevatedButton.styleFrom(
                                     //padding: EdgeInsets.fromLTRB(0, 20, 50, 20),
@@ -589,31 +494,6 @@ class _HomePageState extends State<HomePage> {
                                     side: const BorderSide(
                                         color: Color.fromARGB(255, 14, 75, 16),
                                         width: 2.5)),
-                              ),
-                              Visibility(
-                                visible: _isShowSnack,
-                                child: ElevatedButton(
-                                  onPressed: () {},
-                                  style: ElevatedButton.styleFrom(
-                                      //padding: EdgeInsets.all(20.0),
-                                      backgroundColor: Colors.lightGreen,
-                                      fixedSize: const Size(200, 40),
-                                      textStyle: const TextStyle(
-                                          fontSize: 22,
-                                          fontWeight: FontWeight.bold),
-                                      elevation: 15,
-                                      shadowColor:
-                                          const Color.fromARGB(255, 14, 75, 16),
-                                      shape: const StadiumBorder(),
-                                      side: const BorderSide(
-                                          color:
-                                              Color.fromARGB(255, 14, 75, 16),
-                                          width: 2.5)),
-                                  child: Icon(MdiIcons.pencil,
-                                      color:
-                                          const Color.fromARGB(255, 14, 75, 16),
-                                      size: 27.5),
-                                ),
                               ),
                             ],
                           ),
