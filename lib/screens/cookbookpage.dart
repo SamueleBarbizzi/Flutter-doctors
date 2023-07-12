@@ -32,8 +32,8 @@ class CookBookPage extends StatefulWidget {
 }
 
 class _CookBookPageState extends State<CookBookPage> {
-  //List of recipes
-  final List<Map> recipes = CookBook().recipeslist;
+
+  List<Map> recipes = [];
 
   List<List> ingredients = [[], [], [], []]; //selected ingredient
 
@@ -50,22 +50,25 @@ class _CookBookPageState extends State<CookBookPage> {
     'SIDE',
     'DESSERT'
   ];
-  List<List> groups = Groups().createDishesGroups();
+  
   List<String> chosenName = ['main1', 'main2', 'side', 'dessert'];
 
   List<List> chosen = []; // list of the selected recipes
 
   @override
   void initState() {
+    final List<Map> recipes = Provider.of<CookBook>(context, listen: false).recipeslist;
+
     if (widget.selected[0].isEmpty &
         widget.selected[1].isEmpty &
         widget.selected[2].isEmpty &
         widget.selected[3].isEmpty) {
-      possibleRecipes = Groups().createDishesGroups();
+      possibleRecipes = [Groups().createFirstMainDishes(context),Groups().createSecondMainDishes(context),Groups().createSideDishes(context),Groups().createDessertDishes(context),];
 
       for (int i = 0; i < possibleRecipes.length; i++) {
         possibleRecipes[i].sort((a, b) => a["name"].compareTo(b["name"]));
       }
+
     } else {
       for (var i = 0; i < widget.selected.length; i++) {
         for (var element in widget.selected[i]) {
@@ -73,8 +76,6 @@ class _CookBookPageState extends State<CookBookPage> {
               .add(element['name']); //list of selected ingredients (by name)
         }
       }
-      //ingredients = widget.selected;
-      //ingredients.sort((a, b) => a["name"].compareTo(b["name"]));
 
       for (var i = 0; i < possibleRecipes.length; i++) {
         possibleRecipes[i] = recipes
@@ -121,6 +122,7 @@ class _CookBookPageState extends State<CookBookPage> {
   @override
   Widget build(BuildContext context) {
     print('${CookBookPage.routename} built');
+
     return DefaultTabController(
       length: groupsName.length,
       child: Scaffold(
@@ -161,31 +163,6 @@ class _CookBookPageState extends State<CookBookPage> {
         ),
         body: TabBarView(
           children: [
-            /*
-            Column(
-                children: <Widget>[
-                  Padding(
-                    padding: const EdgeInsets.all(10),
-                    child: TextField(
-                    onChanged: (value) {
-                      _filterSearchResults(value);
-                    },
-                      controller: editingController,
-                      decoration: InputDecoration(
-                          labelText: "Search",
-                          hintText: "Name of the recipe...",
-                          prefixIcon: const Icon(Icons.search),
-                          border: const OutlineInputBorder(
-                              borderRadius: BorderRadius.all(Radius.circular(10))),
-                          suffixIcon: IconButton(
-                            icon: const Icon(Icons.clear, color: Colors.black,),
-                            onPressed: () {
-                              editingController.clear();
-                              _filterSearchResults('');
-                              }),    
-                            ),
-                    ),
-                  ), */
             SingleChildScrollView(
               child: Column(
                 children: [
@@ -321,10 +298,6 @@ class _CookBookPageState extends State<CookBookPage> {
                                           ['isSelected'];
                                 });
                               },
-
-                              //leading: CircleAvatar(
-                              //    backgroundColor: Colors.green,
-                              //    child: Text(possibleRecipes[index]['id'].toString())),
                               title: Text(Provider.of<PersonalMeals>(context, listen: false)
                                   .personalRecipes[0][index]['name']),
                               subtitle: Text('     ${Provider.of<PersonalMeals>(context, listen: false).personalRecipes[0][index]['calories']} kcals'),
@@ -403,21 +376,6 @@ class _CookBookPageState extends State<CookBookPage> {
                                   '${widget.meal.toUpperCase()}_${groupsName[0].toLowerCase()}',
                                   possibleRecipes[0][index]),
                             ),
-
-                            /*
-                            trailing:  IconButton(
-                              icon: Provider.of<Favorites>(context).isExist(recipes[index])
-                                ? const Icon(Icons.favorite, color: Colors.red)
-                                : const Icon(Icons.favorite_border),
-
-                              onPressed: () {
-                              // if this item isn't selected yet, "isSaved": false -> true
-                              // If this item already is selected: "isSaved": true -> false
-                                
-                              Provider.of<Favorites>(context, listen: false).toggleFavorite(recipes[index]);
-                            
-                            },
-                          )*/
                           ));
                     },
                   ),
@@ -635,21 +593,6 @@ class _CookBookPageState extends State<CookBookPage> {
                                   '${widget.meal.toUpperCase()}_${groupsName[1].toLowerCase()}',
                                   possibleRecipes[1][index]),
                             ),
-
-                            /*
-                                trailing:  IconButton(
-                                  icon: Provider.of<Favorites>(context).isExist(recipes[index])
-                                    ? const Icon(Icons.favorite, color: Colors.red)
-                                    : const Icon(Icons.favorite_border),
-
-                                  onPressed: () {
-                                  // if this item isn't selected yet, "isSaved": false -> true
-                                  // If this item already is selected: "isSaved": true -> false
-                                    
-                                  Provider.of<Favorites>(context, listen: false).toggleFavorite(recipes[index]);
-                                
-                                },
-                              )*/
                           ));
                     },
                   ),
@@ -786,10 +729,6 @@ class _CookBookPageState extends State<CookBookPage> {
                                           ['isSelected'];
                                 });
                               },
-
-                              //leading: CircleAvatar(
-                              //    backgroundColor: Colors.green,
-                              //    child: Text(possibleRecipes[index]['id'].toString())),
                               title: Text(Provider.of<PersonalMeals>(context, listen: false)
                                   .personalRecipes[2][index]['name']),
                               subtitle: Text('     ${Provider.of<PersonalMeals>(context, listen: false).personalRecipes[2][index]['calories']} kcals'),
@@ -832,10 +771,6 @@ class _CookBookPageState extends State<CookBookPage> {
                                     !possibleRecipes[2][index]['isSelected'];
                               });
                             },
-
-                            //leading: CircleAvatar(
-                            //    backgroundColor: Colors.green,
-                            //    child: Text(possibleRecipes[index]['id'].toString())),
                             title: Text(possibleRecipes[2][index]['name'],
                                 style: const TextStyle(
                                     fontWeight: FontWeight.bold)),
@@ -1017,10 +952,6 @@ class _CookBookPageState extends State<CookBookPage> {
                                           ['isSelected'];
                                 });
                               },
-
-                              //leading: CircleAvatar(
-                              //    backgroundColor: Colors.green,
-                              //    child: Text(possibleRecipes[index]['id'].toString())),
                               title: Text(Provider.of<PersonalMeals>(context, listen: false)
                                   .personalRecipes[3][index]['name']),
                               subtitle: Text('     ${Provider.of<PersonalMeals>(context, listen: false).personalRecipes[3][index]['calories']} kcals'),
@@ -1063,10 +994,6 @@ class _CookBookPageState extends State<CookBookPage> {
                                     !possibleRecipes[3][index]['isSelected'];
                               });
                             },
-
-                            //leading: CircleAvatar(
-                            //    backgroundColor: Colors.green,
-                            //    child: Text(possibleRecipes[index]['id'].toString())),
                             title: Text(possibleRecipes[3][index]['name'],
                                 style: const TextStyle(
                                     fontWeight: FontWeight.bold)),
@@ -1098,21 +1025,7 @@ class _CookBookPageState extends State<CookBookPage> {
                                   '${widget.meal.toUpperCase()}_${groupsName[3].toLowerCase()}',
                                   possibleRecipes[3][index]),
                             ),
-                            /*
-                                trailing:  IconButton(
-                                  icon: Provider.of<Favorites>(context).isExist(recipes[index])
-                                    ? const Icon(Icons.favorite, color: Colors.red)
-                                    : const Icon(Icons.favorite_border),
 
-                                  onPressed: () {
-                                  // if this item isn't selected yet, "isSaved": false -> true
-                                  // If this item already is selected: "isSaved": true -> false
-                                    
-                                  Provider.of<Favorites>(context, listen: false).toggleFavorite(recipes[index]);
-                                
-                                },
-                              )
-                              */
                           ));
                     },
                   ),
@@ -1125,15 +1038,6 @@ class _CookBookPageState extends State<CookBookPage> {
     );
   } //build
 
-  /*
-  void _filterSearchResults(String query) {
-  setState(() {
-    possibleRecipes = possibleRecipes
-        .where((item) => item['name'].toLowerCase().contains(query.toLowerCase()))
-        .toList();
-    });
-  }
-  */
 
   void _toMainNavigator(BuildContext context) {
     Navigator.of(context).pushReplacement(MaterialPageRoute(
@@ -1144,7 +1048,7 @@ class _CookBookPageState extends State<CookBookPage> {
   } //_toMainNavigator
 
   void _Done(BuildContext context) {
-    for (int i = 0; i < groups.length; i++) {
+    for (int i = 0; i < groupsName.length; i++) {
       chosen.add(possibleRecipes[i]
           .where((item) => item['isSelected'] == true)
           .toList());
@@ -1157,9 +1061,7 @@ class _CookBookPageState extends State<CookBookPage> {
         Map item = chosen[i][j];
 
         Provider.of<MealChoiche>(context, listen: false).ChooseAndReplace(dish, item);
-        Provider.of<CookBook>(context, listen: false).toggleRecipe(id);
-
-
+        //Provider.of<CookBook>(context, listen: false).toggleRecipe(id);
       }
     }
 

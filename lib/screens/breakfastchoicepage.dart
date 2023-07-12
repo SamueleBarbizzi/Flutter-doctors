@@ -32,11 +32,12 @@ class _BreakfastChoicePageState extends State<BreakfastChoicePage> {
 
   // This controller will store the value of the search bar
   // TextEditingController editingController = TextEditingController();
-  List recipes = Groups().getBreakfastDishes();
+  List recipes = [];
   List chosen = []; // list of the selected recipes
 
   @override
   void initState() {
+    final recipes = Groups().createBreakfastDishes(context);
     recipes.sort((a, b) => a["name"].compareTo(b["name"]));
     super.initState();
   }
@@ -44,6 +45,7 @@ class _BreakfastChoicePageState extends State<BreakfastChoicePage> {
   @override
   Widget build(BuildContext context) {
     print('${BreakfastChoicePage.routename} built');
+    final recipes = Groups().createBreakfastDishes(context);
     return Scaffold(
       floatingActionButton: FloatingActionButton(
         onPressed: () {
@@ -68,33 +70,7 @@ class _BreakfastChoicePageState extends State<BreakfastChoicePage> {
         ],
       ),
       body:
-          /*
-            Column(
-                children: <Widget>[
-                  Padding(
-                    padding: const EdgeInsets.all(10),
-                    child: TextField(
-                    onChanged: (value) {
-                      _filterSearchResults(value);
-                    },
-                      controller: editingController,
-                      decoration: InputDecoration(
-                          labelText: "Search",
-                          hintText: "Name of the recipe...",
-                          prefixIcon: const Icon(Icons.search),
-                          border: const OutlineInputBorder(
-                              borderRadius: BorderRadius.all(Radius.circular(10))),
-                          suffixIcon: IconButton(
-                            icon: const Icon(Icons.clear, color: Colors.black,),
-                            onPressed: () {
-                              editingController.clear();
-                              _filterSearchResults('');
-                              }),    
-                            ),
-                    ),
-                  ), */
           ListView.builder(
-        //physics: const NeverScrollableScrollPhysics(),
         shrinkWrap: true,
         itemCount: recipes.length,
         itemBuilder: (BuildContext ctx, index) {
@@ -128,16 +104,6 @@ class _BreakfastChoicePageState extends State<BreakfastChoicePage> {
       ),
     );
   } //build
-
-  /*
-  void _filterSearchResults(String query) {
-  setState(() {
-    possibleRecipes = possibleRecipes
-        .where((item) => item['name'].toLowerCase().contains(query.toLowerCase()))
-        .toList();
-    });
-  }
-  */
 
   void _toMainNavigator(BuildContext context) {
     Navigator.of(context).pushReplacement(MaterialPageRoute(

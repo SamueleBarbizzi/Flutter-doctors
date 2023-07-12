@@ -34,9 +34,6 @@ class MealChoiche extends ChangeNotifier {
     else{
       chosen[dish] = item;
     }
-
-
-    
     //Remember to call the CookBook provider when using choose.
 
     //Call the notifyListeners() method to alert that something happened.
@@ -55,8 +52,8 @@ class MealChoiche extends ChangeNotifier {
     notifyListeners();
   }
 
-  Map getRecipe(String meal, String course) {
-    return chosen['${meal.toUpperCase()}_${course.toLowerCase()}'];
+  Map getRecipe(String meal, String course, int id) {
+    return chosen['${meal.toUpperCase()}_${course.toLowerCase()}_$id'];
   }
 
   Map getChosenRecipes() {

@@ -1,12 +1,12 @@
 // ignore_for_file: depend_on_referenced_packages, library_private_types_in_public_api, avoid_print, unused_import, unused_element, avoid_unnecessary_containers
 
 import 'package:flutter/material.dart';
+import 'package:flutter_doctors/screens/breakfastchoicepage.dart';
 import 'package:intl/intl.dart';
 import 'package:line_icons/line_icons.dart';
 import 'package:material_design_icons_flutter/material_design_icons_flutter.dart';
 import 'package:flutter_doctors/screens/loginpage.dart';
 import 'package:flutter_doctors/screens/infopage.dart';
-import 'package:flutter_doctors/screens/cookbookpage.dart';
 import 'package:flutter_doctors/models/score_circular_progress.dart';
 import 'package:flutter_doctors/screens/ingredientspage.dart';
 import 'package:provider/provider.dart';
@@ -14,9 +14,6 @@ import 'package:shared_preferences/shared_preferences.dart';
 import 'package:flutter_doctors/database/entities/caloriesentity.dart';
 import 'package:flutter_doctors/provider/databaseprovider.dart';
 import 'package:flutter_doctors/screens/recipepage.dart';
-import 'package:flutter_doctors/screens/breakfastchoicepage.dart';
-import 'package:flutter_doctors/models/personalmeals.dart';
-import 'package:flutter_doctors/models/groups.dart';
 
 class HomePage extends StatefulWidget {
   final bool firstDatabaseEntry;
@@ -30,9 +27,6 @@ class HomePage extends StatefulWidget {
 
 class _HomePageState extends State<HomePage> {
   int i = 0;
-
-  TextEditingController nameController = TextEditingController();
-  TextEditingController quantityController = TextEditingController();
 
   @override
   void didChangeDependencies() {
@@ -84,10 +78,6 @@ class _HomePageState extends State<HomePage> {
     });
   }
 
-  bool _isShowBreakfast = false;
-  bool _isShowLunch = false;
-  bool _isShowDinner = false;
-  bool _isShowSnack = false;
 
   @override
   Widget build(BuildContext context) {
@@ -124,8 +114,26 @@ class _HomePageState extends State<HomePage> {
                   return Column(
                     children: [
                       Row(
-                        mainAxisAlignment: MainAxisAlignment.center,
-                        children: [
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          children: [
+                            const SizedBox(height: 5),
+                            IconButton(
+                              color: const Color.fromARGB(255, 14, 75, 16),
+                              splashColor: Colors.transparent,
+                              highlightColor: Colors.transparent,
+                              icon: const Icon(LineIcons.angleDoubleLeft),
+                              onPressed: _decrementDate,
+                            ),
+                            Text(date, style: const TextStyle(fontFamily: "Lato", fontSize: 18, fontWeight: FontWeight.bold, color: Color.fromARGB(255, 14, 75, 16))),
+                            IconButton(
+                              color: const Color.fromARGB(255, 14, 75, 16),
+                              splashColor: Colors.transparent,
+                              highlightColor: Colors.transparent,
+                              icon: const Icon(LineIcons.angleDoubleRight),
+                              onPressed: () => _incrementDate(dataLength),
+                            ),
+                          ],
+                        ),
                           Align(
                             alignment: Alignment.center,
                             child: Container(
@@ -190,7 +198,7 @@ class _HomePageState extends State<HomePage> {
                                                 child: const Center(
                                                     child: Padding(
                                                   padding: EdgeInsets.only(
-                                                      top: 35.0),
+                                                      top: 50.0),
                                                   child: Column(
                                                       mainAxisAlignment:
                                                           MainAxisAlignment
@@ -316,7 +324,7 @@ class _HomePageState extends State<HomePage> {
                           ),
                           const SizedBox(height: 15),
                           Container(
-                            height: 330,
+                            height: 330, width: 350,
                             margin: const EdgeInsets.fromLTRB(25, 0, 25, 0),
                             decoration: BoxDecoration(
                               color: Colors.white,
@@ -332,10 +340,7 @@ class _HomePageState extends State<HomePage> {
                                 )
                               ],
                             ),
-                          ),
-                        ],
-                      ),
-                      Column(
+                          child: Column(
                         mainAxisAlignment: MainAxisAlignment.center,
                         children: [
                           Container(
@@ -346,7 +351,7 @@ class _HomePageState extends State<HomePage> {
                             child: const Text("Meal Selection",
                                 style: TextStyle(
                                     fontWeight: FontWeight.bold,
-                                    fontSize: 24,
+                                    fontSize: 20,
                                     color: Color.fromARGB(255, 76, 175, 80))),
                           ),
                           const SizedBox(height: 25),
@@ -366,11 +371,7 @@ class _HomePageState extends State<HomePage> {
                                 label: const Text('Breakfast'),
                                 //onPressed: (){},
                                 onPressed: () {
-                                  setState(
-                                    () {
-                                      _isShowBreakfast = !_isShowBreakfast;
-                                    },
-                                  );
+                                  _toBreakfastChoicePage(context);
                                 },
                                 style: ElevatedButton.styleFrom(
                                     //padding: EdgeInsets.fromLTRB(0, 20, 20, 20),
@@ -386,34 +387,6 @@ class _HomePageState extends State<HomePage> {
                                     side: const BorderSide(
                                         color: Color.fromARGB(255, 14, 75, 16),
                                         width: 2.5)),
-                              ),
-                              Visibility(
-                                visible: _isShowBreakfast,
-                                child: ElevatedButton(
-                                  onPressed: () {
-                                    String mealName = 'BREAKFAST';
-                                    _toIngredientsPage(context, mealName);
-                                  },
-                                  style: ElevatedButton.styleFrom(
-                                      //padding: EdgeInsets.fromLTRB(0, 20, 20, 20),
-                                      backgroundColor: Colors.lightGreen,
-                                      fixedSize: const Size(200, 40),
-                                      textStyle: const TextStyle(
-                                          fontSize: 22,
-                                          fontWeight: FontWeight.bold),
-                                      elevation: 15,
-                                      shadowColor:
-                                          const Color.fromARGB(255, 14, 75, 16),
-                                      shape: const CircleBorder(),
-                                      side: const BorderSide(
-                                          color:
-                                              Color.fromARGB(255, 14, 75, 16),
-                                          width: 2.5)),
-                                  child: Icon(MdiIcons.pencil,
-                                      color:
-                                          const Color.fromARGB(255, 14, 75, 16),
-                                      size: 27.5),
-                                ),
                               ),
                             ],
                           ),
@@ -433,11 +406,8 @@ class _HomePageState extends State<HomePage> {
                                     ]),
                                 label: const Text('Lunch'),
                                 onPressed: () {
-                                  setState(
-                                    () {
-                                      _isShowLunch = !_isShowLunch;
-                                    },
-                                  );
+                                  String mealName = 'LUNCH';
+                                    _toIngredientsPage(context, mealName);
                                 },
                                 style: ElevatedButton.styleFrom(
                                     //padding: EdgeInsets.fromLTRB(0, 20, 50, 20),
@@ -453,34 +423,6 @@ class _HomePageState extends State<HomePage> {
                                     side: const BorderSide(
                                         color: Color.fromARGB(255, 14, 75, 16),
                                         width: 2.5)),
-                              ),
-                              Visibility(
-                                visible: _isShowLunch,
-                                child: ElevatedButton(
-                                  onPressed: () {
-                                    String mealName = 'LUNCH';
-                                    _toIngredientsPage(context, mealName);
-                                  },
-                                  style: ElevatedButton.styleFrom(
-                                      //padding: EdgeInsets.fromLTRB(0, 20, 50, 20),
-                                      backgroundColor: Colors.lightGreen,
-                                      fixedSize: const Size(200, 40),
-                                      textStyle: const TextStyle(
-                                          fontSize: 22,
-                                          fontWeight: FontWeight.bold),
-                                      elevation: 15,
-                                      shadowColor:
-                                          const Color.fromARGB(255, 14, 75, 16),
-                                      shape: const CircleBorder(),
-                                      side: const BorderSide(
-                                          color:
-                                              Color.fromARGB(255, 14, 75, 16),
-                                          width: 2.5)),
-                                  child: Icon(MdiIcons.pencil,
-                                      color:
-                                          const Color.fromARGB(255, 14, 75, 16),
-                                      size: 27.5),
-                                ),
                               ),
                             ],
                           ),
@@ -499,11 +441,8 @@ class _HomePageState extends State<HomePage> {
                                     ]),
                                 label: const Text('Dinner'),
                                 onPressed: () {
-                                  setState(
-                                    () {
-                                      _isShowDinner = !_isShowDinner;
-                                    },
-                                  );
+                                  String mealName = 'DINNER';
+                                  _toIngredientsPage(context, mealName);
                                 },
                                 style: ElevatedButton.styleFrom(
                                     //padding: EdgeInsets.all(20.0),
@@ -519,29 +458,6 @@ class _HomePageState extends State<HomePage> {
                                     side: const BorderSide(
                                         color: Color.fromARGB(255, 14, 75, 16),
                                         width: 2.5)),
-                              ),
-                              Visibility(
-                                visible: _isShowDinner,
-                                child: ElevatedButton(
-                                  onPressed: () {
-                                    String mealName = 'DINNER';
-                                    _toIngredientsPage(context, mealName);
-                                  },
-                                  style: ElevatedButton.styleFrom(
-                                      shape: const CircleBorder(),
-                                      padding: const EdgeInsets.all(13),
-                                      backgroundColor: Colors.lightGreen,
-                                      shadowColor:
-                                          const Color.fromARGB(255, 14, 75, 16),
-                                      side: const BorderSide(
-                                          color:
-                                              Color.fromARGB(255, 14, 75, 16),
-                                          width: 3)),
-                                  child: Icon(MdiIcons.pencil,
-                                      color:
-                                          const Color.fromARGB(255, 14, 75, 16),
-                                      size: 27.5),
-                                ),
                               ),
                             ],
                           ),
@@ -561,11 +477,8 @@ class _HomePageState extends State<HomePage> {
                                     ]),
                                 label: const Text('Snack'),
                                 onPressed: () {
-                                  setState(
-                                    () {
-                                      _isShowSnack = !_isShowSnack;
-                                    },
-                                  );
+                                  String mealName = 'DINNER';
+                                  _toIngredientsPage(context, mealName);
                                 },
                                 style: ElevatedButton.styleFrom(
                                     //padding: EdgeInsets.fromLTRB(0, 20, 50, 20),
@@ -582,595 +495,16 @@ class _HomePageState extends State<HomePage> {
                                         color: Color.fromARGB(255, 14, 75, 16),
                                         width: 2.5)),
                               ),
-                              Visibility(
-                                visible: _isShowSnack,
-                                child: ElevatedButton(
-                                  onPressed: () {},
-                                  style: ElevatedButton.styleFrom(
-                                      //padding: EdgeInsets.all(20.0),
-                                      backgroundColor: Colors.lightGreen,
-                                      fixedSize: const Size(200, 40),
-                                      textStyle: const TextStyle(
-                                          fontSize: 22,
-                                          fontWeight: FontWeight.bold),
-                                      elevation: 15,
-                                      shadowColor:
-                                          const Color.fromARGB(255, 14, 75, 16),
-                                      shape: const StadiumBorder(),
-                                      side: const BorderSide(
-                                          color:
-                                              Color.fromARGB(255, 14, 75, 16),
-                                          width: 2.5)),
-                                  child: Icon(MdiIcons.pencil,
-                                      color:
-                                          const Color.fromARGB(255, 14, 75, 16),
-                                      size: 27.5),
-                                ),
-                              ),
                             ],
                           ),
                         ],
                       ),
+                          ),
                     ],
                   );
                 } else {
-                  /*
                   return const Center(
                     child: CircularProgressIndicator(),
-                  );
-                  */
-                  return Column(
-                    children: [
-                      Align(
-                          alignment: Alignment.center,
-                          child: Container(
-                              height: 230,
-                              width: 350,
-                              margin: const EdgeInsets.only(top: 10),
-                              decoration: BoxDecoration(
-                                color: Colors.white,
-                                border: Border.all(
-                                    color: Colors.grey.shade400, width: 1.0),
-                                borderRadius: BorderRadius.circular(10),
-                                boxShadow: [
-                                  BoxShadow(
-                                    color: Colors.grey.shade700,
-                                    blurRadius: 6,
-                                    spreadRadius: 2,
-                                    offset: const Offset(-4, -4),
-                                  )
-                                ],
-                              ),
-                              child: Column(children: [
-                                Container(
-                                    height: 40,
-                                    alignment: const Alignment(-0.95, 0.5),
-                                    child: const Text("Calories",
-                                        style: TextStyle(
-                                            fontWeight: FontWeight.bold,
-                                            fontSize: 20,
-                                            color: Color.fromARGB(
-                                                255, 76, 175, 80)))),
-                                Container(
-                                    height: 20,
-                                    alignment: const Alignment(-0.9, 0),
-                                    child: const Text(
-                                        "Remaining = Target - Food + Exercise",
-                                        style: TextStyle(
-                                            fontSize: 12,
-                                            color: Colors.black))),
-                                const SizedBox(height: 15),
-                                Align(
-                                  alignment: const Alignment(1, -1),
-                                  child: Row(
-                                    mainAxisAlignment: MainAxisAlignment.end,
-                                    crossAxisAlignment: CrossAxisAlignment.end,
-                                    children: [
-                                      SizedBox(
-                                        width: 150,
-                                        height: 150,
-                                        child: CustomPaint(
-                                            painter: ScoreCircularProgress(
-                                              backColor: Colors.lightGreen
-                                                  .withOpacity(0.4),
-                                              frontColor: Colors.lightGreen,
-                                              strokeWidth: 20,
-                                              value: 0.5, // da mettere valori
-                                            ),
-                                            child: const Center(
-                                                child: Padding(
-                                              padding:
-                                                  EdgeInsets.only(top: 35.0),
-                                              child: Column(
-                                                  mainAxisAlignment:
-                                                      MainAxisAlignment.start,
-                                                  children: [
-                                                    Text(
-                                                      '2481', // mettere numero calorie con dati
-                                                      style: TextStyle(
-                                                          fontWeight:
-                                                              FontWeight.bold,
-                                                          fontSize: 26,
-                                                          color: Color.fromARGB(
-                                                              255,
-                                                              76,
-                                                              175,
-                                                              80)),
-                                                    ),
-                                                    Text(
-                                                      'Remaining',
-                                                      style: TextStyle(
-                                                          fontSize: 14),
-                                                    )
-                                                  ]),
-                                            ))),
-                                      ),
-                                      const SizedBox(width: 30, height: 150),
-                                      Align(
-                                        alignment: const Alignment(1, 0),
-                                        child: SizedBox(
-                                          width: 150,
-                                          height: 150,
-                                          child: Column(
-                                            crossAxisAlignment:
-                                                CrossAxisAlignment.end,
-                                            children: [
-                                              Row(
-                                                children: [
-                                                  Icon(MdiIcons.bullseyeArrow,
-                                                      color: Colors.red),
-                                                  const Text("Base Target   ",
-                                                      style: TextStyle(
-                                                          fontSize: 12,
-                                                          color: Colors.black)),
-                                                  const Text("2387",
-                                                      style: TextStyle(
-                                                          fontWeight:
-                                                              FontWeight.bold,
-                                                          fontSize: 12,
-                                                          color: Color.fromARGB(
-                                                              255,
-                                                              76,
-                                                              175,
-                                                              80))), // inserire dati aggiornati
-                                                ],
-                                              ),
-                                              Row(
-                                                children: [
-                                                  Icon(
-                                                      MdiIcons
-                                                          .silverwareForkKnife,
-                                                      color: Colors.blue),
-                                                  const Text("Food   ",
-                                                      style: TextStyle(
-                                                          fontSize: 12,
-                                                          color: Colors.black)),
-                                                  const Text("1099",
-                                                      style: TextStyle(
-                                                          fontWeight:
-                                                              FontWeight.bold,
-                                                          fontSize: 12,
-                                                          color: Color.fromARGB(
-                                                              255,
-                                                              76,
-                                                              175,
-                                                              80))), // inserire dati aggiornati
-                                                ],
-                                              ),
-                                              Row(
-                                                children: [
-                                                  Icon(MdiIcons.fire,
-                                                      color: Colors.orange),
-                                                  const Text("Exercise   ",
-                                                      style: TextStyle(
-                                                          fontSize: 12,
-                                                          color: Colors.black)),
-                                                  const Text("503",
-                                                      style: TextStyle(
-                                                          fontWeight:
-                                                              FontWeight.bold,
-                                                          fontSize: 12,
-                                                          color: Color.fromARGB(
-                                                              255,
-                                                              76,
-                                                              175,
-                                                              80))), // inserire dati aggiornati
-                                                ],
-                                              )
-                                            ],
-                                          ),
-                                        ),
-                                      )
-                                    ],
-                                  ),
-                                ),
-                              ]))),
-                      const SizedBox(height: 15),
-                      Container(
-                        height: 250, width: 350,
-                        //margin: EdgeInsets.only(bottom: 10),
-                        decoration: BoxDecoration(
-                          color: Colors.white,
-                          border: Border.all(
-                              color: Colors.grey.shade400, width: 1.0),
-                          borderRadius: BorderRadius.circular(10),
-                          boxShadow: [
-                            BoxShadow(
-                              color: Colors.grey.shade700,
-                              blurRadius: 6,
-                              spreadRadius: 2,
-                              offset: const Offset(-4, -4),
-                            )
-                          ],
-                        ),
-                        child: Column(
-                          mainAxisAlignment: MainAxisAlignment.center,
-                          children: [
-                            Container(
-                              height: 25,
-                              alignment: const Alignment(-0.95, 0.5),
-                              padding: const EdgeInsets.only(left: 5),
-                              child: const Text("Meal Selection",
-                                  style: TextStyle(
-                                      fontWeight: FontWeight.bold,
-                                      fontSize: 20,
-                                      color: Color.fromARGB(255, 76, 175, 80))),
-                            ),
-                            const SizedBox(height: 14),
-                            Row(
-                              mainAxisAlignment: MainAxisAlignment.center,
-                              children: [
-                                ElevatedButton.icon(
-                                  icon: Icon(MdiIcons.coffee,
-                                      color:
-                                          const Color.fromARGB(255, 6, 90, 158),
-                                      shadows: const <Shadow>[
-                                        Shadow(
-                                            color: Colors.black,
-                                            blurRadius: 1.0,
-                                            offset: Offset(0, 2))
-                                      ]),
-                                  label: const Text('Breakfast'),
-                                  //onPressed: (){},
-                                  onPressed: () {
-                                    setState(
-                                      () {
-                                        _isShowBreakfast = !_isShowBreakfast;
-                                      },
-                                    );
-                                  },
-                                  style: ElevatedButton.styleFrom(
-                                      //padding: EdgeInsets.fromLTRB(0, 20, 20, 20),
-                                      backgroundColor: Colors.lightGreen,
-                                      fixedSize: const Size(200, 40),
-                                      textStyle: const TextStyle(
-                                          fontSize: 22,
-                                          fontWeight: FontWeight.bold),
-                                      elevation: 15,
-                                      shadowColor:
-                                          const Color.fromARGB(255, 14, 75, 16),
-                                      shape: const StadiumBorder(),
-                                      side: const BorderSide(
-                                          color:
-                                              Color.fromARGB(255, 14, 75, 16),
-                                          width: 2.5)),
-                                ),
-                                Visibility(
-                                  visible: _isShowBreakfast,
-                                  child: ElevatedButton(
-                                    onPressed: () {
-                                      _toBreakfastChoicePage(context);
-                                    },
-                                    style: ElevatedButton.styleFrom(
-                                        shape: const CircleBorder(),
-                                        padding: const EdgeInsets.all(13),
-                                        backgroundColor: Colors.lightGreen,
-                                        shadowColor: const Color.fromARGB(
-                                            255, 14, 75, 16),
-                                        side: const BorderSide(
-                                            color:
-                                                Color.fromARGB(255, 14, 75, 16),
-                                            width: 3)),
-                                    child: Icon(MdiIcons.pencil,
-                                        color: const Color.fromARGB(
-                                            255, 14, 75, 16),
-                                        size: 27.5),
-                                  ),
-                                ),
-                              ],
-                            ),
-                            const SizedBox(height: 12),
-                            Row(
-                              mainAxisAlignment: MainAxisAlignment.center,
-                              children: [
-                                ElevatedButton.icon(
-                                  icon: Icon(MdiIcons.whiteBalanceSunny,
-                                      color: const Color.fromARGB(
-                                          255, 219, 200, 23),
-                                      shadows: const <Shadow>[
-                                        Shadow(
-                                            color: Colors.black,
-                                            blurRadius: 1.0,
-                                            offset: Offset(0, 2))
-                                      ]),
-                                  label: const Text('Lunch'),
-                                  onPressed: () {
-                                    setState(
-                                      () {
-                                        _isShowLunch = !_isShowLunch;
-                                      },
-                                    );
-                                  },
-                                  style: ElevatedButton.styleFrom(
-                                      //padding: EdgeInsets.fromLTRB(0, 20, 50, 20),
-                                      backgroundColor: Colors.lightGreen,
-                                      fixedSize: const Size(200, 40),
-                                      textStyle: const TextStyle(
-                                          fontSize: 22,
-                                          fontWeight: FontWeight.bold),
-                                      elevation: 15,
-                                      shadowColor:
-                                          const Color.fromARGB(255, 14, 75, 16),
-                                      shape: const StadiumBorder(),
-                                      side: const BorderSide(
-                                          color:
-                                              Color.fromARGB(255, 14, 75, 16),
-                                          width: 2.5)),
-                                ),
-                                Visibility(
-                                  visible: _isShowLunch,
-                                  child: ElevatedButton(
-                                    onPressed: () {
-                                      String mealName = 'LUNCH';
-                                      _toIngredientsPage(context, mealName);
-                                    },
-                                    style: ElevatedButton.styleFrom(
-                                        shape: const CircleBorder(),
-                                        padding: const EdgeInsets.all(13),
-                                        backgroundColor: Colors.lightGreen,
-                                        shadowColor: const Color.fromARGB(
-                                            255, 14, 75, 16),
-                                        side: const BorderSide(
-                                            color:
-                                                Color.fromARGB(255, 14, 75, 16),
-                                            width: 3)),
-                                    child: Icon(MdiIcons.pencil,
-                                        color: const Color.fromARGB(
-                                            255, 14, 75, 16),
-                                        size: 27.5),
-                                  ),
-                                ),
-                              ],
-                            ),
-                            const SizedBox(height: 12),
-                            Row(
-                              mainAxisAlignment: MainAxisAlignment.center,
-                              children: [
-                                ElevatedButton.icon(
-                                  icon: const Icon(Icons.mode_night_rounded,
-                                      color: Color.fromARGB(255, 126, 125, 125),
-                                      shadows: <Shadow>[
-                                        Shadow(
-                                            color: Colors.black,
-                                            blurRadius: 1.0,
-                                            offset: Offset(0, 2))
-                                      ]),
-                                  label: const Text('Dinner'),
-                                  onPressed: () {
-                                    setState(
-                                      () {
-                                        _isShowDinner = !_isShowDinner;
-                                      },
-                                    );
-                                  },
-                                  style: ElevatedButton.styleFrom(
-                                      //padding: EdgeInsets.all(20.0),
-                                      backgroundColor: Colors.lightGreen,
-                                      fixedSize: const Size(200, 40),
-                                      textStyle: const TextStyle(
-                                          fontSize: 22,
-                                          fontWeight: FontWeight.bold),
-                                      elevation: 15,
-                                      shadowColor:
-                                          const Color.fromARGB(255, 14, 75, 16),
-                                      shape: const StadiumBorder(),
-                                      side: const BorderSide(
-                                          color:
-                                              Color.fromARGB(255, 14, 75, 16),
-                                          width: 2.5)),
-                                ),
-                                Visibility(
-                                  visible: _isShowDinner,
-                                  child: ElevatedButton(
-                                    onPressed: () {
-                                      String mealName = 'DINNER';
-                                      _toIngredientsPage(context, mealName);
-                                    },
-                                    style: ElevatedButton.styleFrom(
-                                        shape: const CircleBorder(),
-                                        padding: const EdgeInsets.all(13),
-                                        backgroundColor: Colors.lightGreen,
-                                        shadowColor: const Color.fromARGB(
-                                            255, 14, 75, 16),
-                                        side: const BorderSide(
-                                            color:
-                                                Color.fromARGB(255, 14, 75, 16),
-                                            width: 3)),
-                                    child: Icon(MdiIcons.pencil,
-                                        color: const Color.fromARGB(
-                                            255, 14, 75, 16),
-                                        size: 27.5),
-                                  ),
-                                ),
-                              ],
-                            ),
-                            const SizedBox(height: 12),
-                            Row(
-                              mainAxisAlignment: MainAxisAlignment.center,
-                              children: [
-                                ElevatedButton.icon(
-                                  icon: Icon(MdiIcons.foodApple,
-                                      color: const Color.fromARGB(
-                                          255, 218, 26, 12),
-                                      shadows: const <Shadow>[
-                                        Shadow(
-                                            color: Colors.black,
-                                            blurRadius: 1.0,
-                                            offset: Offset(0, 2))
-                                      ]),
-                                  label: const Text('Snack'),
-                                  onPressed: () {
-                                    setState(
-                                      () {
-                                        _isShowSnack = !_isShowSnack;
-                                      },
-                                    );
-                                  },
-                                  style: ElevatedButton.styleFrom(
-                                      //padding: EdgeInsets.fromLTRB(0, 20, 50, 20),
-                                      backgroundColor: Colors.lightGreen,
-                                      fixedSize: const Size(200, 40),
-                                      textStyle: const TextStyle(
-                                          fontSize: 22,
-                                          fontWeight: FontWeight.bold),
-                                      elevation: 15,
-                                      shadowColor:
-                                          const Color.fromARGB(255, 14, 75, 16),
-                                      shape: const StadiumBorder(),
-                                      side: const BorderSide(
-                                          color:
-                                              Color.fromARGB(255, 14, 75, 16),
-                                          width: 2.5)),
-                                ),
-                                Visibility(
-                                  visible: _isShowSnack,
-                                  child: ElevatedButton(
-                                    onPressed: () => showDialog(
-                                      context: context,
-                                      builder: (context) => ScaffoldMessenger(
-                                        child: Builder(
-                                          builder: (context) => Scaffold(
-                                            backgroundColor: Colors.transparent,
-                                            body: GestureDetector(
-                                              child: AlertDialog(
-                                                title: const Text(
-                                                    'New snack'),
-                                                content: Column(
-                                                  mainAxisSize:
-                                                      MainAxisSize.min,
-                                                  children: [
-                                                    TextField(
-                                                      controller:
-                                                          nameController,
-                                                      //onChanged: (value) {String name = value;},
-                                                      decoration:
-                                                          const InputDecoration(
-                                                        labelText: "Name",
-                                                        hintText: "Name...",
-                                                        border: OutlineInputBorder(
-                                                            borderRadius:
-                                                                BorderRadius
-                                                                    .all(Radius
-                                                                        .circular(
-                                                                            10))),
-                                                      ),
-                                                    ),
-                                                    const SizedBox(height: 20),
-                                                    TextField(
-                                                      controller:
-                                                          quantityController,
-                                                      keyboardType:
-                                                          TextInputType.number,
-                                                      //onChanged: (value) {int quantity = int.parse(value);},
-                                                      decoration:
-                                                          const InputDecoration(
-                                                        labelText: "Calories",
-                                                        hintText: "Kcals...",
-                                                        border: OutlineInputBorder(
-                                                            borderRadius:
-                                                                BorderRadius
-                                                                    .all(Radius
-                                                                        .circular(
-                                                                            10))),
-                                                      ),
-                                                    ),
-                                                  ],
-                                                ),
-                                                actions: <Widget>[
-                                                  TextButton(
-                                                    onPressed: () {
-                                                      nameController.clear();
-                                                      quantityController
-                                                          .clear();
-                                                      Navigator.pop(
-                                                          context, 'Cancel');
-                                                    },
-                                                    child: const Text('Cancel'),
-                                                  ),
-                                                  TextButton(
-                                                    onPressed: () {
-                                                      if (nameController.text !=
-                                                              '' &&
-                                                          quantityController
-                                                                  .text !=
-                                                              '') {
-                                                        Provider.of<PersonalMeals>(
-                                                                context,
-                                                                listen: false)
-                                                            .addSnack(
-                                                                nameController
-                                                                    .text,
-                                                                int.parse(
-                                                                    quantityController
-                                                                        .text));
-                                                        setState(() {});
-                                                        nameController.clear();
-                                                        quantityController
-                                                            .clear();
-                                                        Navigator.pop(
-                                                            context, 'Add');
-                                                      } else {
-                                                        ScaffoldMessenger.of(
-                                                                context)
-                                                            .showSnackBar(
-                                                                const SnackBar(
-                                                          content: Text(
-                                                              'Name or quantity inserted are empty! Please complete both inputs or Cancel'),
-                                                          elevation: 20,
-                                                        ));
-                                                      }
-                                                    },
-                                                    child: const Text('Add'),
-                                                  ),
-                                                ],
-                                              ),
-                                            ),
-                                          ),
-                                        ),
-                                      ),
-                                    ),
-                                    style: ElevatedButton.styleFrom(
-                                        shape: const CircleBorder(),
-                                        padding: const EdgeInsets.all(13),
-                                        backgroundColor: Colors.lightGreen,
-                                        shadowColor: const Color.fromARGB(
-                                            255, 14, 75, 16),
-                                        side: const BorderSide(
-                                            color:
-                                                Color.fromARGB(255, 14, 75, 16),
-                                            width: 3)),
-                                    child: Icon(MdiIcons.pencil,
-                                        color: const Color.fromARGB(
-                                            255, 14, 75, 16),
-                                        size: 27.5),
-                                  ),
-                                ),
-                              ],
-                            ),
-                          ],
-                        ),
-                      ),
-                    ],
                   );
                 }
               });
@@ -1201,9 +535,9 @@ class _HomePageState extends State<HomePage> {
             meal: mealName, firstDatabaseEntry: widget.firstDatabaseEntry)));
   } //_toIngredientsPage
 
-    void _toBreakfastChoicePage(BuildContext context) {
+      void _toBreakfastChoicePage(BuildContext context) {
     Navigator.of(context).pushReplacement(MaterialPageRoute(
         builder: (context) => BreakfastChoicePage(firstDatabaseEntry: widget.firstDatabaseEntry,)));
   } //_toCookbookPage
 
-} //HomePage
+} //HomePage                  */
