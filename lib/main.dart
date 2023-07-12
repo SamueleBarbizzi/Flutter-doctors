@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_doctors/database/database.dart';
+import 'package:flutter_doctors/models/cookbook.dart';
 import 'package:flutter_doctors/models/favorites.dart';
 import 'package:flutter_doctors/models/mealchoice.dart';
 import 'package:flutter_doctors/models/personalmeals.dart';
@@ -17,6 +18,7 @@ void main() async {
         Provider<Favorites>(create: (context) => Favorites()),
         ListenableProvider<MealChoiche>(create: (_) => MealChoiche()),
         ListenableProvider<PersonalMeals>(create: (_) => PersonalMeals()),
+        ListenableProvider<CookBook>(create: (_) => CookBook()),
         ChangeNotifierProvider<DatabaseProvider>(
           create: (context) => DatabaseProvider(database: database),
         ),

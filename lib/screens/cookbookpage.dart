@@ -1152,12 +1152,14 @@ class _CookBookPageState extends State<CookBookPage> {
 
     for (int i = 0; i < chosen.length; i++) {
       for (int j = 0; j < chosen[i].length; j++) {
-        String dish =
-            '${widget.meal.toUpperCase()}_${chosenName[i].toLowerCase()}_${(j + 1).toString()}';
+        int id = chosen[i][j]['id'];
+        String dish = '${widget.meal.toUpperCase()}_${chosenName[i].toLowerCase()}_${id.toString()}';
         Map item = chosen[i][j];
 
-        Provider.of<MealChoiche>(context, listen: false)
-            .ChooseAndReplace(dish, item);
+        Provider.of<MealChoiche>(context, listen: false).ChooseAndReplace(dish, item);
+        Provider.of<CookBook>(context, listen: false).toggleRecipe(id);
+
+
       }
     }
 

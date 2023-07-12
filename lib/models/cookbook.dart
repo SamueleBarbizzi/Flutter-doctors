@@ -1,6 +1,9 @@
 // ignore_for_file: file_names
 
-class CookBook {
+import 'package:flutter/material.dart';
+
+class CookBook extends ChangeNotifier{
+
   final List<Map> recipeslist = [
     {
       'id': 1,
@@ -1563,6 +1566,19 @@ class CookBook {
           'https://www.chezuppa.com/wp-content/uploads/2021/10/risotto-funghi-porcini02.jpg'
     },
   ];
+
+  void toggleRecipe(int id) {
+    // this wants to alternate between favorite and not favorite
+    final isExist = recipeslist[id-1]['isSelected'];
+    if (isExist) {
+      recipeslist[id-1]['isSelected'] = false;
+    } else {
+      recipeslist[id-1]['isSelected'] = true;
+    }
+    //Call the notifyListeners() method to alert that something happened.
+    notifyListeners();
+  }
+
 }//Ingredients
 
 /*     {'id': num,

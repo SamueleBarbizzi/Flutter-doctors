@@ -29,11 +29,10 @@ class BreakfastChoicePage extends StatefulWidget {
 
 class _BreakfastChoicePageState extends State<BreakfastChoicePage> {
   //List of recipes
-  final List recipes = Groups().getBreakfastDishes();
 
   // This controller will store the value of the search bar
   // TextEditingController editingController = TextEditingController();
-
+  List recipes = Groups().getBreakfastDishes();
   List chosen = []; // list of the selected recipes
 
   @override
@@ -95,7 +94,7 @@ class _BreakfastChoicePageState extends State<BreakfastChoicePage> {
                     ),
                   ), */
           ListView.builder(
-        physics: const NeverScrollableScrollPhysics(),
+        //physics: const NeverScrollableScrollPhysics(),
         shrinkWrap: true,
         itemCount: recipes.length,
         itemBuilder: (BuildContext ctx, index) {
@@ -154,11 +153,13 @@ class _BreakfastChoicePageState extends State<BreakfastChoicePage> {
     String meal = 'BREAKFAST';
 
     for (int i = 0; i < chosen.length; i++) {
-      String dish = '${meal.toUpperCase()}_${(i + 1).toString()}';
+      int id = (chosen[i]['id']);
+      String dish = '${meal.toUpperCase()}_${id.toString()}';
       Map item = chosen[i];
 
-      Provider.of<MealChoiche>(context, listen: false)
-          .ChooseAndReplace(dish, item);
+      Provider.of<MealChoiche>(context, listen: false).ChooseAndReplace(dish, item);
+      Provider.of<CookBook>(context, listen: false).toggleRecipe(id);
+
     }
 
     Navigator.of(context).pushReplacement(
