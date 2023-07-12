@@ -1,9 +1,11 @@
 // ignore_for_file: non_constant_identifier_names
 
+import 'package:flutter/material.dart';
 import 'package:flutter_doctors/models/cookbook.dart';
 import 'package:flutter_doctors/models/ingredientslist.dart';
+import 'package:provider/provider.dart';
 
-class Groups {
+class Groups extends ChangeNotifier{
   // here we creates the groups in which the ingredients are displayed,
   // based on the course they are used for
   final List<Map> BreakfastIngredients = IngredientsList()
@@ -42,42 +44,39 @@ class Groups {
 
   // here we creates the groups in which the recipes are displayed,
   // based on the course  in which they are used
-
-  final List<Map> BreakfastDishes = CookBook()
-      .recipeslist
-      .where((element) => element['course'].contains('Breakfast'))
-      .toList();
-
-  final List<Map> FirstMainDishes = CookBook()
-      .recipeslist
-      .where((element) => element['course'].contains('Main1'))
-      .toList();
-
-  final List<Map> SecondMainDishes = CookBook()
-      .recipeslist
-      .where((element) => element['course'].contains('Main2'))
-      .toList();
-
-  final List<Map> SideDishes = CookBook()
-      .recipeslist
-      .where((element) => element['course'].contains('Side'))
-      .toList();
-
-  final List<Map> DessertDishes = CookBook()
-      .recipeslist
-      .where((element) => element['course'].contains('Dessert'))
-      .toList();
-
-  List<List> createDishesGroups() {
-    return [FirstMainDishes, SecondMainDishes, SideDishes, DessertDishes];
+  List<Map> createBreakfastDishes(BuildContext context) {
+    return Provider.of<CookBook>(context, listen: false)
+        .recipeslist
+        .where((element) => element['course'].contains('Breakfast'))
+        .toList();
   }
 
-  List getBreakfastDishes() {
-    return [BreakfastDishes];
+  List<Map> createFirstMainDishes(BuildContext context) {
+    return Provider.of<CookBook>(context, listen: false)
+        .recipeslist
+        .where((element) => element['course'].contains('Main1'))
+        .toList();
   }
 
-  List getDessertDishes() {
-    return [DessertDishes];
+  List<Map> createSecondMainDishes(BuildContext context) {
+    return Provider.of<CookBook>(context, listen: false)
+        .recipeslist
+        .where((element) => element['course'].contains('Main2'))
+        .toList();
+  }
+
+  List<Map> createSideDishes(BuildContext context) {
+    return Provider.of<CookBook>(context, listen: false)
+        .recipeslist
+        .where((element) => element['course'].contains('Side'))
+        .toList();
+  }
+
+  List<Map> createDessertDishes(BuildContext context) {
+    return Provider.of<CookBook>(context, listen: false)
+        .recipeslist
+        .where((element) => element['course'].contains('Dessert'))
+        .toList();
   }
 
 /*

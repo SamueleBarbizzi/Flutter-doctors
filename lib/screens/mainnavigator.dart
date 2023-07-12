@@ -10,6 +10,7 @@ import 'package:flutter_doctors/screens/loginpage.dart';
 import 'package:flutter_doctors/screens/accountpage.dart';
 import 'package:flutter_doctors/screens/homepage.dart';
 import 'package:shared_preferences/shared_preferences.dart';
+import 'package:flutter_doctors/screens/visualEditRecipepage.dart';
 
 class MainNavigator extends StatefulWidget {
   final bool firstDatabaseEntry;
@@ -69,7 +70,7 @@ class _MainNavigatorState extends State<MainNavigator> {
   Widget build(BuildContext context) {
     final List<Widget> _screens = [
       HomePage(firstDatabaseEntry: widget.firstDatabaseEntry),
-      InfoPage(),
+      VisualEditRecipe(),
       AccountPage(),
     ];
     print('${MainNavigator.routename} built');
