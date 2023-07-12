@@ -16,6 +16,6 @@ class Impact {
 
   static const patientUsername = "Jpefaq6m58";
 
-  static const username = "TEuLBZQD4V";
-  static const password = "12345678!";
+  static const username = "";
+  static const password = "";
 }
