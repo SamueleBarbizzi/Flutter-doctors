@@ -67,7 +67,6 @@ class _LoginPageState extends State<LoginPage> {
 
     return FlutterLogin(
       title: 'Welcome!',
-      logo: const AssetImage('assets/images/logo.png'),
       theme: LoginTheme(
         primaryColor: Colors.green,
         accentColor: Colors.black,
@@ -149,10 +148,8 @@ class _LoginPageState extends State<LoginPage> {
     );
   } // build
 
-  void _toMainNavigator(BuildContext context,
-      {bool firstDatabaseEntry = true}) {
+  void _toMainNavigator(BuildContext context, {bool firstDatabaseEntry = true}) {
     Navigator.of(context).pushReplacement(MaterialPageRoute(
-        builder: (context) =>
-            const MainNavigator(flag: false, firstDatabaseEntry: true,)));
+        builder: (context) => MainNavigator(firstDatabaseEntry: firstDatabaseEntry, flag: true)));
   } //_toHomePage
 } // LoginScreen

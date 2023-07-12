@@ -117,8 +117,26 @@ class _HomePageState extends State<HomePage> {
                   return Column(
                     children: [
                       Row(
-                        mainAxisAlignment: MainAxisAlignment.center,
-                        children: [
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          children: [
+                            SizedBox(height: 5),
+                            IconButton(
+                              color: Color.fromARGB(255, 14, 75, 16),
+                              splashColor: Colors.transparent,
+                              highlightColor: Colors.transparent,
+                              icon: Icon(LineIcons.angleDoubleLeft),
+                              onPressed: _decrementDate,
+                            ),
+                            Text(date, style: TextStyle(fontFamily: "Lato", fontSize: 18, fontWeight: FontWeight.bold, color: Color.fromARGB(255, 14, 75, 16))),
+                            IconButton(
+                              color: Color.fromARGB(255, 14, 75, 16),
+                              splashColor: Colors.transparent,
+                              highlightColor: Colors.transparent,
+                              icon: Icon(LineIcons.angleDoubleRight),
+                              onPressed: () => _incrementDate(dataLength),
+                            ),
+                          ],
+                        ),
                           Align(
                             alignment: Alignment.center,
                             child: Container(
@@ -183,7 +201,7 @@ class _HomePageState extends State<HomePage> {
                                                 child: const Center(
                                                     child: Padding(
                                                   padding: EdgeInsets.only(
-                                                      top: 35.0),
+                                                      top: 50.0),
                                                   child: Column(
                                                       mainAxisAlignment:
                                                           MainAxisAlignment
@@ -309,7 +327,7 @@ class _HomePageState extends State<HomePage> {
                           ),
                           const SizedBox(height: 15),
                           Container(
-                            height: 330,
+                            height: 330, width: 350,
                             margin: const EdgeInsets.fromLTRB(25, 0, 25, 0),
                             decoration: BoxDecoration(
                               color: Colors.white,
@@ -325,10 +343,7 @@ class _HomePageState extends State<HomePage> {
                                 )
                               ],
                             ),
-                          ),
-                        ],
-                      ),
-                      Column(
+                          child: Column(
                         mainAxisAlignment: MainAxisAlignment.center,
                         children: [
                           Container(
@@ -339,7 +354,7 @@ class _HomePageState extends State<HomePage> {
                             child: const Text("Meal Selection",
                                 style: TextStyle(
                                     fontWeight: FontWeight.bold,
-                                    fontSize: 24,
+                                    fontSize: 20,
                                     color: Color.fromARGB(255, 76, 175, 80))),
                           ),
                           const SizedBox(height: 25),
@@ -604,6 +619,7 @@ class _HomePageState extends State<HomePage> {
                           ),
                         ],
                       ),
+                          ),
                     ],
                   );
                 } else {

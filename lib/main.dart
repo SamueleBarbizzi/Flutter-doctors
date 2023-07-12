@@ -21,7 +21,7 @@ void main() async {
           create: (context) => DatabaseProvider(database: database),
         ),
       ],
-      child: const MyApp(),
+      child: MyApp(),
     ),
   );
 } //main
@@ -39,7 +39,7 @@ class MyApp extends StatelessWidget {
           color: Color.fromARGB(255, 14, 75, 16),
         ),
       ),
-      home: const LoginPage(),
+      home: LoginPage(),
     );
   } //build
 } //MyApp
