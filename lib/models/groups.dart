@@ -73,11 +73,11 @@ class Groups {
   }
 
   List getBreakfastDishes() {
-    return [BreakfastDishes];
+    return BreakfastDishes;
   }
 
   List getDessertDishes() {
-    return [DessertDishes];
+    return DessertDishes;
   }
 
 /*

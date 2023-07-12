@@ -30,7 +30,7 @@ class MealChoiche extends ChangeNotifier {
     final isExist = chosen.containsKey(dish);
 
     if (isExist) {
-      final recipeExist = chosen[dish].contains(item);
+      final recipeExist = chosen[dish]['id'] == item['id'];
       if (recipeExist) {
         chosen[dish] = {};
       } else {
