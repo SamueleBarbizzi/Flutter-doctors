@@ -12,8 +12,9 @@ class PersonalMeals extends ChangeNotifier {
     personalRecipes[indexMeal].add({
       'name': name,
       'calories': calories,
-      'isLunchSaved': false,
-      'isDinnerSaved': false,
+      'isSelected': false,
+      'isLUNCHSaved': false,
+      'isDINNERSaved': false,
     });
     for (int i = 0; i < personalRecipes.length; i++) {
       personalRecipes[indexMeal].sort((a, b) => a["name"].compareTo(b["name"]));
@@ -22,12 +23,16 @@ class PersonalMeals extends ChangeNotifier {
     notifyListeners();
   }
 
+  Map getPersonalRecipe(int indexMeal, int indexCourse) {
+    return personalRecipes[indexMeal][indexCourse];
+  }
+
   void removePersonalRecipe(int indexMeal, int indexCourse) {
     personalRecipes[indexMeal].removeAt(indexCourse);
 
     //Call the notifyListeners() method to alert that something happened.
     notifyListeners();
-  }
+  }  
 
   void addSnack(String name, int calories) {
     snacks.add({

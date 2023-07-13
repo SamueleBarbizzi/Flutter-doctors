@@ -42,6 +42,26 @@ class MealChoiche extends ChangeNotifier {
     },
   };
 
+  Map personalRecipes = {
+    'BREAKFAST': {
+      'breakfast': <dynamic>{}, //this is a Set, to avoid repetitions
+    },
+    'LUNCH': {
+      'main1': <dynamic>{},
+      'main2': <dynamic>{},
+      'side': <dynamic>{},
+      'dessert': <dynamic>{},
+    },
+    'DINNER': {
+      'main1': <dynamic>{},
+      'main2': <dynamic>{},
+      'side': <dynamic>{},
+      'dessert': <dynamic>{},
+    },
+  };
+
+
+
   void ToogleChosenRecipe(String meal, String course, Map item) {
     // this wants to alternate between inserting the recipe in the chosen Map,
     // and removes it if it is already present
@@ -52,6 +72,33 @@ class MealChoiche extends ChangeNotifier {
     else {chosen[meal.toUpperCase()][course.toLowerCase()].add(item);}
 
     //Remember to call the CookBook provider when using choose.
+
+    //Call the notifyListeners() method to alert that something happened.
+    notifyListeners();
+  }
+
+    void TooglePersonalRecipe(String meal, String course, Map item) {
+    // this wants to alternate between inserting the recipe in the chosen Map,
+    // and removes it if it is already present
+    bool isPresent = personalRecipes[meal.toUpperCase()][course.toLowerCase()].contains(item);
+    if (isPresent){
+      personalRecipes[meal.toUpperCase()][course.toLowerCase()].remove(item);
+    }
+    else {personalRecipes[meal.toUpperCase()][course.toLowerCase()].add(item);}
+
+    //Remember to call the CookBook provider when using choose.
+
+    //Call the notifyListeners() method to alert that something happened.
+    notifyListeners();
+  }
+
+  void removePersonalRecipe(String meal, String course, Map item) {
+    // this wants to alternate between inserting the recipe in the chosen Map,
+    // and removes it if it is already present
+    bool isPresent = personalRecipes[meal.toUpperCase()][course.toLowerCase()].contains(item);
+    if (isPresent){
+      personalRecipes[meal.toUpperCase()][course.toLowerCase()].remove(item);
+    }    
 
     //Call the notifyListeners() method to alert that something happened.
     notifyListeners();
@@ -79,23 +126,34 @@ class MealChoiche extends ChangeNotifier {
     notifyListeners();
   }
 
+  void clearPersonalRecipes() {
+    personalRecipes = {
+      'BREAKFAST': {
+        'breakfast': {}, //this is a Set, to avoid repetitions
+      },
+      'LUNCH': {
+        'main1': {},
+        'main2': {},
+        'side': {},
+        'dessert': {},
+      },
+      'DINNER': {
+        'main1': {},
+        'main2': {},
+        'side': {},
+        'dessert': {},
+      },
+    };
+
+    notifyListeners();
+  }
+
   Set getMealRecipes(String meal, String course, int id) {
     return chosen[meal.toUpperCase()][course.toLowerCase()];
   }
 
-  /*int getAllCalories(){
-    int totalCalories = 0;
-    for (String meal in chosen){
-      for (String course in chosen[meal]){
-        for (int i=0; i<chosen[meal][course].length; i++){
-          totalCalories += chosen[meal][course]['calories'];
-        }
-      }
-    }
-    return totalCalories;
-  }*/
 
-  int getAllCalories() {
+  int getAllChosenCalories() {
     num totalCalories = 0;
     chosen.forEach(
       (key, value) {
@@ -111,4 +169,23 @@ class MealChoiche extends ChangeNotifier {
     }
     return totalCalories.toInt();
   }
+
+    int getAllPersonalCalories() {
+    num totalCalories = 0;
+    personalRecipes.forEach(
+      (key, value) {
+        value.forEach((key2, value2) {
+          for (Map recipe in value2) {
+            totalCalories += recipe['calories'];
+          }
+        });
+      },
+    );
+    if (kDebugMode) {
+      print('total calories: $totalCalories');
+    }
+    return totalCalories.toInt();
+  }
+
+
 } //MealChoice

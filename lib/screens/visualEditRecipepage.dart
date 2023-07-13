@@ -22,108 +22,126 @@ class VisualEditRecipe extends StatefulWidget {
 
 class _VisualEditRecipeState extends State<VisualEditRecipe> {
 
+  late Map chosen= Provider.of<MealChoiche>(context, listen: false).chosen;
+  late Map personal=Provider.of<MealChoiche>(context, listen: false).personalRecipes;
+
   @override
   Widget build(BuildContext context) {
     print('${VisualEditRecipe.routename} built');
-  Map chosen= Provider.of<MealChoiche>(context, listen: false).chosen; 
-  List lista = chosen['LUNCH'].values.toList();
-  List<bool> valori = [];
-  List complex = [];
-  for( int i=0; i< 4; i++) {valori.add(lista[i].isNotEmpty); complex.add(lista[i]);};
-  int lungh = valori.where((x) => x == true).length;
-  List all_list= complex.expand((x) => x).toList(); 
-  int lunlist=all_list.length;
   
-    return Scaffold(
-      appBar: AppBar(
-        title: Row(children: [
-          const Text(VisualEditRecipe.routename, 
-          style: const TextStyle(fontWeight: FontWeight.bold))]),
-        centerTitle: true,
-        leading: BackButton(
-          onPressed: (){} //=> Navigator.of(context).pushReplacement(MaterialPageRoute(builder: (context) => const MainNavigator())),
-        ),),
-      body: SingleChildScrollView(
-        child: Column(
-          mainAxisSize: MainAxisSize.min,
-          children: <Widget>[
-            Text(
-              'Headline',
-              style: TextStyle(fontSize: 18),
-            ),
-            SizedBox(
-              height: 200,
-              child: ListView.builder(
-                physics: ClampingScrollPhysics(),
+    List<Widget> mywidgets = [];
+    Map chosen= Provider.of<MealChoiche>(context, listen: false).chosen;
+    Map personal=Provider.of<MealChoiche>(context, listen: false).personalRecipes;
+
+    for (var k in ['BREAKFAST','LUNCH','DINNER']) { 
+      List recipe = chosen[k].values.toList();
+      List recipePersonal = personal[k].values.toList();
+      List addRecipe = [];
+      List addRecipePersonal = [];
+      List<bool> isEmpty = [];
+      List<bool> isEmptyPersonal = [];
+      int iter = k=='BREAKFAST'? 1 : 4;
+      for( int i=0; i< iter; i++) {
+        isEmpty.add(recipe[i].isNotEmpty); 
+        isEmptyPersonal.add(recipePersonal[i].isNotEmpty); 
+        addRecipe.add(recipe[i]);
+        addRecipePersonal.add(recipePersonal[i]);
+      };
+      int lenEmpty = isEmpty.where((x) => x == true).length;
+      int lenEmptyPersonal = isEmptyPersonal.where((x) => x == true).length;
+      List allRecipe = addRecipe.expand((x) => x).toList();
+      List allRecipePersonal = addRecipePersonal.expand((x) => x).toList();
+      int lenRecipe=allRecipe.length;
+      int lenRecipePersonal=allRecipePersonal.length;
+      if (lenEmpty+lenEmptyPersonal!=0) {
+        mywidgets.add(
+          Container( child: 
+            Column( children: [ 
+              Container( alignment: Alignment.center, 
+                width: double.infinity,
+                padding: EdgeInsets.all(3), 
+                margin: EdgeInsets.all(5),
+                decoration: BoxDecoration(
+                  color: Colors.white,
+                  border: Border.all(
+                      color: Colors.grey.shade400, width: 1.0),
+                  borderRadius: BorderRadius.circular(10),
+                  boxShadow: [ BoxShadow(
+                    color: Colors.grey.shade700,
+                    blurRadius: 6,
+                    spreadRadius: 2,
+                    offset: const Offset(-4, -4),
+                  )],
+                ),
+                child: Text( '$k',
+                  style: TextStyle(
+                    fontWeight: FontWeight.bold,
+                    fontSize: 22,
+                    color: Color.fromARGB(255, 76, 175, 80)),
+                    
+                ),
+              ),
+              ListView.builder(
+                physics: const NeverScrollableScrollPhysics(),
                 shrinkWrap: true,
-                scrollDirection: Axis.horizontal,
-                itemCount: lunlist,
-                itemBuilder: (BuildContext ctx, index) => Card ( 
-                  key: ValueKey(all_list[index]['name']),
-                  child: Container(
+                itemCount: lenRecipePersonal,
+                itemBuilder: (BuildContext ctx, index) { 
+                  return Card(
+                    key: ValueKey(allRecipePersonal[index]['name']),
+                    margin: const EdgeInsets.fromLTRB(5,1,5,1),
+                    shape: RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(10)),
+                    child: ListTile(
+                      title: Text(allRecipePersonal[index]['name']),
+                      subtitle: Text('     ${allRecipePersonal[index]['calories']} kcals'),
+                    ),
+                  );
+                },
+              ),
+              SizedBox(
+                height: 200,
+                child: ListView.builder(
+                  physics: ClampingScrollPhysics(),
+                  shrinkWrap: true,
+                  scrollDirection: Axis.horizontal,
+                  itemCount: lenRecipe,
+                  itemBuilder: (BuildContext ctx, index) => Card ( 
+                    key: ValueKey(allRecipe[index]['name']),
+                    child: Container(
                       decoration: BoxDecoration(
                         color: Colors.white,
                         border: Border.all(color: Colors.grey.shade400, width: 1.0),
                         borderRadius: BorderRadius.circular(8)
                       ), 
                       child: ClipRRect(borderRadius: BorderRadius.circular(10),
-                        child: Image.network(all_list[index]['url']),
+                        child: Image.network(allRecipe[index]['url']),
                       )
-                    ),),
-              ),
-            ),
-            Text(
-              'Headline 2',
-              style: TextStyle(fontSize: 18),
-            ),
-            SizedBox(
-              height: 200.0,
-              child: ListView.builder(
-                physics: ClampingScrollPhysics(),
-                shrinkWrap: true,
-                scrollDirection: Axis.horizontal,
-                itemCount: 15,
-                itemBuilder: (BuildContext context, int index) => Card(
-                      child: Center(child: Text('Dummy Card Text')),
                     ),
+                  ),
+                ),
               ),
-            ),
-            Text(
-              'Headline 3',
-              style: TextStyle(fontSize: 18),
-            ),
-            SizedBox(
-              height: 200.0,
-              child: ListView.builder(
-                physics: ClampingScrollPhysics(),
-                shrinkWrap: true,
-                scrollDirection: Axis.horizontal,
-                itemCount: 15,
-                itemBuilder: (BuildContext context, int index) => Card(
-                      child: Center(child: Text('Dummy Card Text')),
-                    ),
-              ),
-            ),
-            Text(
-              'Headline 4',
-              style: TextStyle(fontSize: 18),
-            ),
-            SizedBox(
-              height: 200.0,
-              child: ListView.builder(
-                physics: ClampingScrollPhysics(),
-                shrinkWrap: true,
-                scrollDirection: Axis.horizontal,
-                itemCount: 15,
-                itemBuilder: (BuildContext context, int index) => Card(
-                      child: Center(child: Text('Dummy Card Text')),
-                    ),
-              ),
-            ),
-          ],
-        ),
-      ),
-    );
+              const SizedBox(height: 20,)
+            ],),
+          ),
+        );
+      }
+    }  
+        return Scaffold(
+          appBar: AppBar(
+            title: Row(children: [
+              const Text(VisualEditRecipe.routename, 
+              style: const TextStyle(fontWeight: FontWeight.bold))]),
+            centerTitle: true,
+            leading: BackButton(
+              onPressed: (){} //=> Navigator.of(context).pushReplacement(MaterialPageRoute(builder: (context) => const MainNavigator())),
+            ),),
+          body: SingleChildScrollView(
+            child: Column(
+              mainAxisSize: MainAxisSize.min,
+              children: mywidgets
+          ),
+          ),
+        );
   }
 }
 
