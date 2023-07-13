@@ -48,7 +48,8 @@ class _AccountPageState extends State<AccountPage> {
       _foodIntoleranceController.text = prefs.getString('foodIntolerance') ?? '';
       _dailycalorieintakeController.text = prefs.getString('dailycalorieintake') ?? '';
       _consentController.text = prefs.getString('consent') ?? 'false';      
-      
+      consentChecked = prefs.getBool('consentChecked') ?? false;
+
     });
   }
 
@@ -63,7 +64,7 @@ class _AccountPageState extends State<AccountPage> {
     await prefs.setString('foodIntolerance', _foodIntoleranceController.text);
     await prefs.setString('dailycalorieintake', _dailycalorieintakeController.text);
     await prefs.setString('consent', _consentController.text);
-  
+    await prefs.setBool('consentChecked', consentChecked);
   }
   
    @override
@@ -215,6 +216,7 @@ class _AccountPageState extends State<AccountPage> {
       onChanged: (bool? value) {
         setState(() {
           consentChecked = value ?? false;
+          _consentController.text = consentChecked.toString();
         });
       },
       controlAffinity: ListTileControlAffinity.leading,
