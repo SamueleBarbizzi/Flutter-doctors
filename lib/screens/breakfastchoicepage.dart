@@ -32,7 +32,7 @@ class _BreakfastChoicePageState extends State<BreakfastChoicePage> {
 
   // This controller will store the value of the search bar
   // TextEditingController editingController = TextEditingController();
-  List recipes = [];
+  late final recipes = Groups().createBreakfastDishes(context);
   List chosen = []; // list of the selected recipes
 
   @override
@@ -41,6 +41,7 @@ class _BreakfastChoicePageState extends State<BreakfastChoicePage> {
     recipes.sort((a, b) => a["name"].compareTo(b["name"]));
     super.initState();
   }
+
 
   @override
   Widget build(BuildContext context) {
@@ -53,7 +54,7 @@ class _BreakfastChoicePageState extends State<BreakfastChoicePage> {
           //back to MainNavigator, saving the coiches
           _Done(context);
         },
-        backgroundColor: Colors.blue,
+        backgroundColor: Colors.green,
         child: const Icon(Icons.done),
       ),
       appBar: AppBar(
@@ -91,12 +92,12 @@ class _BreakfastChoicePageState extends State<BreakfastChoicePage> {
                 // If this item already is selected: "isSelected": true -> false
                 setState(() {
                   recipes[index]['isSelected'] = !recipes[index]['isSelected'];
+                  String meal = 'BREAKFAST';
+                  String course = 'breakfast';
+                  Provider.of<MealChoiche>(context, listen: false).ToogleChosenRecipe(meal.toUpperCase(), course , recipes[index]);
                 });
               },
 
-              //leading: CircleAvatar(
-              //    backgroundColor: Colors.green,
-              //    child: Text(possibleRecipes[index]['id'].toString())),
               title: Text(recipes[index]['name']),
               subtitle: Text('     ${recipes[index]['calories']} kcals'),
             ),
@@ -115,18 +116,6 @@ class _BreakfastChoicePageState extends State<BreakfastChoicePage> {
   } //_toMainNavigator
 
   void _Done(BuildContext context) {
-    chosen = recipes.where((item) => item['isSelected'] == true).toList();
-
-    String meal = 'BREAKFAST';
-
-    for (int i = 0; i < chosen.length; i++) {
-      int id = (chosen[i]['id']);
-      Map item = chosen[i];
-
-      Provider.of<MealChoiche>(context, listen: false).ChooseRecipe(meal.toUpperCase(), 'breakfast' , item);
-      Provider.of<CookBook>(context, listen: false).toggleRecipe(id);
-
-    }
 
     Navigator.of(context).pushReplacement(
       MaterialPageRoute(
