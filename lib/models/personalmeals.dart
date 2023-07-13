@@ -13,8 +13,8 @@ class PersonalMeals extends ChangeNotifier {
       'name': name,
       'calories': calories,
       'isSelected': false,
-      'isLunchSaved': false,
-      'isDinnerSaved': false,
+      'isLUNCHSaved': false,
+      'isDINNERSaved': false,
     });
     for (int i = 0; i < personalRecipes.length; i++) {
       personalRecipes[indexMeal].sort((a, b) => a["name"].compareTo(b["name"]));

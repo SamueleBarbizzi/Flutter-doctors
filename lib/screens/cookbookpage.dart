@@ -337,15 +337,15 @@ class _CookBookPageState extends State<CookBookPage> {
                                   trailing: IconButton(
                                     icon: const Icon(Icons.delete_forever),
                                     onPressed: () {
-                                      Provider.of<PersonalMeals>(context,
-                                              listen: false)
-                                          .removePersonalRecipe(0, index);
                                 Map item = Provider.of<PersonalMeals>(context,
                                         listen: false)
                                     .getPersonalRecipe(0, index);
                                 Provider.of<MealChoiche>(context, listen: false)
                                     .removePersonalRecipe(widget.meal.toUpperCase(),
                                         coursesName[0].toLowerCase(), item);
+                                      Provider.of<PersonalMeals>(context,
+                                              listen: false)
+                                          .removePersonalRecipe(0, index);
                                       setState(() {});
                                     },
                                   )));
@@ -614,15 +614,15 @@ class _CookBookPageState extends State<CookBookPage> {
                                   trailing: IconButton(
                                     icon: const Icon(Icons.delete_forever),
                                     onPressed: () {
-                                      Provider.of<PersonalMeals>(context,
-                                              listen: false)
-                                          .removePersonalRecipe(1, index);
                                 Map item = Provider.of<PersonalMeals>(context,
                                         listen: false)
                                     .getPersonalRecipe(1, index);
                                 Provider.of<MealChoiche>(context, listen: false)
                                     .removePersonalRecipe(widget.meal.toUpperCase(),
                                         coursesName[1].toLowerCase(), item);
+                                      Provider.of<PersonalMeals>(context,
+                                              listen: false)
+                                          .removePersonalRecipe(1, index);
                                       setState(() {});
                                     },
                                   )));
@@ -886,15 +886,15 @@ class _CookBookPageState extends State<CookBookPage> {
                                   trailing: IconButton(
                                     icon: const Icon(Icons.delete_forever),
                                     onPressed: () {
-                                      Provider.of<PersonalMeals>(context,
-                                              listen: false)
-                                          .removePersonalRecipe(2, index);
                                 Map item = Provider.of<PersonalMeals>(context,
                                         listen: false)
                                     .getPersonalRecipe(2, index);
                                 Provider.of<MealChoiche>(context, listen: false)
                                     .removePersonalRecipe(widget.meal.toUpperCase(),
                                         coursesName[2].toLowerCase(), item);
+                                      Provider.of<PersonalMeals>(context,
+                                              listen: false)
+                                          .removePersonalRecipe(2, index);
                                       setState(() {});
                                     },
                                   )));
@@ -1161,15 +1161,15 @@ class _CookBookPageState extends State<CookBookPage> {
                               trailing: IconButton(
                                 icon: const Icon(Icons.delete_forever),
                                 onPressed: () {
-                                  Provider.of<PersonalMeals>(context,
-                                          listen: false)
-                                      .removePersonalRecipe(3, index);
                                 Map item = Provider.of<PersonalMeals>(context,
                                         listen: false)
                                     .getPersonalRecipe(3, index);
                                 Provider.of<MealChoiche>(context, listen: false)
                                     .removePersonalRecipe(widget.meal.toUpperCase(),
                                         coursesName[3].toLowerCase(), item);
+                                  Provider.of<PersonalMeals>(context,
+                                          listen: false)
+                                      .removePersonalRecipe(3, index);
                                   setState(() {});
                                 },
                               )));
