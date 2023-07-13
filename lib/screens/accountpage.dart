@@ -5,7 +5,7 @@ import 'package:flutter_doctors/screens/loginpage.dart';
 import 'package:flutter_doctors/screens/infopage.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:shared_preferences/shared_preferences.dart';
-
+import 'package:flutter_doctors/screens/mainnavigator.dart';
 
 class AccountPage extends StatefulWidget {
   AccountPage({Key? key}) : super(key: key);
@@ -71,6 +71,8 @@ class _AccountPageState extends State<AccountPage> {
     await prefs.setString('dailycalorieintake', _dailycalorieintakeController.text);
     await prefs.setString('consent', _consentController.text);
     await prefs.setBool('consentChecked', consentChecked);
+
+    _toMainNavigator(context);
     } else {
 
       ScaffoldMessenger.of(context).showSnackBar(
@@ -232,10 +234,10 @@ drawer: Drawer(
               Row(mainAxisAlignment: MainAxisAlignment.center,
                 children: [
                   Icon(Icons.settings,
-                    size: 34,
+                    size: 28,
                     color: Colors.white,
                   ),
-                  SizedBox(width: 10),
+                  SizedBox(width: 1),
                   Text('Settings',style: TextStyle(
                       fontSize: 34,
                       color: Colors.white,
@@ -369,6 +371,11 @@ drawer: Drawer(
     );
   }
   }
+
+  void _toMainNavigator(BuildContext context) {
+  Navigator.of(context).pushReplacement(MaterialPageRoute(builder: (context) => MainNavigator()));
+}  
+
 void _toLoginPage(BuildContext context) async{
     //Unset the 'username' filed in SharedPreference 
     final sp = await SharedPreferences.getInstance();

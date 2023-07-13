@@ -1,7 +1,7 @@
 // ignore_for_file: use_build_context_synchronously, depend_on_referenced_packages
 
 import 'package:flutter/material.dart';
-import 'package:flutter_doctors/screens/mainnavigator.dart';
+import 'package:flutter_doctors/screens/accountpage.dart';
 import 'package:flutter_login/flutter_login.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
@@ -28,7 +28,8 @@ class _LoginPageState extends State<LoginPage> {
     final sp = await SharedPreferences.getInstance();
     if(sp.getString('username') != null){
       //If 'username' is set, go to MainNavigator
-      _toMainNavigator(context);
+     _toAccountPage(context);
+
     }//if
   }//_checkIfLogged
 
@@ -149,13 +150,14 @@ class _LoginPageState extends State<LoginPage> {
       onSignup: _signUpUser,
       onRecoverPassword: _recoverPassword,
       onSubmitAnimationCompleted: () async{
-        _toMainNavigator(context);
+    _toAccountPage(context);
+
       },
     );
   } // build
 
-  void _toMainNavigator(BuildContext context){
-    Navigator.of(context).pushReplacement(MaterialPageRoute(builder: (context) => const MainNavigator()));
-  }//_toHomePage
+  void _toAccountPage(BuildContext context) {
+  Navigator.of(context).pushReplacement(MaterialPageRoute(builder: (context) => AccountPage()));
+}
 
 } // LoginScreen
