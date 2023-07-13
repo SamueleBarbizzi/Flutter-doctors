@@ -1,12 +1,14 @@
-import 'dart:ffi';
+//import 'dart:ffi';
 
 import 'package:flutter/material.dart';
 //import 'package:material_design_icons_flutter/material_design_icons_flutter.dart';
-import 'package:flutter_doctors/screens/mainnavigator.dart';
+//import 'package:flutter_doctors/screens/mainnavigator.dart';
 import 'package:flutter_doctors/models/mealchoice.dart';
-import 'package:flutter_doctors/models/personalmeals.dart';
-import 'package:flutter_doctors/models/groups.dart';
+//import 'package:flutter_doctors/models/personalmeals.dart';
+//import 'package:flutter_doctors/models/groups.dart';
 import 'package:provider/provider.dart';
+import 'package:flutter_doctors/screens/cookbookpage.dart';
+import 'package:flutter_doctors/screens/recipepage.dart';
 
 
 class VisualEditRecipe extends StatefulWidget {
@@ -24,6 +26,12 @@ class _VisualEditRecipeState extends State<VisualEditRecipe> {
 
   late Map chosen= Provider.of<MealChoiche>(context, listen: false).chosen;
   late Map personal=Provider.of<MealChoiche>(context, listen: false).personalRecipes;
+  final List<String> groupsName = [
+    'FIRST MAIN DISH',
+    'SECOND MAIN DISH',
+    'SIDE',
+    'DESSERT',
+  ];
 
   @override
   Widget build(BuildContext context) {
@@ -108,15 +116,25 @@ class _VisualEditRecipeState extends State<VisualEditRecipe> {
                   itemCount: lenRecipe,
                   itemBuilder: (BuildContext ctx, index) => Card ( 
                     key: ValueKey(allRecipe[index]['name']),
-                    child: Container(
-                      decoration: BoxDecoration(
-                        color: Colors.white,
-                        border: Border.all(color: Colors.grey.shade400, width: 1.0),
-                        borderRadius: BorderRadius.circular(8)
-                      ), 
-                      child: ClipRRect(borderRadius: BorderRadius.circular(10),
-                        child: Image.network(allRecipe[index]['url']),
-                      )
+                    child: Tooltip( 
+                      message: allRecipe[index]['name'],
+                      child: GestureDetector( 
+                        child: Container(
+                          decoration: BoxDecoration(
+                            color: Colors.white,
+                            border: Border.all(color: Colors.grey.shade400, width: 1.0),
+                            borderRadius: BorderRadius.circular(8)
+                          ), 
+                          child: ClipRRect(borderRadius: BorderRadius.circular(10),
+                            child: Image.network(allRecipe[index]['url']),
+                          ),
+                        ),
+                        onTap: () { _showRecipe(
+                                    context,
+                                    allRecipe[index]['course'][0],
+                                    allRecipe[index]);
+                        },
+                      ),
                     ),
                   ),
                 ),
@@ -144,6 +162,15 @@ class _VisualEditRecipeState extends State<VisualEditRecipe> {
           ),
         );
   }
+
+  void _showRecipe(BuildContext context, String dish, Map recipe) {
+    Navigator.of(context).push(MaterialPageRoute(
+        builder: (context) => RecipePage(
+              recipe: recipe,
+              dish: dish,
+            )));
+  }
+
 }
 
 
