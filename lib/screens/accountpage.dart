@@ -6,6 +6,7 @@ import 'package:flutter_doctors/screens/infopage.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
+
 class AccountPage extends StatefulWidget {
   AccountPage({Key? key}) : super(key: key);
 
@@ -55,6 +56,7 @@ class _AccountPageState extends State<AccountPage> {
   }
 
   void saveUserData() async {
+     if (_isFormValid()) {
     SharedPreferences prefs = await SharedPreferences.getInstance();
     await prefs.setString('fullName', _fullNameController.text);
     await prefs.setString('email', _emailController.text);
@@ -66,9 +68,37 @@ class _AccountPageState extends State<AccountPage> {
     await prefs.setString('dailycalorieintake', _dailycalorieintakeController.text);
     await prefs.setString('consent', _consentController.text);
     await prefs.setBool('consentChecked', consentChecked);
+    } else {
+
+      ScaffoldMessenger.of(context).showSnackBar(
+      SnackBar(
+        content: Text('Please fill all required fields.'),
+      ),
+    ); 
   }
+   if (!consentChecked) {
+    ScaffoldMessenger.of(context).showSnackBar(
+      SnackBar(
+      content: Text('Please accept the consent for data processing'),
+      )
+    );
+    return;
+  }
+}
+
+bool _isFormValid() {
+  // Verifica se tutti i campi di testo obbligatori sono stati compilati correttamente
+  return _fullNameController.text.isNotEmpty &&
+      _emailController.text.isNotEmpty &&
+      _passwordController.text.isNotEmpty &&
+      _genderController.text.isNotEmpty &&
+      _ageController.text.isNotEmpty &&
+      _improvementGoalController.text.isNotEmpty &&
+      _foodIntoleranceController.text.isNotEmpty &&
+      _dailycalorieintakeController.text.isNotEmpty;
+}
   
-   @override
+  @override
   Widget build(BuildContext context) {
     print('${AccountPage.routename} built');
     return Scaffold(
@@ -197,12 +227,12 @@ drawer: Drawer(
               Row(mainAxisAlignment: MainAxisAlignment.center,
                 children: [
                   Icon(Icons.settings,
-                    size: 24,
+                    size: 34,
                     color: Colors.white,
                   ),
                   SizedBox(width: 10),
                   Text('Settings',style: TextStyle(
-                      fontSize: 24,
+                      fontSize: 34,
                       color: Colors.white,
                     ),
                   ),
