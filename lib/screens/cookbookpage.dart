@@ -964,7 +964,7 @@ class _CookBookPageState extends State<CookBookPage> {
   */
 
   void _toMainNavigator(BuildContext context){
-    Navigator.of(context).pushReplacement(MaterialPageRoute(builder: (context) => MainNavigator(flag: false, firstDatabaseEntry: widget.firstDatabaseEntry,)));
+    Navigator.of(context).pushReplacement(MaterialPageRoute(builder: (context) => MainNavigator(firstDatabaseEntry: widget.firstDatabaseEntry, flag: false)));
   }//_toMainNavigator
 
   
