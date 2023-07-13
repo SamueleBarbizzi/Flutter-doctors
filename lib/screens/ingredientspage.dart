@@ -59,7 +59,7 @@ class _IngredientsPageState extends State<IngredientsPage> {
             //go to recipes page
             _toCookBookPage(context);
           },
-          backgroundColor: Colors.blue,
+          backgroundColor: Colors.green,
           child: const Icon(Icons.done),
         ),
         appBar: AppBar(

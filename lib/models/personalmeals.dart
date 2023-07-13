@@ -12,7 +12,8 @@ class PersonalMeals extends ChangeNotifier {
     personalRecipes[indexMeal].add({
       'name': name,
       'calories': calories,
-      'isSelected': false,
+      'isLunchSaved': false,
+      'isDinnerSaved': false,
     });
     for (int i = 0; i < personalRecipes.length; i++) {
       personalRecipes[indexMeal].sort((a, b) => a["name"].compareTo(b["name"]));
@@ -28,21 +29,28 @@ class PersonalMeals extends ChangeNotifier {
     notifyListeners();
   }
 
-  void addSnack(String name, int calories){
-    snacks.add(
-      {
-        'name': name,
-        'calories': calories,
-        'isSelected': false,
-      }
-    );
+  void addSnack(String name, int calories) {
+    snacks.add({
+      'name': name,
+      'calories': calories,
+      'isSelected': false,
+    });
   }
 
-  void removeSnack(String name){
+  void removeSnack(String name) {
     snacks.removeWhere((element) => element['name'] == name);
   }
 
-
-
-
+  int getAllCalories() {
+    num totalCalories = 0;
+    for (var personalRecipesOfMeal in personalRecipes) {
+      for (var recipe in personalRecipesOfMeal) {
+        totalCalories += recipe['calories'];
+      }
+    }
+    for (var snack in snacks) {
+      totalCalories += snack['calories'];
+    }
+    return totalCalories.toInt();
+  }
 }//PersonalMeals

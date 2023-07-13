@@ -1,6 +1,7 @@
 // ignore_for_file: depend_on_referenced_packages, library_private_types_in_public_api, avoid_print, unused_import, unused_element, avoid_unnecessary_containers
 
 import 'package:flutter/material.dart';
+import 'package:flutter_doctors/models/personalmeals.dart';
 import 'package:flutter_doctors/screens/breakfastchoicepage.dart';
 import 'package:intl/intl.dart';
 import 'package:line_icons/line_icons.dart';
@@ -28,6 +29,17 @@ class HomePage extends StatefulWidget {
 class _HomePageState extends State<HomePage> {
   int i = 0;
 
+  TextEditingController nameController = TextEditingController();
+  TextEditingController quantityController = TextEditingController();
+
+  @override
+  void dispose() {
+    // Clean up the controller when the widget is disposed.
+    nameController.dispose();
+    quantityController.dispose();
+    super.dispose();
+  }
+  
   @override
   void didChangeDependencies() {
     super.didChangeDependencies();
@@ -476,10 +488,110 @@ class _HomePageState extends State<HomePage> {
                                           offset: Offset(0, 2))
                                     ]),
                                 label: const Text('Snack'),
-                                onPressed: () {
-                                  String mealName = 'DINNER';
-                                  _toIngredientsPage(context, mealName);
-                                },
+                                onPressed: () => showDialog(
+                                      context: context,
+                                      builder: (context) => ScaffoldMessenger(
+                                        child: Builder(
+                                          builder: (context) => Scaffold(
+                                            backgroundColor: Colors.transparent,
+                                            body: GestureDetector(
+                                              child: AlertDialog(
+                                                title: const Text(
+                                                    'New snack'),
+                                                content: Column(
+                                                  mainAxisSize:
+                                                      MainAxisSize.min,
+                                                  children: [
+                                                    TextField(
+                                                      controller:
+                                                          nameController,
+                                                      //onChanged: (value) {String name = value;},
+                                                      decoration:
+                                                          const InputDecoration(
+                                                        labelText: "Name",
+                                                        hintText: "Name...",
+                                                        border: OutlineInputBorder(
+                                                            borderRadius:
+                                                                BorderRadius
+                                                                    .all(Radius
+                                                                        .circular(
+                                                                            10))),
+                                                      ),
+                                                    ),
+                                                    const SizedBox(height: 20),
+                                                    TextField(
+                                                      controller:
+                                                          quantityController,
+                                                      keyboardType:
+                                                          TextInputType.number,
+                                                      //onChanged: (value) {int quantity = int.parse(value);},
+                                                      decoration:
+                                                          const InputDecoration(
+                                                        labelText: "Calories",
+                                                        hintText: "Kcals...",
+                                                        border: OutlineInputBorder(
+                                                            borderRadius:
+                                                                BorderRadius
+                                                                    .all(Radius
+                                                                        .circular(
+                                                                            10))),
+                                                      ),
+                                                    ),
+                                                  ],
+                                                ),
+                                                actions: <Widget>[
+                                                  TextButton(
+                                                    onPressed: () {
+                                                      nameController.clear();
+                                                      quantityController
+                                                          .clear();
+                                                      Navigator.pop(
+                                                          context, 'Cancel');
+                                                    },
+                                                    child: const Text('Cancel'),
+                                                  ),
+                                                  TextButton(
+                                                    onPressed: () {
+                                                      if (nameController.text !=
+                                                              '' &&
+                                                          quantityController
+                                                                  .text !=
+                                                              '') {
+                                                        Provider.of<PersonalMeals>(
+                                                                context,
+                                                                listen: false)
+                                                            .addSnack(
+                                                                nameController
+                                                                    .text,
+                                                                int.parse(
+                                                                    quantityController
+                                                                        .text));
+                                                        setState(() {});
+                                                        nameController.clear();
+                                                        quantityController
+                                                            .clear();
+                                                        Navigator.pop(
+                                                            context, 'Add');
+                                                      } else {
+                                                        ScaffoldMessenger.of(
+                                                                context)
+                                                            .showSnackBar(
+                                                                const SnackBar(
+                                                          content: Text(
+                                                              'Name or quantity inserted are empty! Please complete both inputs or Cancel'),
+                                                          elevation: 20,
+                                                        ));
+                                                      }
+                                                    },
+                                                    child: const Text('Add'),
+                                                  ),
+                                                ],
+                                              ),
+                                            ),
+                                          ),
+                                        ),
+                                      ),
+                                    ),
                                 style: ElevatedButton.styleFrom(
                                     //padding: EdgeInsets.fromLTRB(0, 20, 50, 20),
                                     backgroundColor: Colors.lightGreen,
