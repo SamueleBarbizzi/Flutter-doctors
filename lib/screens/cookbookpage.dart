@@ -3,6 +3,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_doctors/models/mealchoice.dart';
 import 'package:flutter_doctors/models/personalmeals.dart';
+import 'package:flutter_doctors/models/score_linear_progress.dart';
 import 'package:flutter_login/flutter_login.dart';
 import 'package:material_design_icons_flutter/material_design_icons_flutter.dart';
 import 'package:flutter_doctors/screens/mainnavigator.dart';
@@ -32,7 +33,6 @@ class CookBookPage extends StatefulWidget {
 }
 
 class _CookBookPageState extends State<CookBookPage> {
-
   List<Map> recipes = [];
 
   List<List> ingredients = [[], [], [], []]; //selected ingredient
@@ -48,28 +48,41 @@ class _CookBookPageState extends State<CookBookPage> {
     'FIRST MAIN DISH',
     'SECOND MAIN DISH',
     'SIDE',
-    'DESSERT'
+    'DESSERT',
   ];
-  
-  List<String> chosenName = ['main1', 'main2', 'side', 'dessert'];
+
+  List<String> coursesName = ['main1', 'main2', 'side', 'dessert'];
 
   List<List> chosen = []; // list of the selected recipes
 
+  late Color subtitle2Color;
+
   @override
   void initState() {
-    final List<Map> recipes = Provider.of<CookBook>(context, listen: false).recipeslist;
+    final List<Map> recipes =
+        Provider.of<CookBook>(context, listen: false).recipeslist;
 
     if (widget.selected[0].isEmpty &
         widget.selected[1].isEmpty &
         widget.selected[2].isEmpty &
         widget.selected[3].isEmpty) {
-      possibleRecipes = [Groups().createFirstMainDishes(context),Groups().createSecondMainDishes(context),Groups().createSideDishes(context),Groups().createDessertDishes(context),];
+      
+      subtitle2Color = Colors.transparent;
+
+      possibleRecipes = [
+        Groups().createFirstMainDishes(context),
+        Groups().createSecondMainDishes(context),
+        Groups().createSideDishes(context),
+        Groups().createDessertDishes(context),
+      ];
 
       for (int i = 0; i < possibleRecipes.length; i++) {
         possibleRecipes[i].sort((a, b) => a["name"].compareTo(b["name"]));
       }
-
     } else {
+
+      subtitle2Color = Colors.black;
+
       for (var i = 0; i < widget.selected.length; i++) {
         for (var element in widget.selected[i]) {
           ingredients[i]
@@ -80,17 +93,17 @@ class _CookBookPageState extends State<CookBookPage> {
       for (var i = 0; i < possibleRecipes.length; i++) {
         possibleRecipes[i] = recipes
             .where((item) =>
-                item['ingredients'].keys.toList().any(ingredients[i].contains))
+                item['ingredients'].keys.toList().any(ingredients[i].contains) && item['course'].contains('${coursesName[i][0].toUpperCase()}${coursesName[i].substring(1)}'))
             .toList();
 
         for (var j = 0; j < possibleRecipes[i].length; j++) {
-          List lists = [
+          List listsToCompare = [
             possibleRecipes[i][j]['ingredients'].keys.toList(),
             ingredients[i]
           ];
 
-          List commonIngredients = (lists.fold<Set>(
-                  lists.first.toSet(), (a, b) => a.intersection(b.toSet())))
+          List commonIngredients = (listsToCompare.fold<Set>(
+                  listsToCompare.first.toSet(), (a, b) => a.intersection(b.toSet())))
               .toList();
 
           commonIngredients.sort((a, b) => a.compareTo(b));
@@ -98,7 +111,8 @@ class _CookBookPageState extends State<CookBookPage> {
           int commonIngredientsCount = commonIngredients.length;
 
           possibleRecipes[i][j]['commonIngredients'] = commonIngredients;
-          possibleRecipes[i][j]['commonIngredientsCount'] = commonIngredientsCount;
+          possibleRecipes[i][j]['commonIngredientsCount'] =
+              commonIngredientsCount;
         }
 
         //this line creates possibleRecipes as a list of the recipes that contain at least one of the selected ingredients
@@ -123,6 +137,10 @@ class _CookBookPageState extends State<CookBookPage> {
   Widget build(BuildContext context) {
     print('${CookBookPage.routename} built');
 
+    //double deviceHeight(BuildContext context) => MediaQuery.of(context).size.height;
+    double deviceWidth(BuildContext context) =>
+        MediaQuery.of(context).size.width;
+
     return DefaultTabController(
       length: groupsName.length,
       child: Scaffold(
@@ -131,7 +149,7 @@ class _CookBookPageState extends State<CookBookPage> {
             //go to recipe page
             _Done(context);
           },
-          backgroundColor: Colors.blue,
+          backgroundColor: Colors.green,
           child: const Icon(Icons.done),
         ),
         appBar: AppBar(
@@ -163,646 +181,758 @@ class _CookBookPageState extends State<CookBookPage> {
         ),
         body: TabBarView(
           children: [
-            SingleChildScrollView(
-              child: Column(
-                children: [
-                  OutlinedButton(
-                      onPressed: () => showDialog(
-                            context: context,
-                            builder: (context) => ScaffoldMessenger(
-                              child: Builder(
-                                builder: (context) => Scaffold(
-                                  backgroundColor: Colors.transparent,
-                                  body: GestureDetector(
-                                    child: AlertDialog(
-                                      title: const Text(
-                                          'Insert personal course option'),
-                                      content: Column(
-                                        mainAxisSize: MainAxisSize.min,
-                                        children: [
-                                          TextField(
-                                            controller: nameController,
-                                            //onChanged: (value) {String name = value;},
-                                            decoration: const InputDecoration(
-                                              labelText: "Name",
-                                              hintText: "Name...",
-                                              border: OutlineInputBorder(
-                                                  borderRadius:
-                                                      BorderRadius.all(
-                                                          Radius.circular(10))),
-                                            ),
+            Stack(
+              children: <Widget>[
+                SingleChildScrollView(
+                  child: Column(
+                    children: [
+                      OutlinedButton(
+                          onPressed: () => showDialog(
+                                context: context,
+                                builder: (context) => ScaffoldMessenger(
+                                  child: Builder(
+                                    builder: (context) => Scaffold(
+                                      backgroundColor: Colors.transparent,
+                                      body: GestureDetector(
+                                        child: AlertDialog(
+                                          title: const Text(
+                                              'Insert personal course option'),
+                                          content: Column(
+                                            mainAxisSize: MainAxisSize.min,
+                                            children: [
+                                              TextField(
+                                                controller: nameController,
+                                                //onChanged: (value) {String name = value;},
+                                                decoration:
+                                                    const InputDecoration(
+                                                  labelText: "Name",
+                                                  hintText: "Name...",
+                                                  border: OutlineInputBorder(
+                                                      borderRadius:
+                                                          BorderRadius.all(
+                                                              Radius.circular(
+                                                                  10))),
+                                                ),
+                                              ),
+                                              const SizedBox(height: 20),
+                                              TextField(
+                                                controller: quantityController,
+                                                keyboardType:
+                                                    TextInputType.number,
+                                                //onChanged: (value) {int quantity = int.parse(value);},
+                                                decoration:
+                                                    const InputDecoration(
+                                                  labelText: "Calories",
+                                                  hintText: "Kcals...",
+                                                  border: OutlineInputBorder(
+                                                      borderRadius:
+                                                          BorderRadius.all(
+                                                              Radius.circular(
+                                                                  10))),
+                                                ),
+                                              ),
+                                            ],
                                           ),
-                                          const SizedBox(height: 20),
-                                          TextField(
-                                            controller: quantityController,
-                                            keyboardType: TextInputType.number,
-                                            //onChanged: (value) {int quantity = int.parse(value);},
-                                            decoration: const InputDecoration(
-                                              labelText: "Calories",
-                                              hintText: "Kcals...",
-                                              border: OutlineInputBorder(
-                                                  borderRadius:
-                                                      BorderRadius.all(
-                                                          Radius.circular(10))),
+                                          actions: <Widget>[
+                                            TextButton(
+                                              onPressed: () {
+                                                nameController.clear();
+                                                quantityController.clear();
+                                                Navigator.pop(
+                                                    context, 'Cancel');
+                                              },
+                                              child: const Text('Cancel'),
                                             ),
-                                          ),
-                                        ],
+                                            TextButton(
+                                              onPressed: () {
+                                                if (nameController.text != '' &&
+                                                    quantityController.text !=
+                                                        '') {
+                                                  Provider.of<PersonalMeals>(
+                                                          context,
+                                                          listen: false)
+                                                      .addPersonalRecipe(
+                                                          0,
+                                                          nameController.text,
+                                                          int.parse(
+                                                              quantityController
+                                                                  .text));
+                                                  setState(() {});
+                                                  nameController.clear();
+                                                  quantityController.clear();
+                                                  Navigator.pop(context, 'Add');
+                                                } else {
+                                                  ScaffoldMessenger.of(context)
+                                                      .showSnackBar(
+                                                          const SnackBar(
+                                                    content: Text(
+                                                        'Name or quantity inserted are empty! Please complete both inputs or Cancel'),
+                                                    elevation: 20,
+                                                  ));
+                                                }
+                                              },
+                                              child: const Text('Add'),
+                                            ),
+                                          ],
+                                        ),
                                       ),
-                                      actions: <Widget>[
-                                        TextButton(
-                                          onPressed: () {
-                                            nameController.clear();
-                                            quantityController.clear();
-                                            Navigator.pop(context, 'Cancel');
-                                          },
-                                          child: const Text('Cancel'),
-                                        ),
-                                        TextButton(
-                                          onPressed: () {
-                                            if (nameController.text != '' &&
-                                                quantityController.text != '') {
-                                              Provider.of<PersonalMeals>(
-                                                      context,
-                                                      listen: false)
-                                                  .addPersonalRecipe(
-                                                      0,
-                                                      nameController.text,
-                                                      int.parse(
-                                                          quantityController
-                                                              .text));
-                                              setState(() {});
-                                              nameController.clear();
-                                              quantityController.clear();
-                                              Navigator.pop(context, 'Add');
-                                            } else {
-                                              ScaffoldMessenger.of(context)
-                                                  .showSnackBar(const SnackBar(
-                                                content: Text(
-                                                    'Name or quantity inserted are empty! Please complete both inputs or Cancel'),
-                                                elevation: 20,
-                                              ));
-                                            }
-                                          },
-                                          child: const Text('Add'),
-                                        ),
-                                      ],
                                     ),
                                   ),
                                 ),
                               ),
-                            ),
-                          ),
-                      child: Container(
-                          alignment: Alignment.topLeft,
-                          child: const Text(
-                              'Insert personalized course (name and calories)'))),
-                  const Center(
-                    heightFactor: 3,
-                    child: Text('Personalized courses:'),
-                  ),
-                  ListView.builder(
-                    physics: const NeverScrollableScrollPhysics(),
-                    shrinkWrap: true,
-                    itemCount:
-                        Provider.of<PersonalMeals>(context, listen: false)
-                            .personalRecipes[0]
-                            .length,
-                    itemBuilder: (BuildContext ctx, index) {
-                      return Card(
-                          key: ValueKey(
-                              Provider.of<PersonalMeals>(context, listen: false)
-                                  .personalRecipes[0][index]['name']),
-                          margin: const EdgeInsets.all(1),
-                          shape: RoundedRectangleBorder(
-                              borderRadius: BorderRadius.circular(5)),
+                          child: Container(
+                              alignment: Alignment.topLeft,
+                              child: const Text(
+                                  'Insert personalized course (name and calories)'))),
+                      const Center(
+                        heightFactor: 3,
+                        child: Text('Personalized courses:'),
+                      ),
+                      ListView.builder(
+                        physics: const NeverScrollableScrollPhysics(),
+                        shrinkWrap: true,
+                        itemCount:
+                            Provider.of<PersonalMeals>(context, listen: false)
+                                .personalRecipes[0]
+                                .length,
+                        itemBuilder: (BuildContext ctx, index) {
+                          return Card(
+                              key: ValueKey(
+                                  Provider.of<PersonalMeals>(context, listen: false)
+                                      .personalRecipes[0][index]['name']),
+                              margin: const EdgeInsets.all(1),
+                              shape: RoundedRectangleBorder(
+                                  borderRadius: BorderRadius.circular(5)),
 
-                          // The color depends on this is selected or not
-                          color: Provider.of<PersonalMeals>(context, listen: false)
-                                          .personalRecipes[0][index]
-                                      ['isSelected'] ==
-                                  true
-                              ? Colors.lightGreen
-                              : Colors.white,
-                          child: ListTile(
-                              onTap: () {
-                                // if this item isn't selected yet, "isSelected": false -> true
-                                // If this item already is selected: "isSelected": true -> false
-                                setState(() {
-                                  Provider.of<PersonalMeals>(context,
-                                                  listen: false)
+                              // The color depends on this is selected or not
+                              color: Provider.of<PersonalMeals>(context, listen: false)
                                               .personalRecipes[0][index]
-                                          ['isSelected'] =
-                                      !Provider.of<PersonalMeals>(context,
-                                                  listen: false)
-                                              .personalRecipes[0][index]
-                                          ['isSelected'];
-                                });
-                              },
-                              title: Text(Provider.of<PersonalMeals>(context, listen: false)
-                                  .personalRecipes[0][index]['name']),
-                              subtitle: Text('     ${Provider.of<PersonalMeals>(context, listen: false).personalRecipes[0][index]['calories']} kcals'),
-                              trailing: IconButton(
-                                icon: const Icon(Icons.delete_forever),
-                                onPressed: () {
-                                  Provider.of<PersonalMeals>(context,
-                                          listen: false)
-                                      .removePersonalRecipe(0, index);
-                                  setState(() {});
-                                },
-                              )));
-                    },
-                  ),
-                  const Center(
-                    heightFactor: 3,
-                    child: Text('Proposed recipes:'),
-                  ),
-                  ListView.builder(
-                    shrinkWrap: true,
-                    physics: const NeverScrollableScrollPhysics(),
-                    itemCount: possibleRecipes[0].length,
-                    itemBuilder: (BuildContext ctx, index) {
-                      return Card(
-                          key: ValueKey(possibleRecipes[0][index]['name']),
-                          margin: const EdgeInsets.all(1),
-                          shape: RoundedRectangleBorder(
-                              borderRadius: BorderRadius.circular(5)),
-
-                          // The color depends on this is selected or not
-                          color: possibleRecipes[0][index]['isSelected'] == true
-                              ? Colors.lightGreen
-                              : Colors.white,
-                          child: ListTile(
-                            onTap: () {
-                              // if this item isn't selected yet, "isSelected": false -> true
-                              // If this item already is selected: "isSelected": true -> false
-                              setState(() {
-                                possibleRecipes[0][index]['isSelected'] =
-                                    !possibleRecipes[0][index]['isSelected'];
-                              });
-                            },
-
-                            //leading: CircleAvatar(
-                            //    backgroundColor: Colors.green,
-                            //    child: Text(possibleRecipes[index]['id'].toString())),
-                            title: Text(possibleRecipes[0][index]['name'],
-                                style: const TextStyle(
-                                    fontWeight: FontWeight.bold)),
-                            subtitle: RichText(
-                              text: TextSpan(
-                                text:
-                                    "     ${possibleRecipes[0][index]['calories']} kcals",
-                                style: const TextStyle(
-                                    fontWeight: FontWeight.normal,
-                                    color: Colors.black),
-                                children: [
-                                  TextSpan(
-                                    text:
-                                        "\n${possibleRecipes[0][index]['commonIngredientsCount']} ingredients inside: ${possibleRecipes[0][index]['commonIngredients']}",
-                                    style: TextStyle(
-                                        fontWeight: FontWeight.normal,
-                                        fontSize: 11,
-                                        fontStyle: FontStyle.italic,
-                                        color: Colors.black.withOpacity(0.6)),
-                                  ),
-                                ],
-                              ),
-                            ),
-
-                            trailing: IconButton(
-                              icon: const Icon(Icons.remove_red_eye_rounded),
-                              tooltip: 'Show Recipe',
-                              onPressed: () => _showRecipe(
-                                  context,
-                                  '${widget.meal.toUpperCase()}_${groupsName[0].toLowerCase()}',
-                                  possibleRecipes[0][index]),
-                            ),
-                          ));
-                    },
-                  ),
-                ],
-              ),
-            ),
-            SingleChildScrollView(
-              child: Column(
-                children: [
-                  OutlinedButton(
-                      onPressed: () => showDialog(
-                            context: context,
-                            builder: (context) => ScaffoldMessenger(
-                              child: Builder(
-                                builder: (context) => Scaffold(
-                                  backgroundColor: Colors.transparent,
-                                  body: GestureDetector(
-                                    child: AlertDialog(
-                                      title: const Text(
-                                          'Insert personal course option'),
-                                      content: Column(
-                                        mainAxisSize: MainAxisSize.min,
-                                        children: [
-                                          TextField(
-                                            controller: nameController,
-                                            //onChanged: (value) {String name = value;},
-                                            decoration: const InputDecoration(
-                                              labelText: "Name",
-                                              hintText: "Name...",
-                                              border: OutlineInputBorder(
-                                                  borderRadius:
-                                                      BorderRadius.all(
-                                                          Radius.circular(10))),
-                                            ),
-                                          ),
-                                          const SizedBox(height: 20),
-                                          TextField(
-                                            controller: quantityController,
-                                            keyboardType: TextInputType.number,
-                                            //onChanged: (value) {int quantity = int.parse(value);},
-                                            decoration: const InputDecoration(
-                                              labelText: "Quantity",
-                                              hintText: "Kcals...",
-                                              border: OutlineInputBorder(
-                                                  borderRadius:
-                                                      BorderRadius.all(
-                                                          Radius.circular(10))),
-                                            ),
-                                          ),
-                                        ],
-                                      ),
-                                      actions: <Widget>[
-                                        TextButton(
-                                          onPressed: () =>
-                                              Navigator.pop(context, 'Cancel'),
-                                          child: const Text('Cancel'),
-                                        ),
-                                        TextButton(
-                                          onPressed: () {
-                                            if (nameController.text != '' &&
-                                                quantityController.text != '') {
-                                              Provider.of<PersonalMeals>(
-                                                      context,
+                                          ['is${widget.meal}Saved'] ==
+                                      true
+                                  ? Colors.lightGreen
+                                  : Colors.white,
+                              child: ListTile(
+                                  onTap: () {
+                                    // if this item isn't selected yet, "isSelected": false -> true
+                                    // If this item already is selected: "isSelected": true -> false
+                                    setState(() {
+                                      Provider.of<PersonalMeals>(context,
                                                       listen: false)
-                                                  .addPersonalRecipe(
-                                                      1,
-                                                      nameController.text,
-                                                      int.parse(
-                                                          quantityController
-                                                              .text));
-                                              setState(() {});
-                                              Navigator.pop(context, 'Add');
-                                            } else {
-                                              ScaffoldMessenger.of(context)
-                                                  .showSnackBar(const SnackBar(
-                                                content: Text(
-                                                    'Name or quantity inserted are empty! Please complete both inputs or Cancel'),
-                                                elevation: 20,
-                                              ));
-                                            }
-                                          },
-                                          child: const Text('Add'),
+                                                  .personalRecipes[0][index]
+                                              ['is${widget.meal}Saved'] =
+                                          !Provider.of<PersonalMeals>(context,
+                                                      listen: false)
+                                                  .personalRecipes[0][index]
+                                              ['is${widget.meal}Saved'];
+                                    
+                                    });
+                                  },
+                                  title: Text(Provider.of<PersonalMeals>(context, listen: false)
+                                      .personalRecipes[0][index]['name']),
+                                  subtitle: Text('     ${Provider.of<PersonalMeals>(context, listen: false).personalRecipes[0][index]['calories']} kcals'),
+                                  trailing: IconButton(
+                                    icon: const Icon(Icons.delete_forever),
+                                    onPressed: () {
+                                      Provider.of<PersonalMeals>(context,
+                                              listen: false)
+                                          .removePersonalRecipe(0, index);
+                                      setState(() {});
+                                    },
+                                  )));
+                        },
+                      ),
+                      const Center(
+                        heightFactor: 3,
+                        child: Text('Proposed recipes:'),
+                      ),
+                      ListView.builder(
+                        shrinkWrap: true,
+                        physics: const NeverScrollableScrollPhysics(),
+                        itemCount: possibleRecipes[0].length,
+                        itemBuilder: (BuildContext ctx, index) {
+                          return Card(
+                              key: ValueKey(possibleRecipes[0][index]['name']),
+                              margin: const EdgeInsets.all(1),
+                              shape: RoundedRectangleBorder(
+                                  borderRadius: BorderRadius.circular(5)),
+
+                              // The color depends on this is selected or not
+                              color: possibleRecipes[0][index]['is${widget.meal}Saved'] ==
+                                      true
+                                  ? Colors.lightGreen
+                                  : Colors.white,
+                              child: ListTile(
+                                onTap: () {
+                                  // if this item isn't selected yet, "isSelected": false -> true
+                                  // If this item already is selected: "isSelected": true -> false
+                                  setState(() {
+                                    possibleRecipes[0][index]['is${widget.meal}Saved'] =
+                                        !possibleRecipes[0][index]
+                                            ['is${widget.meal}Saved'];
+                                    String meal = widget.meal;
+                                    String course = coursesName[0];
+                                    Provider.of<MealChoiche>(context, listen: false).ToogleChosenRecipe(meal.toUpperCase(), course , possibleRecipes[0][index]);
+                                  });
+                                },
+
+                                //leading: CircleAvatar(
+                                //    backgroundColor: Colors.green,
+                                //    child: Text(possibleRecipes[index]['id'].toString())),
+                                title: Text(possibleRecipes[0][index]['name'],
+                                    style: const TextStyle(
+                                        fontWeight: FontWeight.bold)),
+                                subtitle: RichText(
+                                  text: TextSpan(
+                                    text:
+                                        "     ${possibleRecipes[0][index]['calories']} kcals",
+                                    style: const TextStyle(
+                                        fontWeight: FontWeight.normal,
+                                        color: Colors.black),
+                                    children: [
+                                      TextSpan(
+                                        text:
+                                            "\n${possibleRecipes[0][index]['commonIngredientsCount']} ingredients inside: ${possibleRecipes[0][index]['commonIngredients'].join(", ")}",
+                                        style: TextStyle(
+                                            fontWeight: FontWeight.normal,
+                                            fontSize: 11,
+                                            fontStyle: FontStyle.italic,
+                                            color:
+                                                subtitle2Color),
+                                      ),
+                                    ],
+                                  ),
+                                ),
+
+                                trailing: IconButton(
+                                  icon:
+                                      const Icon(Icons.remove_red_eye_rounded),
+                                  tooltip: 'Show Recipe',
+                                  onPressed: () => _showRecipe(
+                                      context,
+                                      '${widget.meal.toUpperCase()}_${groupsName[0].toLowerCase()}',
+                                      possibleRecipes[0][index]),
+                                ),
+                              ));
+                        },
+                      ),
+                    ],
+                  ),
+                ),
+                Align(
+                  alignment: Alignment.bottomCenter,
+                  child: Container(
+                    height: 30,
+                    width: deviceWidth(context),
+                    color: Colors.blue,
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.stretch,
+                      children: [
+                        const Expanded(
+                          child: Text(
+                            ' Actual calories count:',
+                          ),
+                        ),
+                        Expanded(
+                          child: CustomPaint(
+                            foregroundPainter: ScoreLinearProgress(
+                              backColor:
+                                  Colors.lightBlueAccent.withOpacity(0.4),
+                              frontColor: Colors.lightBlueAccent,
+                              strokeWidth: 20,
+                              value: 0.5,
+                            ),
+                          ),
+                        ),
+                      ],
+                    ),
+                  ),
+                ),
+              ],
+            ),
+            Stack(
+              children: <Widget>[
+                SingleChildScrollView(
+                  child: Column(
+                    children: [
+                      OutlinedButton(
+                          onPressed: () => showDialog(
+                                context: context,
+                                builder: (context) => ScaffoldMessenger(
+                                  child: Builder(
+                                    builder: (context) => Scaffold(
+                                      backgroundColor: Colors.transparent,
+                                      body: GestureDetector(
+                                        child: AlertDialog(
+                                          title: const Text(
+                                              'Insert personal course option'),
+                                          content: Column(
+                                            mainAxisSize: MainAxisSize.min,
+                                            children: [
+                                              TextField(
+                                                controller: nameController,
+                                                //onChanged: (value) {String name = value;},
+                                                decoration:
+                                                    const InputDecoration(
+                                                  labelText: "Name",
+                                                  hintText: "Name...",
+                                                  border: OutlineInputBorder(
+                                                      borderRadius:
+                                                          BorderRadius.all(
+                                                              Radius.circular(
+                                                                  10))),
+                                                ),
+                                              ),
+                                              const SizedBox(height: 20),
+                                              TextField(
+                                                controller: quantityController,
+                                                keyboardType:
+                                                    TextInputType.number,
+                                                //onChanged: (value) {int quantity = int.parse(value);},
+                                                decoration:
+                                                    const InputDecoration(
+                                                  labelText: "Quantity",
+                                                  hintText: "Kcals...",
+                                                  border: OutlineInputBorder(
+                                                      borderRadius:
+                                                          BorderRadius.all(
+                                                              Radius.circular(
+                                                                  10))),
+                                                ),
+                                              ),
+                                            ],
+                                          ),
+                                          actions: <Widget>[
+                                            TextButton(
+                                              onPressed: () => Navigator.pop(
+                                                  context, 'Cancel'),
+                                              child: const Text('Cancel'),
+                                            ),
+                                            TextButton(
+                                              onPressed: () {
+                                                if (nameController.text != '' &&
+                                                    quantityController.text !=
+                                                        '') {
+                                                  Provider.of<PersonalMeals>(
+                                                          context,
+                                                          listen: false)
+                                                      .addPersonalRecipe(
+                                                          1,
+                                                          nameController.text,
+                                                          int.parse(
+                                                              quantityController
+                                                                  .text));
+                                                  setState(() {});
+                                                  Navigator.pop(context, 'Add');
+                                                } else {
+                                                  ScaffoldMessenger.of(context)
+                                                      .showSnackBar(
+                                                          const SnackBar(
+                                                    content: Text(
+                                                        'Name or quantity inserted are empty! Please complete both inputs or Cancel'),
+                                                    elevation: 20,
+                                                  ));
+                                                }
+                                              },
+                                              child: const Text('Add'),
+                                            ),
+                                          ],
                                         ),
-                                      ],
+                                      ),
                                     ),
                                   ),
                                 ),
                               ),
+                          child: Container(
+                              alignment: Alignment.topLeft,
+                              child: const Text(
+                                  'Insert personalized course (name and calories)'))),
+                      const Center(
+                        heightFactor: 3,
+                        child: Text('Personalized courses:'),
+                      ),
+                      ListView.builder(
+                        physics: const NeverScrollableScrollPhysics(),
+                        shrinkWrap: true,
+                        itemCount:
+                            Provider.of<PersonalMeals>(context, listen: false)
+                                .personalRecipes[1]
+                                .length,
+                        itemBuilder: (BuildContext ctx, index) {
+                          return Card(
+                              key: ValueKey(
+                                  Provider.of<PersonalMeals>(context, listen: false)
+                                      .personalRecipes[1][index]['name']),
+                              margin: const EdgeInsets.all(1),
+                              shape: RoundedRectangleBorder(
+                                  borderRadius: BorderRadius.circular(5)),
+
+                              // The color depends on this is selected or not
+                              color: Provider.of<PersonalMeals>(context, listen: false)
+                                              .personalRecipes[1][index]
+                                          ['is${widget.meal}Saved'] ==
+                                      true
+                                  ? Colors.lightGreen
+                                  : Colors.white,
+                              child: ListTile(
+                                  onTap: () {
+                                    // if this item isn't selected yet, "isSelected": false -> true
+                                    // If this item already is selected: "isSelected": true -> false
+                                    setState(() {
+                                      Provider.of<PersonalMeals>(context,
+                                                      listen: false)
+                                                  .personalRecipes[1][index]
+                                              ['is${widget.meal}Saved'] =
+                                          !Provider.of<PersonalMeals>(context,
+                                                      listen: false)
+                                                  .personalRecipes[1][index]
+                                              ['is${widget.meal}Saved'];
+                                    });
+                                  },
+
+                                  //leading: CircleAvatar(
+                                  //    backgroundColor: Colors.green,
+                                  //    child: Text(possibleRecipes[index]['id'].toString())),
+                                  title: Text(Provider.of<PersonalMeals>(context, listen: false)
+                                      .personalRecipes[1][index]['name']),
+                                  subtitle: Text('     ${Provider.of<PersonalMeals>(context, listen: false).personalRecipes[1][index]['calories']} kcals'),
+                                  trailing: IconButton(
+                                    icon: const Icon(Icons.delete_forever),
+                                    onPressed: () {
+                                      Provider.of<PersonalMeals>(context,
+                                              listen: false)
+                                          .removePersonalRecipe(1, index);
+                                      setState(() {});
+                                    },
+                                  )));
+                        },
+                      ),
+                      const Center(
+                        heightFactor: 3,
+                        child: Text('Proposed recipes:'),
+                      ),
+                      ListView.builder(
+                        physics: const NeverScrollableScrollPhysics(),
+                        shrinkWrap: true,
+                        itemCount: possibleRecipes[1].length,
+                        itemBuilder: (BuildContext ctx, index) {
+                          return Card(
+                              key: ValueKey(possibleRecipes[1][index]['name']),
+                              margin: const EdgeInsets.all(1),
+                              shape: RoundedRectangleBorder(
+                                  borderRadius: BorderRadius.circular(5)),
+
+                              // The color depends on this is selected or not
+                              color: possibleRecipes[1][index]['is${widget.meal}Saved'] ==
+                                      true
+                                  ? Colors.lightGreen
+                                  : Colors.white,
+                              child: ListTile(
+                                onTap: () {
+                                  // if this item isn't selected yet, "isSelected": false -> true
+                                  // If this item already is selected: "isSelected": true -> false
+                                  setState(() {
+                                    possibleRecipes[1][index]['is${widget.meal}Saved'] =
+                                        !possibleRecipes[1][index]
+                                            ['is${widget.meal}Saved'];
+                                    String meal = widget.meal;
+                                    String course = coursesName[1];
+                                    Provider.of<MealChoiche>(context, listen: false).ToogleChosenRecipe(meal.toUpperCase(), course , possibleRecipes[1][index]);
+                                  });
+                                },
+
+                                //leading: CircleAvatar(
+                                //    backgroundColor: Colors.green,
+                                //    child: Text(possibleRecipes[index]['id'].toString())),
+                                title: Text(possibleRecipes[1][index]['name'],
+                                    style: const TextStyle(
+                                        fontWeight: FontWeight.bold)),
+                                subtitle: RichText(
+                                  text: TextSpan(
+                                    text:
+                                        "     ${possibleRecipes[1][index]['calories']} kcals",
+                                    style: const TextStyle(
+                                        fontWeight: FontWeight.normal,
+                                        color: Colors.black),
+                                    children: [
+                                      TextSpan(
+                                        text:
+                                            "\n${possibleRecipes[1][index]['commonIngredientsCount']} ingredients inside: ${possibleRecipes[1][index]['commonIngredients'].join(", ")}",
+                                        style: TextStyle(
+                                            fontWeight: FontWeight.normal,
+                                            fontSize: 11,
+                                            fontStyle: FontStyle.italic,
+                                            color:
+                                                Colors.black.withOpacity(0.6)),
+                                      ),
+                                    ],
+                                  ),
+                                ),
+                                trailing: IconButton(
+                                  icon:
+                                      const Icon(Icons.remove_red_eye_rounded),
+                                  tooltip: 'Show Recipe',
+                                  onPressed: () => _showRecipe(
+                                      context,
+                                      '${widget.meal.toUpperCase()}_${groupsName[1].toLowerCase()}',
+                                      possibleRecipes[1][index]),
+                                ),
+                              ));
+                        },
+                      ),
+                    ],
+                  ),
+                ),
+                Align(
+                  alignment: Alignment.bottomCenter,
+                  child: Container(
+                    height: 30,
+                    width: deviceWidth(context),
+                    color: Colors.blue,
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.stretch,
+                      children: [
+                        const Expanded(
+                          child: Text(
+                            ' Actual calories count:',
+                          ),
+                        ),
+                        Expanded(
+                          child: CustomPaint(
+                            foregroundPainter: ScoreLinearProgress(
+                              backColor:
+                                  Colors.lightBlueAccent.withOpacity(0.4),
+                              frontColor: Colors.lightBlueAccent,
+                              strokeWidth: 20,
+                              value: 0.5,
                             ),
                           ),
-                      child: Container(
-                          alignment: Alignment.topLeft,
-                          child: const Text(
-                              'Insert personalized course (name and calories)'))),
-                  const Center(
-                    heightFactor: 3,
-                    child: Text('Personalized courses:'),
+                        ),
+                      ],
+                    ),
                   ),
-                  ListView.builder(
-                    physics: const NeverScrollableScrollPhysics(),
-                    shrinkWrap: true,
-                    itemCount:
-                        Provider.of<PersonalMeals>(context, listen: false)
-                            .personalRecipes[1]
-                            .length,
-                    itemBuilder: (BuildContext ctx, index) {
-                      return Card(
-                          key: ValueKey(
-                              Provider.of<PersonalMeals>(context, listen: false)
-                                  .personalRecipes[1][index]['name']),
-                          margin: const EdgeInsets.all(1),
-                          shape: RoundedRectangleBorder(
-                              borderRadius: BorderRadius.circular(5)),
-
-                          // The color depends on this is selected or not
-                          color: Provider.of<PersonalMeals>(context, listen: false)
-                                          .personalRecipes[1][index]
-                                      ['isSelected'] ==
-                                  true
-                              ? Colors.lightGreen
-                              : Colors.white,
-                          child: ListTile(
-                              onTap: () {
-                                // if this item isn't selected yet, "isSelected": false -> true
-                                // If this item already is selected: "isSelected": true -> false
-                                setState(() {
-                                  Provider.of<PersonalMeals>(context,
-                                                  listen: false)
-                                              .personalRecipes[1][index]
-                                          ['isSelected'] =
-                                      !Provider.of<PersonalMeals>(context,
-                                                  listen: false)
-                                              .personalRecipes[1][index]
-                                          ['isSelected'];
-                                });
-                              },
-
-                              //leading: CircleAvatar(
-                              //    backgroundColor: Colors.green,
-                              //    child: Text(possibleRecipes[index]['id'].toString())),
-                              title: Text(Provider.of<PersonalMeals>(context, listen: false)
-                                  .personalRecipes[1][index]['name']),
-                              subtitle: Text('     ${Provider.of<PersonalMeals>(context, listen: false).personalRecipes[1][index]['calories']} kcals'),
-                              trailing: IconButton(
-                                icon: const Icon(Icons.delete_forever),
-                                onPressed: () {
-                                  Provider.of<PersonalMeals>(context,
-                                          listen: false)
-                                      .removePersonalRecipe(1, index);
-                                  setState(() {});
-                                },
-                              )));
-                    },
-                  ),
-                  const Center(
-                    heightFactor: 3,
-                    child: Text('Proposed recipes:'),
-                  ),
-                  ListView.builder(
-                    physics: const NeverScrollableScrollPhysics(),
-                    shrinkWrap: true,
-                    itemCount: possibleRecipes[1].length,
-                    itemBuilder: (BuildContext ctx, index) {
-                      return Card(
-                          key: ValueKey(possibleRecipes[1][index]['name']),
-                          margin: const EdgeInsets.all(1),
-                          shape: RoundedRectangleBorder(
-                              borderRadius: BorderRadius.circular(5)),
-
-                          // The color depends on this is selected or not
-                          color: possibleRecipes[1][index]['isSelected'] == true
-                              ? Colors.lightGreen
-                              : Colors.white,
-                          child: ListTile(
-                            onTap: () {
-                              // if this item isn't selected yet, "isSelected": false -> true
-                              // If this item already is selected: "isSelected": true -> false
-                              setState(() {
-                                possibleRecipes[1][index]['isSelected'] =
-                                    !possibleRecipes[1][index]['isSelected'];
-                              });
-                            },
-
-                            //leading: CircleAvatar(
-                            //    backgroundColor: Colors.green,
-                            //    child: Text(possibleRecipes[index]['id'].toString())),
-                            title: Text(possibleRecipes[1][index]['name'],
-                                style: const TextStyle(
-                                    fontWeight: FontWeight.bold)),
-                            subtitle: RichText(
-                              text: TextSpan(
-                                text:
-                                    "     ${possibleRecipes[1][index]['calories']} kcals",
-                                style: const TextStyle(
-                                    fontWeight: FontWeight.normal,
-                                    color: Colors.black),
-                                children: [
-                                  TextSpan(
-                                    text:
-                                        "\n${possibleRecipes[1][index]['commonIngredientsCount']} ingredients inside: ${possibleRecipes[1][index]['commonIngredients']}",
-                                    style: TextStyle(
-                                        fontWeight: FontWeight.normal,
-                                        fontSize: 11,
-                                        fontStyle: FontStyle.italic,
-                                        color: Colors.black.withOpacity(0.6)),
-                                  ),
-                                ],
-                              ),
-                            ),
-                            trailing: IconButton(
-                              icon: const Icon(Icons.remove_red_eye_rounded),
-                              tooltip: 'Show Recipe',
-                              onPressed: () => _showRecipe(
-                                  context,
-                                  '${widget.meal.toUpperCase()}_${groupsName[1].toLowerCase()}',
-                                  possibleRecipes[1][index]),
-                            ),
-                          ));
-                    },
-                  ),
-                ],
-              ),
+                ),
+              ],
             ),
-            SingleChildScrollView(
-              child: Column(
-                children: [
-                  OutlinedButton(
-                      onPressed: () => showDialog(
-                            context: context,
-                            builder: (context) => ScaffoldMessenger(
-                              child: Builder(
-                                builder: (context) => Scaffold(
-                                  backgroundColor: Colors.transparent,
-                                  body: GestureDetector(
-                                    child: AlertDialog(
-                                      title: const Text(
-                                          'Insert personal course option'),
-                                      content: Column(
-                                        mainAxisSize: MainAxisSize.min,
-                                        children: [
-                                          TextField(
-                                            controller: nameController,
-                                            //onChanged: (value) {String name = value;},
-                                            decoration: const InputDecoration(
-                                              labelText: "Name",
-                                              hintText: "Name...",
-                                              border: OutlineInputBorder(
-                                                  borderRadius:
-                                                      BorderRadius.all(
-                                                          Radius.circular(10))),
-                                            ),
+            Stack(
+              children: <Widget>[
+                SingleChildScrollView(
+                  child: Column(
+                    children: [
+                      OutlinedButton(
+                          onPressed: () => showDialog(
+                                context: context,
+                                builder: (context) => ScaffoldMessenger(
+                                  child: Builder(
+                                    builder: (context) => Scaffold(
+                                      backgroundColor: Colors.transparent,
+                                      body: GestureDetector(
+                                        child: AlertDialog(
+                                          title: const Text(
+                                              'Insert personal course option'),
+                                          content: Column(
+                                            mainAxisSize: MainAxisSize.min,
+                                            children: [
+                                              TextField(
+                                                controller: nameController,
+                                                //onChanged: (value) {String name = value;},
+                                                decoration:
+                                                    const InputDecoration(
+                                                  labelText: "Name",
+                                                  hintText: "Name...",
+                                                  border: OutlineInputBorder(
+                                                      borderRadius:
+                                                          BorderRadius.all(
+                                                              Radius.circular(
+                                                                  10))),
+                                                ),
+                                              ),
+                                              const SizedBox(height: 20),
+                                              TextField(
+                                                controller: quantityController,
+                                                keyboardType:
+                                                    TextInputType.number,
+                                                //onChanged: (value) {int quantity = int.parse(value);},
+                                                decoration:
+                                                    const InputDecoration(
+                                                  labelText: "Quantity",
+                                                  hintText: "Kcals...",
+                                                  border: OutlineInputBorder(
+                                                      borderRadius:
+                                                          BorderRadius.all(
+                                                              Radius.circular(
+                                                                  10))),
+                                                ),
+                                              ),
+                                            ],
                                           ),
-                                          const SizedBox(height: 20),
-                                          TextField(
-                                            controller: quantityController,
-                                            keyboardType: TextInputType.number,
-                                            //onChanged: (value) {int quantity = int.parse(value);},
-                                            decoration: const InputDecoration(
-                                              labelText: "Quantity",
-                                              hintText: "Kcals...",
-                                              border: OutlineInputBorder(
-                                                  borderRadius:
-                                                      BorderRadius.all(
-                                                          Radius.circular(10))),
+                                          actions: <Widget>[
+                                            TextButton(
+                                              onPressed: () => Navigator.pop(
+                                                  context, 'Cancel'),
+                                              child: const Text('Cancel'),
                                             ),
-                                          ),
-                                        ],
+                                            TextButton(
+                                              onPressed: () {
+                                                if (nameController.text != '' &&
+                                                    quantityController.text !=
+                                                        '') {
+                                                  Provider.of<PersonalMeals>(
+                                                          context,
+                                                          listen: false)
+                                                      .addPersonalRecipe(
+                                                          2,
+                                                          nameController.text,
+                                                          int.parse(
+                                                              quantityController
+                                                                  .text));
+                                                  setState(() {});
+                                                  Navigator.pop(context, 'Add');
+                                                } else {
+                                                  ScaffoldMessenger.of(context)
+                                                      .showSnackBar(
+                                                          const SnackBar(
+                                                    content: Text(
+                                                        'Name or quantity inserted are empty! Please complete both inputs or Cancel'),
+                                                    elevation: 20,
+                                                  ));
+                                                }
+                                              },
+                                              child: const Text('Add'),
+                                            ),
+                                          ],
+                                        ),
                                       ),
-                                      actions: <Widget>[
-                                        TextButton(
-                                          onPressed: () =>
-                                              Navigator.pop(context, 'Cancel'),
-                                          child: const Text('Cancel'),
-                                        ),
-                                        TextButton(
-                                          onPressed: () {
-                                            if (nameController.text != '' &&
-                                                quantityController.text != '') {
-                                              Provider.of<PersonalMeals>(
-                                                      context,
-                                                      listen: false)
-                                                  .addPersonalRecipe(
-                                                      2,
-                                                      nameController.text,
-                                                      int.parse(
-                                                          quantityController
-                                                              .text));
-                                              setState(() {});
-                                              Navigator.pop(context, 'Add');
-                                            } else {
-                                              ScaffoldMessenger.of(context)
-                                                  .showSnackBar(const SnackBar(
-                                                content: Text(
-                                                    'Name or quantity inserted are empty! Please complete both inputs or Cancel'),
-                                                elevation: 20,
-                                              ));
-                                            }
-                                          },
-                                          child: const Text('Add'),
-                                        ),
-                                      ],
                                     ),
                                   ),
                                 ),
                               ),
-                            ),
-                          ),
-                      child: Container(
-                          alignment: Alignment.topLeft,
-                          child: const Text(
-                              'Insert personalized course (name and calories)'))),
-                  const Center(
-                    heightFactor: 3,
-                    child: Text('Personalized courses:'),
-                  ),
-                  ListView.builder(
-                    physics: const NeverScrollableScrollPhysics(),
-                    shrinkWrap: true,
-                    itemCount:
-                        Provider.of<PersonalMeals>(context, listen: false)
-                            .personalRecipes[2]
-                            .length,
-                    itemBuilder: (BuildContext ctx, index) {
-                      return Card(
-                          key: ValueKey(
-                              Provider.of<PersonalMeals>(context, listen: false)
-                                  .personalRecipes[2][index]['name']),
-                          margin: const EdgeInsets.all(1),
-                          shape: RoundedRectangleBorder(
-                              borderRadius: BorderRadius.circular(5)),
+                          child: Container(
+                              alignment: Alignment.topLeft,
+                              child: const Text(
+                                  'Insert personalized course (name and calories)'))),
+                      const Center(
+                        heightFactor: 3,
+                        child: Text('Personalized courses:'),
+                      ),
+                      ListView.builder(
+                        physics: const NeverScrollableScrollPhysics(),
+                        shrinkWrap: true,
+                        itemCount:
+                            Provider.of<PersonalMeals>(context, listen: false)
+                                .personalRecipes[2]
+                                .length,
+                        itemBuilder: (BuildContext ctx, index) {
+                          return Card(
+                              key: ValueKey(
+                                  Provider.of<PersonalMeals>(context, listen: false)
+                                      .personalRecipes[2][index]['name']),
+                              margin: const EdgeInsets.all(1),
+                              shape: RoundedRectangleBorder(
+                                  borderRadius: BorderRadius.circular(5)),
 
-                          // The color depends on this is selected or not
-                          color: Provider.of<PersonalMeals>(context, listen: false)
-                                          .personalRecipes[2][index]
-                                      ['isSelected'] ==
-                                  true
-                              ? Colors.lightGreen
-                              : Colors.white,
-                          child: ListTile(
-                              onTap: () {
-                                // if this item isn't selected yet, "isSelected": false -> true
-                                // If this item already is selected: "isSelected": true -> false
-                                setState(() {
-                                  Provider.of<PersonalMeals>(context,
-                                                  listen: false)
+                              // The color depends on this is selected or not
+                              color: Provider.of<PersonalMeals>(context, listen: false)
                                               .personalRecipes[2][index]
-                                          ['isSelected'] =
-                                      !Provider.of<PersonalMeals>(context,
-                                                  listen: false)
-                                              .personalRecipes[2][index]
-                                          ['isSelected'];
-                                });
-                              },
-                              title: Text(Provider.of<PersonalMeals>(context, listen: false)
-                                  .personalRecipes[2][index]['name']),
-                              subtitle: Text('     ${Provider.of<PersonalMeals>(context, listen: false).personalRecipes[2][index]['calories']} kcals'),
-                              trailing: IconButton(
-                                icon: const Icon(Icons.delete_forever),
-                                onPressed: () {
-                                  Provider.of<PersonalMeals>(context,
-                                          listen: false)
-                                      .removePersonalRecipe(2, index);
-                                  setState(() {});
+                                          ['is${widget.meal}Saved'] ==
+                                      true
+                                  ? Colors.lightGreen
+                                  : Colors.white,
+                              child: ListTile(
+                                  onTap: () {
+                                    // if this item isn't selected yet, "isSelected": false -> true
+                                    // If this item already is selected: "isSelected": true -> false
+                                    setState(() {
+                                      Provider.of<PersonalMeals>(context,
+                                                      listen: false)
+                                                  .personalRecipes[2][index]
+                                              ['is${widget.meal}Saved'] =
+                                          !Provider.of<PersonalMeals>(context,
+                                                      listen: false)
+                                                  .personalRecipes[2][index]
+                                              ['is${widget.meal}Saved'];
+                                    });
+                                  },
+                                  title: Text(Provider.of<PersonalMeals>(context, listen: false)
+                                      .personalRecipes[2][index]['name']),
+                                  subtitle: Text('     ${Provider.of<PersonalMeals>(context, listen: false).personalRecipes[2][index]['calories']} kcals'),
+                                  trailing: IconButton(
+                                    icon: const Icon(Icons.delete_forever),
+                                    onPressed: () {
+                                      Provider.of<PersonalMeals>(context,
+                                              listen: false)
+                                          .removePersonalRecipe(2, index);
+                                      setState(() {});
+                                    },
+                                  )));
+                        },
+                      ),
+                      const Center(
+                        heightFactor: 3,
+                        child: Text('Proposed recipes:'),
+                      ),
+                      ListView.builder(
+                        physics: const NeverScrollableScrollPhysics(),
+                        shrinkWrap: true,
+                        itemCount: possibleRecipes[2].length,
+                        itemBuilder: (BuildContext ctx, index) {
+                          return Card(
+                              key: ValueKey(possibleRecipes[2][index]['name']),
+                              margin: const EdgeInsets.all(1),
+                              shape: RoundedRectangleBorder(
+                                  borderRadius: BorderRadius.circular(5)),
+
+                              // The color depends on this is selected or not
+                              color: possibleRecipes[2][index]['is${widget.meal}Saved'] ==
+                                      true
+                                  ? Colors.lightGreen
+                                  : Colors.white,
+                              child: ListTile(
+                                onTap: () {
+                                  // if this item isn't selected yet, "isSelected": false -> true
+                                  // If this item already is selected: "isSelected": true -> false
+                                  setState(() {
+                                    possibleRecipes[2][index]['is${widget.meal}Saved'] =
+                                        !possibleRecipes[2][index]
+                                            ['is${widget.meal}Saved'];
+                                    String meal = widget.meal;
+                                    String course = coursesName[2];
+                                    Provider.of<MealChoiche>(context, listen: false).ToogleChosenRecipe(meal.toUpperCase(), course , possibleRecipes[2][index]);
+                                  });
                                 },
-                              )));
-                    },
-                  ),
-                  const Center(
-                    heightFactor: 3,
-                    child: Text('Proposed recipes:'),
-                  ),
-                  ListView.builder(
-                    physics: const NeverScrollableScrollPhysics(),
-                    shrinkWrap: true,
-                    itemCount: possibleRecipes[2].length,
-                    itemBuilder: (BuildContext ctx, index) {
-                      return Card(
-                          key: ValueKey(possibleRecipes[2][index]['name']),
-                          margin: const EdgeInsets.all(1),
-                          shape: RoundedRectangleBorder(
-                              borderRadius: BorderRadius.circular(5)),
-
-                          // The color depends on this is selected or not
-                          color: possibleRecipes[2][index]['isSelected'] == true
-                              ? Colors.lightGreen
-                              : Colors.white,
-                          child: ListTile(
-                            onTap: () {
-                              // if this item isn't selected yet, "isSelected": false -> true
-                              // If this item already is selected: "isSelected": true -> false
-                              setState(() {
-                                possibleRecipes[2][index]['isSelected'] =
-                                    !possibleRecipes[2][index]['isSelected'];
-                              });
-                            },
-                            title: Text(possibleRecipes[2][index]['name'],
-                                style: const TextStyle(
-                                    fontWeight: FontWeight.bold)),
-                            subtitle: RichText(
-                              text: TextSpan(
-                                text:
-                                    "     ${possibleRecipes[2][index]['calories']} kcals",
-                                style: const TextStyle(
-                                    fontWeight: FontWeight.normal,
-                                    color: Colors.black),
-                                children: [
-                                  TextSpan(
+                                title: Text(possibleRecipes[2][index]['name'],
+                                    style: const TextStyle(
+                                        fontWeight: FontWeight.bold)),
+                                subtitle: RichText(
+                                  text: TextSpan(
                                     text:
-                                        "\n${possibleRecipes[2][index]['commonIngredientsCount']} ingredients inside: ${possibleRecipes[2][index]['commonIngredients']}",
-                                    style: TextStyle(
+                                        "     ${possibleRecipes[2][index]['calories']} kcals",
+                                    style: const TextStyle(
                                         fontWeight: FontWeight.normal,
-                                        fontSize: 11,
-                                        fontStyle: FontStyle.italic,
-                                        color: Colors.black.withOpacity(0.6)),
+                                        color: Colors.black),
+                                    children: [
+                                      TextSpan(
+                                        text:
+                                            "\n${possibleRecipes[2][index]['commonIngredientsCount']} ingredients inside: ${possibleRecipes[2][index]['commonIngredients'].join(", ")}",
+                                        style: TextStyle(
+                                            fontWeight: FontWeight.normal,
+                                            fontSize: 11,
+                                            fontStyle: FontStyle.italic,
+                                            color:
+                                                Colors.black.withOpacity(0.6)),
+                                      ),
+                                    ],
                                   ),
-                                ],
-                              ),
-                            ),
-                            trailing: IconButton(
-                              icon: const Icon(Icons.remove_red_eye_rounded),
-                              tooltip: 'Show Recipe',
-                              onPressed: () => _showRecipe(
-                                  context,
-                                  '${widget.meal.toUpperCase()}_${groupsName[2].toLowerCase()}',
-                                  possibleRecipes[2][index]),
-                            ),
-                            /*
+                                ),
+                                trailing: IconButton(
+                                  icon:
+                                      const Icon(Icons.remove_red_eye_rounded),
+                                  tooltip: 'Show Recipe',
+                                  onPressed: () => _showRecipe(
+                                      context,
+                                      '${widget.meal.toUpperCase()}_${groupsName[2].toLowerCase()}',
+                                      possibleRecipes[2][index]),
+                                ),
+                                /*
                                 trailing:  IconButton(
                                   icon: Provider.of<Favorites>(context).isExist(recipes[index])
                                     ? const Icon(Icons.favorite, color: Colors.red)
@@ -816,12 +946,45 @@ class _CookBookPageState extends State<CookBookPage> {
                                 
                                 },
                               )*/
-                          ));
-                    },
+                              ));
+                        },
+                      ),
+                    ],
                   ),
-                ],
-              ),
+                ),
+                Align(
+                  alignment: Alignment.bottomCenter,
+                  child: Container(
+                    height: 30,
+                    width: deviceWidth(context),
+                    color: Colors.blue,
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.stretch,
+                      children: [
+                        const Expanded(
+                          child: Text(
+                            ' Actual calories count:',
+                          ),
+                        ),
+                        Expanded(
+                          child: CustomPaint(
+                            foregroundPainter: ScoreLinearProgress(
+                              backColor:
+                                  Colors.lightBlueAccent.withOpacity(0.4),
+                              frontColor: Colors.lightBlueAccent,
+                              strokeWidth: 20,
+                              value: 0.5,
+                            ),
+                          ),
+                        ),
+                      ],
+                    ),
+                  ),
+                ),
+              ],
             ),
+            Stack(
+              children: <Widget>[
             SingleChildScrollView(
               child: Column(
                 children: [
@@ -933,7 +1096,7 @@ class _CookBookPageState extends State<CookBookPage> {
                           // The color depends on this is selected or not
                           color: Provider.of<PersonalMeals>(context, listen: false)
                                           .personalRecipes[3][index]
-                                      ['isSelected'] ==
+                                      ['is${widget.meal}Saved'] ==
                                   true
                               ? Colors.lightGreen
                               : Colors.white,
@@ -945,11 +1108,11 @@ class _CookBookPageState extends State<CookBookPage> {
                                   Provider.of<PersonalMeals>(context,
                                                   listen: false)
                                               .personalRecipes[3][index]
-                                          ['isSelected'] =
+                                          ['is${widget.meal}Saved'] =
                                       !Provider.of<PersonalMeals>(context,
                                                   listen: false)
                                               .personalRecipes[3][index]
-                                          ['isSelected'];
+                                          ['is${widget.meal}Saved'];
                                 });
                               },
                               title: Text(Provider.of<PersonalMeals>(context, listen: false)
@@ -982,7 +1145,7 @@ class _CookBookPageState extends State<CookBookPage> {
                               borderRadius: BorderRadius.circular(5)),
 
                           // The color depends on this is selected or not
-                          color: possibleRecipes[3][index]['isSelected'] == true
+                          color: possibleRecipes[3][index]['is${widget.meal}Saved'] == true
                               ? Colors.lightGreen
                               : Colors.white,
                           child: ListTile(
@@ -990,8 +1153,11 @@ class _CookBookPageState extends State<CookBookPage> {
                               // if this item isn't selected yet, "isSelected": false -> true
                               // If this item already is selected: "isSelected": true -> false
                               setState(() {
-                                possibleRecipes[3][index]['isSelected'] =
-                                    !possibleRecipes[3][index]['isSelected'];
+                                possibleRecipes[3][index]['is${widget.meal}Saved'] =
+                                    !possibleRecipes[3][index]['is${widget.meal}Saved'];
+                                String meal = widget.meal;
+                                String course = coursesName[3];
+                                Provider.of<MealChoiche>(context, listen: false).ToogleChosenRecipe(meal.toUpperCase(), course , possibleRecipes[3][index]);
                               });
                             },
                             title: Text(possibleRecipes[3][index]['name'],
@@ -1007,7 +1173,7 @@ class _CookBookPageState extends State<CookBookPage> {
                                 children: [
                                   TextSpan(
                                     text:
-                                        "\n${possibleRecipes[3][index]['commonIngredientsCount']} ingredients inside: ${possibleRecipes[3][index]['commonIngredients']}",
+                                        "\n${possibleRecipes[3][index]['commonIngredientsCount']} ingredients inside: ${possibleRecipes[3][index]['commonIngredients'].join(", ")}",
                                     style: TextStyle(
                                         fontWeight: FontWeight.normal,
                                         fontSize: 11,
@@ -1025,19 +1191,48 @@ class _CookBookPageState extends State<CookBookPage> {
                                   '${widget.meal.toUpperCase()}_${groupsName[3].toLowerCase()}',
                                   possibleRecipes[3][index]),
                             ),
-
                           ));
                     },
                   ),
                 ],
               ),
             ),
+            Align(
+                  alignment: Alignment.bottomCenter,
+                  child: Container(
+                    height: 30,
+                    width: deviceWidth(context),
+                    color: Colors.blue,
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.stretch,
+                      children: [
+                        const Expanded(
+                          child: Text(
+                            ' Actual calories count:',
+                          ),
+                        ),
+                        Expanded(
+                          child: CustomPaint(
+                            foregroundPainter: ScoreLinearProgress(
+                              backColor:
+                                  Colors.lightBlueAccent.withOpacity(0.4),
+                              frontColor: Colors.lightBlueAccent,
+                              strokeWidth: 20,
+                              value: 0.5,
+                            ),
+                          ),
+                        ),
+                      ],
+                    ),
+                  ),
+                ),
+              ],
+            ),
           ],
         ),
       ),
     );
   } //build
-
 
   void _toMainNavigator(BuildContext context) {
     Navigator.of(context).pushReplacement(MaterialPageRoute(
@@ -1048,6 +1243,8 @@ class _CookBookPageState extends State<CookBookPage> {
   } //_toMainNavigator
 
   void _Done(BuildContext context) {
+    
+    /*
     for (int i = 0; i < groupsName.length; i++) {
       chosen.add(possibleRecipes[i]
           .where((item) => item['isSelected'] == true)
@@ -1059,10 +1256,12 @@ class _CookBookPageState extends State<CookBookPage> {
         // int id = chosen[i][j]['id'];
         Map item = chosen[i][j];
 
-        Provider.of<MealChoiche>(context, listen: false).ChooseRecipe(widget.meal.toUpperCase(), chosenName[i].toLowerCase(), item);
+        Provider.of<MealChoiche>(context, listen: false).ChooseRecipe(
+            widget.meal.toUpperCase(), chosenName[i].toLowerCase(), item);
         //Provider.of<CookBook>(context, listen: false).toggleRecipe(id);
       }
     }
+*/
 
     _toMainNavigator(context);
   } //_Done
