@@ -1,3 +1,5 @@
+import 'dart:ffi';
+
 import 'package:flutter/material.dart';
 //import 'package:material_design_icons_flutter/material_design_icons_flutter.dart';
 import 'package:flutter_doctors/screens/mainnavigator.dart';
@@ -23,7 +25,15 @@ class _VisualEditRecipeState extends State<VisualEditRecipe> {
   @override
   Widget build(BuildContext context) {
     print('${VisualEditRecipe.routename} built');
-  Map chosen= Provider.of<MealChoiche>(context, listen: false).chosen;  
+  Map chosen= Provider.of<MealChoiche>(context, listen: false).chosen; 
+  List lista = chosen['LUNCH'].values.toList();
+  List<bool> valori = [];
+  List complex = [];
+  for( int i=0; i< 4; i++) {valori.add(lista[i].isNotEmpty); complex.add(lista[i]);};
+  int lungh = valori.where((x) => x == true).length;
+  List all_list= complex.expand((x) => x).toList(); 
+  int lunlist=all_list.length;
+  
     return Scaffold(
       appBar: AppBar(
         title: Row(children: [
@@ -47,17 +57,9 @@ class _VisualEditRecipeState extends State<VisualEditRecipe> {
                 physics: ClampingScrollPhysics(),
                 shrinkWrap: true,
                 scrollDirection: Axis.horizontal,
-                itemCount: chosen['BREAKFAST'].length,
-                itemBuilder: (BuildContext ctx, index) => SizedBox(
-              height: 200,
-              child: ListView.builder(
-                physics: ClampingScrollPhysics(),
-                shrinkWrap: true,
-                scrollDirection: Axis.horizontal,
-                itemCount: chosen['BREAKFAST'][index].length,
-                itemBuilder: (BuildContext ctx, index) =>
-                Card ( 
-                  key: ValueKey(chosen['BREAKFAST']['breakfast'][index]['name']),
+                itemCount: lunlist,
+                itemBuilder: (BuildContext ctx, index) => Card ( 
+                  key: ValueKey(all_list[index]['name']),
                   child: Container(
                       decoration: BoxDecoration(
                         color: Colors.white,
@@ -65,11 +67,11 @@ class _VisualEditRecipeState extends State<VisualEditRecipe> {
                         borderRadius: BorderRadius.circular(8)
                       ), 
                       child: ClipRRect(borderRadius: BorderRadius.circular(10),
-                        child: Image.network(chosen['BREAKFAST']['breakfast'][index]['url']),
+                        child: Image.network(all_list[index]['url']),
                       )
                     ),),
               ),
-            ),),),
+            ),
             Text(
               'Headline 2',
               style: TextStyle(fontSize: 18),
