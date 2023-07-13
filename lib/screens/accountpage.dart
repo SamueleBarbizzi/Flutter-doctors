@@ -17,16 +17,18 @@ class AccountPage extends StatefulWidget {
 class _AccountPageState extends State<AccountPage> {
   
   bool isObscurePassword =true;
+  bool consentChecked = false;
   
 
   final TextEditingController _fullNameController = TextEditingController();
-   final TextEditingController _emailController = TextEditingController();
+  final TextEditingController _emailController = TextEditingController();
   final TextEditingController _passwordController = TextEditingController();
   final TextEditingController _genderController = TextEditingController();
   final TextEditingController _ageController = TextEditingController();
   final TextEditingController _improvementGoalController = TextEditingController();
   final TextEditingController _foodIntoleranceController = TextEditingController();
   final TextEditingController  _dailycalorieintakeController = TextEditingController();
+  final TextEditingController  _consentController = TextEditingController(text: 'false');
 
   @override
   void initState() {
@@ -45,6 +47,8 @@ class _AccountPageState extends State<AccountPage> {
       _improvementGoalController.text = prefs.getString('improvementGoal') ?? '';
       _foodIntoleranceController.text = prefs.getString('foodIntolerance') ?? '';
       _dailycalorieintakeController.text = prefs.getString('dailycalorieintake') ?? '';
+      _consentController.text = prefs.getString('consent') ?? 'false';      
+      
     });
   }
 
@@ -58,10 +62,11 @@ class _AccountPageState extends State<AccountPage> {
     await prefs.setString('improvementGoal', _improvementGoalController.text);
     await prefs.setString('foodIntolerance', _foodIntoleranceController.text);
     await prefs.setString('dailycalorieintake', _dailycalorieintakeController.text);
+    await prefs.setString('consent', _consentController.text);
+  
   }
   
-  
-  @override
+   @override
   Widget build(BuildContext context) {
     print('${AccountPage.routename} built');
     return Scaffold(
@@ -142,7 +147,9 @@ class _AccountPageState extends State<AccountPage> {
            buildTextField('Improvement goal', 'Enter your improvement goal', false,  _improvementGoalController),
            buildTextField('Daily calorie intake', 'Enter your daily calorie intake', false,  _dailycalorieintakeController), 
            buildTextField('Food intolerances/allergy', 'Enter your food intolerances/allergy', false,  _foodIntoleranceController),          
-          
+           buildTextField('Consent to the processing of personal data', '', false, _consentController),
+           
+
                 const Center(
                   child: SizedBox(
                   height:20,
@@ -195,8 +202,25 @@ class _AccountPageState extends State<AccountPage> {
     
   } 
  //build
-  Widget buildTextField( String labelText, String placeholder, bool isPasswordtextField, TextEditingController controller,) {
-    return Padding(
+  Widget buildTextField( String labelText, String placeholder, bool isPasswordtextField, TextEditingController controller) {    
+     if (labelText == 'Consent to the processing of personal data') {
+    return CheckboxListTile(
+      title: Text(
+        labelText,
+        style: TextStyle(
+          fontWeight: FontWeight.bold,
+        ),
+      ),
+      value: consentChecked,
+      onChanged: (bool? value) {
+        setState(() {
+          consentChecked = value ?? false;
+        });
+      },
+      controlAffinity: ListTileControlAffinity.leading,
+    );
+  } else {  
+     return Padding(
       padding: const EdgeInsets.only(bottom: 30),
       child:    TextField( 
       controller: controller, 
@@ -225,8 +249,8 @@ class _AccountPageState extends State<AccountPage> {
     ),
     );
   }
-
-  void _toLoginPage(BuildContext context) async{
+  }
+void _toLoginPage(BuildContext context) async{
     //Unset the 'username' filed in SharedPreference 
     final sp = await SharedPreferences.getInstance();
     sp.remove('username'); 
