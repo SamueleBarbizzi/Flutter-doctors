@@ -57,6 +57,7 @@ class _VisualEditRecipeState extends State<VisualEditRecipe> {
         mywidgets.add(
           Container( child: 
             Column( children: [ 
+
               Container( alignment: Alignment.center, 
                 width: double.infinity,
                 padding: EdgeInsets.all(3), 
@@ -85,7 +86,7 @@ class _VisualEditRecipeState extends State<VisualEditRecipe> {
                 physics: const NeverScrollableScrollPhysics(),
                 shrinkWrap: true,
                 itemCount: lenRecipePersonal,
-                itemBuilder: (BuildContext ctx, index) { 
+                itemBuilder: (BuildContext context, index) { 
                   return Card(
                     key: ValueKey(allRecipePersonal[index]['name']),
                     margin: const EdgeInsets.fromLTRB(5,1,5,1),
