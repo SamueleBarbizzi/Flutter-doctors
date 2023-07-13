@@ -3,6 +3,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_doctors/screens/loginpage.dart';
 import 'package:flutter_doctors/screens/infopage.dart';
+import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 class AccountPage extends StatefulWidget {
@@ -181,26 +182,107 @@ class _AccountPageState extends State<AccountPage> {
         )
       ),
 
-      drawer: Drawer(
-        child: ListView(
-          padding: EdgeInsets.zero,
-          children: [
-            const DrawerHeader(
-              decoration: BoxDecoration(
-                color: Colors.blue,
+
+drawer: Drawer(
+  child: ListView(padding: EdgeInsets.zero,
+    children: [
+      Container(height: 150,
+        child: DrawerHeader(
+          decoration: BoxDecoration(
+            color: Colors.green,
+          ),
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: const [
+              Row(mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  Icon(Icons.settings,
+                    size: 24,
+                    color: Colors.white,
+                  ),
+                  SizedBox(width: 10),
+                  Text('Settings',style: TextStyle(
+                      fontSize: 24,
+                      color: Colors.white,
+                    ),
+                  ),
+                ],
               ),
-              child: Text('login_flow'),
-            ),
-            ListTile(
-              leading: const Icon(Icons.logout),
-              title: const Text('Logout'),
-              onTap: () => _toLoginPage(context),
-            ),
-          ],
+            ],
+          ),
         ),
       ),
-    );
-    
+      ListTile(leading: Icon(FontAwesomeIcons.facebook),
+        title: Text('Facebook',
+          style: TextStyle(
+            fontSize: 16,
+          ),
+        ),
+        onTap: () {
+          // TODO: Open Facebook page
+        },
+      ),
+      ListTile(leading: Icon(FontAwesomeIcons.instagram),
+        title: Text('Instagram',
+          style: TextStyle(
+            fontSize: 16,
+          ),
+        ),
+        onTap: () {
+          // TODO: Open Instagram page
+        },
+      ),
+      ListTile(leading: Icon(Icons.feedback),
+        title: Text('Feedback',
+          style: TextStyle(
+            fontSize: 16,
+          ),
+        ),
+        onTap: () {
+          // TODO: Open feedback form
+        },
+      ),
+      ListTile(leading: Icon(Icons.star),
+        title: Text('Rate us',
+          style: TextStyle(
+            fontSize: 16,
+          ),
+        ),
+        onTap: () {
+          // TODO: Open voting page
+        },
+      ),
+
+      ListTile(leading: Icon(Icons.mail),
+        title: Text('Contact support',
+          style: TextStyle(
+            fontSize: 16,
+          ),
+        ),
+        onTap: () {
+          // TODO: Open assistance contact
+        }
+      ),
+      
+       ClipRRect(
+        borderRadius: BorderRadius.circular(80),
+        child: Container(color: Colors.red,
+          child: ListTile(
+            leading: Icon(Icons.logout, color: Colors.white),
+            title: Text('Logout',
+            style: TextStyle(
+              fontSize: 16,
+              color: Colors.white,
+          ),
+        ),
+        onTap: () => _toLoginPage(context),
+          ) 
+      ),
+      )  
+    ],
+  ),
+),);
+     
   } 
  //build
   Widget buildTextField( String labelText, String placeholder, bool isPasswordtextField, TextEditingController controller) {    
