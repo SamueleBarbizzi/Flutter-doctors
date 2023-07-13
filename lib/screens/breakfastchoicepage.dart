@@ -46,6 +46,7 @@ class _BreakfastChoicePageState extends State<BreakfastChoicePage> {
   Widget build(BuildContext context) {
     print('${BreakfastChoicePage.routename} built');
     final recipes = Groups().createBreakfastDishes(context);
+    recipes.sort((a, b) => a["name"].compareTo(b["name"]));
     return Scaffold(
       floatingActionButton: FloatingActionButton(
         onPressed: () {
@@ -120,10 +121,9 @@ class _BreakfastChoicePageState extends State<BreakfastChoicePage> {
 
     for (int i = 0; i < chosen.length; i++) {
       int id = (chosen[i]['id']);
-      String dish = '${meal.toUpperCase()}_${id.toString()}';
       Map item = chosen[i];
 
-      Provider.of<MealChoiche>(context, listen: false).ChooseAndReplace(dish, item);
+      Provider.of<MealChoiche>(context, listen: false).ChooseRecipe(meal.toUpperCase(), 'breakfast' , item);
       Provider.of<CookBook>(context, listen: false).toggleRecipe(id);
 
     }
@@ -137,4 +137,4 @@ class _BreakfastChoicePageState extends State<BreakfastChoicePage> {
       ),
     );
   } //_Done
-} //HomePage
+} //BreakfastChoicePage

@@ -4,59 +4,88 @@ import 'package:flutter/material.dart';
 
 class MealChoiche extends ChangeNotifier {
   //Initialize list of choosen recipes
-  Map chosen = {};
 
-  //The structure will be something like this:
+    //The structure will be something like this:
+
   /*
   Map chosen = {
-    'BREAKFAST_recipe1id' = {recipe1},
-    'LUNCH_main1_recipe2id' = {recipe2},
-    'LUNCH_main1_recipe3id' = {recipe3},
-    'LUNCH_main2_recipe4id' = {recipe4},
-    'LUNCH_side_recipe5id' = {recipe5},
-    'LUNCH_dessert_recipe6id' = {recipe6},
-    'DINNER_main1_recipe7id' = {recipe7},
-    'DINNER_main2_recipe8id' = {recipe8},
-    'DINNER_main1_recipe9id' = {recipe9},
-    'DINNER_side_recipe10id' = {recipe10},
-    'DINNER_dessert_recipe11id' = {recipe11},
+    'BREAKFAST': {
+        'breakfast' : [breakfast1id, breakfast2id,...],
+    },
+    'LUNCH': {
+        'main1' : [LUNCH_main1_recipe3id, LUNCH_main1_recipe4id,...],
+        'main2' : [LUNCH_main2_recipe5id, ...],
+        'side' : [LUNCH_side_recipe5id,...],
+        'dessert' : [LUNCH_dessert_recipe6id, ...],
+    },
+    'DINNER': {
+        ...
+    },
   };
-  */
+*/
 
-  void ChooseAndReplace(String dish, Map item) {
+  Map chosen = {
+    'BREAKFAST': {
+        'breakfast' : <dynamic>{}, //this is a Set, to avoid repetitions
+    },
+    'LUNCH': {
+        'main1' : <dynamic>{},
+        'main2' : <dynamic>{},
+        'side' : <dynamic>{},
+        'dessert' : <dynamic>{},
+    },
+    'DINNER': {
+        'main1' : <dynamic>{},
+        'main2' : <dynamic>{},
+        'side' : <dynamic>{},
+        'dessert' : <dynamic>{},
+    },
+  };
+
+
+
+  void ChooseRecipe(String meal, String course, Map item) {
     // this wants to alternate between inserting the recipe in the chosen Map,
     // and removes it if it is already present 
-    final isPresent = chosen.containsKey(dish);
 
-    if (isPresent){
-      chosen.remove(dish);
-    }
-    else{
-      chosen[dish] = item;
-    }
+    chosen[meal.toUpperCase()][course.toLowerCase()].add(item);
     //Remember to call the CookBook provider when using choose.
 
     //Call the notifyListeners() method to alert that something happened.
     notifyListeners();
   }
 
-  void RemoveRecipe(String dish, Map item) {
-      chosen[dish] = {};
+  void RemoveRecipe(String meal, String course, Map item) {
+      chosen[meal.toUpperCase()][course.toLowerCase()].remove(item);
 
     //Call the notifyListeners() method to alert that something happened.
     notifyListeners();
   }
 
   void clearChosen() {
-    chosen = {};
+    chosen = {
+    'BREAKFAST': {
+        'breakfast' : {}, //this is a Set, to avoid repetitions
+    },
+    'LUNCH': {
+        'main1' : {},
+        'main2' : {},
+        'side' : {},
+        'dessert' : {},
+    },
+    'DINNER': {
+        'main1' : {},
+        'main2' : {},
+        'side' : {},
+        'dessert' : {},
+    },
+  };
+
     notifyListeners();
   }
 
-  Map getRecipe(String meal, String course, int id) {
-    return chosen['${meal.toUpperCase()}_${course.toLowerCase()}_$id'];
+  Set getMealRecipes(String meal, String course, int id) {
+    return chosen[meal.toUpperCase()][course.toLowerCase()];
   }
 
-  Map getChosenRecipes() {
-    return chosen;
-  }
 }//MealChoice
