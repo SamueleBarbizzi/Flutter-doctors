@@ -138,8 +138,7 @@ class _CookBookPageState extends State<CookBookPage> {
     print('${CookBookPage.routename} built');
 
     //double deviceHeight(BuildContext context) => MediaQuery.of(context).size.height;
-    double deviceWidth(BuildContext context) =>
-        MediaQuery.of(context).size.width;
+    double deviceWidth(BuildContext context) => MediaQuery.of(context).size.width;
 
     return DefaultTabController(
       length: groupsName.length,
@@ -324,7 +323,12 @@ class _CookBookPageState extends State<CookBookPage> {
                                                       listen: false)
                                                   .personalRecipes[0][index]
                                               ['is${widget.meal}Saved'];
-                                    
+                                Map item = Provider.of<PersonalMeals>(context,
+                                        listen: false)
+                                    .getPersonalRecipe(0, index);
+                                Provider.of<MealChoiche>(context, listen: false)
+                                    .TooglePersonalRecipe(widget.meal.toUpperCase(),
+                                        coursesName[0].toLowerCase(), item);
                                     });
                                   },
                                   title: Text(Provider.of<PersonalMeals>(context, listen: false)
@@ -336,6 +340,12 @@ class _CookBookPageState extends State<CookBookPage> {
                                       Provider.of<PersonalMeals>(context,
                                               listen: false)
                                           .removePersonalRecipe(0, index);
+                                Map item = Provider.of<PersonalMeals>(context,
+                                        listen: false)
+                                    .getPersonalRecipe(0, index);
+                                Provider.of<MealChoiche>(context, listen: false)
+                                    .removePersonalRecipe(widget.meal.toUpperCase(),
+                                        coursesName[0].toLowerCase(), item);
                                       setState(() {});
                                     },
                                   )));
@@ -586,6 +596,12 @@ class _CookBookPageState extends State<CookBookPage> {
                                                       listen: false)
                                                   .personalRecipes[1][index]
                                               ['is${widget.meal}Saved'];
+                                Map item = Provider.of<PersonalMeals>(context,
+                                        listen: false)
+                                    .getPersonalRecipe(1, index);
+                                Provider.of<MealChoiche>(context, listen: false)
+                                    .TooglePersonalRecipe(widget.meal.toUpperCase(),
+                                        coursesName[1].toLowerCase(), item);
                                     });
                                   },
 
@@ -601,6 +617,12 @@ class _CookBookPageState extends State<CookBookPage> {
                                       Provider.of<PersonalMeals>(context,
                                               listen: false)
                                           .removePersonalRecipe(1, index);
+                                Map item = Provider.of<PersonalMeals>(context,
+                                        listen: false)
+                                    .getPersonalRecipe(1, index);
+                                Provider.of<MealChoiche>(context, listen: false)
+                                    .removePersonalRecipe(widget.meal.toUpperCase(),
+                                        coursesName[1].toLowerCase(), item);
                                       setState(() {});
                                     },
                                   )));
@@ -850,6 +872,12 @@ class _CookBookPageState extends State<CookBookPage> {
                                                       listen: false)
                                                   .personalRecipes[2][index]
                                               ['is${widget.meal}Saved'];
+                                Map item = Provider.of<PersonalMeals>(context,
+                                        listen: false)
+                                    .getPersonalRecipe(2, index);
+                                Provider.of<MealChoiche>(context, listen: false)
+                                    .TooglePersonalRecipe(widget.meal.toUpperCase(),
+                                        coursesName[2].toLowerCase(), item);
                                     });
                                   },
                                   title: Text(Provider.of<PersonalMeals>(context, listen: false)
@@ -861,6 +889,12 @@ class _CookBookPageState extends State<CookBookPage> {
                                       Provider.of<PersonalMeals>(context,
                                               listen: false)
                                           .removePersonalRecipe(2, index);
+                                Map item = Provider.of<PersonalMeals>(context,
+                                        listen: false)
+                                    .getPersonalRecipe(2, index);
+                                Provider.of<MealChoiche>(context, listen: false)
+                                    .removePersonalRecipe(widget.meal.toUpperCase(),
+                                        coursesName[2].toLowerCase(), item);
                                       setState(() {});
                                     },
                                   )));
@@ -1113,6 +1147,12 @@ class _CookBookPageState extends State<CookBookPage> {
                                                   listen: false)
                                               .personalRecipes[3][index]
                                           ['is${widget.meal}Saved'];
+                                Map item = Provider.of<PersonalMeals>(context,
+                                        listen: false)
+                                    .getPersonalRecipe(3, index);
+                                Provider.of<MealChoiche>(context, listen: false)
+                                    .TooglePersonalRecipe(widget.meal.toUpperCase(),
+                                        coursesName[3].toLowerCase(), item);
                                 });
                               },
                               title: Text(Provider.of<PersonalMeals>(context, listen: false)
@@ -1124,6 +1164,12 @@ class _CookBookPageState extends State<CookBookPage> {
                                   Provider.of<PersonalMeals>(context,
                                           listen: false)
                                       .removePersonalRecipe(3, index);
+                                Map item = Provider.of<PersonalMeals>(context,
+                                        listen: false)
+                                    .getPersonalRecipe(3, index);
+                                Provider.of<MealChoiche>(context, listen: false)
+                                    .removePersonalRecipe(widget.meal.toUpperCase(),
+                                        coursesName[3].toLowerCase(), item);
                                   setState(() {});
                                 },
                               )));

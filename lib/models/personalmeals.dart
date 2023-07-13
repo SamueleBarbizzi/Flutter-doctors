@@ -12,6 +12,7 @@ class PersonalMeals extends ChangeNotifier {
     personalRecipes[indexMeal].add({
       'name': name,
       'calories': calories,
+      'isSelected': false,
       'isLunchSaved': false,
       'isDinnerSaved': false,
     });
@@ -22,12 +23,16 @@ class PersonalMeals extends ChangeNotifier {
     notifyListeners();
   }
 
+  Map getPersonalRecipe(int indexMeal, int indexCourse) {
+    return personalRecipes[indexMeal][indexCourse];
+  }
+
   void removePersonalRecipe(int indexMeal, int indexCourse) {
     personalRecipes[indexMeal].removeAt(indexCourse);
 
     //Call the notifyListeners() method to alert that something happened.
     notifyListeners();
-  }
+  }  
 
   void addSnack(String name, int calories) {
     snacks.add({
