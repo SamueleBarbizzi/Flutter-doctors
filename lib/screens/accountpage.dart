@@ -27,6 +27,7 @@ class _AccountPageState extends State<AccountPage> {
   final TextEditingController _passwordController = TextEditingController();
   final TextEditingController _genderController = TextEditingController();
   final TextEditingController _ageController = TextEditingController();
+  final TextEditingController _weightController = TextEditingController();
   final TextEditingController _improvementGoalController = TextEditingController();
   final TextEditingController _foodIntoleranceController = TextEditingController();
   final TextEditingController  _dailycalorieintakeController = TextEditingController();
@@ -46,6 +47,7 @@ class _AccountPageState extends State<AccountPage> {
       _passwordController.text = prefs.getString('password') ?? '';
       _genderController.text = prefs.getString('gender') ?? '';
       _ageController.text = prefs.getString('age') ?? '';
+      _weightController.text = prefs.getString('weight') ?? '';
       _improvementGoalController.text = prefs.getString('improvementGoal') ?? '';
       _foodIntoleranceController.text = prefs.getString('foodIntolerance') ?? '';
       _dailycalorieintakeController.text = prefs.getString('dailycalorieintake') ?? '';
@@ -63,6 +65,7 @@ class _AccountPageState extends State<AccountPage> {
     await prefs.setString('password', _passwordController.text);
     await prefs.setString('gender', _genderController.text);
     await prefs.setString('age', _ageController.text);
+    await prefs.setString('weight', _weightController.text);
     await prefs.setString('improvementGoal', _improvementGoalController.text);
     await prefs.setString('foodIntolerance', _foodIntoleranceController.text);
     await prefs.setString('dailycalorieintake', _dailycalorieintakeController.text);
@@ -93,6 +96,7 @@ bool _isFormValid() {
       _passwordController.text.isNotEmpty &&
       _genderController.text.isNotEmpty &&
       _ageController.text.isNotEmpty &&
+      _weightController.text.isNotEmpty &&
       _improvementGoalController.text.isNotEmpty &&
       _foodIntoleranceController.text.isNotEmpty &&
       _dailycalorieintakeController.text.isNotEmpty;
@@ -176,6 +180,7 @@ bool _isFormValid() {
            buildTextField('Password', 'Enter your password', true, _passwordController),         
            buildTextField('Gender', 'Enter your gender', false, _genderController),
            buildTextField('Age', 'Enter your age', false, _ageController),
+           buildTextField('Weight', 'Enter your weight', false, _weightController),
            buildTextField('Improvement goal', 'Enter your improvement goal', false,  _improvementGoalController),
            buildTextField('Daily calorie intake', 'Enter your daily calorie intake', false,  _dailycalorieintakeController), 
            buildTextField('Food intolerances/allergy', 'Enter your food intolerances/allergy', false,  _foodIntoleranceController),          
@@ -316,7 +321,7 @@ drawer: Drawer(
   } 
  //build
   Widget buildTextField( String labelText, String placeholder, bool isPasswordtextField, TextEditingController controller) {    
-     if (labelText == 'Consent to the processing of personal data') {
+    if (labelText == 'Consent to the processing of personal data') {
     return CheckboxListTile(
       title: Text(
         labelText,
