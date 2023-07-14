@@ -1,21 +1,16 @@
 //import 'dart:ffi';
 
+// ignore_for_file: file_names, library_private_types_in_public_api
+
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
-//import 'package:material_design_icons_flutter/material_design_icons_flutter.dart';
-import 'package:flutter_doctors/screens/mainnavigator.dart';
 import 'package:flutter_doctors/models/mealchoice.dart';
-// import 'package:flutter_doctors/models/personalmeals.dart';
-//import 'package:flutter_doctors/models/groups.dart';
 import 'package:provider/provider.dart';
-//import 'package:flutter_doctors/screens/cookbookpage.dart';
 import 'package:flutter_doctors/screens/recipepage.dart';
 
 
 class VisualEditRecipe extends StatefulWidget {
-  const VisualEditRecipe({Key? key, required this.firstDatabaseEntry}) : super(key: key);
-  //final Map recipe;
-  //final String dish;
-  final bool firstDatabaseEntry;
+  const VisualEditRecipe({Key? key}) : super(key: key);
 
   static const routename = 'visualEditRecipePage';
 
@@ -39,7 +34,9 @@ class _VisualEditRecipeState extends State<VisualEditRecipe> {
 
   @override
   Widget build(BuildContext context) {
-    print('${VisualEditRecipe.routename} built');
+    if (kDebugMode) {
+      print('${VisualEditRecipe.routename} built');
+    }
   
     List<Widget> widgetMeals = [];
     Map chosen= Provider.of<MealChoiche>(context, listen: false).chosen;
@@ -68,125 +65,11 @@ class _VisualEditRecipeState extends State<VisualEditRecipe> {
       int lenRecipePersonal=allRecipePersonal.length;
       if (lenEmpty+lenEmptyPersonal!=0) {
         widgetMeals.add(
-          Container( child: 
-            Column( children: [ 
-              Container( alignment: Alignment.center, 
-                width: double.infinity,
-                padding: EdgeInsets.all(3), 
-                margin: EdgeInsets.all(5),
-                decoration: BoxDecoration(
-                  color: Colors.white,
-                  border: Border.all(
-                      color: Colors.grey.shade400, width: 1.0),
-                  borderRadius: BorderRadius.circular(10),
-                  boxShadow: [ BoxShadow(
-                    color: Colors.grey.shade700,
-                    blurRadius: 6,
-                    spreadRadius: 2,
-                    offset: const Offset(-4, -4),
-                  )],
-                ),
-                child: Text( '$k',
-                  style: TextStyle(
-                    fontWeight: FontWeight.bold,
-                    fontSize: 22,
-                    color: Color.fromARGB(255, 76, 175, 80)),
-                ),
-              ),
-              ListView.builder(
-                physics: const NeverScrollableScrollPhysics(),
-                shrinkWrap: true,
-                itemCount: lenRecipePersonal,
-                itemBuilder: (BuildContext context, index) { 
-                  return Card(
-                    key: ValueKey(allRecipePersonal[index]['name']),
-                    margin: const EdgeInsets.fromLTRB(5,1,5,1),
-                    shape: RoundedRectangleBorder(
-                      borderRadius: BorderRadius.circular(10)),
-                    child: ListTile(
-                      title: Text(allRecipePersonal[index]['name']),
-                      subtitle: Text('     ${allRecipePersonal[index]['calories']} kcals'),
-                      trailing: IconButton(
-                                    icon: const Icon(Icons.delete_forever),
-                                    onPressed: () {
-                                      
-                                      Provider.of<MealChoiche>(context,listen: false)
-                                      .findAndRemovePersonalRecipe(allRecipePersonal[index]['name']);
-
-                                    setState(() {});
-                                    },
-                                  ),
-                    ),
-                  );
-                },
-              ),
-                SizedBox(
-                  height: 200,
-                  child: ListView.builder(
-                    physics: ClampingScrollPhysics(),
-                    shrinkWrap: true,
-                    scrollDirection: Axis.horizontal,
-                    itemCount: lenRecipe,
-                    itemBuilder: (BuildContext ctx, index) => Card ( 
-                      key: ValueKey(allRecipe[index]['name']),
-                      child: Tooltip( 
-                        message: allRecipe[index]['name'],
-                        child: GestureDetector(
-                          onTap: () { _showRecipe(
-                                      context,
-                                      allRecipe[index]['course'][0],
-                                      allRecipe[index]);
-                            }, 
-                          child: Container(
-                            decoration: BoxDecoration(
-                                color: Colors.white,
-                              border: Border.all(color: Colors.grey.shade400, width: 1.0),
-                              borderRadius: BorderRadius.circular(8)
-                            ), 
-                            child: ClipRRect(borderRadius: BorderRadius.circular(10),
-                            child: Stack( alignment: Alignment.topRight,
-                              children: [Image.network(allRecipe[index]['url']),
-                                Container(alignment: Alignment.center, height: 50, width: 50,
-                                decoration: BoxDecoration( 
-                                              color: Colors.red,
-                                              border: Border.all(color: Colors.grey.shade400, width: 1.0),
-                                              borderRadius: BorderRadius.circular(8)),               
-                                  child: IconButton(
-                                    icon: const Icon(Icons.delete_forever),
-                                    onPressed: () {
-                                      
-                                      Provider.of<MealChoiche>(context,listen: false)
-                                      .findAndRemoveChosenRecipe(allRecipe[index]['name']);
-
-                                    setState(() {});
-                                    },
-                                  ),
-
-                                )],
-                            ),            
-                          ),
-                        ),
-                      ),
-                    ),
-                  ),
-                ),),
-              const SizedBox(height: 20,)
-            ],),
-          ),
-        );
-      }
-    }
-
-
-    int lenSnacks=snacks.length;
-    if (lenSnacks!=0) {
-      widgetMeals.add(
-        Container( child: 
           Column( children: [ 
             Container( alignment: Alignment.center, 
               width: double.infinity,
-              padding: EdgeInsets.all(3), 
-              margin: EdgeInsets.all(5),
+              padding: const EdgeInsets.all(3), 
+              margin: const EdgeInsets.all(5),
               decoration: BoxDecoration(
                 color: Colors.white,
                 border: Border.all(
@@ -199,8 +82,8 @@ class _VisualEditRecipeState extends State<VisualEditRecipe> {
                   offset: const Offset(-4, -4),
                 )],
               ),
-              child: Text( 'SNACK',
-                style: TextStyle(
+              child: Text( k,
+                style: const TextStyle(
                   fontWeight: FontWeight.bold,
                   fontSize: 22,
                   color: Color.fromARGB(255, 76, 175, 80)),
@@ -209,44 +92,154 @@ class _VisualEditRecipeState extends State<VisualEditRecipe> {
             ListView.builder(
               physics: const NeverScrollableScrollPhysics(),
               shrinkWrap: true,
-              itemCount: lenSnacks,
+              itemCount: lenRecipePersonal,
               itemBuilder: (BuildContext context, index) { 
                 return Card(
-                  key: ValueKey(snacks[index]['name']),
+                  key: ValueKey(allRecipePersonal[index]['name']),
                   margin: const EdgeInsets.fromLTRB(5,1,5,1),
                   shape: RoundedRectangleBorder(
                     borderRadius: BorderRadius.circular(10)),
                   child: ListTile(
-                    title: Text(snacks[index]['name']),
-                    subtitle: Text('     ${snacks[index]['calories']} kcals'),
+                    title: Text(allRecipePersonal[index]['name']),
+                    subtitle: Text('     ${allRecipePersonal[index]['calories']} kcals'),
                     trailing: IconButton(
-                      icon: const Icon(Icons.delete_forever),
-                      onPressed: () {
-                        Provider.of<MealChoiche>(context,listen: false)
-                          .removeSnack(snacks[index]['name']);
-                        setState(() {});
-                      },
-                    )
+                                  icon: const Icon(Icons.delete_forever),
+                                  onPressed: () {
+                                    
+                                    Provider.of<MealChoiche>(context,listen: false)
+                                    .findAndRemovePersonalRecipe(allRecipePersonal[index]['name']);
+
+                                  setState(() {});
+                                  },
+                                ),
                   ),
                 );
               },
             ),
+              SizedBox(
+                height: 200,
+                child: ListView.builder(
+                  physics: const ClampingScrollPhysics(),
+                  shrinkWrap: true,
+                  scrollDirection: Axis.horizontal,
+                  itemCount: lenRecipe,
+                  itemBuilder: (BuildContext ctx, index) => Card ( 
+                    key: ValueKey(allRecipe[index]['name']),
+                    child: Tooltip( 
+                      message: allRecipe[index]['name'],
+                      child: GestureDetector(
+                        onTap: () { _showRecipe(
+                                    context,
+                                    allRecipe[index]['course'][0],
+                                    allRecipe[index]);
+                          }, 
+                        child: Container(
+                          decoration: BoxDecoration(
+                              color: Colors.white,
+                            border: Border.all(color: Colors.grey.shade400, width: 1.0),
+                            borderRadius: BorderRadius.circular(8)
+                          ), 
+                          child: ClipRRect(borderRadius: BorderRadius.circular(10),
+                          child: Stack( alignment: Alignment.topRight,
+                            children: [Image.network(allRecipe[index]['url']),
+                              Container(alignment: Alignment.center, height: 50, width: 50,
+                              decoration: BoxDecoration( 
+                                            color: Colors.red,
+                                            border: Border.all(color: Colors.grey.shade400, width: 1.0),
+                                            borderRadius: BorderRadius.circular(8)),               
+                                child: IconButton(
+                                  icon: const Icon(Icons.delete_forever),
+                                  onPressed: () {
+                                    
+                                    Provider.of<MealChoiche>(context,listen: false)
+                                    .findAndRemoveChosenRecipe(allRecipe[index]['name']);
+
+                                  setState(() {});
+                                  },
+                                ),
+
+                              )],
+                          ),            
+                        ),
+                      ),
+                    ),
+                  ),
+                ),
+              ),),
             const SizedBox(height: 20,)
           ],),
-        ),
+        );
+      }
+    }
+
+
+    int lenSnacks=snacks.length;
+    if (lenSnacks!=0) {
+      widgetMeals.add(
+        Column( children: [ 
+          Container( alignment: Alignment.center, 
+            width: double.infinity,
+            padding: const EdgeInsets.all(3), 
+            margin: const EdgeInsets.all(5),
+            decoration: BoxDecoration(
+              color: Colors.white,
+              border: Border.all(
+                  color: Colors.grey.shade400, width: 1.0),
+              borderRadius: BorderRadius.circular(10),
+              boxShadow: [ BoxShadow(
+                color: Colors.grey.shade700,
+                blurRadius: 6,
+                spreadRadius: 2,
+                offset: const Offset(-4, -4),
+              )],
+            ),
+            child: const Text( 'SNACK',
+              style: TextStyle(
+                fontWeight: FontWeight.bold,
+                fontSize: 22,
+                color: Color.fromARGB(255, 76, 175, 80)),
+            ),
+          ),
+          ListView.builder(
+            physics: const NeverScrollableScrollPhysics(),
+            shrinkWrap: true,
+            itemCount: lenSnacks,
+            itemBuilder: (BuildContext context, index) { 
+              return Card(
+                key: ValueKey(snacks[index]['name']),
+                margin: const EdgeInsets.fromLTRB(5,1,5,1),
+                shape: RoundedRectangleBorder(
+                  borderRadius: BorderRadius.circular(10)),
+                child: ListTile(
+                  title: Text(snacks[index]['name']),
+                  subtitle: Text('     ${snacks[index]['calories']} kcals'),
+                  trailing: IconButton(
+                    icon: const Icon(Icons.delete_forever),
+                    onPressed: () {
+                      Provider.of<MealChoiche>(context,listen: false)
+                        .removeSnack(snacks[index]['name']);
+                      setState(() {});
+                    },
+                  )
+                ),
+              );
+            },
+          ),
+          const SizedBox(height: 20,)
+        ],),
       );
     }
 
 
     return Scaffold(
       appBar: AppBar(
-        title: Row(children: [
-          const Text(VisualEditRecipe.routename, 
-            style: const TextStyle(fontWeight: FontWeight.bold))]),
+        title: const Row(children: [
+          Text(VisualEditRecipe.routename, 
+            style: TextStyle(fontWeight: FontWeight.bold))]),
         centerTitle: true,
-        leading: BackButton(
+        /*leading: BackButton(
           onPressed: () => _toMainNavigator(context),
-        ),
+        ),*/
       ),
       body: SingleChildScrollView(
         child: Column(
@@ -266,14 +259,11 @@ class _VisualEditRecipeState extends State<VisualEditRecipe> {
             )));
   }
 
-  void _toMainNavigator(BuildContext context) {
+  /*void _toMainNavigator(BuildContext context) {
     Navigator.of(context).pushReplacement(MaterialPageRoute(
         builder: (context) => MainNavigator(
             firstDatabaseEntry: widget.firstDatabaseEntry, flag: false
             )));
-  } //_toMainNavigator
+  } //_toMainNavigator*/
 
 }
-
-
-

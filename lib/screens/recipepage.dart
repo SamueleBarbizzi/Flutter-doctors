@@ -17,7 +17,7 @@ class RecipePage extends StatelessWidget {
   Widget build(BuildContext context) {
     print('${RecipePage.routename} built');
     String ingredientsToCut = recipe['ingredients'].toString();
-    String ingredientsToSplit = '\u2022 ' + ingredientsToCut.substring(1,ingredientsToCut.length-1);
+    String ingredientsToSplit = '\u2022 ${ingredientsToCut.substring(1,ingredientsToCut.length-1)}';
     String ingredientsList = ingredientsToSplit.replaceAll(",","\n\u2022");
     return Scaffold(
       appBar: AppBar(

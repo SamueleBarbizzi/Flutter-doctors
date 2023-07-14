@@ -1,7 +1,6 @@
 // ignore_for_file: non_constant_identifier_names
 
 import 'package:flutter/foundation.dart';
-import 'package:flutter/material.dart';
 
 class MealChoiche extends ChangeNotifier {
   //Initialize list of choosen recipes
@@ -86,7 +85,6 @@ class MealChoiche extends ChangeNotifier {
       chosen[meal.toUpperCase()][course.toLowerCase()].add(item);
     }
 
-
     //Remember to call the CookBook provider when using choose.
 
     //Call the notifyListeners() method to alert that something happened.
@@ -106,6 +104,8 @@ class MealChoiche extends ChangeNotifier {
         }
       }
     }
+    notifyListeners();
+  }
 
     void findAndRemoveChosenRecipe(String name) {
       loop:
@@ -119,12 +119,12 @@ class MealChoiche extends ChangeNotifier {
             break loop;
           }
         }
-
       }
+      notifyListeners();
     }
 
-    notifyListeners();
-  }
+    
+  
 
   void removeChosenRecipe(String meal, String course, Map item) {
     bool isPresent = personalRecipes[meal.toUpperCase()][course.toLowerCase()]
@@ -213,7 +213,6 @@ class MealChoiche extends ChangeNotifier {
     notifyListeners();
   }
 
-
   Set getMealRecipes(String meal, String course) {
     return chosen[meal.toUpperCase()][course.toLowerCase()];
   }
@@ -280,5 +279,4 @@ class MealChoiche extends ChangeNotifier {
         getAllPersonalCalories() +
         getAllSnackCalories();
   }
-
 } //MealChoice

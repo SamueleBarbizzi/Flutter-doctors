@@ -1,6 +1,7 @@
 // ignore_for_file: depend_on_referenced_packages, library_private_types_in_public_api, avoid_print, unused_element, use_build_context_synchronously, no_leading_underscores_for_local_identifiers
 
 import 'package:flutter/material.dart';
+//import 'package:flutter_doctors/screens/infopage.dart';
 import 'package:flutter_doctors/services/apicall.dart';
 import 'package:flutter_doctors/services/databasecall.dart';
 import 'package:jwt_decoder/jwt_decoder.dart';
@@ -69,7 +70,8 @@ class _MainNavigatorState extends State<MainNavigator> {
   Widget build(BuildContext context) {
     final List<Widget> _screens = [
       HomePage(firstDatabaseEntry: widget.firstDatabaseEntry),
-      VisualEditRecipe(firstDatabaseEntry: widget.firstDatabaseEntry),
+      // ignore: prefer_const_constructors
+      VisualEditRecipe(),
       AccountPage(),
     ];
     print('${MainNavigator.routename} built');
