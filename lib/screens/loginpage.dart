@@ -1,7 +1,7 @@
 // ignore_for_file: use_build_context_synchronously, depend_on_referenced_packages
 
 import 'package:flutter/material.dart';
-import 'package:flutter_doctors/screens/mainnavigator.dart';
+import 'package:flutter_doctors/screens/accountpage.dart';
 import 'package:flutter_doctors/services/apicall.dart';
 import 'package:flutter_login/flutter_login.dart';
 import 'package:shared_preferences/shared_preferences.dart';
@@ -28,9 +28,11 @@ class _LoginPageState extends State<LoginPage> {
     final sp = await SharedPreferences.getInstance();
     if (sp.getString('username') != null) {
       //If 'username' is set, go to MainNavigator
-      _toMainNavigator(context, firstDatabaseEntry: false);
-    } //if
-  } //_checkIfLogged
+     _toAccountPage(context);
+
+    }//if
+  }//_checkIfLogged
+
 
   Future<String> _loginUser(LoginData data) async {
     const String email = 'admin@admin.com';
@@ -142,13 +144,15 @@ class _LoginPageState extends State<LoginPage> {
       onLogin: _loginUser,
       onSignup: _signUpUser,
       onRecoverPassword: _recoverPassword,
-      onSubmitAnimationCompleted: () async {
-        _toMainNavigator(context);
+
+      onSubmitAnimationCompleted: () async{
+    _toAccountPage(context);
+
       },
     );
   } // build
 
-  void _toMainNavigator(BuildContext context, {bool firstDatabaseEntry = true}) {
+  void _toAccountPage(BuildContext context, {bool firstDatabaseEntry = true}) {
     Navigator.of(context).pushReplacement(MaterialPageRoute(
         builder: (context) => MainNavigator(firstDatabaseEntry: firstDatabaseEntry, flag: true)));
   } //_toHomePage
