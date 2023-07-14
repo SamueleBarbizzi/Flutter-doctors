@@ -3,16 +3,20 @@ import 'package:flutter/material.dart';
 import 'package:vector_math/vector_math.dart';
 
 class ScoreCircularProgress extends CustomPainter {
-  const ScoreCircularProgress(
+  ScoreCircularProgress(
       {required this.backColor,
       required this.frontColor,
       required this.strokeWidth,
       required this.value});
   final Color backColor, frontColor;
-  final double strokeWidth, value;
+  final double strokeWidth;
+  double value;
 
   @override
   void paint(Canvas canvas, Size size) {
+
+    if (value > 1){value = 1;}
+
     final w = size.width, h = size.height;
     final paint1 = Paint()
       ..strokeWidth = strokeWidth

@@ -212,7 +212,7 @@ class _HomePageState extends State<HomePage> {
                                                   frontColor: Colors.lightGreen,
                                                   strokeWidth: 20,
                                                   value:
-                                                      (actualCalories/remain).toDouble(), // da mettere valori
+                                                      (actualCalories/baseTarget).toDouble(), // da mettere valori
                                                 ),
                                                 child: Center(
                                                     child: Padding(
@@ -588,6 +588,7 @@ class _HomePageState extends State<HomePage> {
                                                                     quantityController
                                                                         .text));
                                                         setState(() {});
+                                                        actualCalories = Provider.of<MealChoiche>(context, listen: false).getAllCalories();
                                                         nameController.clear();
                                                         quantityController
                                                             .clear();
