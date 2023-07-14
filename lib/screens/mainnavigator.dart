@@ -70,7 +70,7 @@ class _MainNavigatorState extends State<MainNavigator> {
   Widget build(BuildContext context) {
     final List<Widget> _screens = [
       HomePage(firstDatabaseEntry: widget.firstDatabaseEntry),
-      VisualEditRecipe(),
+      VisualEditRecipe(firstDatabaseEntry: widget.firstDatabaseEntry),
       AccountPage(),
     ];
     print('${MainNavigator.routename} built');

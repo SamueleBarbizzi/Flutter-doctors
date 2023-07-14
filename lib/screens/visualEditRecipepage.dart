@@ -2,19 +2,20 @@
 
 import 'package:flutter/material.dart';
 //import 'package:material_design_icons_flutter/material_design_icons_flutter.dart';
-//import 'package:flutter_doctors/screens/mainnavigator.dart';
+import 'package:flutter_doctors/screens/mainnavigator.dart';
 import 'package:flutter_doctors/models/mealchoice.dart';
-//import 'package:flutter_doctors/models/personalmeals.dart';
+import 'package:flutter_doctors/models/personalmeals.dart';
 //import 'package:flutter_doctors/models/groups.dart';
 import 'package:provider/provider.dart';
-import 'package:flutter_doctors/screens/cookbookpage.dart';
+//import 'package:flutter_doctors/screens/cookbookpage.dart';
 import 'package:flutter_doctors/screens/recipepage.dart';
 
 
 class VisualEditRecipe extends StatefulWidget {
-  const VisualEditRecipe({Key? key}) : super(key: key);
+  const VisualEditRecipe({Key? key, required this.firstDatabaseEntry}) : super(key: key);
   //final Map recipe;
   //final String dish;
+  final bool firstDatabaseEntry;
 
   static const routename = 'visualEditRecipePage';
 
@@ -26,20 +27,23 @@ class _VisualEditRecipeState extends State<VisualEditRecipe> {
 
   late Map chosen= Provider.of<MealChoiche>(context, listen: false).chosen;
   late Map personal=Provider.of<MealChoiche>(context, listen: false).personalRecipes;
-  final List<String> groupsName = [
+  late List snacks=Provider.of<PersonalMeals>(context, listen: false).snacks;
+
+/*   final List<String> groupsName = [
     'FIRST MAIN DISH',
     'SECOND MAIN DISH',
     'SIDE',
     'DESSERT',
-  ];
+  ]; */
 
   @override
   Widget build(BuildContext context) {
     print('${VisualEditRecipe.routename} built');
   
-    List<Widget> mywidgets = [];
+    List<Widget> widgetMeals = [];
     Map chosen= Provider.of<MealChoiche>(context, listen: false).chosen;
     Map personal=Provider.of<MealChoiche>(context, listen: false).personalRecipes;
+    List snacks=Provider.of<PersonalMeals>(context, listen: false).snacks;
 
     for (var k in ['BREAKFAST','LUNCH','DINNER']) { 
       List recipe = chosen[k].values.toList();
@@ -54,7 +58,7 @@ class _VisualEditRecipeState extends State<VisualEditRecipe> {
         isEmptyPersonal.add(recipePersonal[i].isNotEmpty); 
         addRecipe.add(recipe[i]);
         addRecipePersonal.add(recipePersonal[i]);
-      };
+      }
       int lenEmpty = isEmpty.where((x) => x == true).length;
       int lenEmptyPersonal = isEmptyPersonal.where((x) => x == true).length;
       List allRecipe = addRecipe.expand((x) => x).toList();
@@ -62,10 +66,9 @@ class _VisualEditRecipeState extends State<VisualEditRecipe> {
       int lenRecipe=allRecipe.length;
       int lenRecipePersonal=allRecipePersonal.length;
       if (lenEmpty+lenEmptyPersonal!=0) {
-        mywidgets.add(
+        widgetMeals.add(
           Container( child: 
             Column( children: [ 
-
               Container( alignment: Alignment.center, 
                 width: double.infinity,
                 padding: EdgeInsets.all(3), 
@@ -87,7 +90,6 @@ class _VisualEditRecipeState extends State<VisualEditRecipe> {
                     fontWeight: FontWeight.bold,
                     fontSize: 22,
                     color: Color.fromARGB(255, 76, 175, 80)),
-                    
                 ),
               ),
               ListView.builder(
@@ -144,23 +146,79 @@ class _VisualEditRecipeState extends State<VisualEditRecipe> {
           ),
         );
       }
-    }  
-        return Scaffold(
-          appBar: AppBar(
-            title: Row(children: [
-              const Text(VisualEditRecipe.routename, 
-              style: const TextStyle(fontWeight: FontWeight.bold))]),
-            centerTitle: true,
-            leading: BackButton(
-              onPressed: (){} //=> Navigator.of(context).pushReplacement(MaterialPageRoute(builder: (context) => const MainNavigator())),
-            ),),
-          body: SingleChildScrollView(
-            child: Column(
-              mainAxisSize: MainAxisSize.min,
-              children: mywidgets
-          ),
-          ),
-        );
+    }
+
+
+    int lenSnacks=snacks.length;
+    if (lenSnacks!=0) {
+      widgetMeals.add(
+        Container( child: 
+          Column( children: [ 
+            Container( alignment: Alignment.center, 
+              width: double.infinity,
+              padding: EdgeInsets.all(3), 
+              margin: EdgeInsets.all(5),
+              decoration: BoxDecoration(
+                color: Colors.white,
+                border: Border.all(
+                    color: Colors.grey.shade400, width: 1.0),
+                borderRadius: BorderRadius.circular(10),
+                boxShadow: [ BoxShadow(
+                  color: Colors.grey.shade700,
+                  blurRadius: 6,
+                  spreadRadius: 2,
+                  offset: const Offset(-4, -4),
+                )],
+              ),
+              child: Text( 'SNACK',
+                style: TextStyle(
+                  fontWeight: FontWeight.bold,
+                  fontSize: 22,
+                  color: Color.fromARGB(255, 76, 175, 80)),
+              ),
+            ),
+            ListView.builder(
+              physics: const NeverScrollableScrollPhysics(),
+              shrinkWrap: true,
+              itemCount: lenSnacks,
+              itemBuilder: (BuildContext context, index) { 
+                return Card(
+                  key: ValueKey(snacks[index]['name']),
+                  margin: const EdgeInsets.fromLTRB(5,1,5,1),
+                  shape: RoundedRectangleBorder(
+                    borderRadius: BorderRadius.circular(10)),
+                  child: ListTile(
+                    title: Text(snacks[index]['name']),
+                    subtitle: Text('     ${snacks[index]['calories']} kcals'),
+                  ),
+                );
+              },
+            ),
+            const SizedBox(height: 20,)
+          ],),
+        ),
+      );
+    }
+
+
+    return Scaffold(
+      appBar: AppBar(
+        title: Row(children: [
+          const Text(VisualEditRecipe.routename, 
+            style: const TextStyle(fontWeight: FontWeight.bold))]),
+        centerTitle: true,
+        leading: BackButton(
+          onPressed: () => _toMainNavigator(context),
+        ),
+      ),
+      body: SingleChildScrollView(
+        child: Column(
+          mainAxisSize: MainAxisSize.min,
+          children: widgetMeals
+        ),
+      ),
+    );
+
   }
 
   void _showRecipe(BuildContext context, String dish, Map recipe) {
@@ -170,6 +228,13 @@ class _VisualEditRecipeState extends State<VisualEditRecipe> {
               dish: dish,
             )));
   }
+
+  void _toMainNavigator(BuildContext context) {
+    Navigator.of(context).pushReplacement(MaterialPageRoute(
+        builder: (context) => MainNavigator(
+            firstDatabaseEntry: widget.firstDatabaseEntry, flag: false
+            )));
+  } //_toMainNavigator
 
 }
 
