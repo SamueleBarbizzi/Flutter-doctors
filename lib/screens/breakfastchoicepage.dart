@@ -292,7 +292,7 @@ class _BreakfastChoicePageState extends State<BreakfastChoicePage> {
                                   tooltip: 'Show Recipe',
                                   onPressed: () => _showRecipe(
                                       context,
-                                      'BREAKFAST_breakfast',
+                                      'Breakfast',
                                       recipes[index]),
                                 ),
                       ),

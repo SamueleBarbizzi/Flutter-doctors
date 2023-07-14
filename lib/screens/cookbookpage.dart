@@ -424,7 +424,7 @@ class _CookBookPageState extends State<CookBookPage> {
                                   tooltip: 'Show Recipe',
                                   onPressed: () => _showRecipe(
                                       context,
-                                      '${widget.meal.toUpperCase()}_${groupsName[0].toLowerCase()}',
+                                      groupsName[0][0].toUpperCase() + groupsName[0].substring(1).toLowerCase(),
                                       possibleRecipes[0][index]),
                                 ),
                               ));
@@ -708,7 +708,7 @@ class _CookBookPageState extends State<CookBookPage> {
                                   tooltip: 'Show Recipe',
                                   onPressed: () => _showRecipe(
                                       context,
-                                      '${widget.meal.toUpperCase()}_${groupsName[1].toLowerCase()}',
+                                      groupsName[1][0].toUpperCase() + groupsName[1].substring(1).toLowerCase(),
                                       possibleRecipes[1][index]),
                                 ),
                               ));
@@ -984,7 +984,7 @@ class _CookBookPageState extends State<CookBookPage> {
                                   tooltip: 'Show Recipe',
                                   onPressed: () => _showRecipe(
                                       context,
-                                      '${widget.meal.toUpperCase()}_${groupsName[2].toLowerCase()}',
+                                      groupsName[2][0].toUpperCase() + groupsName[2].substring(1).toLowerCase(),
                                       possibleRecipes[2][index]),
                                 ),
                                 /*
@@ -1263,7 +1263,7 @@ class _CookBookPageState extends State<CookBookPage> {
                               tooltip: 'Show Recipe',
                               onPressed: () => _showRecipe(
                                   context,
-                                  '${widget.meal.toUpperCase()}_${groupsName[3].toLowerCase()}',
+                                  groupsName[3][0].toUpperCase() + groupsName[3].substring(1).toLowerCase(),
                                   possibleRecipes[3][index]),
                             ),
                           ));

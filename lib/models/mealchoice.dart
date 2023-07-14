@@ -167,9 +167,6 @@ class MealChoiche extends ChangeNotifier {
         'side': {},
         'dessert': {},
       },
-      'SNACK': {
-        'snack': <dynamic>{},
-      }
     };
 
     notifyListeners();
@@ -212,4 +209,20 @@ class MealChoiche extends ChangeNotifier {
     }
     return totalCalories.toInt();
   }
+
+    int getAllSnackCalories() {
+    num totalCalories = 0;
+    
+    for (Map element in snacks){
+      totalCalories += element['calories'];
+    }
+
+      if (kDebugMode) {
+        print('total calories: $totalCalories');
+      }
+    return totalCalories.toInt();
+  }
+
+
+
 } //MealChoice
