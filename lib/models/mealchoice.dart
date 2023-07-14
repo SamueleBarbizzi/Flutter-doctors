@@ -93,16 +93,31 @@ class MealChoiche extends ChangeNotifier {
   }
 
   void findAndRemovePersonalRecipe(String name) {
-    for (String meal in ['BREAKFAST','LUNCH','DINNER']) {
+    loop:
+    for (String meal in ['BREAKFAST', 'LUNCH', 'DINNER']) {
       for (String course in personalRecipes[meal].keys) {
-        bool isPresent = personalRecipes[meal][course]
-            .where((element) => element['name'] == name).isNotEmpty;
-        if (isPresent){
-          personalRecipes[meal][course].remove(personalRecipes[meal][course]
-            .where((element) => element['name'] == name));
-          break;
+        List temp = personalRecipes[meal][course].toList();
+        int ind = temp.indexWhere((element) => element['name'] == name);
+        if (ind != -1) {
+          Map item = personalRecipes[meal][course].elementAt(ind);
+          personalRecipes[meal][course].remove(item);
+          break loop;
         }
-        else{continue;}
+      }
+    }
+
+    void findAndRemoveChosenRecipe(String name) {
+      loop:
+      for (String meal in ['BREAKFAST', 'LUNCH', 'DINNER']) {
+        for (String course in chosen[meal].keys) {
+          List temp = chosen[meal][course].toList();
+          int ind = temp.indexWhere((element) => element['name'] == name);
+          if (ind != -1) {
+            Map item = chosen[meal][course].elementAt(ind);
+            chosen[meal][course].remove(item);
+            break loop;
+          }
+        }
       }
     }
 

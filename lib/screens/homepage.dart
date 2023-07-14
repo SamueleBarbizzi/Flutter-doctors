@@ -65,9 +65,11 @@ class _HomePageState extends State<HomePage> {
     SharedPreferences sp = await SharedPreferences.getInstance();
     if (widget.firstDatabaseEntry == true &&
         sp.getInt('selectedIndex') == null) {
+          if (mounted){
       setState(() {
         i = dataLength - 1;
       });
+          }
     }
   }
 
