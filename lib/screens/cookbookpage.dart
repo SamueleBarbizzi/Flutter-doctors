@@ -1437,6 +1437,7 @@ class _CookBookPageState extends State<CookBookPage> {
     );
   } //build
 
+
   void _toMainNavigator(BuildContext context) {
     Navigator.of(context).pushReplacement(MaterialPageRoute(
         builder: (context) => MainNavigator(
@@ -1445,11 +1446,7 @@ class _CookBookPageState extends State<CookBookPage> {
             )));
   } //_toMainNavigator
 
-  void _Done(BuildContext context) {
-    
-
-    _toMainNavigator(context);
-  } //_Done
+  void _Done(BuildContext context) {_toMainNavigator(context);} //_Done
 
   void _showRecipe(BuildContext context, String dish, Map recipe) {
     Navigator.of(context).push(MaterialPageRoute(

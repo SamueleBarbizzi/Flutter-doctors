@@ -9,12 +9,10 @@ class DatabaseCall {
     for (int k = 0; k < arraySumCalories.length; k++) {
       if (firstDatabaseEntry == true) {
         await Provider.of<DatabaseProvider>(context, listen: false)
-            .insertCalories(CaloriesEntity(
-                null, arraySumCalories[k][0], arraySumCalories[k][1]));
+            .insertCalories(CaloriesEntity(k, arraySumCalories[k][0], arraySumCalories[k][1]));
       } else {
         await Provider.of<DatabaseProvider>(context, listen: false)
-            .updateCalories(CaloriesEntity(
-                null, arraySumCalories[k][0], arraySumCalories[k][1]));
+            .updateCalories(CaloriesEntity(k, arraySumCalories[k][0], arraySumCalories[k][1]));
       }
     }
   }

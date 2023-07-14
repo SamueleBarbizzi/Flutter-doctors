@@ -289,7 +289,7 @@ packages:
     source: sdk
     version: "0.0.0"
   font_awesome_flutter:
-    dependency: transitive
+    dependency: "direct main"
     description:
       name: font_awesome_flutter
       sha256: "5fb789145cae1f4c3245c58b3f8fb287d055c26323879eab57a7bf0cfd1e45f3"
@@ -749,6 +749,22 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "0.2.2"
+  syncfusion_flutter_charts:
+    dependency: "direct main"
+    description:
+      name: syncfusion_flutter_charts
+      sha256: d0e89b194c6b3dcfe674128a6ad66ca1f5ca858a4e58cffb2e14246f815aaaf7
+      url: "https://pub.dev"
+    source: hosted
+    version: "22.1.38"
+  syncfusion_flutter_core:
+    dependency: transitive
+    description:
+      name: syncfusion_flutter_core
+      sha256: a38808b2636bafc6466079668232eb228b85aa7c3d83545a15cc3b593d40b315
+      url: "https://pub.dev"
+    source: hosted
+    version: "22.1.38"
   synchronized:
     dependency: transitive
     description:

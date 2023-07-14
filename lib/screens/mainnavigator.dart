@@ -15,8 +15,7 @@ import 'package:flutter_doctors/screens/visualEditRecipepage.dart';
 class MainNavigator extends StatefulWidget {
   final bool firstDatabaseEntry;
   final bool flag;
-  const MainNavigator(
-      {super.key, required this.firstDatabaseEntry, required this.flag});
+  const MainNavigator({super.key, required this.firstDatabaseEntry, required this.flag});
 
   static const routename = 'MainNavigator';
 
@@ -25,6 +24,7 @@ class MainNavigator extends StatefulWidget {
 }
 
 class _MainNavigatorState extends State<MainNavigator> {
+
   @override
   void initState() {
     super.initState();
@@ -72,7 +72,8 @@ class _MainNavigatorState extends State<MainNavigator> {
       HomePage(firstDatabaseEntry: widget.firstDatabaseEntry),
       // ignore: prefer_const_constructors
       VisualEditRecipe(),
-      AccountPage(),
+      AccountPage(firstDatabaseEntry: widget.firstDatabaseEntry, flag: false),
+
     ];
     print('${MainNavigator.routename} built');
     return SafeArea(

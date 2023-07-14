@@ -16,6 +16,7 @@ import 'package:shared_preferences/shared_preferences.dart';
 import 'package:flutter_doctors/database/entities/caloriesentity.dart';
 import 'package:flutter_doctors/provider/databaseprovider.dart';
 import 'package:flutter_doctors/screens/recipepage.dart';
+import 'package:syncfusion_flutter_charts/charts.dart';
 
 class HomePage extends StatefulWidget {
   final bool firstDatabaseEntry;
@@ -28,7 +29,11 @@ class HomePage extends StatefulWidget {
 }
 
 class _HomePageState extends State<HomePage> {
+
   int i = 0;
+  int largestValueIndex = 0;
+  List<CaloriesEntity> fetchedData = [];
+  List<ChartsData> chartData = [];
 
   TextEditingController nameController = TextEditingController();
   TextEditingController quantityController = TextEditingController();
@@ -52,7 +57,6 @@ class _HomePageState extends State<HomePage> {
     i = sp.getInt('selectedIndex') ?? 0;
   }
 
-  List<CaloriesEntity> fetchedData = [];
 
   Future<List<CaloriesEntity>> _fetchData() async {
     List<CaloriesEntity> fetchedData =
@@ -93,7 +97,6 @@ class _HomePageState extends State<HomePage> {
     });
   }
 
-
   @override
   Widget build(BuildContext context) {
     print('${HomePage.routename} built');
@@ -130,6 +133,21 @@ class _HomePageState extends State<HomePage> {
                   int dataLength = data.length;
                   firstIndex(dataLength);
                   final DateFormat italyDateFormat = DateFormat("dd-MM-yyyy");
+                  chartData = []; 
+      for (int t = 0; t < data.length; t++) {
+        String date = italyDateFormat.format(data[t].dateTime);
+        int sumCalories = data[t].sumCalories.round();
+        chartData.add(ChartsData(date, sumCalories));
+      }
+
+      int largestValue = data[0].sumCalories.round();
+
+  for (int t = 1; t < data.length; t++) {
+    if (data[t].sumCalories.round() > largestValue) {
+      largestValue = data[t].sumCalories.round();
+      largestValueIndex = t;
+    }
+  }
                   String date = italyDateFormat.format(data[i].dateTime);
                   int sumCalories = data[i].sumCalories.round();
                   return Column(
@@ -137,7 +155,7 @@ class _HomePageState extends State<HomePage> {
                       Row(
                           mainAxisAlignment: MainAxisAlignment.center,
                           children: [
-                            const SizedBox(height: 5),
+                            // const SizedBox(height: 5),
                             IconButton(
                               color: const Color.fromARGB(255, 14, 75, 16),
                               splashColor: Colors.transparent,
@@ -155,6 +173,41 @@ class _HomePageState extends State<HomePage> {
                             ),
                           ],
                         ),
+                      Center(
+                        child: TextButton(
+                          onPressed: () {
+                            showDataAlert(chartData);
+                          },
+                          style: ButtonStyle(
+                              splashFactory: NoSplash.splashFactory,
+                              shape: MaterialStateProperty.all<
+                                  RoundedRectangleBorder>(
+                                RoundedRectangleBorder(
+                                  borderRadius: BorderRadius.circular(50.0),
+                                ),
+                              ),
+                              backgroundColor:
+                                  MaterialStateProperty.resolveWith<Color>(
+                                      (Set<MaterialState> states) {
+                                if (states.contains(MaterialState.pressed)) {
+                                  return Colors.green;
+                                }
+                                return Color.fromARGB(255, 14, 75, 16);
+                              }),
+                              overlayColor: MaterialStatePropertyAll<Color>(
+                                  Color.fromARGB(255, 14, 75, 16)),
+                              elevation: MaterialStatePropertyAll(8.0)),
+                          child: Text(
+                            'Weekly Analytics',
+                            style: TextStyle(
+                              fontFamily: "Lato",
+                              fontSize: 12,
+                              fontWeight: FontWeight.bold,
+                              color: Colors.white,
+                            ),
+                          ),
+                        ),
+                      ),
                           Align(
                             alignment: Alignment.center,
                             child: Container(
@@ -232,12 +285,7 @@ class _HomePageState extends State<HomePage> {
                                                                   FontWeight
                                                                       .bold,
                                                               fontSize: 26,
-                                                              color: Color
-                                                                  .fromARGB(
-                                                                      255,
-                                                                      76,
-                                                                      175,
-                                                                      80)),
+                                                              color: Color.fromARGB(255, 76, 175, 80)),
                                                         ),
                                                         const Text(
                                                           'Remaining',
@@ -254,9 +302,12 @@ class _HomePageState extends State<HomePage> {
                                             child: SizedBox(
                                               width: 150,
                                               height: 150,
-                                              child: Column(
-                                                crossAxisAlignment:
-                                                    CrossAxisAlignment.end,
+                                          child: Column(
+                                            crossAxisAlignment:
+                                                CrossAxisAlignment.end,
+                                            children: [
+                                              const SizedBox(height: 20),
+                                              Row(
                                                 children: [
                                                   const SizedBox(height: 20),
                                                   Row(
@@ -281,7 +332,7 @@ class _HomePageState extends State<HomePage> {
                                                                   255,
                                                                   76,
                                                                   175,
-                                                                  80))), // inserire dati aggiornati
+                                                                  80))),
                                                     ],
                                                   ),
                                                   Row(
@@ -328,21 +379,20 @@ class _HomePageState extends State<HomePage> {
                                                                   255,
                                                                   76,
                                                                   175,
-                                                                  80))), // inserire dati aggiornati
+                                                                  80))),
                                                     ],
                                                   ),
-                                                ],
-                                              ),
-                                            ),
+                                            ],
                                           ),
-                                        ],
+                                        ),
                                       ),
-                                    ),
+                                    ],
                                   ),
-                                ],
+                                ),
                               ),
+                             ],
                             ),
-                          ),
+
                           const SizedBox(height: 15),
                           Container(
                             height: 330, width: 350,
@@ -391,11 +441,6 @@ class _HomePageState extends State<HomePage> {
                                     ]),
                                 label: const Text('Breakfast'),
                                 onPressed: () {
-                                  //If you eat three meals a day, you should consume:
-                                  //30-35% of daily calories for breakfast. <---
-                                  //35-40% of daily calories for lunch.
-                                  //25-35% of daily calories for dinner.
-                                  // int breakfastCalories = sumCalories*(0.3).round();
                                   _toBreakfastChoicePage(context, baseTarget);
                                 },
                                 style: ElevatedButton.styleFrom(
@@ -431,11 +476,6 @@ class _HomePageState extends State<HomePage> {
                                     ]),
                                 label: const Text('Lunch'),
                                 onPressed: () {
-                                  //If you eat three meals a day, you should consume:
-                                  //30-35% of daily calories for breakfast.
-                                  //35-40% of daily calories for lunch.--- 
-                                  //25-35% of daily calories for dinner.
-                                  //int lunchCalories = sumCalories*0.4.round();
                                   String mealName = 'LUNCH';
                                     _toIngredientsPage(context, mealName, baseTarget);
                                 },
@@ -471,11 +511,6 @@ class _HomePageState extends State<HomePage> {
                                     ]),
                                 label: const Text('Dinner'),
                                 onPressed: () {
-                                  //If you eat three meals a day, you should consume:
-                                  //30-35% of daily calories for breakfast.
-                                  //35-40% of daily calories for lunch.
-                                  //25-35% of daily calories for dinner. <---
-                                  //int dinnerCalories = sumCalories*0.3.round();
                                   String mealName = 'DINNER';
                                   _toIngredientsPage(context, mealName, baseTarget);
                                 },
@@ -632,12 +667,12 @@ class _HomePageState extends State<HomePage> {
                                     side: const BorderSide(
                                         color: Color.fromARGB(255, 14, 75, 16),
                                         width: 2.5)),
-                              ),
-                            ],
-                          ),
-                        ],
+                                ),
+                              ],
+                            ),
+                          ],
+                        ),
                       ),
-                          ),
                     ],
                   );
                 } else {
@@ -649,17 +684,54 @@ class _HomePageState extends State<HomePage> {
         }),
       ),
     );
-
-    /*body: Center(
-          child:
-            ElevatedButton(
-              onPressed: () => _toIngredientsPage(context),
-              child: const Text('Ingredients')
-          ),
-        ),
-      
-    );*/
   } //build
+
+  void showDataAlert(List<ChartsData> chartData) {
+  showDialog(
+      context: context,
+      builder: (BuildContext context) {
+        return Dialog(
+          shape: RoundedRectangleBorder(
+            borderRadius: BorderRadius.all(
+              Radius.circular(
+                20.0,
+              ),
+            ),
+          ),
+          child: SizedBox(
+            height: 400.0,
+            child: Container(
+                          child: SfCartesianChart(
+                            onDataLabelRender: (DataLabelRenderArgs args) {
+                            //LineSeries<ChartsData, String> series = args.seriesRenderer;
+                     if(args.pointIndex == largestValueIndex) {
+                      args.color = Color(0xFF912F40);
+                      args.textStyle = TextStyle(color: Colors.white);
+                    }
+                            },
+                            title: ChartTitle(
+                              text: 'Weekly Calories View',
+                              textStyle: TextStyle(
+                      color: Color(0xFFE09F3E),
+                      fontFamily: 'Roboto',
+                      fontWeight: FontWeight.bold,
+                      fontSize: 14,
+                    )
+                            ),
+                            primaryXAxis: CategoryAxis(
+                              isVisible: false,
+                            ),
+                            primaryYAxis: NumericAxis(
+                              // rangePadding: ChartRangePadding.round,
+                            ),
+                            tooltipBehavior: TooltipBehavior(enable: true, header: "Calories"),
+                            series: <LineSeries<ChartsData, String>>[LineSeries<ChartsData, String>(color: Color(0xFFE09F3E), dataSource: chartData, xValueMapper: (ChartsData chart, _) => chart.dataTotalCalories, yValueMapper: (ChartsData chart, _) => chart.totalCalories, dataLabelSettings: DataLabelSettings(isVisible: true, textStyle: TextStyle(color: Colors.black)), markerSettings: MarkerSettings(isVisible: true, shape: DataMarkerType.circle, color: Color(0xFFE09F3E)))],
+                          ),
+                      ),
+          ),
+        );
+      });
+}
 
   void _toInfoPage(BuildContext context) {
     //Then pop the HomePage
@@ -679,4 +751,10 @@ class _HomePageState extends State<HomePage> {
         builder: (context) => BreakfastChoicePage(firstDatabaseEntry: widget.firstDatabaseEntry, sumCalories: calories,)));
   } //_toCookbookPage
 
-} //HomePage                  */
+} //HomePage
+
+class ChartsData {
+  ChartsData(this.dataTotalCalories, this.totalCalories);
+  String dataTotalCalories; 
+  int totalCalories; 
+}
