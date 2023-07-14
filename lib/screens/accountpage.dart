@@ -4,12 +4,19 @@ import 'package:flutter/material.dart';
 import 'package:flutter_doctors/screens/loginpage.dart';
 import 'package:flutter_doctors/screens/infopage.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+import 'package:flutter_doctors/services/databasecall.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:flutter_doctors/screens/mainnavigator.dart';
 
 class AccountPage extends StatefulWidget {
-  AccountPage({Key? key}) : super(key: key);
+  AccountPage({Key? key,
+              required this.flag,
+               required this.firstDatabaseEntry,
+              }) : super(key: key);
 
+  final bool firstDatabaseEntry;
+  final bool flag;
+  
   static const routename = 'Accountpage';
 
   @override
@@ -17,10 +24,9 @@ class AccountPage extends StatefulWidget {
 }
 
 class _AccountPageState extends State<AccountPage> {
-  
   bool isObscurePassword =true;
   bool consentChecked = false;
-  
+
 
   final TextEditingController _fullNameController = TextEditingController();
   final TextEditingController _emailController = TextEditingController();
@@ -32,6 +38,7 @@ class _AccountPageState extends State<AccountPage> {
   final TextEditingController _foodIntoleranceController = TextEditingController();
   final TextEditingController  _dailycalorieintakeController = TextEditingController();
   final TextEditingController  _consentController = TextEditingController(text: 'false');
+
 
   @override
   void initState() {
@@ -53,7 +60,6 @@ class _AccountPageState extends State<AccountPage> {
       _dailycalorieintakeController.text = prefs.getString('dailycalorieintake') ?? '';
       _consentController.text = prefs.getString('consent') ?? 'false';      
       consentChecked = prefs.getBool('consentChecked') ?? false;
-
     });
   }
 
@@ -114,65 +120,108 @@ bool _isFormValid() {
           IconButton(
             icon: const Icon(Icons.info),
             tooltip: 'Info',
-            onPressed: () => _toInfoPage(context), //THIS HAS A BUG
+            onPressed: () => _toInfoPage(context),
           ),
         ],
       ),
-
       body: Container(
-        padding: const EdgeInsets.only(left: 15, top: 20, right: 15),
-        child: GestureDetector(
-          onTap: (){
-            FocusScope.of(context).unfocus();
-          },
-        child: ListView(
-          children: [
-            Center(
-              child: Stack(
+          padding: const EdgeInsets.only(left: 15, top: 20, right: 15),
+          child: GestureDetector(
+              onTap: () {
+                FocusScope.of(context).unfocus();
+              },
+              child: ListView(
                 children: [
-                  Container(
-                    width: 130,
-                    height: 130,
-                    decoration: BoxDecoration(
-                      border: Border.all(width: 4, color: Colors.white),
-                      boxShadow: [
-                        BoxShadow(
-                          spreadRadius: 2,
-                          blurRadius: 10,
-                          color: Colors.black.withOpacity(0.1)
-                        )
+                  Center(
+                    child: Stack(
+                      children: [
+                        Container(
+                            width: 130,
+                            height: 130,
+                            decoration: BoxDecoration(
+                                border:
+                                    Border.all(width: 4, color: Colors.white),
+                                boxShadow: [
+                                  BoxShadow(
+                                      spreadRadius: 2,
+                                      blurRadius: 10,
+                                      color: Colors.black.withOpacity(0.1))
+                                ],
+                                shape: BoxShape.circle,
+                                image: const DecorationImage(
+                                  fit: BoxFit.cover,
+                                  image: AssetImage('assets/images/apples.jpg'),
+                                ))),
+                        Positioned(
+                          bottom: 0,
+                          right: 0,
+                          child: Container(
+                            height: 40,
+                            width: 40,
+                            decoration: BoxDecoration(
+                                shape: BoxShape.circle,
+                                border:
+                                    Border.all(width: 4, color: Colors.white),
+                                color: Colors.green),
+                            child: const Icon(
+                              Icons.edit,
+                              color: Colors.white,
+                            ),
+                          ),
+                        ),
                       ],
-                      shape: BoxShape.circle,
-                      image: const DecorationImage(
-                        fit: BoxFit.cover,
-                        image: AssetImage('assets/images/apples.jpg'),
-                      )
-
-                    )
+                    ),
                   ),
-
-                  Positioned(
-                    bottom: 0,
-                    right: 0, 
-                   child: Container(
-                     height: 40,
-                     width: 40,
-                     decoration: BoxDecoration(
-                      shape: BoxShape.circle,
-                      border: Border.all(
-                        width: 4,
-                        color: Colors.white
+                  const SizedBox(height: 30),
+                  buildTextField('Full Name', 'Enter your full name', false,
+                      _fullNameController),
+                  buildTextField(
+                      'Email', 'Enter your email', false, _emailController),
+                  buildTextField('Password', 'Enter your password', true,
+                      _passwordController),
+                  buildTextField(
+                      'Gender', 'Enter your gender', false, _genderController),
+                  buildTextField(
+                      'Age', 'Enter your age', false, _ageController),
+                  buildTextField(
+                      'Improvement goal',
+                      'Enter your improvement goal',
+                      false,
+                      _improvementGoalController),
+                  buildTextField(
+                      'Daily calorie intake',
+                      'Enter your daily calorie intake',
+                      false,
+                      _dailycalorieintakeController),
+                  buildTextField(
+                      'Food intolerances/allergy',
+                      'Enter your food intolerances/allergy',
+                      false,
+                      _foodIntoleranceController),
+                  const Center(
+                    child: SizedBox(
+                      height: 20,
+                    ),
+                  ),
+                  Center(
+                    child: ElevatedButton(
+                      onPressed: () {
+                        saveUserData();
+                      },
+                      style: ElevatedButton.styleFrom(
+                          backgroundColor: Colors.green,
+                          padding: const EdgeInsets.symmetric(horizontal: 80),
+                          shape: RoundedRectangleBorder(
+                              borderRadius: BorderRadius.circular(20))),
+                      child: const Text(
+                        "SAVE",
+                        style: TextStyle(
+                            fontSize: 15,
+                            letterSpacing: 2,
+                            color: Colors.white),
                       ),
-                      color: Colors.green
-                     ),
-
-                    child: const Icon(
-                      Icons.edit,
-                      color: Colors.white,
-                     ),
-                  
                     ),
-                    ),
+                  )
                 ],
               ),
             ),
@@ -343,51 +392,56 @@ drawer: Drawer(
   } else {  
      return Padding(
       padding: const EdgeInsets.only(bottom: 30),
-      child:    TextField( 
-      controller: controller, 
-      obscureText: isPasswordtextField ? isObscurePassword : false,
-      decoration: InputDecoration(
-      suffixIcon: isPasswordtextField ?  
-        IconButton(
-          icon: const Icon( Icons.remove_red_eye, color: Colors.grey),
-            onPressed: () {
-              setState((){
-                isObscurePassword = !isObscurePassword;
-              });
-            }      
-        ): null, 
-      contentPadding: const EdgeInsets.only(bottom: 5),
-      labelText: labelText,
-      floatingLabelBehavior: FloatingLabelBehavior.always,
-      hintText: placeholder,
-      hintStyle: const TextStyle(
-        fontSize: 16,
-        fontWeight: FontWeight.bold,
-        color: Colors.grey
-      )
-
-      )
-    ),
+      child: TextField(
+          controller: controller,
+          obscureText: isPasswordtextField ? isObscurePassword : false,
+          decoration: InputDecoration(
+              suffixIcon: isPasswordtextField
+                  ? IconButton(
+                      icon:
+                          const Icon(Icons.remove_red_eye, color: Colors.grey),
+                      onPressed: () {
+                        setState(() {
+                          isObscurePassword = !isObscurePassword;
+                        });
+                      })
+                  : null,
+              contentPadding: const EdgeInsets.only(bottom: 5),
+              labelText: labelText,
+              floatingLabelBehavior: FloatingLabelBehavior.always,
+              hintText: placeholder,
+              hintStyle: const TextStyle(
+                  fontSize: 16,
+                  fontWeight: FontWeight.bold,
+                  color: Colors.grey))),
     );
   }
   }
 
   void _toMainNavigator(BuildContext context) {
-  Navigator.of(context).pushReplacement(MaterialPageRoute(builder: (context) => MainNavigator()));
+  Navigator.of(context).pushReplacement(MaterialPageRoute(builder: (context) => MainNavigator(firstDatabaseEntry: widget.firstDatabaseEntry, flag: widget.flag)));
 }  
 
-void _toLoginPage(BuildContext context) async{
-    //Unset the 'username' filed in SharedPreference 
-    final sp = await SharedPreferences.getInstance();
-    sp.remove('username'); 
+
+  void _toLoginPage(BuildContext context) async {
+    await DatabaseCall.deleteAll(context);
+    SharedPreferences sp = await SharedPreferences.getInstance();
+    await sp.remove('username');
+    await sp.remove('access');
+    await sp.remove('refresh');
+    await sp.remove('selectedIndex');
     
-    //Pop the drawer first 
+    //Pop the drawer first
     Navigator.pop(context);
     //Then pop the HomePage
-    Navigator.of(context).pushReplacement(MaterialPageRoute(builder: (context) => const LoginPage()));
+    Navigator.of(context).pushReplacement(
+        MaterialPageRoute(builder: (context) => const LoginPage()));
   }
+
 //_toLoginPage
-    void _toInfoPage(BuildContext context){
+  void _toInfoPage(BuildContext context) {
     //Then pop the AccountPage
-    Navigator.of(context).push(MaterialPageRoute(builder: (context) => InfoPage()));
-  }} //AccountPage
+    Navigator.of(context)
+        .push(MaterialPageRoute(builder: (context) => InfoPage()));
+  }
+} //AccountPage

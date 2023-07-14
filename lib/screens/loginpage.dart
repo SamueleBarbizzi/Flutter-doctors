@@ -2,11 +2,12 @@
 
 import 'package:flutter/material.dart';
 import 'package:flutter_doctors/screens/accountpage.dart';
+import 'package:flutter_doctors/services/apicall.dart';
 import 'package:flutter_login/flutter_login.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 class LoginPage extends StatefulWidget {
-  const LoginPage({Key? key}) : super(key: key);
+  const LoginPage({super.key});
 
   static const routename = 'LoginPage';
 
@@ -15,18 +16,17 @@ class LoginPage extends StatefulWidget {
 }
 
 class _LoginPageState extends State<LoginPage> {
-
   @override
   void initState() {
     super.initState();
     //Check if the user is already logged
     _checkIfLogged();
-  }//initState
+  } //initState
 
   void _checkIfLogged() async {
     //Get the SharedPreference instance and check if the value of the 'username' filed is set or not
     final sp = await SharedPreferences.getInstance();
-    if(sp.getString('username') != null){
+    if (sp.getString('username') != null) {
       //If 'username' is set, go to MainNavigator
      _toAccountPage(context);
 
@@ -38,18 +38,19 @@ class _LoginPageState extends State<LoginPage> {
     const String email = 'admin@admin.com';
     const String password = 'admin';
 
-    if(data.name == email && data.password == password){
-
-      final sp = await SharedPreferences.getInstance();
-      sp.setString('username', data.name);
+    if (data.name == email && data.password == password) {
+      bool refreshedToken = false;
+      bool apiAuth = await ApiCall.requestTokens(context, refreshedToken);
+      if (apiAuth == true) {
+        final sp = await SharedPreferences.getInstance();
+        sp.setString('username', data.name);
+      }
 
       return '';
-      
     } else {
       return 'Wrong credentials';
     }
   } // _loginUser
-
 
   Future<String> _signUpUser(SignupData data) async {
     return 'Not implemented';
@@ -61,7 +62,6 @@ class _LoginPageState extends State<LoginPage> {
 
   @override
   Widget build(BuildContext context) {
-    
     const inputBorder = BorderRadius.vertical(
       bottom: Radius.circular(10.0),
       top: Radius.circular(20.0),
@@ -69,10 +69,6 @@ class _LoginPageState extends State<LoginPage> {
 
     return FlutterLogin(
       title: 'Welcome!',
-
-
-      //logo: AssetImage('assets/images/ecorp-lightblue.png'),
-
       theme: LoginTheme(
         primaryColor: Colors.green,
         accentColor: Colors.black,
@@ -145,10 +141,10 @@ class _LoginPageState extends State<LoginPage> {
           // shape: ContinuousRectangleBorder(borderRadius: BorderRadius.circular(55.0)),
         ),
       ),
-      
       onLogin: _loginUser,
       onSignup: _signUpUser,
       onRecoverPassword: _recoverPassword,
+
       onSubmitAnimationCompleted: () async{
     _toAccountPage(context);
 
@@ -156,8 +152,8 @@ class _LoginPageState extends State<LoginPage> {
     );
   } // build
 
-  void _toAccountPage(BuildContext context) {
-  Navigator.of(context).pushReplacement(MaterialPageRoute(builder: (context) => AccountPage()));
-}
-
+  void _toAccountPage(BuildContext context, {bool firstDatabaseEntry = true}) {
+    Navigator.of(context).pushReplacement(MaterialPageRoute(
+        builder: (context) => MainNavigator(firstDatabaseEntry: firstDatabaseEntry, flag: true)));
+  } //_toHomePage
 } // LoginScreen
