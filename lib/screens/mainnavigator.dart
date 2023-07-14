@@ -14,8 +14,7 @@ import 'package:shared_preferences/shared_preferences.dart';
 class MainNavigator extends StatefulWidget {
   final bool firstDatabaseEntry;
   final bool flag;
-  const MainNavigator(
-      {super.key, required this.firstDatabaseEntry, required this.flag});
+  const MainNavigator({super.key, required this.firstDatabaseEntry, required this.flag});
 
   static const routename = 'MainNavigator';
 
@@ -71,7 +70,7 @@ class _MainNavigatorState extends State<MainNavigator> {
     final List<Widget> _screens = [
       HomePage(firstDatabaseEntry: widget.firstDatabaseEntry),
       InfoPage(),
-      AccountPage(firstDatabaseEntry: widget.firstDatabaseEntry, flag: widget.flag,),
+      AccountPage(firstDatabaseEntry: widget.firstDatabaseEntry, flag: false),
     ];
     print('${MainNavigator.routename} built');
     return SafeArea(

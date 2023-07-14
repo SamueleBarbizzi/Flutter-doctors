@@ -9,14 +9,10 @@ import 'package:shared_preferences/shared_preferences.dart';
 import 'package:flutter_doctors/screens/mainnavigator.dart';
 
 class AccountPage extends StatefulWidget {
-  AccountPage({Key? key,
-              required this.flag,
-               required this.firstDatabaseEntry,
-              }) : super(key: key);
-
   final bool firstDatabaseEntry;
   final bool flag;
-  
+  const AccountPage({super.key, required this.firstDatabaseEntry, required this.flag});
+
   static const routename = 'Accountpage';
 
   @override
@@ -77,8 +73,11 @@ class _AccountPageState extends State<AccountPage> {
     await prefs.setString('dailycalorieintake', _dailycalorieintakeController.text);
     await prefs.setString('consent', _consentController.text);
     await prefs.setBool('consentChecked', consentChecked);
-
-    _toMainNavigator(context);
+      
+      if(widget.flag == true){
+      _toMainNavigator(context);
+      }
+      
     } else {
 
       ScaffoldMessenger.of(context).showSnackBar(
@@ -365,7 +364,7 @@ drawer: Drawer(
 
   void _toMainNavigator(BuildContext context) {
   Navigator.of(context).pushReplacement(MaterialPageRoute(builder: (context) => MainNavigator(firstDatabaseEntry: widget.firstDatabaseEntry, flag: widget.flag)));
-}  
+  }  
 
 
   void _toLoginPage(BuildContext context) async {

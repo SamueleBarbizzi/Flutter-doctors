@@ -2,6 +2,7 @@
 
 import 'package:flutter/material.dart';
 import 'package:flutter_doctors/screens/accountpage.dart';
+import 'package:flutter_doctors/screens/mainnavigator.dart';
 import 'package:flutter_doctors/services/apicall.dart';
 import 'package:flutter_login/flutter_login.dart';
 import 'package:shared_preferences/shared_preferences.dart';
@@ -28,7 +29,7 @@ class _LoginPageState extends State<LoginPage> {
     final sp = await SharedPreferences.getInstance();
     if (sp.getString('username') != null) {
       //If 'username' is set, go to MainNavigator
-     _toAccountPage(context);
+     _toAccountPage(context, firstDatabaseEntry: false);
 
     }//if
   }//_checkIfLogged
@@ -153,7 +154,11 @@ class _LoginPageState extends State<LoginPage> {
   } // build
 
   void _toAccountPage(BuildContext context, {bool firstDatabaseEntry = true}) {
-    Navigator.of(context).pushReplacement(MaterialPageRoute(
-        builder: (context) => AccountPage(firstDatabaseEntry: firstDatabaseEntry, flag: true)));
+    if(firstDatabaseEntry == true){
+    Navigator.of(context).pushReplacement(MaterialPageRoute(builder: (context) => AccountPage(firstDatabaseEntry: firstDatabaseEntry, flag: true)));
+    }
+    else{
+    Navigator.of(context).pushReplacement(MaterialPageRoute(builder: (context) => MainNavigator(firstDatabaseEntry: firstDatabaseEntry, flag: true)));
+    }
   } //_toHomePage
 } // LoginScreen
