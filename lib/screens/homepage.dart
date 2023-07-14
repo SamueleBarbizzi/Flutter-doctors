@@ -212,7 +212,7 @@ class _HomePageState extends State<HomePage> {
                                                   frontColor: Colors.lightGreen,
                                                   strokeWidth: 20,
                                                   value:
-                                                      (actualCalories/sumCalories).toDouble(), // da mettere valori
+                                                      (actualCalories/remain).toDouble(), // da mettere valori
                                                 ),
                                                 child: Center(
                                                     child: Padding(
@@ -394,7 +394,7 @@ class _HomePageState extends State<HomePage> {
                                   //35-40% of daily calories for lunch.
                                   //25-35% of daily calories for dinner.
                                   // int breakfastCalories = sumCalories*(0.3).round();
-                                  _toBreakfastChoicePage(context, sumCalories);
+                                  _toBreakfastChoicePage(context, baseTarget);
                                 },
                                 style: ElevatedButton.styleFrom(
                                     //padding: EdgeInsets.fromLTRB(0, 20, 20, 20),
@@ -435,7 +435,7 @@ class _HomePageState extends State<HomePage> {
                                   //25-35% of daily calories for dinner.
                                   //int lunchCalories = sumCalories*0.4.round();
                                   String mealName = 'LUNCH';
-                                    _toIngredientsPage(context, mealName, sumCalories);
+                                    _toIngredientsPage(context, mealName, baseTarget);
                                 },
                                 style: ElevatedButton.styleFrom(
                                     //padding: EdgeInsets.fromLTRB(0, 20, 50, 20),
@@ -475,7 +475,7 @@ class _HomePageState extends State<HomePage> {
                                   //25-35% of daily calories for dinner. <---
                                   //int dinnerCalories = sumCalories*0.3.round();
                                   String mealName = 'DINNER';
-                                  _toIngredientsPage(context, mealName, sumCalories);
+                                  _toIngredientsPage(context, mealName, baseTarget);
                                 },
                                 style: ElevatedButton.styleFrom(
                                     //padding: EdgeInsets.all(20.0),

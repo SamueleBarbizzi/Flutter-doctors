@@ -41,8 +41,6 @@ class _BreakfastChoicePageState extends State<BreakfastChoicePage> {
   TextEditingController nameController = TextEditingController();
   TextEditingController quantityController = TextEditingController();
 
-  int countCalories = 0;
-
   @override
   void dispose() {
     // Clean up the controller when the widget is disposed.
@@ -61,6 +59,7 @@ class _BreakfastChoicePageState extends State<BreakfastChoicePage> {
   @override
   Widget build(BuildContext context) {
     print('${BreakfastChoicePage.routename} built');
+    int countCalories = Provider.of<MealChoiche>(context, listen: false).getAllCalories();
     double deviceWidth(BuildContext context) =>
         MediaQuery.of(context).size.width;
     final recipes = Groups().createBreakfastDishes(context);

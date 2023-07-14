@@ -58,7 +58,6 @@ class _CookBookPageState extends State<CookBookPage> {
   List<List> chosen = []; // list of the selected recipes
 
   late Color subtitle2Color;
-  int countCalories = 0;
 
   @override
   void initState() {
@@ -139,6 +138,8 @@ class _CookBookPageState extends State<CookBookPage> {
   @override
   Widget build(BuildContext context) {
     print('${CookBookPage.routename} built');
+
+    int countCalories = Provider.of<MealChoiche>(context, listen: false).getAllCalories();
 
     //double deviceHeight(BuildContext context) => MediaQuery.of(context).size.height;
     double deviceWidth(BuildContext context) => MediaQuery.of(context).size.width;
