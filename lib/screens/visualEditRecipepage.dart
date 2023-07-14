@@ -144,14 +144,32 @@ class _VisualEditRecipeState extends State<VisualEditRecipe> {
                               borderRadius: BorderRadius.circular(8)
                             ), 
                             child: ClipRRect(borderRadius: BorderRadius.circular(10),
-                              child: Image.network(allRecipe[index]['url']),
+                            child: Stack( alignment: Alignment.topRight,
+                              children: [Image.network(allRecipe[index]['url']),
+                                Container(alignment: Alignment.center, height: 50, width: 50,
+                                decoration: BoxDecoration( 
+                                              color: Colors.red,
+                                              border: Border.all(color: Colors.grey.shade400, width: 1.0),
+                                              borderRadius: BorderRadius.circular(8)),               
+                                  child: IconButton(
+                                    icon: const Icon(Icons.delete_forever),
+                                    onPressed: () {
+                                      
+                                      Provider.of<MealChoiche>(context,listen: false)
+                                      .findAndRemoveChosenRecipe(allRecipe[index]['name']);
+
+                                    setState(() {});
+                                    },
+                                  ),
+
+                                )],
                             ),            
                           ),
                         ),
                       ),
                     ),
                   ),
-                ),
+                ),),
               const SizedBox(height: 20,)
             ],),
           ),
