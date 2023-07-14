@@ -93,10 +93,16 @@ class MealChoiche extends ChangeNotifier {
   }
 
   void findAndRemovePersonalRecipe(String name) {
-    for (int indexMeal = 0; indexMeal < personalRecipes.length; indexMeal++) {
-      for (var course in personalRecipes[indexMeal]) {
-        personalRecipes[indexMeal][course].removeAt(personalRecipes[indexMeal][course]
-            .indexWhere((element) => element['name'] == name));
+    for (String meal in ['BREAKFAST','LUNCH','DINNER']) {
+      for (String course in personalRecipes[meal].keys) {
+        bool isPresent = personalRecipes[meal][course]
+            .where((element) => element['name'] == name).isNotEmpty;
+        if (isPresent){
+          personalRecipes[meal][course].remove(personalRecipes[meal][course]
+            .where((element) => element['name'] == name));
+          break;
+        }
+        else{continue;}
       }
     }
 

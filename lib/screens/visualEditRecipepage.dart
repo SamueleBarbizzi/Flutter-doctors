@@ -108,8 +108,12 @@ class _VisualEditRecipeState extends State<VisualEditRecipe> {
                       subtitle: Text('     ${allRecipePersonal[index]['calories']} kcals'),
                       trailing: IconButton(
                                     icon: const Icon(Icons.delete_forever),
-                                    onPressed: () { Provider.of<MealChoiche>(context,listen: false)
+                                    onPressed: () {
+                                      
+                                      Provider.of<MealChoiche>(context,listen: false)
                                       .findAndRemovePersonalRecipe(allRecipePersonal[index]['name']);
+
+                                      allRecipePersonal.removeAt(index);
                                     setState(() {});
                                     },
                                   ),
