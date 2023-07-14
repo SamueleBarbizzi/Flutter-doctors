@@ -256,6 +256,12 @@ class _CookBookPageState extends State<CookBookPage> {
                                                           int.parse(
                                                               quantityController
                                                                   .text));
+                                                   Map item = Provider.of<PersonalMeals>(context,
+                                        listen: false)
+                                    .getPersonalRecipe(widget.meal, 0, 1, true);
+                                                  Provider.of<MealChoiche>(context, listen: false).
+                                                    addPersonalRecipe(widget.meal.toUpperCase(),
+                                        coursesName[0].toLowerCase(), item);
                                                   setState(() {});
                                                   nameController.clear();
                                                   quantityController.clear();
@@ -325,7 +331,7 @@ class _CookBookPageState extends State<CookBookPage> {
                                               ['is${widget.meal}Saved'];
                                 Map item = Provider.of<PersonalMeals>(context,
                                         listen: false)
-                                    .getPersonalRecipe(widget.meal, 0, index);
+                                    .getPersonalRecipe(widget.meal, 0, index, false);
                                 Provider.of<MealChoiche>(context, listen: false)
                                     .TooglePersonalRecipe(widget.meal.toUpperCase(),
                                         coursesName[0].toLowerCase(), item);
@@ -339,7 +345,7 @@ class _CookBookPageState extends State<CookBookPage> {
                                     onPressed: () {
                                 Map item = Provider.of<PersonalMeals>(context,
                                         listen: false)
-                                    .getPersonalRecipe(widget.meal,0, index);
+                                    .getPersonalRecipe(widget.meal,0, index, false);
                                 Provider.of<MealChoiche>(context, listen: false)
                                     .removePersonalRecipe(widget.meal.toUpperCase(),
                                         coursesName[0].toLowerCase(), item);
@@ -418,7 +424,7 @@ class _CookBookPageState extends State<CookBookPage> {
                                   tooltip: 'Show Recipe',
                                   onPressed: () => _showRecipe(
                                       context,
-                                      '${widget.meal.toUpperCase()}_${groupsName[0].toLowerCase()}',
+                                      groupsName[0][0].toUpperCase() + groupsName[0].substring(1).toLowerCase(),
                                       possibleRecipes[0][index]),
                                 ),
                               ));
@@ -531,6 +537,14 @@ class _CookBookPageState extends State<CookBookPage> {
                                                               quantityController
                                                                   .text));
                                                   setState(() {});
+                                                  Map item = Provider.of<PersonalMeals>(context,
+                                        listen: false)
+                                    .getPersonalRecipe(widget.meal, 1, 1, true);
+                                                  Provider.of<MealChoiche>(context, listen: false).
+                                                    addPersonalRecipe(widget.meal.toUpperCase(),
+                                        coursesName[1].toLowerCase(), item);
+                                                  nameController.clear();
+                                                  quantityController.clear();
                                                   Navigator.pop(context, 'Add');
                                                 } else {
                                                   ScaffoldMessenger.of(context)
@@ -597,7 +611,7 @@ class _CookBookPageState extends State<CookBookPage> {
                                               ['is${widget.meal}Saved'];
                                 Map item = Provider.of<PersonalMeals>(context,
                                         listen: false)
-                                    .getPersonalRecipe(widget.meal, 1, index);
+                                    .getPersonalRecipe(widget.meal, 1, index, false);
                                 Provider.of<MealChoiche>(context, listen: false)
                                     .TooglePersonalRecipe(widget.meal.toUpperCase(),
                                         coursesName[1].toLowerCase(), item);
@@ -615,7 +629,7 @@ class _CookBookPageState extends State<CookBookPage> {
                                     onPressed: () {
                                 Map item = Provider.of<PersonalMeals>(context,
                                         listen: false)
-                                    .getPersonalRecipe(widget.meal, 1, index);
+                                    .getPersonalRecipe(widget.meal, 1, index, false);
                                 Provider.of<MealChoiche>(context, listen: false)
                                     .removePersonalRecipe(widget.meal.toUpperCase(),
                                         coursesName[1].toLowerCase(), item);
@@ -694,7 +708,7 @@ class _CookBookPageState extends State<CookBookPage> {
                                   tooltip: 'Show Recipe',
                                   onPressed: () => _showRecipe(
                                       context,
-                                      '${widget.meal.toUpperCase()}_${groupsName[1].toLowerCase()}',
+                                      groupsName[1][0].toUpperCase() + groupsName[1].substring(1).toLowerCase(),
                                       possibleRecipes[1][index]),
                                 ),
                               ));
@@ -807,6 +821,14 @@ class _CookBookPageState extends State<CookBookPage> {
                                                               quantityController
                                                                   .text));
                                                   setState(() {});
+                                                  Map item = Provider.of<PersonalMeals>(context,
+                                        listen: false)
+                                    .getPersonalRecipe(widget.meal, 2, 1, true);
+                                                  Provider.of<MealChoiche>(context, listen: false).
+                                                    addPersonalRecipe(widget.meal.toUpperCase(),
+                                        coursesName[2].toLowerCase(), item);
+                                                  nameController.clear();
+                                                  quantityController.clear();
                                                   Navigator.pop(context, 'Add');
                                                 } else {
                                                   ScaffoldMessenger.of(context)
@@ -873,7 +895,7 @@ class _CookBookPageState extends State<CookBookPage> {
                                               ['is${widget.meal}Saved'];
                                 Map item = Provider.of<PersonalMeals>(context,
                                         listen: false)
-                                    .getPersonalRecipe(widget.meal, 2, index);
+                                    .getPersonalRecipe(widget.meal, 2, index, false);
                                 Provider.of<MealChoiche>(context, listen: false)
                                     .TooglePersonalRecipe(widget.meal.toUpperCase(),
                                         coursesName[2].toLowerCase(), item);
@@ -887,7 +909,7 @@ class _CookBookPageState extends State<CookBookPage> {
                                     onPressed: () {
                                 Map item = Provider.of<PersonalMeals>(context,
                                         listen: false)
-                                    .getPersonalRecipe(widget.meal, 2, index);
+                                    .getPersonalRecipe(widget.meal, 2, index, false);
                                 Provider.of<MealChoiche>(context, listen: false)
                                     .removePersonalRecipe(widget.meal.toUpperCase(),
                                         coursesName[2].toLowerCase(), item);
@@ -962,7 +984,7 @@ class _CookBookPageState extends State<CookBookPage> {
                                   tooltip: 'Show Recipe',
                                   onPressed: () => _showRecipe(
                                       context,
-                                      '${widget.meal.toUpperCase()}_${groupsName[2].toLowerCase()}',
+                                      groupsName[2][0].toUpperCase() + groupsName[2].substring(1).toLowerCase(),
                                       possibleRecipes[2][index]),
                                 ),
                                 /*
@@ -1083,6 +1105,14 @@ class _CookBookPageState extends State<CookBookPage> {
                                                           quantityController
                                                               .text));
                                               setState(() {});
+                                              Map item = Provider.of<PersonalMeals>(context,
+                                        listen: false)
+                                    .getPersonalRecipe(widget.meal, 3, 1, true);
+                                                  Provider.of<MealChoiche>(context, listen: false).
+                                                    addPersonalRecipe(widget.meal.toUpperCase(),
+                                        coursesName[3].toLowerCase(), item);
+                                              nameController.clear();
+                                              quantityController.clear();
                                               Navigator.pop(context, 'Add');
                                             } else {
                                               ScaffoldMessenger.of(context)
@@ -1148,7 +1178,7 @@ class _CookBookPageState extends State<CookBookPage> {
                                           ['is${widget.meal}Saved'];
                                 Map item = Provider.of<PersonalMeals>(context,
                                         listen: false)
-                                    .getPersonalRecipe(widget.meal, 3, index);
+                                    .getPersonalRecipe(widget.meal, 3, index, false);
                                 Provider.of<MealChoiche>(context, listen: false)
                                     .TooglePersonalRecipe(widget.meal.toUpperCase(),
                                         coursesName[3].toLowerCase(), item);
@@ -1162,7 +1192,7 @@ class _CookBookPageState extends State<CookBookPage> {
                                 onPressed: () {
                                 Map item = Provider.of<PersonalMeals>(context,
                                         listen: false)
-                                    .getPersonalRecipe(widget.meal, 3, index);
+                                    .getPersonalRecipe(widget.meal, 3, index, false);
                                 Provider.of<MealChoiche>(context, listen: false)
                                     .removePersonalRecipe(widget.meal.toUpperCase(),
                                         coursesName[3].toLowerCase(), item);
@@ -1233,7 +1263,7 @@ class _CookBookPageState extends State<CookBookPage> {
                               tooltip: 'Show Recipe',
                               onPressed: () => _showRecipe(
                                   context,
-                                  '${widget.meal.toUpperCase()}_${groupsName[3].toLowerCase()}',
+                                  groupsName[3][0].toUpperCase() + groupsName[3].substring(1).toLowerCase(),
                                   possibleRecipes[3][index]),
                             ),
                           ));

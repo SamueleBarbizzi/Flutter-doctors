@@ -34,18 +34,20 @@ class PersonalMeals extends ChangeNotifier {
       });
       for (int i = 0; i < personalRecipes[meal].length; i++) {
         personalRecipes[meal][indexCourse]
-            .sort((a, b) => a["name"].compareTo(b["name"]));
+            .sort((a, b) => (a["name"] as String).compareTo(b["name"] as String));
       }
     }
     //Call the notifyListeners() method to alert that something happened.
     notifyListeners();
   }
 
-  Map getPersonalRecipe(String meal, int indexCourse, int indexRecipe) {
+  Map getPersonalRecipe(String meal, int indexCourse, int indexRecipe, bool last) {
     if (meal == 'BREAKFAST') {
-      return personalRecipes[meal][indexRecipe];
+      if (last){return personalRecipes[meal].last;}
+      else{return personalRecipes[meal][indexRecipe];}
     } else{
-      return personalRecipes[meal][indexCourse][indexRecipe];
+      if (last){return personalRecipes[meal][indexCourse].last;}
+      else{return personalRecipes[meal][indexCourse][indexRecipe];}
     }
   }
 

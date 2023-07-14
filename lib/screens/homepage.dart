@@ -382,8 +382,12 @@ class _HomePageState extends State<HomePage> {
                                           offset: Offset(0, 2))
                                     ]),
                                 label: const Text('Breakfast'),
-                                //onPressed: (){},
                                 onPressed: () {
+                                  //If you eat three meals a day, you should consume:
+                                  //30-35% of daily calories for breakfast. <---
+                                  //35-40% of daily calories for lunch.
+                                  //25-35% of daily calories for dinner.
+                                  int breakfastCalories = sumCalories*0.3.round();
                                   _toBreakfastChoicePage(context);
                                 },
                                 style: ElevatedButton.styleFrom(
@@ -419,6 +423,11 @@ class _HomePageState extends State<HomePage> {
                                     ]),
                                 label: const Text('Lunch'),
                                 onPressed: () {
+                                  //If you eat three meals a day, you should consume:
+                                  //30-35% of daily calories for breakfast.
+                                  //35-40% of daily calories for lunch.--- 
+                                  //25-35% of daily calories for dinner.
+                                  int lunchCalories = sumCalories*0.4.round();
                                   String mealName = 'LUNCH';
                                     _toIngredientsPage(context, mealName);
                                 },
@@ -454,6 +463,11 @@ class _HomePageState extends State<HomePage> {
                                     ]),
                                 label: const Text('Dinner'),
                                 onPressed: () {
+                                  //If you eat three meals a day, you should consume:
+                                  //30-35% of daily calories for breakfast.
+                                  //35-40% of daily calories for lunch.
+                                  //25-35% of daily calories for dinner. <---
+                                  int dinnerCalories = sumCalories*0.3.round();
                                   String mealName = 'DINNER';
                                   _toIngredientsPage(context, mealName);
                                 },

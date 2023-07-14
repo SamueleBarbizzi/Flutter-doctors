@@ -151,6 +151,12 @@ class _BreakfastChoicePageState extends State<BreakfastChoicePage> {
                                                     nameController.text,
                                                     int.parse(quantityController
                                                         .text));
+                                Map item = Provider.of<PersonalMeals>(context,
+                                        listen: false)
+                                    .getPersonalRecipe(meal, 0, 1, true);
+                                                  Provider.of<MealChoiche>(context, listen: false).
+                                                    addPersonalRecipe(meal.toUpperCase(),
+                                        course.toLowerCase(), item);
                                             setState(() {});
                                             nameController.clear();
                                             quantityController.clear();
@@ -207,6 +213,12 @@ class _BreakfastChoicePageState extends State<BreakfastChoicePage> {
                               // if this item isn't selected yet, "isSelected": false -> true
                               // If this item already is selected: "isSelected": true -> false
                               setState(() {
+                                Map item = Provider.of<PersonalMeals>(context,
+                                        listen: false)
+                                    .getPersonalRecipe(meal, 0, index, false);
+                                Provider.of<MealChoiche>(context, listen: false)
+                                    .TooglePersonalRecipe(meal.toUpperCase(),
+                                        course.toLowerCase(), item);
                                 Provider.of<PersonalMeals>(context,
                                                 listen: false)
                                             .personalRecipes[meal][index]
@@ -215,13 +227,6 @@ class _BreakfastChoicePageState extends State<BreakfastChoicePage> {
                                                 listen: false)
                                             .personalRecipes[meal][index]
                                         ['isSelected'];
-
-                                Map item = Provider.of<PersonalMeals>(context,
-                                        listen: false)
-                                    .getPersonalRecipe(meal, 0, index);
-                                Provider.of<MealChoiche>(context, listen: false)
-                                    .TooglePersonalRecipe(meal.toUpperCase(),
-                                        course.toLowerCase(), item);
                               });
                             },
                             title: Text(
@@ -234,7 +239,7 @@ class _BreakfastChoicePageState extends State<BreakfastChoicePage> {
                               onPressed: () {
                                 Map item = Provider.of<PersonalMeals>(context,
                                         listen: false)
-                                    .getPersonalRecipe(meal, 0, index);
+                                    .getPersonalRecipe(meal, 0, index, false);
                                 Provider.of<MealChoiche>(context, listen: false)
                                     .removePersonalRecipe(meal.toUpperCase(),
                                         course.toLowerCase(), item);
@@ -287,7 +292,7 @@ class _BreakfastChoicePageState extends State<BreakfastChoicePage> {
                                   tooltip: 'Show Recipe',
                                   onPressed: () => _showRecipe(
                                       context,
-                                      'BREAKFAST_breakfast',
+                                      'Breakfast',
                                       recipes[index]),
                                 ),
                       ),

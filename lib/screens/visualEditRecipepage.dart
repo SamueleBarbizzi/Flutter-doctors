@@ -109,38 +109,38 @@ class _VisualEditRecipeState extends State<VisualEditRecipe> {
                   );
                 },
               ),
-              SizedBox(
-                height: 200,
-                child: ListView.builder(
-                  physics: ClampingScrollPhysics(),
-                  shrinkWrap: true,
-                  scrollDirection: Axis.horizontal,
-                  itemCount: lenRecipe,
-                  itemBuilder: (BuildContext ctx, index) => Card ( 
-                    key: ValueKey(allRecipe[index]['name']),
-                    child: Tooltip( 
-                      message: allRecipe[index]['name'],
-                      child: GestureDetector( 
-                        child: Container(
-                          decoration: BoxDecoration(
-                            color: Colors.white,
-                            border: Border.all(color: Colors.grey.shade400, width: 1.0),
-                            borderRadius: BorderRadius.circular(8)
-                          ), 
-                          child: ClipRRect(borderRadius: BorderRadius.circular(10),
-                            child: Image.network(allRecipe[index]['url']),
+                SizedBox(
+                  height: 200,
+                  child: ListView.builder(
+                    physics: ClampingScrollPhysics(),
+                    shrinkWrap: true,
+                    scrollDirection: Axis.horizontal,
+                    itemCount: lenRecipe,
+                    itemBuilder: (BuildContext ctx, index) => Card ( 
+                      key: ValueKey(allRecipe[index]['name']),
+                      child: Tooltip( 
+                        message: allRecipe[index]['name'],
+                        child: GestureDetector(
+                          onTap: () { _showRecipe(
+                                      context,
+                                      allRecipe[index]['course'][0],
+                                      allRecipe[index]);
+                            }, 
+                          child: Container(
+                            decoration: BoxDecoration(
+                                color: Colors.white,
+                              border: Border.all(color: Colors.grey.shade400, width: 1.0),
+                              borderRadius: BorderRadius.circular(8)
+                            ), 
+                            child: ClipRRect(borderRadius: BorderRadius.circular(10),
+                              child: Image.network(allRecipe[index]['url']),
+                            ),            
                           ),
                         ),
-                        onTap: () { _showRecipe(
-                                    context,
-                                    allRecipe[index]['course'][0],
-                                    allRecipe[index]);
-                        },
                       ),
                     ),
                   ),
                 ),
-              ),
               const SizedBox(height: 20,)
             ],),
           ),
