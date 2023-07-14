@@ -59,9 +59,8 @@ class MealChoiche extends ChangeNotifier {
       'dessert': <dynamic>{},
     },
   };
-  
-  List<Map> snacks = [];
 
+  List<Map> snacks = [];
 
   void addSnack(String name, int calories) {
     snacks.add({
@@ -78,11 +77,13 @@ class MealChoiche extends ChangeNotifier {
   void ToogleChosenRecipe(String meal, String course, Map item) {
     // this wants to alternate between inserting the recipe in the chosen Map,
     // and removes it if it is already present
-    bool isPresent = chosen[meal.toUpperCase()][course.toLowerCase()].contains(item);
-    if (isPresent){
+    bool isPresent =
+        chosen[meal.toUpperCase()][course.toLowerCase()].contains(item);
+    if (isPresent) {
       chosen[meal.toUpperCase()][course.toLowerCase()].remove(item);
+    } else {
+      chosen[meal.toUpperCase()][course.toLowerCase()].add(item);
     }
-    else {chosen[meal.toUpperCase()][course.toLowerCase()].add(item);}
 
     //Remember to call the CookBook provider when using choose.
 
@@ -90,14 +91,23 @@ class MealChoiche extends ChangeNotifier {
     notifyListeners();
   }
 
-    void TooglePersonalRecipe(String meal, String course, Map item) {
+  void addPersonalRecipe(String meal, String course, Map item) {
+    personalRecipes[meal.toUpperCase()][course.toLowerCase()].add(item);
+
+    //Call the notifyListeners() method to alert that something happened.
+    notifyListeners();
+  }
+
+  void TooglePersonalRecipe(String meal, String course, Map item) {
     // this wants to alternate between inserting the recipe in the chosen Map,
     // and removes it if it is already present
-    bool isPresent = personalRecipes[meal.toUpperCase()][course.toLowerCase()].contains(item);
-    if (isPresent){
+    bool isPresent = personalRecipes[meal.toUpperCase()][course.toLowerCase()]
+        .contains(item);
+    if (isPresent) {
       personalRecipes[meal.toUpperCase()][course.toLowerCase()].remove(item);
+    } else {
+      personalRecipes[meal.toUpperCase()][course.toLowerCase()].add(item);
     }
-    else {personalRecipes[meal.toUpperCase()][course.toLowerCase()].add(item);}
 
     //Remember to call the CookBook provider when using choose.
 
@@ -108,10 +118,11 @@ class MealChoiche extends ChangeNotifier {
   void removePersonalRecipe(String meal, String course, Map item) {
     // this wants to alternate between inserting the recipe in the chosen Map,
     // and removes it if it is already present
-    bool isPresent = personalRecipes[meal.toUpperCase()][course.toLowerCase()].contains(item);
-    if (isPresent){
+    bool isPresent = personalRecipes[meal.toUpperCase()][course.toLowerCase()]
+        .contains(item);
+    if (isPresent) {
       personalRecipes[meal.toUpperCase()][course.toLowerCase()].remove(item);
-    }    
+    }
 
     //Call the notifyListeners() method to alert that something happened.
     notifyListeners();
@@ -156,10 +167,10 @@ class MealChoiche extends ChangeNotifier {
         'side': {},
         'dessert': {},
       },
-    'SNACK':{
-      'snack':<dynamic>{},
-    }
-  };
+      'SNACK': {
+        'snack': <dynamic>{},
+      }
+    };
 
     notifyListeners();
   }
@@ -167,7 +178,6 @@ class MealChoiche extends ChangeNotifier {
   Set getMealRecipes(String meal, String course, int id) {
     return chosen[meal.toUpperCase()][course.toLowerCase()];
   }
-
 
   int getAllChosenCalories() {
     num totalCalories = 0;
@@ -186,7 +196,7 @@ class MealChoiche extends ChangeNotifier {
     return totalCalories.toInt();
   }
 
-    int getAllPersonalCalories() {
+  int getAllPersonalCalories() {
     num totalCalories = 0;
     personalRecipes.forEach(
       (key, value) {
@@ -202,6 +212,4 @@ class MealChoiche extends ChangeNotifier {
     }
     return totalCalories.toInt();
   }
-
-
 } //MealChoice
