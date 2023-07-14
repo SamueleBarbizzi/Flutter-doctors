@@ -2,6 +2,7 @@
 
 import 'package:flutter/material.dart';
 import 'package:flutter_doctors/models/personalmeals.dart';
+import 'package:flutter_doctors/models/mealchoice.dart';
 import 'package:flutter_doctors/screens/breakfastchoicepage.dart';
 import 'package:intl/intl.dart';
 import 'package:line_icons/line_icons.dart';
@@ -557,7 +558,7 @@ class _HomePageState extends State<HomePage> {
                                                           quantityController
                                                                   .text !=
                                                               '') {
-                                                        Provider.of<PersonalMeals>(
+                                                        Provider.of<MealChoiche>(
                                                                 context,
                                                                 listen: false)
                                                             .addSnack(

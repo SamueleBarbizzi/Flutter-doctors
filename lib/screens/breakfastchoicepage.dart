@@ -146,7 +146,7 @@ class _BreakfastChoicePageState extends State<BreakfastChoicePage> {
                                               quantityController.text != '') {
                                             Provider.of<PersonalMeals>(context,
                                                     listen: false)
-                                                .addPersonalRecipe(
+                                                .addPersonalRecipe(meal,
                                                     0,
                                                     nameController.text,
                                                     int.parse(quantityController
@@ -185,20 +185,20 @@ class _BreakfastChoicePageState extends State<BreakfastChoicePage> {
                   physics: const NeverScrollableScrollPhysics(),
                   shrinkWrap: true,
                   itemCount: Provider.of<PersonalMeals>(context, listen: false)
-                      .personalRecipes[0]
+                      .personalRecipes[meal]
                       .length,
                   itemBuilder: (BuildContext ctx, index) {
                     return Card(
                         key: ValueKey(
                             Provider.of<PersonalMeals>(context, listen: false)
-                                .personalRecipes[0][index]['name']),
+                                .personalRecipes[meal][index]['name']),
                         margin: const EdgeInsets.all(1),
                         shape: RoundedRectangleBorder(
                             borderRadius: BorderRadius.circular(5)),
 
                         // The color depends on this is selected or not
                         color: Provider.of<PersonalMeals>(context, listen: false)
-                                    .personalRecipes[0][index]['isSelected'] ==
+                                    .personalRecipes[meal][index]['isSelected'] ==
                                 true
                             ? Colors.lightGreen
                             : Colors.white,
@@ -209,16 +209,16 @@ class _BreakfastChoicePageState extends State<BreakfastChoicePage> {
                               setState(() {
                                 Provider.of<PersonalMeals>(context,
                                                 listen: false)
-                                            .personalRecipes[0][index]
+                                            .personalRecipes[meal][index]
                                         ['isSelected'] =
                                     !Provider.of<PersonalMeals>(context,
                                                 listen: false)
-                                            .personalRecipes[0][index]
+                                            .personalRecipes[meal][index]
                                         ['isSelected'];
 
                                 Map item = Provider.of<PersonalMeals>(context,
                                         listen: false)
-                                    .getPersonalRecipe(0, index);
+                                    .getPersonalRecipe(meal, 0, index);
                                 Provider.of<MealChoiche>(context, listen: false)
                                     .TooglePersonalRecipe(meal.toUpperCase(),
                                         course.toLowerCase(), item);
@@ -226,20 +226,21 @@ class _BreakfastChoicePageState extends State<BreakfastChoicePage> {
                             },
                             title: Text(
                                 Provider.of<PersonalMeals>(context, listen: false)
-                                    .personalRecipes[0][index]['name']),
-                            subtitle: Text('     ${Provider.of<PersonalMeals>(context, listen: false).personalRecipes[0][index]['calories']} kcals'),
-                            trailing: IconButton(
+                                    .personalRecipes[meal][index]['name']),
+                            subtitle: Text('     ${Provider.of<PersonalMeals>(context, listen: false).personalRecipes[meal][index]['calories']} kcals'),
+                            trailing: 
+                            IconButton(
                               icon: const Icon(Icons.delete_forever),
                               onPressed: () {
                                 Map item = Provider.of<PersonalMeals>(context,
                                         listen: false)
-                                    .getPersonalRecipe(0, index);
+                                    .getPersonalRecipe(meal, 0, index);
                                 Provider.of<MealChoiche>(context, listen: false)
                                     .removePersonalRecipe(meal.toUpperCase(),
                                         course.toLowerCase(), item);
                                 Provider.of<PersonalMeals>(context,
                                         listen: false)
-                                    .removePersonalRecipe(0, index);
+                                    .removePersonalRecipe(meal, 0, index);
                                 setState(() {});
                               },
                             )));
@@ -280,6 +281,15 @@ class _BreakfastChoicePageState extends State<BreakfastChoicePage> {
                         title: Text(recipes[index]['name']),
                         subtitle:
                             Text('     ${recipes[index]['calories']} kcals'),
+                        trailing: IconButton(
+                                  icon:
+                                      const Icon(Icons.remove_red_eye_rounded),
+                                  tooltip: 'Show Recipe',
+                                  onPressed: () => _showRecipe(
+                                      context,
+                                      'BREAKFAST_breakfast',
+                                      recipes[index]),
+                                ),
                       ),
                     );
                   },
@@ -338,4 +348,13 @@ class _BreakfastChoicePageState extends State<BreakfastChoicePage> {
       ),
     );
   } //_Done
+
+    void _showRecipe(BuildContext context, String dish, Map recipe) {
+    Navigator.of(context).push(MaterialPageRoute(
+        builder: (context) => RecipePage(
+              recipe: recipe,
+              dish: dish,
+            )));
+  }
+
 } //BreakfastChoicePage

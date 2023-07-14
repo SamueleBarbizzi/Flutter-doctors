@@ -250,7 +250,7 @@ class _CookBookPageState extends State<CookBookPage> {
                                                   Provider.of<PersonalMeals>(
                                                           context,
                                                           listen: false)
-                                                      .addPersonalRecipe(
+                                                      .addPersonalRecipe(widget.meal,
                                                           0,
                                                           nameController.text,
                                                           int.parse(
@@ -292,20 +292,20 @@ class _CookBookPageState extends State<CookBookPage> {
                         shrinkWrap: true,
                         itemCount:
                             Provider.of<PersonalMeals>(context, listen: false)
-                                .personalRecipes[0]
+                                .personalRecipes[widget.meal][0]
                                 .length,
                         itemBuilder: (BuildContext ctx, index) {
                           return Card(
                               key: ValueKey(
                                   Provider.of<PersonalMeals>(context, listen: false)
-                                      .personalRecipes[0][index]['name']),
+                                      .personalRecipes[widget.meal][0][index]['name']),
                               margin: const EdgeInsets.all(1),
                               shape: RoundedRectangleBorder(
                                   borderRadius: BorderRadius.circular(5)),
 
                               // The color depends on this is selected or not
                               color: Provider.of<PersonalMeals>(context, listen: false)
-                                              .personalRecipes[0][index]
+                                              .personalRecipes[widget.meal][0][index]
                                           ['is${widget.meal}Saved'] ==
                                       true
                                   ? Colors.lightGreen
@@ -317,35 +317,35 @@ class _CookBookPageState extends State<CookBookPage> {
                                     setState(() {
                                       Provider.of<PersonalMeals>(context,
                                                       listen: false)
-                                                  .personalRecipes[0][index]
+                                                  .personalRecipes[widget.meal][0][index]
                                               ['is${widget.meal}Saved'] =
                                           !Provider.of<PersonalMeals>(context,
                                                       listen: false)
-                                                  .personalRecipes[0][index]
+                                                  .personalRecipes[widget.meal][0][index]
                                               ['is${widget.meal}Saved'];
                                 Map item = Provider.of<PersonalMeals>(context,
                                         listen: false)
-                                    .getPersonalRecipe(0, index);
+                                    .getPersonalRecipe(widget.meal, 0, index);
                                 Provider.of<MealChoiche>(context, listen: false)
                                     .TooglePersonalRecipe(widget.meal.toUpperCase(),
                                         coursesName[0].toLowerCase(), item);
                                     });
                                   },
                                   title: Text(Provider.of<PersonalMeals>(context, listen: false)
-                                      .personalRecipes[0][index]['name']),
-                                  subtitle: Text('     ${Provider.of<PersonalMeals>(context, listen: false).personalRecipes[0][index]['calories']} kcals'),
+                                      .personalRecipes[widget.meal][0][index]['name']),
+                                  subtitle: Text('     ${Provider.of<PersonalMeals>(context, listen: false).personalRecipes[widget.meal][0][index]['calories']} kcals'),
                                   trailing: IconButton(
                                     icon: const Icon(Icons.delete_forever),
                                     onPressed: () {
                                 Map item = Provider.of<PersonalMeals>(context,
                                         listen: false)
-                                    .getPersonalRecipe(0, index);
+                                    .getPersonalRecipe(widget.meal,0, index);
                                 Provider.of<MealChoiche>(context, listen: false)
                                     .removePersonalRecipe(widget.meal.toUpperCase(),
                                         coursesName[0].toLowerCase(), item);
                                       Provider.of<PersonalMeals>(context,
                                               listen: false)
-                                          .removePersonalRecipe(0, index);
+                                          .removePersonalRecipe(widget.meal, 0, index);
                                       setState(() {});
                                     },
                                   )));
@@ -412,7 +412,6 @@ class _CookBookPageState extends State<CookBookPage> {
                                     ],
                                   ),
                                 ),
-
                                 trailing: IconButton(
                                   icon:
                                       const Icon(Icons.remove_red_eye_rounded),
@@ -525,7 +524,7 @@ class _CookBookPageState extends State<CookBookPage> {
                                                   Provider.of<PersonalMeals>(
                                                           context,
                                                           listen: false)
-                                                      .addPersonalRecipe(
+                                                      .addPersonalRecipe(widget.meal,
                                                           1,
                                                           nameController.text,
                                                           int.parse(
@@ -565,20 +564,20 @@ class _CookBookPageState extends State<CookBookPage> {
                         shrinkWrap: true,
                         itemCount:
                             Provider.of<PersonalMeals>(context, listen: false)
-                                .personalRecipes[1]
+                                .personalRecipes[widget.meal][1]
                                 .length,
                         itemBuilder: (BuildContext ctx, index) {
                           return Card(
                               key: ValueKey(
                                   Provider.of<PersonalMeals>(context, listen: false)
-                                      .personalRecipes[1][index]['name']),
+                                      .personalRecipes[widget.meal][1][index]['name']),
                               margin: const EdgeInsets.all(1),
                               shape: RoundedRectangleBorder(
                                   borderRadius: BorderRadius.circular(5)),
 
                               // The color depends on this is selected or not
                               color: Provider.of<PersonalMeals>(context, listen: false)
-                                              .personalRecipes[1][index]
+                                              .personalRecipes[widget.meal][1][index]
                                           ['is${widget.meal}Saved'] ==
                                       true
                                   ? Colors.lightGreen
@@ -590,15 +589,15 @@ class _CookBookPageState extends State<CookBookPage> {
                                     setState(() {
                                       Provider.of<PersonalMeals>(context,
                                                       listen: false)
-                                                  .personalRecipes[1][index]
+                                                  .personalRecipes[widget.meal][1][index]
                                               ['is${widget.meal}Saved'] =
                                           !Provider.of<PersonalMeals>(context,
                                                       listen: false)
-                                                  .personalRecipes[1][index]
+                                                  .personalRecipes[widget.meal][1][index]
                                               ['is${widget.meal}Saved'];
                                 Map item = Provider.of<PersonalMeals>(context,
                                         listen: false)
-                                    .getPersonalRecipe(1, index);
+                                    .getPersonalRecipe(widget.meal, 1, index);
                                 Provider.of<MealChoiche>(context, listen: false)
                                     .TooglePersonalRecipe(widget.meal.toUpperCase(),
                                         coursesName[1].toLowerCase(), item);
@@ -609,20 +608,20 @@ class _CookBookPageState extends State<CookBookPage> {
                                   //    backgroundColor: Colors.green,
                                   //    child: Text(possibleRecipes[index]['id'].toString())),
                                   title: Text(Provider.of<PersonalMeals>(context, listen: false)
-                                      .personalRecipes[1][index]['name']),
-                                  subtitle: Text('     ${Provider.of<PersonalMeals>(context, listen: false).personalRecipes[1][index]['calories']} kcals'),
+                                      .personalRecipes[widget.meal][1][index]['name']),
+                                  subtitle: Text('     ${Provider.of<PersonalMeals>(context, listen: false).personalRecipes[widget.meal][1][index]['calories']} kcals'),
                                   trailing: IconButton(
                                     icon: const Icon(Icons.delete_forever),
                                     onPressed: () {
                                 Map item = Provider.of<PersonalMeals>(context,
                                         listen: false)
-                                    .getPersonalRecipe(1, index);
+                                    .getPersonalRecipe(widget.meal, 1, index);
                                 Provider.of<MealChoiche>(context, listen: false)
                                     .removePersonalRecipe(widget.meal.toUpperCase(),
                                         coursesName[1].toLowerCase(), item);
                                       Provider.of<PersonalMeals>(context,
                                               listen: false)
-                                          .removePersonalRecipe(1, index);
+                                          .removePersonalRecipe(widget.meal, 1, index);
                                       setState(() {});
                                     },
                                   )));
@@ -801,7 +800,7 @@ class _CookBookPageState extends State<CookBookPage> {
                                                   Provider.of<PersonalMeals>(
                                                           context,
                                                           listen: false)
-                                                      .addPersonalRecipe(
+                                                      .addPersonalRecipe(widget.meal, 
                                                           2,
                                                           nameController.text,
                                                           int.parse(
@@ -841,20 +840,20 @@ class _CookBookPageState extends State<CookBookPage> {
                         shrinkWrap: true,
                         itemCount:
                             Provider.of<PersonalMeals>(context, listen: false)
-                                .personalRecipes[2]
+                                .personalRecipes[widget.meal][2]
                                 .length,
                         itemBuilder: (BuildContext ctx, index) {
                           return Card(
                               key: ValueKey(
                                   Provider.of<PersonalMeals>(context, listen: false)
-                                      .personalRecipes[2][index]['name']),
+                                      .personalRecipes[widget.meal][2][index]['name']),
                               margin: const EdgeInsets.all(1),
                               shape: RoundedRectangleBorder(
                                   borderRadius: BorderRadius.circular(5)),
 
                               // The color depends on this is selected or not
                               color: Provider.of<PersonalMeals>(context, listen: false)
-                                              .personalRecipes[2][index]
+                                              .personalRecipes[widget.meal][2][index]
                                           ['is${widget.meal}Saved'] ==
                                       true
                                   ? Colors.lightGreen
@@ -866,35 +865,35 @@ class _CookBookPageState extends State<CookBookPage> {
                                     setState(() {
                                       Provider.of<PersonalMeals>(context,
                                                       listen: false)
-                                                  .personalRecipes[2][index]
+                                                  .personalRecipes[widget.meal][2][index]
                                               ['is${widget.meal}Saved'] =
                                           !Provider.of<PersonalMeals>(context,
                                                       listen: false)
-                                                  .personalRecipes[2][index]
+                                                  .personalRecipes[widget.meal][2][index]
                                               ['is${widget.meal}Saved'];
                                 Map item = Provider.of<PersonalMeals>(context,
                                         listen: false)
-                                    .getPersonalRecipe(2, index);
+                                    .getPersonalRecipe(widget.meal, 2, index);
                                 Provider.of<MealChoiche>(context, listen: false)
                                     .TooglePersonalRecipe(widget.meal.toUpperCase(),
                                         coursesName[2].toLowerCase(), item);
                                     });
                                   },
                                   title: Text(Provider.of<PersonalMeals>(context, listen: false)
-                                      .personalRecipes[2][index]['name']),
-                                  subtitle: Text('     ${Provider.of<PersonalMeals>(context, listen: false).personalRecipes[2][index]['calories']} kcals'),
+                                      .personalRecipes[widget.meal][2][index]['name']),
+                                  subtitle: Text('     ${Provider.of<PersonalMeals>(context, listen: false).personalRecipes[widget.meal][2][index]['calories']} kcals'),
                                   trailing: IconButton(
                                     icon: const Icon(Icons.delete_forever),
                                     onPressed: () {
                                 Map item = Provider.of<PersonalMeals>(context,
                                         listen: false)
-                                    .getPersonalRecipe(2, index);
+                                    .getPersonalRecipe(widget.meal, 2, index);
                                 Provider.of<MealChoiche>(context, listen: false)
                                     .removePersonalRecipe(widget.meal.toUpperCase(),
                                         coursesName[2].toLowerCase(), item);
                                       Provider.of<PersonalMeals>(context,
                                               listen: false)
-                                          .removePersonalRecipe(2, index);
+                                          .removePersonalRecipe(widget.meal, 2, index);
                                       setState(() {});
                                     },
                                   )));
@@ -1077,7 +1076,7 @@ class _CookBookPageState extends State<CookBookPage> {
                                               Provider.of<PersonalMeals>(
                                                       context,
                                                       listen: false)
-                                                  .addPersonalRecipe(
+                                                  .addPersonalRecipe(widget.meal, 
                                                       3,
                                                       nameController.text,
                                                       int.parse(
@@ -1116,20 +1115,20 @@ class _CookBookPageState extends State<CookBookPage> {
                     shrinkWrap: true,
                     itemCount:
                         Provider.of<PersonalMeals>(context, listen: false)
-                            .personalRecipes[3]
+                            .personalRecipes[widget.meal][3]
                             .length,
                     itemBuilder: (BuildContext ctx, index) {
                       return Card(
                           key: ValueKey(
                               Provider.of<PersonalMeals>(context, listen: false)
-                                  .personalRecipes[3][index]['name']),
+                                  .personalRecipes[widget.meal][3][index]['name']),
                           margin: const EdgeInsets.all(1),
                           shape: RoundedRectangleBorder(
                               borderRadius: BorderRadius.circular(5)),
 
                           // The color depends on this is selected or not
                           color: Provider.of<PersonalMeals>(context, listen: false)
-                                          .personalRecipes[3][index]
+                                          .personalRecipes[widget.meal][3][index]
                                       ['is${widget.meal}Saved'] ==
                                   true
                               ? Colors.lightGreen
@@ -1141,35 +1140,35 @@ class _CookBookPageState extends State<CookBookPage> {
                                 setState(() {
                                   Provider.of<PersonalMeals>(context,
                                                   listen: false)
-                                              .personalRecipes[3][index]
+                                              .personalRecipes[widget.meal][3][index]
                                           ['is${widget.meal}Saved'] =
                                       !Provider.of<PersonalMeals>(context,
                                                   listen: false)
-                                              .personalRecipes[3][index]
+                                              .personalRecipes[widget.meal][3][index]
                                           ['is${widget.meal}Saved'];
                                 Map item = Provider.of<PersonalMeals>(context,
                                         listen: false)
-                                    .getPersonalRecipe(3, index);
+                                    .getPersonalRecipe(widget.meal, 3, index);
                                 Provider.of<MealChoiche>(context, listen: false)
                                     .TooglePersonalRecipe(widget.meal.toUpperCase(),
                                         coursesName[3].toLowerCase(), item);
                                 });
                               },
                               title: Text(Provider.of<PersonalMeals>(context, listen: false)
-                                  .personalRecipes[3][index]['name']),
-                              subtitle: Text('     ${Provider.of<PersonalMeals>(context, listen: false).personalRecipes[3][index]['calories']} kcals'),
+                                  .personalRecipes[widget.meal][3][index]['name']),
+                              subtitle: Text('     ${Provider.of<PersonalMeals>(context, listen: false).personalRecipes[widget.meal][3][index]['calories']} kcals'),
                               trailing: IconButton(
                                 icon: const Icon(Icons.delete_forever),
                                 onPressed: () {
                                 Map item = Provider.of<PersonalMeals>(context,
                                         listen: false)
-                                    .getPersonalRecipe(3, index);
+                                    .getPersonalRecipe(widget.meal, 3, index);
                                 Provider.of<MealChoiche>(context, listen: false)
                                     .removePersonalRecipe(widget.meal.toUpperCase(),
                                         coursesName[3].toLowerCase(), item);
                                   Provider.of<PersonalMeals>(context,
                                           listen: false)
-                                      .removePersonalRecipe(3, index);
+                                      .removePersonalRecipe(widget.meal, 3, index);
                                   setState(() {});
                                 },
                               )));
