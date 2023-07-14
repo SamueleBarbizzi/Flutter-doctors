@@ -71,7 +71,7 @@ class _MainNavigatorState extends State<MainNavigator> {
     final List<Widget> _screens = [
       HomePage(firstDatabaseEntry: widget.firstDatabaseEntry),
       InfoPage(),
-      AccountPage(),
+      AccountPage(firstDatabaseEntry: widget.firstDatabaseEntry, flag: widget.flag,),
     ];
     print('${MainNavigator.routename} built');
     return SafeArea(

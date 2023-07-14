@@ -154,6 +154,6 @@ class _LoginPageState extends State<LoginPage> {
 
   void _toAccountPage(BuildContext context, {bool firstDatabaseEntry = true}) {
     Navigator.of(context).pushReplacement(MaterialPageRoute(
-        builder: (context) => MainNavigator(firstDatabaseEntry: firstDatabaseEntry, flag: true)));
+        builder: (context) => AccountPage(firstDatabaseEntry: firstDatabaseEntry, flag: true)));
   } //_toHomePage
 } // LoginScreen

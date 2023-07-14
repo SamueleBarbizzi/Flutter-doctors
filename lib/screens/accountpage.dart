@@ -1,4 +1,4 @@
-// ignore_for_file: prefer_const_constructors_in_immutables, avoid_print, prefer_const_constructors, depend_on_referenced_packages, use_build_context_synchronously
+// ignore_for_file: prefer_const_constructors_in_immutables, avoid_print, prefer_const_constructors, depend_on_referenced_packages, use_build_context_synchronously, sized_box_for_whitespace
 
 import 'package:flutter/material.dart';
 import 'package:flutter_doctors/screens/loginpage.dart';
@@ -95,7 +95,7 @@ class _AccountPageState extends State<AccountPage> {
     );
     return;
   }
-}
+  }
 
 bool _isFormValid() {
   // Verifica se tutti i campi di testo obbligatori sono stati compilati correttamente
@@ -108,7 +108,7 @@ bool _isFormValid() {
       _improvementGoalController.text.isNotEmpty &&
       _foodIntoleranceController.text.isNotEmpty &&
       _dailycalorieintakeController.text.isNotEmpty;
-}
+  }
   
   @override
   Widget build(BuildContext context) {
@@ -173,31 +173,16 @@ bool _isFormValid() {
                     ),
                   ),
                   const SizedBox(height: 30),
-                  buildTextField('Full Name', 'Enter your full name', false,
-                      _fullNameController),
-                  buildTextField(
-                      'Email', 'Enter your email', false, _emailController),
-                  buildTextField('Password', 'Enter your password', true,
-                      _passwordController),
-                  buildTextField(
-                      'Gender', 'Enter your gender', false, _genderController),
-                  buildTextField(
-                      'Age', 'Enter your age', false, _ageController),
-                  buildTextField(
-                      'Improvement goal',
-                      'Enter your improvement goal',
-                      false,
-                      _improvementGoalController),
-                  buildTextField(
-                      'Daily calorie intake',
-                      'Enter your daily calorie intake',
-                      false,
-                      _dailycalorieintakeController),
-                  buildTextField(
-                      'Food intolerances/allergy',
-                      'Enter your food intolerances/allergy',
-                      false,
-                      _foodIntoleranceController),
+                  buildTextField('Full Name', 'Enter your full name', false, _fullNameController),
+                  buildTextField('Email', 'Enter your email', false, _emailController),
+                  buildTextField('Password', 'Enter your password', true, _passwordController),         
+                  buildTextField('Gender', 'Enter your gender', false, _genderController),
+                  buildTextField('Age', 'Enter your age', false, _ageController),
+                  buildTextField('Weight', 'Enter your weight', false, _weightController),
+                  buildTextField('Improvement goal', 'Enter your improvement goal', false,  _improvementGoalController),
+                  buildTextField('Daily calorie intake', 'Enter your daily calorie intake', false,  _dailycalorieintakeController), 
+                  buildTextField('Food intolerances/allergy', 'Enter your food intolerances/allergy', false,  _foodIntoleranceController),          
+                  buildTextField('Consent to the processing of personal data', '', false, _consentController),
                   const Center(
                     child: SizedBox(
                       height: 20,
@@ -225,48 +210,8 @@ bool _isFormValid() {
                 ],
               ),
             ),
-           const SizedBox(height: 30),
-           buildTextField('Full Name', 'Enter your full name', false, _fullNameController),
-           buildTextField('Email', 'Enter your email', false, _emailController),
-           buildTextField('Password', 'Enter your password', true, _passwordController),         
-           buildTextField('Gender', 'Enter your gender', false, _genderController),
-           buildTextField('Age', 'Enter your age', false, _ageController),
-           buildTextField('Weight', 'Enter your weight', false, _weightController),
-           buildTextField('Improvement goal', 'Enter your improvement goal', false,  _improvementGoalController),
-           buildTextField('Daily calorie intake', 'Enter your daily calorie intake', false,  _dailycalorieintakeController), 
-           buildTextField('Food intolerances/allergy', 'Enter your food intolerances/allergy', false,  _foodIntoleranceController),          
-           buildTextField('Consent to the processing of personal data', '', false, _consentController),
+          ),
            
-
-                const Center(
-                  child: SizedBox(
-                  height:20,
-                  ),
-                ),
-
-                Center(
-                  child: ElevatedButton(
-                onPressed: () {
-                  saveUserData();
-
-               },
-                style: ElevatedButton.styleFrom(
-                  backgroundColor: Colors.green,
-                  padding: const EdgeInsets.symmetric(horizontal: 80),
-                  shape: RoundedRectangleBorder(borderRadius : BorderRadius.circular(20))
-                ),
-                
-                  child: const Text("SAVE", style: TextStyle(
-                  fontSize:15,
-                  letterSpacing: 2,
-                  color: Colors.white
-                ),),
-                ),
-               )             
-         ],
-        )
-        )
-      ),
 
 
 drawer: Drawer(
