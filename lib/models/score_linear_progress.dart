@@ -26,14 +26,14 @@ class ScoreLinearProgress extends CustomPainter {
       ..strokeCap = StrokeCap.square;
 
     canvas.drawLine(
-      Offset(w * 0, h * 1), //starting point
-      Offset(w * 1, h * 1), //end point
+      Offset(w * 0, h * 0.5), //starting point
+      Offset(w * 1, h * 0.5), //end point
       paint1, //paint
     );
 
         canvas.drawLine(
-      Offset(w * 0, h * 1), //starting point
-      Offset(w * value, h * 1), //end point
+      Offset(w * 0, h * 0.5), //starting point
+      Offset(w * value, h * 0.5), //end point
       paint2, //paint
     );
   }

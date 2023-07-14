@@ -95,6 +95,12 @@ class _HomePageState extends State<HomePage> {
   @override
   Widget build(BuildContext context) {
     print('${HomePage.routename} built');
+    //Calories calculation
+    int actualCalories = Provider.of<MealChoiche>(context, listen: false).getAllCalories();
+    int baseTarget = 2387; //da inserire
+    int sumCalories = 0; // actual calculation below at line 130
+    // Remain = Target - Food + Exercise;
+    int remain = baseTarget - actualCalories + sumCalories;
     return Scaffold(
       appBar: AppBar(
         title: const Row(children: [
@@ -206,11 +212,11 @@ class _HomePageState extends State<HomePage> {
                                                   frontColor: Colors.lightGreen,
                                                   strokeWidth: 20,
                                                   value:
-                                                      0.5, // da mettere valori
+                                                      (actualCalories/sumCalories).toDouble(), // da mettere valori
                                                 ),
-                                                child: const Center(
+                                                child: Center(
                                                     child: Padding(
-                                                  padding: EdgeInsets.only(
+                                                  padding: const EdgeInsets.only(
                                                       top: 50.0),
                                                   child: Column(
                                                       mainAxisAlignment:
@@ -218,8 +224,8 @@ class _HomePageState extends State<HomePage> {
                                                               .start,
                                                       children: [
                                                         Text(
-                                                          '2481', // mettere numero calorie con dati
-                                                          style: TextStyle(
+                                                          remain.toString(), // mettere numero calorie con dati
+                                                          style: const TextStyle(
                                                               fontWeight:
                                                                   FontWeight
                                                                       .bold,
@@ -231,7 +237,7 @@ class _HomePageState extends State<HomePage> {
                                                                       175,
                                                                       80)),
                                                         ),
-                                                        Text(
+                                                        const Text(
                                                           'Remaining',
                                                           style: TextStyle(
                                                               fontSize: 14),
@@ -263,8 +269,8 @@ class _HomePageState extends State<HomePage> {
                                                               fontSize: 12,
                                                               color: Colors
                                                                   .black)),
-                                                      const Text("2387",
-                                                          style: TextStyle(
+                                                      Text(baseTarget.toString(),
+                                                          style: const TextStyle(
                                                               fontWeight:
                                                                   FontWeight
                                                                       .bold,
@@ -287,8 +293,8 @@ class _HomePageState extends State<HomePage> {
                                                               fontSize: 12,
                                                               color: Colors
                                                                   .black)),
-                                                      const Text("1099",
-                                                          style: TextStyle(
+                                                      Text(actualCalories.toString(),
+                                                          style: const TextStyle(
                                                               fontWeight:
                                                                   FontWeight
                                                                       .bold,
@@ -387,8 +393,8 @@ class _HomePageState extends State<HomePage> {
                                   //30-35% of daily calories for breakfast. <---
                                   //35-40% of daily calories for lunch.
                                   //25-35% of daily calories for dinner.
-                                  int breakfastCalories = sumCalories*0.3.round();
-                                  _toBreakfastChoicePage(context);
+                                  // int breakfastCalories = sumCalories*(0.3).round();
+                                  _toBreakfastChoicePage(context, sumCalories);
                                 },
                                 style: ElevatedButton.styleFrom(
                                     //padding: EdgeInsets.fromLTRB(0, 20, 20, 20),
@@ -427,9 +433,9 @@ class _HomePageState extends State<HomePage> {
                                   //30-35% of daily calories for breakfast.
                                   //35-40% of daily calories for lunch.--- 
                                   //25-35% of daily calories for dinner.
-                                  int lunchCalories = sumCalories*0.4.round();
+                                  //int lunchCalories = sumCalories*0.4.round();
                                   String mealName = 'LUNCH';
-                                    _toIngredientsPage(context, mealName);
+                                    _toIngredientsPage(context, mealName, sumCalories);
                                 },
                                 style: ElevatedButton.styleFrom(
                                     //padding: EdgeInsets.fromLTRB(0, 20, 50, 20),
@@ -467,9 +473,9 @@ class _HomePageState extends State<HomePage> {
                                   //30-35% of daily calories for breakfast.
                                   //35-40% of daily calories for lunch.
                                   //25-35% of daily calories for dinner. <---
-                                  int dinnerCalories = sumCalories*0.3.round();
+                                  //int dinnerCalories = sumCalories*0.3.round();
                                   String mealName = 'DINNER';
-                                  _toIngredientsPage(context, mealName);
+                                  _toIngredientsPage(context, mealName, sumCalories);
                                 },
                                 style: ElevatedButton.styleFrom(
                                     //padding: EdgeInsets.all(20.0),
@@ -656,15 +662,15 @@ class _HomePageState extends State<HomePage> {
         .push(MaterialPageRoute(builder: (context) => InfoPage()));
   } //_toInfoPage
 
-  void _toIngredientsPage(BuildContext context, String mealName) {
+  void _toIngredientsPage(BuildContext context, String mealName, int calories) {
     Navigator.of(context).pushReplacement(MaterialPageRoute(
         builder: (context) => IngredientsPage(
-            meal: mealName, firstDatabaseEntry: widget.firstDatabaseEntry)));
+            meal: mealName, firstDatabaseEntry: widget.firstDatabaseEntry, sumCalories: calories,)));
   } //_toIngredientsPage
 
-      void _toBreakfastChoicePage(BuildContext context) {
+      void _toBreakfastChoicePage(BuildContext context, int calories) {
     Navigator.of(context).pushReplacement(MaterialPageRoute(
-        builder: (context) => BreakfastChoicePage(firstDatabaseEntry: widget.firstDatabaseEntry,)));
+        builder: (context) => BreakfastChoicePage(firstDatabaseEntry: widget.firstDatabaseEntry, sumCalories: calories,)));
   } //_toCookbookPage
 
 } //HomePage                  */

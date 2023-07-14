@@ -9,11 +9,16 @@ import 'package:flutter_doctors/models/ingredientslist.dart';
 
 class IngredientsPage extends StatefulWidget {
   const IngredientsPage(
-      {Key? key, required this.meal, required this.firstDatabaseEntry})
+      {Key? key,
+      required this.meal,
+      required this.firstDatabaseEntry,
+      required this.sumCalories,
+      })
       : super(key: key);
 
   final String meal;
   final bool firstDatabaseEntry;
+  final int sumCalories;
 
   static const routename = 'IngredientsPage';
 
@@ -324,7 +329,8 @@ class _IngredientsPageState extends State<IngredientsPage> {
         builder: (context) => CookBookPage(
             selected: chosen,
             meal: widget.meal,
-            firstDatabaseEntry: widget.firstDatabaseEntry)));
+            firstDatabaseEntry: widget.firstDatabaseEntry,
+            sumCalories: widget.sumCalories,)));
   } //_toCookBookPage
 
   /* void _filterSearchResults(String query) {

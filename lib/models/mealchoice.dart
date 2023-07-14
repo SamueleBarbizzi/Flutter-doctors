@@ -223,6 +223,10 @@ class MealChoiche extends ChangeNotifier {
     return totalCalories.toInt();
   }
 
+  int getAllCalories(){
+    return getAllChosenCalories() + getAllPersonalCalories() + getAllSnackCalories();
+  }
+
 
 
 } //MealChoice
