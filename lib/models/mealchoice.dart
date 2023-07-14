@@ -7,7 +7,7 @@ class MealChoiche extends ChangeNotifier {
 
   //The structure will be something like this:
 
-  /*
+/*
   Map chosen = {
     'BREAKFAST': {
         'breakfast' : [breakfast1id, breakfast2id,...],
@@ -59,8 +59,21 @@ class MealChoiche extends ChangeNotifier {
       'dessert': <dynamic>{},
     },
   };
+  
+  List<Map> snacks = [];
 
 
+  void addSnack(String name, int calories) {
+    snacks.add({
+      'name': name,
+      'calories': calories,
+      'isSelected': true,
+    });
+  }
+
+  void removeSnack(String name) {
+    snacks.removeWhere((element) => element['name'] == name);
+  }
 
   void ToogleChosenRecipe(String meal, String course, Map item) {
     // this wants to alternate between inserting the recipe in the chosen Map,
@@ -143,7 +156,10 @@ class MealChoiche extends ChangeNotifier {
         'side': {},
         'dessert': {},
       },
-    };
+    'SNACK':{
+      'snack':<dynamic>{},
+    }
+  };
 
     notifyListeners();
   }

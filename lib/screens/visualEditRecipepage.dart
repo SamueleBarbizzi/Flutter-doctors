@@ -4,7 +4,7 @@ import 'package:flutter/material.dart';
 //import 'package:material_design_icons_flutter/material_design_icons_flutter.dart';
 import 'package:flutter_doctors/screens/mainnavigator.dart';
 import 'package:flutter_doctors/models/mealchoice.dart';
-import 'package:flutter_doctors/models/personalmeals.dart';
+//import 'package:flutter_doctors/models/personalmeals.dart';
 //import 'package:flutter_doctors/models/groups.dart';
 import 'package:provider/provider.dart';
 //import 'package:flutter_doctors/screens/cookbookpage.dart';
@@ -27,7 +27,7 @@ class _VisualEditRecipeState extends State<VisualEditRecipe> {
 
   late Map chosen= Provider.of<MealChoiche>(context, listen: false).chosen;
   late Map personal=Provider.of<MealChoiche>(context, listen: false).personalRecipes;
-  late List snacks=Provider.of<PersonalMeals>(context, listen: false).snacks;
+  late List snacks=Provider.of<MealChoiche>(context, listen: false).snacks;
 
 /*   final List<String> groupsName = [
     'FIRST MAIN DISH',
@@ -43,7 +43,7 @@ class _VisualEditRecipeState extends State<VisualEditRecipe> {
     List<Widget> widgetMeals = [];
     Map chosen= Provider.of<MealChoiche>(context, listen: false).chosen;
     Map personal=Provider.of<MealChoiche>(context, listen: false).personalRecipes;
-    List snacks=Provider.of<PersonalMeals>(context, listen: false).snacks;
+    List snacks=Provider.of<MealChoiche>(context, listen: false).snacks;
 
     for (var k in ['BREAKFAST','LUNCH','DINNER']) { 
       List recipe = chosen[k].values.toList();

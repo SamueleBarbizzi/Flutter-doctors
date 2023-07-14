@@ -2,6 +2,7 @@
 
 import 'package:flutter/material.dart';
 import 'package:flutter_doctors/models/personalmeals.dart';
+import 'package:flutter_doctors/models/mealchoice.dart';
 import 'package:flutter_doctors/screens/breakfastchoicepage.dart';
 import 'package:intl/intl.dart';
 import 'package:line_icons/line_icons.dart';
@@ -39,7 +40,7 @@ class _HomePageState extends State<HomePage> {
     quantityController.dispose();
     super.dispose();
   }
-
+  
   @override
   void didChangeDependencies() {
     super.didChangeDependencies();
@@ -488,381 +489,6 @@ class _HomePageState extends State<HomePage> {
                                           offset: Offset(0, 2))
                                     ]),
                                 label: const Text('Snack'),
-                                onPressed: () {
-                                  String mealName = 'DINNER';
-                                  _toIngredientsPage(context, mealName);
-                                },
-                                style: ElevatedButton.styleFrom(
-                                    //padding: EdgeInsets.fromLTRB(0, 20, 50, 20),
-                                    backgroundColor: Colors.lightGreen,
-                                    fixedSize: const Size(200, 40),
-                                    textStyle: const TextStyle(
-                                        fontSize: 22,
-                                        fontWeight: FontWeight.bold),
-                                    elevation: 15,
-                                    shadowColor:
-                                        const Color.fromARGB(255, 14, 75, 16),
-                                    shape: const StadiumBorder(),
-                                    side: const BorderSide(
-                                        color: Color.fromARGB(255, 14, 75, 16),
-                                        width: 2.5)),
-                              ),
-                            ],
-                          ),
-                        ],
-                      ),
-                          ),
-                    ],
-                  );
-
-
-
-
-                } else {
-                  return Column(
-                    children: [
-                          Align(
-                            alignment: Alignment.center,
-                            child: Container(
-                              height: 230,
-                              width: 350,
-                              margin: const EdgeInsets.only(top: 5),
-                              decoration: BoxDecoration(
-                                color: Colors.white,
-                                border: Border.all(
-                                    color: Colors.grey.shade400, width: 1.0),
-                                borderRadius: BorderRadius.circular(10),
-                                boxShadow: [
-                                  BoxShadow(
-                                    color: Colors.grey.shade700,
-                                    blurRadius: 6,
-                                    spreadRadius: 2,
-                                    offset: const Offset(-4, -4),
-                                  )
-                                ],
-                              ),
-                              child: Column(
-                                children: [
-                                  Container(
-                                      height: 40,
-                                      alignment: const Alignment(-0.95, 0.5),
-                                      child: const Text("Calories",
-                                          style: TextStyle(
-                                              fontWeight: FontWeight.bold,
-                                              fontSize: 20,
-                                              color: Color.fromARGB(
-                                                  255, 76, 175, 80)))),
-                                  Container(
-                                      height: 20,
-                                      alignment: const Alignment(-0.9, 0),
-                                      child: const Text(
-                                          "Remaining = Target - Food + Exercise",
-                                          style: TextStyle(
-                                              fontSize: 12,
-                                              color: Colors.black))),
-                                  const SizedBox(height: 15),
-                                  Align(
-                                    alignment: const Alignment(1, -1),
-                                    child: Container(
-                                      child: Row(
-                                        mainAxisAlignment:
-                                            MainAxisAlignment.end,
-                                        crossAxisAlignment:
-                                            CrossAxisAlignment.end,
-                                        children: [
-                                          SizedBox(
-                                            width: 150,
-                                            height: 150,
-                                            child: CustomPaint(
-                                                painter: ScoreCircularProgress(
-                                                  backColor: Colors.lightGreen
-                                                      .withOpacity(0.4),
-                                                  frontColor: Colors.lightGreen,
-                                                  strokeWidth: 20,
-                                                  value:
-                                                      0.5, // da mettere valori
-                                                ),
-                                                child: const Center(
-                                                    child: Padding(
-                                                  padding: EdgeInsets.only(
-                                                      top: 50.0),
-                                                  child: Column(
-                                                      mainAxisAlignment:
-                                                          MainAxisAlignment
-                                                              .start,
-                                                      children: [
-                                                        Text(
-                                                          '2481', // mettere numero calorie con dati
-                                                          style: TextStyle(
-                                                              fontWeight:
-                                                                  FontWeight
-                                                                      .bold,
-                                                              fontSize: 26,
-                                                              color: Color
-                                                                  .fromARGB(
-                                                                      255,
-                                                                      76,
-                                                                      175,
-                                                                      80)),
-                                                        ),
-                                                        Text(
-                                                          'Remaining',
-                                                          style: TextStyle(
-                                                              fontSize: 14),
-                                                        )
-                                                      ]),
-                                                ))),
-                                          ),
-                                          const SizedBox(
-                                              width: 30, height: 150),
-                                          Align(
-                                            alignment: const Alignment(1, 0),
-                                            child: SizedBox(
-                                              width: 150,
-                                              height: 150,
-                                              child: Column(
-                                                crossAxisAlignment:
-                                                    CrossAxisAlignment.end,
-                                                children: [
-                                                  const SizedBox(height: 20),
-                                                  Row(
-                                                    children: [
-                                                      Icon(
-                                                          MdiIcons
-                                                              .bullseyeArrow,
-                                                          color: Colors.red),
-                                                      const Text(
-                                                          "Base Target   ",
-                                                          style: TextStyle(
-                                                              fontSize: 12,
-                                                              color: Colors
-                                                                  .black)),
-                                                      const Text("2387",
-                                                          style: TextStyle(
-                                                              fontWeight:
-                                                                  FontWeight
-                                                                      .bold,
-                                                              fontSize: 12,
-                                                              color: Color.fromARGB(
-                                                                  255,
-                                                                  76,
-                                                                  175,
-                                                                  80))), // inserire dati aggiornati
-                                                    ],
-                                                  ),
-                                                  Row(
-                                                    children: [
-                                                      Icon(
-                                                          MdiIcons
-                                                              .silverwareForkKnife,
-                                                          color: Colors.blue),
-                                                      const Text("Food   ",
-                                                          style: TextStyle(
-                                                              fontSize: 12,
-                                                              color: Colors
-                                                                  .black)),
-                                                      const Text("1099",
-                                                          style: TextStyle(
-                                                              fontWeight:
-                                                                  FontWeight
-                                                                      .bold,
-                                                              fontSize: 12,
-                                                              color: Color.fromARGB(
-                                                                  255,
-                                                                  76,
-                                                                  175,
-                                                                  80))), // inserire dati aggiornati
-                                                    ],
-                                                  ),
-                                                  Row(
-                                                    children: [
-                                                      Icon(MdiIcons.fire,
-                                                          color: Colors.orange),
-                                                      const Text(
-                                                          "Rest + Exercise   ",
-                                                          style: TextStyle(
-                                                              fontSize: 12,
-                                                              color: Colors
-                                                                  .black)),
-                                                      Text("112",
-                                                          style: const TextStyle(
-                                                              fontWeight:
-                                                                  FontWeight
-                                                                      .bold,
-                                                              fontSize: 12,
-                                                              color: Color.fromARGB(
-                                                                  255,
-                                                                  76,
-                                                                  175,
-                                                                  80))), // inserire dati aggiornati
-                                                    ],
-                                                  ),
-                                                ],
-                                              ),
-                                            ),
-                                          ),
-                                        ],
-                                      ),
-                                    ),
-                                  ),
-                                ],
-                              ),
-                            ),
-                          ),
-                          const SizedBox(height: 15),
-                          Container(
-                            height: 330, width: 350,
-                            margin: const EdgeInsets.fromLTRB(25, 0, 25, 0),
-                            decoration: BoxDecoration(
-                              color: Colors.white,
-                              border: Border.all(
-                                  color: Colors.grey.shade400, width: 1.0),
-                              borderRadius: BorderRadius.circular(10),
-                              boxShadow: [
-                                BoxShadow(
-                                  color: Colors.grey.shade700,
-                                  blurRadius: 6,
-                                  spreadRadius: 2,
-                                  offset: const Offset(-4, -4),
-                                )
-                              ],
-                            ),
-                          child: Column(
-                        mainAxisAlignment: MainAxisAlignment.center,
-                        children: [
-                          Container(
-                            height: 30,
-                            alignment: const Alignment(-0.95, -1),
-                            padding: const EdgeInsets.only(
-                                left: 5), //color:Colors.red,
-                            child: const Text("Meal Selection",
-                                style: TextStyle(
-                                    fontWeight: FontWeight.bold,
-                                    fontSize: 20,
-                                    color: Color.fromARGB(255, 76, 175, 80))),
-                          ),
-                          const SizedBox(height: 25),
-                          Row(
-                            mainAxisAlignment: MainAxisAlignment.center,
-                            children: [
-                              ElevatedButton.icon(
-                                icon: Icon(MdiIcons.coffee,
-                                    color:
-                                        const Color.fromARGB(255, 6, 90, 158),
-                                    shadows: const <Shadow>[
-                                      Shadow(
-                                          color: Colors.black,
-                                          blurRadius: 1.0,
-                                          offset: Offset(0, 2))
-                                    ]),
-                                label: const Text('Breakfast'),
-                                //onPressed: (){},
-                                onPressed: () {
-                                  _toBreakfastChoicePage(context);
-                                },
-                                style: ElevatedButton.styleFrom(
-                                    //padding: EdgeInsets.fromLTRB(0, 20, 20, 20),
-                                    backgroundColor: Colors.lightGreen,
-                                    fixedSize: const Size(200, 40),
-                                    textStyle: const TextStyle(
-                                        fontSize: 22,
-                                        fontWeight: FontWeight.bold),
-                                    elevation: 15,
-                                    shadowColor:
-                                        const Color.fromARGB(255, 14, 75, 16),
-                                    shape: const StadiumBorder(),
-                                    side: const BorderSide(
-                                        color: Color.fromARGB(255, 14, 75, 16),
-                                        width: 2.5)),
-                              ),
-                            ],
-                          ),
-                          const SizedBox(height: 15),
-                          Row(
-                            mainAxisAlignment: MainAxisAlignment.center,
-                            children: [
-                              ElevatedButton.icon(
-                                icon: Icon(MdiIcons.whiteBalanceSunny,
-                                    color:
-                                        const Color.fromARGB(255, 219, 200, 23),
-                                    shadows: const <Shadow>[
-                                      Shadow(
-                                          color: Colors.black,
-                                          blurRadius: 1.0,
-                                          offset: Offset(0, 2))
-                                    ]),
-                                label: const Text('Lunch'),
-                                onPressed: () {
-                                  String mealName = 'LUNCH';
-                                    _toIngredientsPage(context, mealName);
-                                },
-                                style: ElevatedButton.styleFrom(
-                                    //padding: EdgeInsets.fromLTRB(0, 20, 50, 20),
-                                    backgroundColor: Colors.lightGreen,
-                                    fixedSize: const Size(200, 40),
-                                    textStyle: const TextStyle(
-                                        fontSize: 22,
-                                        fontWeight: FontWeight.bold),
-                                    elevation: 15,
-                                    shadowColor:
-                                        const Color.fromARGB(255, 14, 75, 16),
-                                    shape: const StadiumBorder(),
-                                    side: const BorderSide(
-                                        color: Color.fromARGB(255, 14, 75, 16),
-                                        width: 2.5)),
-                              ),
-                            ],
-                          ),
-                          const SizedBox(height: 15),
-                          Row(
-                            mainAxisAlignment: MainAxisAlignment.center,
-                            children: [
-                              ElevatedButton.icon(
-                                icon: const Icon(Icons.mode_night_rounded,
-                                    color: Color.fromARGB(255, 126, 125, 125),
-                                    shadows: <Shadow>[
-                                      Shadow(
-                                          color: Colors.black,
-                                          blurRadius: 1.0,
-                                          offset: Offset(0, 2))
-                                    ]),
-                                label: const Text('Dinner'),
-                                onPressed: () {
-                                  String mealName = 'DINNER';
-                                  _toIngredientsPage(context, mealName);
-                                },
-                                style: ElevatedButton.styleFrom(
-                                    //padding: EdgeInsets.all(20.0),
-                                    backgroundColor: Colors.lightGreen,
-                                    fixedSize: const Size(200, 40),
-                                    textStyle: const TextStyle(
-                                        fontSize: 22,
-                                        fontWeight: FontWeight.bold),
-                                    elevation: 15,
-                                    shadowColor:
-                                        const Color.fromARGB(255, 14, 75, 16),
-                                    shape: const StadiumBorder(),
-                                    side: const BorderSide(
-                                        color: Color.fromARGB(255, 14, 75, 16),
-                                        width: 2.5)),
-                              ),
-                            ],
-                          ),
-                          const SizedBox(height: 15),
-                          Row(
-                            mainAxisAlignment: MainAxisAlignment.center,
-                            children: [
-                              ElevatedButton.icon(
-                                icon: Icon(MdiIcons.foodApple,
-                                    color:
-                                        const Color.fromARGB(255, 218, 26, 12),
-                                    shadows: const <Shadow>[
-                                      Shadow(
-                                          color: Colors.black,
-                                          blurRadius: 1.0,
-                                          offset: Offset(0, 2))
-                                    ]),
-                                label: const Text('Snack'),
                                 onPressed: () => showDialog(
                                       context: context,
                                       builder: (context) => ScaffoldMessenger(
@@ -932,7 +558,7 @@ class _HomePageState extends State<HomePage> {
                                                           quantityController
                                                                   .text !=
                                                               '') {
-                                                        Provider.of<PersonalMeals>(
+                                                        Provider.of<MealChoiche>(
                                                                 context,
                                                                 listen: false)
                                                             .addSnack(
@@ -988,6 +614,10 @@ class _HomePageState extends State<HomePage> {
                       ),
                           ),
                     ],
+                  );
+                } else {
+                  return const Center(
+                    child: CircularProgressIndicator(),
                   );
                 }
               });
