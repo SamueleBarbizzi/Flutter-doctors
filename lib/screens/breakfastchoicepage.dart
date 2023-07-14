@@ -18,9 +18,11 @@ class BreakfastChoicePage extends StatefulWidget {
   const BreakfastChoicePage({
     Key? key,
     required this.firstDatabaseEntry,
+    required this.sumCalories,
   }) : super(key: key);
 
   final bool firstDatabaseEntry;
+  final int sumCalories;
 
   static const routename = 'BreakfastChoicePage';
 
@@ -57,6 +59,9 @@ class _BreakfastChoicePageState extends State<BreakfastChoicePage> {
   @override
   Widget build(BuildContext context) {
     print('${BreakfastChoicePage.routename} built');
+    
+    int countCalories = Provider.of<MealChoiche>(context, listen: false).getAllCalories();
+    
     double deviceWidth(BuildContext context) =>
         MediaQuery.of(context).size.width;
     final recipes = Groups().createBreakfastDishes(context);
@@ -146,17 +151,29 @@ class _BreakfastChoicePageState extends State<BreakfastChoicePage> {
                                               quantityController.text != '') {
                                             Provider.of<PersonalMeals>(context,
                                                     listen: false)
-                                                .addPersonalRecipe(meal,
+                                                .addPersonalRecipe(
+                                                    meal,
                                                     0,
                                                     nameController.text,
                                                     int.parse(quantityController
                                                         .text));
-                                Map item = Provider.of<PersonalMeals>(context,
+                                            Map item =
+                                                Provider.of<PersonalMeals>(
+                                                        context,
+                                                        listen: false)
+                                                    .getPersonalRecipe(
+                                                        meal, 0, 1, true);
+                                            Provider.of<MealChoiche>(context,
+                                                    listen: false)
+                                                .addPersonalRecipe(
+                                                    meal.toUpperCase(),
+                                                    course.toLowerCase(),
+                                                    item);
+                                        countCalories = Provider.of<MealChoiche>(
+                                        context,
                                         listen: false)
-                                    .getPersonalRecipe(meal, 0, 1, true);
-                                                  Provider.of<MealChoiche>(context, listen: false).
-                                                    addPersonalRecipe(meal.toUpperCase(),
-                                        course.toLowerCase(), item);
+                                    .getAllCalories();
+
                                             setState(() {});
                                             nameController.clear();
                                             quantityController.clear();
@@ -195,17 +212,15 @@ class _BreakfastChoicePageState extends State<BreakfastChoicePage> {
                       .length,
                   itemBuilder: (BuildContext ctx, index) {
                     return Card(
-                        key: ValueKey(
-                            Provider.of<PersonalMeals>(context, listen: false)
-                                .personalRecipes[meal][index]['name']),
+                        key: ValueKey(Provider.of<PersonalMeals>(context, listen: false)
+                            .personalRecipes[meal][index]['name']),
                         margin: const EdgeInsets.all(1),
                         shape: RoundedRectangleBorder(
                             borderRadius: BorderRadius.circular(5)),
 
                         // The color depends on this is selected or not
                         color: Provider.of<PersonalMeals>(context, listen: false)
-                                    .personalRecipes[meal][index]['isSelected'] ==
-                                true
+                                    .personalRecipes[meal][index]['isSelected'] == true
                             ? Colors.lightGreen
                             : Colors.white,
                         child: ListTile(
@@ -219,6 +234,13 @@ class _BreakfastChoicePageState extends State<BreakfastChoicePage> {
                                 Provider.of<MealChoiche>(context, listen: false)
                                     .TooglePersonalRecipe(meal.toUpperCase(),
                                         course.toLowerCase(), item);
+
+
+                                countCalories = Provider.of<MealChoiche>(
+                                        context,
+                                        listen: false)
+                                    .getAllCalories();
+
                                 Provider.of<PersonalMeals>(context,
                                                 listen: false)
                                             .personalRecipes[meal][index]
@@ -233,8 +255,7 @@ class _BreakfastChoicePageState extends State<BreakfastChoicePage> {
                                 Provider.of<PersonalMeals>(context, listen: false)
                                     .personalRecipes[meal][index]['name']),
                             subtitle: Text('     ${Provider.of<PersonalMeals>(context, listen: false).personalRecipes[meal][index]['calories']} kcals'),
-                            trailing: 
-                            IconButton(
+                            trailing: IconButton(
                               icon: const Icon(Icons.delete_forever),
                               onPressed: () {
                                 Map item = Provider.of<PersonalMeals>(context,
@@ -246,6 +267,12 @@ class _BreakfastChoicePageState extends State<BreakfastChoicePage> {
                                 Provider.of<PersonalMeals>(context,
                                         listen: false)
                                     .removePersonalRecipe(meal, 0, index);
+
+                                countCalories = Provider.of<MealChoiche>(
+                                        context,
+                                        listen: false)
+                                    .getAllCalories();
+                                
                                 setState(() {});
                               },
                             )));
@@ -257,6 +284,7 @@ class _BreakfastChoicePageState extends State<BreakfastChoicePage> {
                 ),
                 ListView.builder(
                   shrinkWrap: true,
+                  physics: const NeverScrollableScrollPhysics(),
                   itemCount: recipes.length,
                   itemBuilder: (BuildContext ctx, index) {
                     return Card(
@@ -281,24 +309,27 @@ class _BreakfastChoicePageState extends State<BreakfastChoicePage> {
                             Provider.of<MealChoiche>(context, listen: false)
                                 .ToogleChosenRecipe(
                                     meal.toUpperCase(), course, recipes[index]);
+
+                            countCalories = Provider.of<MealChoiche>(
+                                        context,
+                                        listen: false)
+                                    .getAllCalories();
                           });
                         },
                         title: Text(recipes[index]['name']),
                         subtitle:
                             Text('     ${recipes[index]['calories']} kcals'),
                         trailing: IconButton(
-                                  icon:
-                                      const Icon(Icons.remove_red_eye_rounded),
-                                  tooltip: 'Show Recipe',
-                                  onPressed: () => _showRecipe(
-                                      context,
-                                      'Breakfast',
-                                      recipes[index]),
-                                ),
+                          icon: const Icon(Icons.remove_red_eye_rounded),
+                          tooltip: 'Show Recipe',
+                          onPressed: () =>
+                              _showRecipe(context, 'Breakfast', recipes[index]),
+                        ),
                       ),
                     );
                   },
                 ),
+                const SizedBox(height: 30),
               ],
             ),
           ),
@@ -311,9 +342,9 @@ class _BreakfastChoicePageState extends State<BreakfastChoicePage> {
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.stretch,
                 children: [
-                  const Expanded(
+                  Expanded(
                     child: Text(
-                      ' Actual calories count:',
+                      ' Actual calories count: $countCalories / ${widget.sumCalories}',
                     ),
                   ),
                   Expanded(
@@ -321,8 +352,10 @@ class _BreakfastChoicePageState extends State<BreakfastChoicePage> {
                       foregroundPainter: ScoreLinearProgress(
                         backColor: Colors.lightBlueAccent.withOpacity(0.4),
                         frontColor: Colors.lightBlueAccent,
-                        strokeWidth: 20,
-                        value: 0.5,
+
+                        strokeWidth: 15,
+                        value: (countCalories/widget.sumCalories).toDouble(),
+
                       ),
                     ),
                   ),
@@ -354,12 +387,12 @@ class _BreakfastChoicePageState extends State<BreakfastChoicePage> {
     );
   } //_Done
 
-    void _showRecipe(BuildContext context, String dish, Map recipe) {
+
+  void _showRecipe(BuildContext context, String dish, Map recipe) {
     Navigator.of(context).push(MaterialPageRoute(
         builder: (context) => RecipePage(
               recipe: recipe,
               dish: dish,
             )));
   }
-
 } //BreakfastChoicePage
