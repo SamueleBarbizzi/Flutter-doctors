@@ -75,4 +75,3 @@ class _ProvaState extends State<Prova> {
               firstDatabaseEntry: widget.firstDatabaseEntry,
             )));
   } //_toMainNavigator
-}

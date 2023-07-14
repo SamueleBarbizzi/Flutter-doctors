@@ -59,7 +59,9 @@ class _BreakfastChoicePageState extends State<BreakfastChoicePage> {
   @override
   Widget build(BuildContext context) {
     print('${BreakfastChoicePage.routename} built');
+    
     int countCalories = Provider.of<MealChoiche>(context, listen: false).getAllCalories();
+    
     double deviceWidth(BuildContext context) =>
         MediaQuery.of(context).size.width;
     final recipes = Groups().createBreakfastDishes(context);
@@ -171,6 +173,7 @@ class _BreakfastChoicePageState extends State<BreakfastChoicePage> {
                                         context,
                                         listen: false)
                                     .getAllCalories();
+
                                             setState(() {});
                                             nameController.clear();
                                             quantityController.clear();
@@ -217,9 +220,7 @@ class _BreakfastChoicePageState extends State<BreakfastChoicePage> {
 
                         // The color depends on this is selected or not
                         color: Provider.of<PersonalMeals>(context, listen: false)
-                                        .personalRecipes[meal][index]
-                                    ['isSelected'] ==
-                                true
+                                    .personalRecipes[meal][index]['isSelected'] == true
                             ? Colors.lightGreen
                             : Colors.white,
                         child: ListTile(
@@ -233,6 +234,7 @@ class _BreakfastChoicePageState extends State<BreakfastChoicePage> {
                                 Provider.of<MealChoiche>(context, listen: false)
                                     .TooglePersonalRecipe(meal.toUpperCase(),
                                         course.toLowerCase(), item);
+
 
                                 countCalories = Provider.of<MealChoiche>(
                                         context,
@@ -265,10 +267,12 @@ class _BreakfastChoicePageState extends State<BreakfastChoicePage> {
                                 Provider.of<PersonalMeals>(context,
                                         listen: false)
                                     .removePersonalRecipe(meal, 0, index);
+
                                 countCalories = Provider.of<MealChoiche>(
                                         context,
                                         listen: false)
                                     .getAllCalories();
+                                
                                 setState(() {});
                               },
                             )));
@@ -348,8 +352,10 @@ class _BreakfastChoicePageState extends State<BreakfastChoicePage> {
                       foregroundPainter: ScoreLinearProgress(
                         backColor: Colors.lightBlueAccent.withOpacity(0.4),
                         frontColor: Colors.lightBlueAccent,
+
                         strokeWidth: 15,
                         value: (countCalories/widget.sumCalories).toDouble(),
+
                       ),
                     ),
                   ),
@@ -380,6 +386,7 @@ class _BreakfastChoicePageState extends State<BreakfastChoicePage> {
       ),
     );
   } //_Done
+
 
   void _showRecipe(BuildContext context, String dish, Map recipe) {
     Navigator.of(context).push(MaterialPageRoute(

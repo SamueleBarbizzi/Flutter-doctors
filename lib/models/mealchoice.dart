@@ -86,6 +86,7 @@ class MealChoiche extends ChangeNotifier {
       chosen[meal.toUpperCase()][course.toLowerCase()].add(item);
     }
 
+
     //Remember to call the CookBook provider when using choose.
 
     //Call the notifyListeners() method to alert that something happened.
@@ -93,10 +94,32 @@ class MealChoiche extends ChangeNotifier {
   }
 
   void findAndRemovePersonalRecipe(String name) {
-    for (int indexMeal = 0; indexMeal < personalRecipes.length; indexMeal++) {
-      for (var course in personalRecipes[indexMeal]) {
-        personalRecipes[indexMeal][course].removeAt(personalRecipes[indexMeal][course]
-            .indexWhere((element) => element['name'] == name));
+    loop:
+    for (String meal in ['BREAKFAST', 'LUNCH', 'DINNER']) {
+      for (String course in personalRecipes[meal].keys) {
+        List temp = personalRecipes[meal][course].toList();
+        int ind = temp.indexWhere((element) => element['name'] == name);
+        if (ind != -1) {
+          Map item = personalRecipes[meal][course].elementAt(ind);
+          personalRecipes[meal][course].remove(item);
+          break loop;
+        }
+      }
+    }
+
+    void findAndRemoveChosenRecipe(String name) {
+      loop:
+      for (String meal in ['BREAKFAST', 'LUNCH', 'DINNER']) {
+        for (String course in chosen[meal].keys) {
+          List temp = chosen[meal][course].toList();
+          int ind = temp.indexWhere((element) => element['name'] == name);
+          if (ind != -1) {
+            Map item = chosen[meal][course].elementAt(ind);
+            chosen[meal][course].remove(item);
+            break loop;
+          }
+        }
+
       }
     }
 
@@ -190,6 +213,7 @@ class MealChoiche extends ChangeNotifier {
     notifyListeners();
   }
 
+
   Set getMealRecipes(String meal, String course) {
     return chosen[meal.toUpperCase()][course.toLowerCase()];
   }
@@ -256,4 +280,5 @@ class MealChoiche extends ChangeNotifier {
         getAllPersonalCalories() +
         getAllSnackCalories();
   }
+
 } //MealChoice

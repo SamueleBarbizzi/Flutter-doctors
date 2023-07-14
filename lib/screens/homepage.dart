@@ -65,9 +65,11 @@ class _HomePageState extends State<HomePage> {
     SharedPreferences sp = await SharedPreferences.getInstance();
     if (widget.firstDatabaseEntry == true &&
         sp.getInt('selectedIndex') == null) {
+          if (mounted){
       setState(() {
         i = dataLength - 1;
       });
+          }
     }
   }
 
@@ -588,7 +590,9 @@ class _HomePageState extends State<HomePage> {
                                                                     quantityController
                                                                         .text));
                                                         setState(() {});
+                                                        
                                                         actualCalories = Provider.of<MealChoiche>(context, listen: false).getAllCalories();
+
                                                         nameController.clear();
                                                         quantityController
                                                             .clear();
@@ -668,6 +672,7 @@ class _HomePageState extends State<HomePage> {
         builder: (context) => IngredientsPage(
             meal: mealName, firstDatabaseEntry: widget.firstDatabaseEntry, sumCalories: calories,)));
   } //_toIngredientsPage
+
 
       void _toBreakfastChoicePage(BuildContext context, int calories) {
     Navigator.of(context).pushReplacement(MaterialPageRoute(

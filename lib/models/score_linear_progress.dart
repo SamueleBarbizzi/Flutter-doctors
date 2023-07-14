@@ -28,6 +28,7 @@ class ScoreLinearProgress extends CustomPainter {
     canvas.drawLine(
       Offset(w * 0, h * 0.5), //starting point
       Offset(w * 1, h * 0.5), //end point
+
       paint1, //paint
     );
 

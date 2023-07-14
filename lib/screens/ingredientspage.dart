@@ -341,5 +341,3 @@ class _IngredientsPageState extends State<IngredientsPage> {
     });
   } */
 } //IngredientsPage
-
-

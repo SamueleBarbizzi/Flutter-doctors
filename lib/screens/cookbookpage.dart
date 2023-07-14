@@ -139,6 +139,7 @@ class _CookBookPageState extends State<CookBookPage> {
   Widget build(BuildContext context) {
     print('${CookBookPage.routename} built');
 
+
     int countCalories = Provider.of<MealChoiche>(context, listen: false).getAllCalories();
 
     //double deviceHeight(BuildContext context) => MediaQuery.of(context).size.height;
@@ -163,7 +164,9 @@ class _CookBookPageState extends State<CookBookPage> {
                 MaterialPageRoute(
                     builder: (context) => IngredientsPage(
                         firstDatabaseEntry: widget.firstDatabaseEntry,
+
                         meal: widget.meal, sumCalories: widget.sumCalories,))),
+
           ),
           actions: [
             IconButton(
@@ -266,6 +269,7 @@ class _CookBookPageState extends State<CookBookPage> {
                                                   Provider.of<MealChoiche>(context, listen: false).
                                                     addPersonalRecipe(widget.meal.toUpperCase(),
                                         coursesName[0].toLowerCase(), item);
+
                                         countCalories = Provider.of<MealChoiche>(
                                         context,
                                         listen: false)
@@ -344,10 +348,12 @@ class _CookBookPageState extends State<CookBookPage> {
                                     .TooglePersonalRecipe(widget.meal.toUpperCase(),
                                         coursesName[0].toLowerCase(), item);
                                     });
+
                                         countCalories = Provider.of<MealChoiche>(
                                         context,
                                         listen: false)
                                     .getAllCalories();
+                                    
                                   },
                                   title: Text(Provider.of<PersonalMeals>(context, listen: false)
                                       .personalRecipes[widget.meal][0][index]['name']),
@@ -364,10 +370,12 @@ class _CookBookPageState extends State<CookBookPage> {
                                       Provider.of<PersonalMeals>(context,
                                               listen: false)
                                           .removePersonalRecipe(widget.meal, 0, index);
+
                                     countCalories = Provider.of<MealChoiche>(
                                         context,
                                         listen: false)
                                     .getAllCalories();
+
                                       setState(() {});
                                     },
                                   )));
@@ -403,6 +411,7 @@ class _CookBookPageState extends State<CookBookPage> {
                                             ['is${widget.meal}Saved'];
                                     String meal = widget.meal;
                                     String course = coursesName[0];
+
                                     Provider.of<MealChoiche>(context, listen: false).
                                     ToogleChosenRecipe(meal.toUpperCase(), course , possibleRecipes[0][index]);
 
@@ -410,6 +419,7 @@ class _CookBookPageState extends State<CookBookPage> {
                                         context,
                                         listen: false)
                                     .getAllCalories();
+
                                   });
                                 },
 
@@ -465,9 +475,11 @@ class _CookBookPageState extends State<CookBookPage> {
                     child: Column(
                       crossAxisAlignment: CrossAxisAlignment.stretch,
                       children: [
+
                         Expanded(
                           child: Text(
                             ' Actual calories count: $countCalories / ${widget.sumCalories}',
+
                           ),
                         ),
                         Expanded(
@@ -476,8 +488,10 @@ class _CookBookPageState extends State<CookBookPage> {
                               backColor:
                                   Colors.lightBlueAccent.withOpacity(0.4),
                               frontColor: Colors.lightBlueAccent,
+
                               strokeWidth: 15,
                               value: (countCalories/widget.sumCalories).toDouble(),
+
                             ),
                           ),
                         ),
@@ -492,7 +506,6 @@ class _CookBookPageState extends State<CookBookPage> {
                 SingleChildScrollView(
                   child: Column(
                     children: [
-                      
                       OutlinedButton(
                           onPressed: () => showDialog(
                                 context: context,
@@ -567,10 +580,12 @@ class _CookBookPageState extends State<CookBookPage> {
                                                   Provider.of<MealChoiche>(context, listen: false).
                                                     addPersonalRecipe(widget.meal.toUpperCase(),
                                         coursesName[1].toLowerCase(), item);
+
                                         countCalories = Provider.of<MealChoiche>(
                                         context,
                                         listen: false)
                                     .getAllCalories();
+                                                  
                                                   nameController.clear();
                                                   quantityController.clear();
                                                   Navigator.pop(context, 'Add');
@@ -643,10 +658,12 @@ class _CookBookPageState extends State<CookBookPage> {
                                 Provider.of<MealChoiche>(context, listen: false)
                                     .TooglePersonalRecipe(widget.meal.toUpperCase(),
                                         coursesName[1].toLowerCase(), item);
+
                                         countCalories = Provider.of<MealChoiche>(
                                         context,
                                         listen: false)
                                     .getAllCalories();
+                                      
                                     });
                                   },
 
@@ -668,10 +685,12 @@ class _CookBookPageState extends State<CookBookPage> {
                                       Provider.of<PersonalMeals>(context,
                                               listen: false)
                                           .removePersonalRecipe(widget.meal, 1, index);
+
                                           countCalories = Provider.of<MealChoiche>(
                                         context,
                                         listen: false)
                                     .getAllCalories();
+
                                       setState(() {});
                                     },
                                   )));
@@ -707,12 +726,14 @@ class _CookBookPageState extends State<CookBookPage> {
                                             ['is${widget.meal}Saved'];
                                     String meal = widget.meal;
                                     String course = coursesName[1];
+
                                     Provider.of<MealChoiche>(context, listen: false).
                                     ToogleChosenRecipe(meal.toUpperCase(), course , possibleRecipes[1][index]);
                                     countCalories = Provider.of<MealChoiche>(
                                         context,
                                         listen: false)
                                     .getAllCalories();
+
                                   });
                                 },
 
@@ -779,8 +800,10 @@ class _CookBookPageState extends State<CookBookPage> {
                               backColor:
                                   Colors.lightBlueAccent.withOpacity(0.4),
                               frontColor: Colors.lightBlueAccent,
+
                               strokeWidth: 15,
                         value: (countCalories/widget.sumCalories).toDouble(),
+
                             ),
                           ),
                         ),
@@ -795,7 +818,6 @@ class _CookBookPageState extends State<CookBookPage> {
                 SingleChildScrollView(
                   child: Column(
                     children: [
-                      
                       OutlinedButton(
                           onPressed: () => showDialog(
                                 context: context,
@@ -870,10 +892,12 @@ class _CookBookPageState extends State<CookBookPage> {
                                                   Provider.of<MealChoiche>(context, listen: false).
                                                     addPersonalRecipe(widget.meal.toUpperCase(),
                                         coursesName[2].toLowerCase(), item);
+
                                         countCalories = Provider.of<MealChoiche>(
                                         context,
                                         listen: false)
                                     .getAllCalories();
+                                                  
                                                   nameController.clear();
                                                   quantityController.clear();
                                                   Navigator.pop(context, 'Add');
@@ -946,10 +970,12 @@ class _CookBookPageState extends State<CookBookPage> {
                                 Provider.of<MealChoiche>(context, listen: false)
                                     .TooglePersonalRecipe(widget.meal.toUpperCase(),
                                         coursesName[2].toLowerCase(), item);
+
                                         countCalories = Provider.of<MealChoiche>(
                                         context,
                                         listen: false)
                                     .getAllCalories();
+
                                     });
                                   },
                                   title: Text(Provider.of<PersonalMeals>(context, listen: false)
@@ -967,10 +993,12 @@ class _CookBookPageState extends State<CookBookPage> {
                                       Provider.of<PersonalMeals>(context,
                                               listen: false)
                                           .removePersonalRecipe(widget.meal, 2, index);
+
                                           countCalories = Provider.of<MealChoiche>(
                                         context,
                                         listen: false)
                                     .getAllCalories();
+
                                       setState(() {});
                                     },
                                   )));
@@ -1006,12 +1034,14 @@ class _CookBookPageState extends State<CookBookPage> {
                                             ['is${widget.meal}Saved'];
                                     String meal = widget.meal;
                                     String course = coursesName[2];
+
                                     Provider.of<MealChoiche>(context, listen: false).
                                     ToogleChosenRecipe(meal.toUpperCase(), course , possibleRecipes[2][index]);
                                     countCalories = Provider.of<MealChoiche>(
                                         context,
                                         listen: false)
                                     .getAllCalories();
+
                                   });
                                 },
                                 title: Text(possibleRecipes[2][index]['name'],
@@ -1064,7 +1094,9 @@ class _CookBookPageState extends State<CookBookPage> {
                               ));
                         },
                       ),
+
                       const SizedBox(height: 30),
+
                     ],
                   ),
                 ),
@@ -1077,9 +1109,11 @@ class _CookBookPageState extends State<CookBookPage> {
                     child: Column(
                       crossAxisAlignment: CrossAxisAlignment.stretch,
                       children: [
+
                         Expanded(
                           child: Text(
                             ' Actual calories count: $countCalories / ${widget.sumCalories}',
+
                           ),
                         ),
                         Expanded(
@@ -1088,8 +1122,10 @@ class _CookBookPageState extends State<CookBookPage> {
                               backColor:
                                   Colors.lightBlueAccent.withOpacity(0.4),
                               frontColor: Colors.lightBlueAccent,
+
                               strokeWidth: 15,
                         value: (countCalories/widget.sumCalories).toDouble(),
+
                             ),
                           ),
                         ),
@@ -1104,7 +1140,7 @@ class _CookBookPageState extends State<CookBookPage> {
             SingleChildScrollView(
               child: Column(
                 children: [
-                  
+
                   OutlinedButton(
                       onPressed: () => showDialog(
                             context: context,
@@ -1173,10 +1209,12 @@ class _CookBookPageState extends State<CookBookPage> {
                                                   Provider.of<MealChoiche>(context, listen: false).
                                                     addPersonalRecipe(widget.meal.toUpperCase(),
                                         coursesName[3].toLowerCase(), item);
+
                                         countCalories = Provider.of<MealChoiche>(
                                         context,
                                         listen: false)
                                     .getAllCalories();
+
                                               nameController.clear();
                                               quantityController.clear();
                                               Navigator.pop(context, 'Add');
@@ -1248,10 +1286,12 @@ class _CookBookPageState extends State<CookBookPage> {
                                 Provider.of<MealChoiche>(context, listen: false)
                                     .TooglePersonalRecipe(widget.meal.toUpperCase(),
                                         coursesName[3].toLowerCase(), item);
+
                                         countCalories = Provider.of<MealChoiche>(
                                         context,
                                         listen: false)
                                     .getAllCalories();
+
                                 });
                               },
                               title: Text(Provider.of<PersonalMeals>(context, listen: false)
@@ -1269,10 +1309,12 @@ class _CookBookPageState extends State<CookBookPage> {
                                   Provider.of<PersonalMeals>(context,
                                           listen: false)
                                       .removePersonalRecipe(widget.meal, 3, index);
+
                                       countCalories = Provider.of<MealChoiche>(
                                         context,
                                         listen: false)
                                     .getAllCalories();
+
                                   setState(() {});
                                 },
                               )));
@@ -1306,12 +1348,14 @@ class _CookBookPageState extends State<CookBookPage> {
                                     !possibleRecipes[3][index]['is${widget.meal}Saved'];
                                 String meal = widget.meal;
                                 String course = coursesName[3];
+
                                 Provider.of<MealChoiche>(context, listen: false).
                                 ToogleChosenRecipe(meal.toUpperCase(), course , possibleRecipes[3][index]);
                                 countCalories = Provider.of<MealChoiche>(
                                         context,
                                         listen: false)
                                     .getAllCalories();
+
                               });
                             },
                             title: Text(possibleRecipes[3][index]['name'],
@@ -1361,9 +1405,11 @@ class _CookBookPageState extends State<CookBookPage> {
                     child: Column(
                       crossAxisAlignment: CrossAxisAlignment.stretch,
                       children: [
+
                         Expanded(
                           child: Text(
                             ' Actual calories count: $countCalories / ${widget.sumCalories}',
+
                           ),
                         ),
                         Expanded(
@@ -1372,8 +1418,10 @@ class _CookBookPageState extends State<CookBookPage> {
                               backColor:
                                   Colors.lightBlueAccent.withOpacity(0.4),
                               frontColor: Colors.lightBlueAccent,
+
                               strokeWidth: 15,
                         value: (countCalories/widget.sumCalories).toDouble(),
+                              
                             ),
                           ),
                         ),
@@ -1399,24 +1447,6 @@ class _CookBookPageState extends State<CookBookPage> {
 
   void _Done(BuildContext context) {
     
-    /*
-    for (int i = 0; i < groupsName.length; i++) {
-      chosen.add(possibleRecipes[i]
-          .where((item) => item['isSelected'] == true)
-          .toList());
-    }
-
-    for (int i = 0; i < chosen.length; i++) {
-      for (int j = 0; j < chosen[i].length; j++) {
-        // int id = chosen[i][j]['id'];
-        Map item = chosen[i][j];
-
-        Provider.of<MealChoiche>(context, listen: false).ChooseRecipe(
-            widget.meal.toUpperCase(), chosenName[i].toLowerCase(), item);
-        //Provider.of<CookBook>(context, listen: false).toggleRecipe(id);
-      }
-    }
-*/
 
     _toMainNavigator(context);
   } //_Done
