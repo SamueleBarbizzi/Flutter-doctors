@@ -16,6 +16,9 @@ class RecipePage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     print('${RecipePage.routename} built');
+    String ingredientsToCut = recipe['ingredients'].toString();
+    String ingredientsToSplit = '\u2022 ${ingredientsToCut.substring(1,ingredientsToCut.length-1)}';
+    String ingredientsList = ingredientsToSplit.replaceAll(",","\n\u2022");
     return Scaffold(
       appBar: AppBar(
           leading: BackButton(onPressed: () {
@@ -141,7 +144,7 @@ class RecipePage extends StatelessWidget {
                       color: Color.fromARGB(255, 76, 175, 80))),
               const SizedBox(height: 5),
               Text(
-                  "\u2022'Saffron': '1/2 tsp', \n\u2022'Rice': ' 80g',\n\u2022'Butter': '35g',\n\u2022'Onion': '1/2',\n\u2022'Grana Padano cheese': '20g',\n\u2022'White wine': '10g',\n\u2022'Water': 'to taste',\n\u2022'Vegetable stock': '1/2L',\n\u2022'Salt': 'to taste'",
+                  ingredientsList,
                   textAlign: TextAlign.left,
                   style: TextStyle(
                       height: 1.2, fontSize: 20, color: Colors.grey[850])),

@@ -70,6 +70,8 @@ class _LoginPageState extends State<LoginPage> {
 
     return FlutterLogin(
       title: 'Welcome!',
+      // logo: const AssetImage('assets/images/logo.png'),
+
       theme: LoginTheme(
         primaryColor: Colors.green,
         accentColor: Colors.black,

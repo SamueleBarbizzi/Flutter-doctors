@@ -1,59 +1,282 @@
 // ignore_for_file: non_constant_identifier_names
 
-import 'package:flutter/material.dart';
+import 'package:flutter/foundation.dart';
 
 class MealChoiche extends ChangeNotifier {
   //Initialize list of choosen recipes
-  Map chosen = {};
 
   //The structure will be something like this:
-  /*
+
+/*
   Map chosen = {
-    'BREAKFAST_1' = {recipe1},
-    'LUNCH_main1_1' = {recipe2},
-    'LUNCH_main1_2' = {recipe3},
-    'LUNCH_main2_1' = {recipe4},
-    'LUNCH_side_1' = {recipe5},
-    'LUNCH_dessert_1' = {recipe6},
-    'DINNER_main1_1' = {recipe7},
-    'DINNER_main2_1' = {recipe8},
-    'DINNER_main1_2' = {recipe9},
-    'DINNER_side_1' = {recipe10},
-    'DINNER_dessert_1' = {recipe11},
+    'BREAKFAST': {
+        'breakfast' : [breakfast1id, breakfast2id,...],
+    },
+    'LUNCH': {
+        'main1' : [LUNCH_main1_recipe3id, LUNCH_main1_recipe4id,...],
+        'main2' : [LUNCH_main2_recipe5id, ...],
+        'side' : [LUNCH_side_recipe5id,...],
+        'dessert' : [LUNCH_dessert_recipe6id, ...],
+    },
+    'DINNER': {
+        ...
+    },
   };
-  */
+*/
 
-  void ChooseAndReplace(String dish, Map item) {
+  Map chosen = {
+    'BREAKFAST': {
+      'breakfast': <dynamic>{}, //this is a Set, to avoid repetitions
+    },
+    'LUNCH': {
+      'main1': <dynamic>{},
+      'main2': <dynamic>{},
+      'side': <dynamic>{},
+      'dessert': <dynamic>{},
+    },
+    'DINNER': {
+      'main1': <dynamic>{},
+      'main2': <dynamic>{},
+      'side': <dynamic>{},
+      'dessert': <dynamic>{},
+    },
+  };
+
+  Map personalRecipes = {
+    'BREAKFAST': {
+      'breakfast': <dynamic>{}, //this is a Set, to avoid repetitions
+    },
+    'LUNCH': {
+      'main1': <dynamic>{},
+      'main2': <dynamic>{},
+      'side': <dynamic>{},
+      'dessert': <dynamic>{},
+    },
+    'DINNER': {
+      'main1': <dynamic>{},
+      'main2': <dynamic>{},
+      'side': <dynamic>{},
+      'dessert': <dynamic>{},
+    },
+  };
+
+  List<Map> snacks = [];
+
+  void addSnack(String name, int calories) {
+    snacks.add({
+      'name': name,
+      'calories': calories,
+      'isSelected': true,
+    });
+  }
+
+  void removeSnack(String name) {
+    snacks.removeWhere((element) => element['name'] == name);
+  }
+
+  void ToogleChosenRecipe(String meal, String course, Map item) {
     // this wants to alternate between inserting the recipe in the chosen Map,
-    // or substitute the actual chosen recipe, or either delete it
-
-    final isExist = chosen.containsKey(dish);
-
-    if (isExist) {
-      final recipeExist = chosen[dish].contains(item);
-      if (recipeExist) {
-        chosen[dish] = {};
-      } else {
-        chosen[dish] = item;
-      }
+    // and removes it if it is already present
+    bool isPresent =
+        chosen[meal.toUpperCase()][course.toLowerCase()].contains(item);
+    if (isPresent) {
+      chosen[meal.toUpperCase()][course.toLowerCase()].remove(item);
     } else {
-      chosen[dish] = item;
+      chosen[meal.toUpperCase()][course.toLowerCase()].add(item);
+    }
+
+    //Remember to call the CookBook provider when using choose.
+
+    //Call the notifyListeners() method to alert that something happened.
+    notifyListeners();
+  }
+
+  void findAndRemovePersonalRecipe(String name) {
+    loop:
+    for (String meal in ['BREAKFAST', 'LUNCH', 'DINNER']) {
+      for (String course in personalRecipes[meal].keys) {
+        List temp = personalRecipes[meal][course].toList();
+        int ind = temp.indexWhere((element) => element['name'] == name);
+        if (ind != -1) {
+          Map item = personalRecipes[meal][course].elementAt(ind);
+          personalRecipes[meal][course].remove(item);
+          break loop;
+        }
+      }
+    }
+    notifyListeners();
+  }
+
+    void findAndRemoveChosenRecipe(String name) {
+      loop:
+      for (String meal in ['BREAKFAST', 'LUNCH', 'DINNER']) {
+        for (String course in chosen[meal].keys) {
+          List temp = chosen[meal][course].toList();
+          int ind = temp.indexWhere((element) => element['name'] == name);
+          if (ind != -1) {
+            Map item = chosen[meal][course].elementAt(ind);
+            chosen[meal][course].remove(item);
+            break loop;
+          }
+        }
+      }
+      notifyListeners();
+    }
+
+    
+  
+
+  void removeChosenRecipe(String meal, String course, Map item) {
+    bool isPresent = personalRecipes[meal.toUpperCase()][course.toLowerCase()]
+        .contains(item);
+    if (isPresent) {
+      chosen[meal.toUpperCase()][course.toLowerCase()].remove(item);
+    }
+  }
+
+  void addPersonalRecipe(String meal, String course, Map item) {
+    personalRecipes[meal.toUpperCase()][course.toLowerCase()].add(item);
+
+    //Call the notifyListeners() method to alert that something happened.
+    notifyListeners();
+  }
+
+  void removePersonalRecipe(String meal, String course, Map item) {
+    bool isPresent = personalRecipes[meal.toUpperCase()][course.toLowerCase()]
+        .contains(item);
+    if (isPresent) {
+      personalRecipes[meal.toUpperCase()][course.toLowerCase()].remove(item);
     }
 
     //Call the notifyListeners() method to alert that something happened.
     notifyListeners();
   }
 
-  void clearChosen() {
-    chosen = {};
+  void TooglePersonalRecipe(String meal, String course, Map item) {
+    // this wants to alternate between inserting the recipe in the chosen Map,
+    // and removes it if it is already present
+    bool isPresent = personalRecipes[meal.toUpperCase()][course.toLowerCase()]
+        .contains(item);
+    if (isPresent) {
+      personalRecipes[meal.toUpperCase()][course.toLowerCase()].remove(item);
+    } else {
+      personalRecipes[meal.toUpperCase()][course.toLowerCase()].add(item);
+    }
+
+    //Remember to call the CookBook provider when using choose.
+
+    //Call the notifyListeners() method to alert that something happened.
     notifyListeners();
   }
 
-  Map getRecipe(String meal, String course) {
-    return chosen['${meal.toUpperCase()}_${course.toLowerCase()}'];
+  void clearChosen() {
+    chosen = {
+      'BREAKFAST': {
+        'breakfast': {}, //this is a Set, to avoid repetitions
+      },
+      'LUNCH': {
+        'main1': {},
+        'main2': {},
+        'side': {},
+        'dessert': {},
+      },
+      'DINNER': {
+        'main1': {},
+        'main2': {},
+        'side': {},
+        'dessert': {},
+      },
+    };
+
+    notifyListeners();
   }
 
-  Map getChosenRecipes() {
-    return chosen;
+  void clearPersonalRecipes() {
+    personalRecipes = {
+      'BREAKFAST': {
+        'breakfast': {}, //this is a Set, to avoid repetitions
+      },
+      'LUNCH': {
+        'main1': {},
+        'main2': {},
+        'side': {},
+        'dessert': {},
+      },
+      'DINNER': {
+        'main1': {},
+        'main2': {},
+        'side': {},
+        'dessert': {},
+      },
+    };
+
+    notifyListeners();
   }
-}//MealChoice
+
+  Set getMealRecipes(String meal, String course) {
+    return chosen[meal.toUpperCase()][course.toLowerCase()];
+  }
+
+  Map getChosenRecipe(String meal, String course, int id) {
+    return chosen[meal.toUpperCase()][course.toLowerCase()]
+        .where((element) => element['id'] == id);
+  }
+
+  Map getPersonalRecipe(String meal, String course, int id) {
+    return personalRecipes[meal.toUpperCase()][course.toLowerCase()]
+        .where((element) => element['id'] == id);
+  }
+
+  int getAllChosenCalories() {
+    num totalCalories = 0;
+    chosen.forEach(
+      (key, value) {
+        value.forEach((key2, value2) {
+          for (Map recipe in value2) {
+            totalCalories += recipe['calories'];
+          }
+        });
+      },
+    );
+    if (kDebugMode) {
+      print('total calories: $totalCalories');
+    }
+    return totalCalories.toInt();
+  }
+
+  int getAllPersonalCalories() {
+    num totalCalories = 0;
+    personalRecipes.forEach(
+      (key, value) {
+        value.forEach((key2, value2) {
+          for (Map recipe in value2) {
+            totalCalories += recipe['calories'];
+          }
+        });
+      },
+    );
+    if (kDebugMode) {
+      print('total calories: $totalCalories');
+    }
+    return totalCalories.toInt();
+  }
+
+  int getAllSnackCalories() {
+    num totalCalories = 0;
+
+    for (Map element in snacks) {
+      totalCalories += element['calories'];
+    }
+
+    if (kDebugMode) {
+      print('total calories: $totalCalories');
+    }
+    return totalCalories.toInt();
+  }
+
+  int getAllCalories() {
+    return getAllChosenCalories() +
+        getAllPersonalCalories() +
+        getAllSnackCalories();
+  }
+} //MealChoice
