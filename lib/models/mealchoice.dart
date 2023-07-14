@@ -1,6 +1,7 @@
 // ignore_for_file: non_constant_identifier_names
 
 import 'package:flutter/foundation.dart';
+import 'package:flutter/material.dart';
 
 class MealChoiche extends ChangeNotifier {
   //Initialize list of choosen recipes
@@ -91,8 +92,38 @@ class MealChoiche extends ChangeNotifier {
     notifyListeners();
   }
 
+  void findAndRemovePersonalRecipe(String name) {
+    for (int indexMeal = 0; indexMeal < personalRecipes.length; indexMeal++) {
+      for (var course in personalRecipes[indexMeal]) {
+        personalRecipes[indexMeal][course].removeAt(personalRecipes[indexMeal][course]
+            .indexWhere((element) => element['name'] == name));
+      }
+    }
+
+    notifyListeners();
+  }
+
+  void removeChosenRecipe(String meal, String course, Map item) {
+    bool isPresent = personalRecipes[meal.toUpperCase()][course.toLowerCase()]
+        .contains(item);
+    if (isPresent) {
+      chosen[meal.toUpperCase()][course.toLowerCase()].remove(item);
+    }
+  }
+
   void addPersonalRecipe(String meal, String course, Map item) {
     personalRecipes[meal.toUpperCase()][course.toLowerCase()].add(item);
+
+    //Call the notifyListeners() method to alert that something happened.
+    notifyListeners();
+  }
+
+  void removePersonalRecipe(String meal, String course, Map item) {
+    bool isPresent = personalRecipes[meal.toUpperCase()][course.toLowerCase()]
+        .contains(item);
+    if (isPresent) {
+      personalRecipes[meal.toUpperCase()][course.toLowerCase()].remove(item);
+    }
 
     //Call the notifyListeners() method to alert that something happened.
     notifyListeners();
@@ -110,19 +141,6 @@ class MealChoiche extends ChangeNotifier {
     }
 
     //Remember to call the CookBook provider when using choose.
-
-    //Call the notifyListeners() method to alert that something happened.
-    notifyListeners();
-  }
-
-  void removePersonalRecipe(String meal, String course, Map item) {
-    // this wants to alternate between inserting the recipe in the chosen Map,
-    // and removes it if it is already present
-    bool isPresent = personalRecipes[meal.toUpperCase()][course.toLowerCase()]
-        .contains(item);
-    if (isPresent) {
-      personalRecipes[meal.toUpperCase()][course.toLowerCase()].remove(item);
-    }
 
     //Call the notifyListeners() method to alert that something happened.
     notifyListeners();
@@ -172,8 +190,18 @@ class MealChoiche extends ChangeNotifier {
     notifyListeners();
   }
 
-  Set getMealRecipes(String meal, String course, int id) {
+  Set getMealRecipes(String meal, String course) {
     return chosen[meal.toUpperCase()][course.toLowerCase()];
+  }
+
+  Map getChosenRecipe(String meal, String course, int id) {
+    return chosen[meal.toUpperCase()][course.toLowerCase()]
+        .where((element) => element['id'] == id);
+  }
+
+  Map getPersonalRecipe(String meal, String course, int id) {
+    return personalRecipes[meal.toUpperCase()][course.toLowerCase()]
+        .where((element) => element['id'] == id);
   }
 
   int getAllChosenCalories() {
@@ -210,19 +238,22 @@ class MealChoiche extends ChangeNotifier {
     return totalCalories.toInt();
   }
 
-    int getAllSnackCalories() {
+  int getAllSnackCalories() {
     num totalCalories = 0;
-    
-    for (Map element in snacks){
+
+    for (Map element in snacks) {
       totalCalories += element['calories'];
     }
 
-      if (kDebugMode) {
-        print('total calories: $totalCalories');
-      }
+    if (kDebugMode) {
+      print('total calories: $totalCalories');
+    }
     return totalCalories.toInt();
   }
 
-
-
+  int getAllCalories() {
+    return getAllChosenCalories() +
+        getAllPersonalCalories() +
+        getAllSnackCalories();
+  }
 } //MealChoice

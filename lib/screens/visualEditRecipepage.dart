@@ -4,7 +4,7 @@ import 'package:flutter/material.dart';
 //import 'package:material_design_icons_flutter/material_design_icons_flutter.dart';
 import 'package:flutter_doctors/screens/mainnavigator.dart';
 import 'package:flutter_doctors/models/mealchoice.dart';
-//import 'package:flutter_doctors/models/personalmeals.dart';
+import 'package:flutter_doctors/models/personalmeals.dart';
 //import 'package:flutter_doctors/models/groups.dart';
 import 'package:provider/provider.dart';
 //import 'package:flutter_doctors/screens/cookbookpage.dart';
@@ -29,6 +29,7 @@ class _VisualEditRecipeState extends State<VisualEditRecipe> {
   late Map personal=Provider.of<MealChoiche>(context, listen: false).personalRecipes;
   late List snacks=Provider.of<MealChoiche>(context, listen: false).snacks;
 
+  List<String> coursesName = ['main1', 'main2', 'side', 'dessert'];
 /*   final List<String> groupsName = [
     'FIRST MAIN DISH',
     'SECOND MAIN DISH',
@@ -105,6 +106,13 @@ class _VisualEditRecipeState extends State<VisualEditRecipe> {
                     child: ListTile(
                       title: Text(allRecipePersonal[index]['name']),
                       subtitle: Text('     ${allRecipePersonal[index]['calories']} kcals'),
+                      trailing: IconButton(
+                                    icon: const Icon(Icons.delete_forever),
+                                    onPressed: () { Provider.of<MealChoiche>(context,listen: false)
+                                      .findAndRemovePersonalRecipe(allRecipePersonal[index]['name']);
+                                    setState(() {});
+                                    },
+                                  ),
                     ),
                   );
                 },
@@ -190,6 +198,14 @@ class _VisualEditRecipeState extends State<VisualEditRecipe> {
                   child: ListTile(
                     title: Text(snacks[index]['name']),
                     subtitle: Text('     ${snacks[index]['calories']} kcals'),
+                    trailing: IconButton(
+                      icon: const Icon(Icons.delete_forever),
+                      onPressed: () {
+                        Provider.of<MealChoiche>(context,listen: false)
+                          .removeSnack(snacks[index]['name']);
+                        setState(() {});
+                      },
+                    )
                   ),
                 );
               },
