@@ -12,7 +12,7 @@ import 'package:flutter_doctors/screens/recipepage.dart';
 class VisualEditRecipe extends StatefulWidget {
   const VisualEditRecipe({Key? key}) : super(key: key);
 
-  static const routename = 'visualEditRecipePage';
+  static const routename = 'My Recipes';
 
   @override
   _VisualEditRecipeState createState() => _VisualEditRecipeState();
@@ -233,9 +233,9 @@ class _VisualEditRecipeState extends State<VisualEditRecipe> {
 
     return Scaffold(
       appBar: AppBar(
-        title: const Row(children: [
+        title: 
           Text(VisualEditRecipe.routename, 
-            style: TextStyle(fontWeight: FontWeight.bold))]),
+            style: TextStyle(fontWeight: FontWeight.bold)),
         centerTitle: true,
         /*leading: BackButton(
           onPressed: () => _toMainNavigator(context),

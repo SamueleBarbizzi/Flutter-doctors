@@ -22,7 +22,7 @@ class HomePage extends StatefulWidget {
   final bool firstDatabaseEntry;
   const HomePage({super.key, required this.firstDatabaseEntry});
 
-  static const routename = 'Homepage';
+  static const routename = 'Home';
 
   @override
   _HomePageState createState() => _HomePageState();
@@ -39,7 +39,6 @@ class _HomePageState extends State<HomePage> {
 
   @override
   void dispose() {
-    // Clean up the controller when the widget is disposed.
     nameController.dispose();
     quantityController.dispose();
     super.dispose();
@@ -97,7 +96,6 @@ class _HomePageState extends State<HomePage> {
 
   @override
   Widget build(BuildContext context) {
-    print('${HomePage.routename} built');
     //Calories calculation
     int actualCalories =
         Provider.of<MealChoiche>(context, listen: false).getAllCalories();
@@ -107,19 +105,8 @@ class _HomePageState extends State<HomePage> {
     int remain = baseTarget - actualCalories + sumCalories;
     return Scaffold(
       appBar: AppBar(
-        title: const Row(children: [
-          //Image.asset("assets/images/logo.png", width: 20),
-          Text(HomePage.routename,
-              style: TextStyle(fontWeight: FontWeight.bold))
-        ]),
+        title: Text(HomePage.routename, style: TextStyle(fontWeight: FontWeight.bold)),
         centerTitle: true,
-        actions: [
-          IconButton(
-            icon: const Icon(Icons.info),
-            tooltip: 'Info',
-            onPressed: () => _toInfoPage(context),
-          ),
-        ],
       ),
       body: SingleChildScrollView(
         child: Consumer<DatabaseProvider>(builder: (context, dbr, child) {
@@ -149,7 +136,8 @@ class _HomePageState extends State<HomePage> {
                   }
                   String date = italyDateFormat.format(data[i].dateTime);
                   int sumCalories = data[i].sumCalories.round();
-                  return Column(children: [
+                  return Column(
+                    children: [
                     Row(
                       mainAxisAlignment: MainAxisAlignment.center,
                       children: [
@@ -179,14 +167,14 @@ class _HomePageState extends State<HomePage> {
                     Center(
                       child: TextButton(
                         onPressed: () {
-                          showDataAlert(chartData);
+                          showAnalytics(chartData);
                         },
                         style: ButtonStyle(
                             splashFactory: NoSplash.splashFactory,
                             shape: MaterialStateProperty.all<
                                 RoundedRectangleBorder>(
                               RoundedRectangleBorder(
-                                borderRadius: BorderRadius.circular(50.0),
+                                borderRadius: BorderRadius.circular(10.0),
                               ),
                             ),
                             backgroundColor:
@@ -199,7 +187,8 @@ class _HomePageState extends State<HomePage> {
                             }),
                             overlayColor: const MaterialStatePropertyAll<Color>(
                                 Color.fromARGB(255, 14, 75, 16)),
-                            elevation: const MaterialStatePropertyAll(8.0)),
+                            elevation: const MaterialStatePropertyAll(8.0)
+                            ),
                         child: const Text(
                           'Weekly Analytics',
                           style: TextStyle(
@@ -211,16 +200,15 @@ class _HomePageState extends State<HomePage> {
                         ),
                       ),
                     ),
-                    Align(
-                        alignment: Alignment.center,
-                        child: Container(
-                            height: 230,
+                    const SizedBox(height: 10),
+
+                         Container(
+                            height: 220,
                             width: 350,
-                            margin: const EdgeInsets.only(top: 5),
+                            
                             decoration: BoxDecoration(
                               color: Colors.white,
-                              border: Border.all(
-                                  color: Colors.grey.shade400, width: 1.0),
+                              border: Border.all(color: Colors.grey.shade400, width: 1.0),
                               borderRadius: BorderRadius.circular(10),
                               boxShadow: [
                                 BoxShadow(
@@ -236,176 +224,98 @@ class _HomePageState extends State<HomePage> {
                                 Container(
                                     height: 40,
                                     alignment: const Alignment(-0.95, 0.5),
-                                    child: const Text("Calories",
-                                        style: TextStyle(
-                                            fontWeight: FontWeight.bold,
-                                            fontSize: 20,
-                                            color: Color.fromARGB(
-                                                255, 76, 175, 80)))),
+                                    child: const Text("Calories", style: TextStyle(fontWeight: FontWeight.bold, fontSize: 20, color: Color.fromARGB(255, 76, 175, 80)))
+                                ),
                                 Container(
                                     height: 20,
                                     alignment: const Alignment(-0.9, 0),
-                                    child: const Text(
-                                        "Remaining = Target - Food + Exercise",
-                                        style: TextStyle(
-                                            fontSize: 12,
-                                            color: Colors.black))),
-                                const SizedBox(height: 15),
-                                Align(
-                                  alignment: const Alignment(1, -1),
-                                  child: Container(
-                                    child: Row(
-                                      mainAxisAlignment: MainAxisAlignment.end,
-                                      crossAxisAlignment:
-                                          CrossAxisAlignment.end,
-                                      children: [
-                                        SizedBox(
-                                          width: 150,
-                                          height: 150,
-                                          child: CustomPaint(
-                                              painter: ScoreCircularProgress(
-                                                backColor: Colors.lightGreen
-                                                    .withOpacity(0.4),
-                                                frontColor: Colors.lightGreen,
-                                                strokeWidth: 20,
-                                                value: (actualCalories /
-                                                        baseTarget)
-                                                    .toDouble(), // da mettere valori
-                                              ),
-                                              child: Center(
-                                                  child: Padding(
-                                                padding: const EdgeInsets.only(
-                                                    top: 50.0),
-                                                child: Column(
-                                                    mainAxisAlignment:
-                                                        MainAxisAlignment.start,
-                                                    children: [
-                                                      Text(
-                                                        remain
-                                                            .toString(), // mettere numero calorie con dati
-                                                        style: const TextStyle(
-                                                            fontWeight:
-                                                                FontWeight.bold,
-                                                            fontSize: 26,
-                                                            color:
-                                                                Color.fromARGB(
-                                                                    255,
-                                                                    76,
-                                                                    175,
-                                                                    80)),
-                                                      ),
-                                                      const Text(
-                                                        'Remaining',
-                                                        style: TextStyle(
-                                                            fontSize: 14),
-                                                      )
-                                                    ]),
-                                              ))),
-                                        ),
-                                        const SizedBox(width: 30, height: 150),
-                                        Align(
-                                          alignment: const Alignment(1, 0),
-                                          child: SizedBox(
-                                            width: 150,
-                                            height: 150,
-                                            child: Column(
-                                              crossAxisAlignment:
-                                                  CrossAxisAlignment.end,
-                                              children: [
-                                                const SizedBox(height: 20),
-                                                Row(
-                                                  children: [
-                                                    const SizedBox(height: 20),
-                                                    Row(
-                                                      children: [
-                                                        Icon(
-                                                            MdiIcons
-                                                                .bullseyeArrow,
-                                                            color: Colors.red),
-                                                        const Text(
-                                                            "Base Target   ",
-                                                            style: TextStyle(
-                                                                fontSize: 12,
-                                                                color: Colors
-                                                                    .black)),
-                                                        Text(
-                                                            baseTarget
-                                                                .toString(),
-                                                            style: const TextStyle(
-                                                                fontWeight:
-                                                                    FontWeight
-                                                                        .bold,
-                                                                fontSize: 12,
-                                                                color: Color
-                                                                    .fromARGB(
-                                                                        255,
-                                                                        76,
-                                                                        175,
-                                                                        80))),
-                                                      ],
-                                                    ),
-                                                    Row(
-                                                      children: [
-                                                        Icon(
-                                                            MdiIcons
-                                                                .silverwareForkKnife,
-                                                            color: Colors.blue),
-                                                        const Text("Food   ",
-                                                            style: TextStyle(
-                                                                fontSize: 12,
-                                                                color: Colors
-                                                                    .black)),
-                                                        Text(
-                                                            actualCalories
-                                                                .toString(),
-                                                            style: const TextStyle(
-                                                                fontWeight:
-                                                                    FontWeight
-                                                                        .bold,
-                                                                fontSize: 12,
-                                                                color: Color
-                                                                    .fromARGB(
-                                                                        255,
-                                                                        76,
-                                                                        175,
-                                                                        80))), // inserire dati aggiornati
-                                                      ],
-                                                    ),
-                                                    Row(
-                                                      children: [
-                                                        Icon(MdiIcons.fire,
-                                                            color:
-                                                                Colors.orange),
-                                                        const Text(
-                                                            "Rest + Exercise   ",
-                                                            style: TextStyle(
-                                                                fontSize: 12,
-                                                                color: Colors
-                                                                    .black)),
-                                                        Text("$sumCalories",
-                                                            style: const TextStyle(
-                                                                fontWeight:
-                                                                    FontWeight
-                                                                        .bold,
-                                                                fontSize: 12,
-                                                                color: Color
-                                                                    .fromARGB(
-                                                                        255,
-                                                                        76,
-                                                                        175,
-                                                                        80))),
-                                                      ],
-                                                    ),
-                                                  ],
-                                                ),
-                                              ],
+                                    child: const Text("Remaining = Target - Food + Exercise", style: TextStyle(fontSize: 12, color: Colors.black))
+                                ),
+
+                                  Padding(
+                                    padding: const EdgeInsets.only(top: 4),
+                                    child: Container(
+                                      child: Row(
+                                        mainAxisAlignment: MainAxisAlignment.spaceAround,
+                                        crossAxisAlignment: CrossAxisAlignment.center,
+                                        children: [
+                                          Padding(
+                                            padding: const EdgeInsets.only(left: 10),
+                                            child: SizedBox(
+                                              width: 120,
+                                              height: 140,
+                                              child: CustomPaint(
+                                                  painter: ScoreCircularProgress(
+                                                    backColor: Colors.lightGreen.withOpacity(0.4),
+                                                    frontColor: Colors.lightGreen,
+                                                    strokeWidth: 20,
+                                                    value: (actualCalories/baseTarget).toDouble(), // da mettere valori
+                                                  ),
+                                                  child: Center(
+                                                      child: Padding(
+                                                    padding: const EdgeInsets.only(top: 52.0),
+                                                    child: Column(
+                                                        mainAxisAlignment:MainAxisAlignment.start,
+                                                        children: [
+                                                          Text(remain.toString(), style: const TextStyle(fontWeight: FontWeight.bold, fontSize: 28, color:Color.fromARGB(255,76,175,80))),
+                                                          const Text('Remaining', style: TextStyle(fontSize: 14))
+                                                        ]
+                                                        ), // Column
+                                                  ) // Padding
+                                                  )
+                                                ), // CustomPaint
                                             ),
                                           ),
-                                        ),
-                                      ],
+                                  
+                                          Padding(
+                                            padding: const EdgeInsets.only(bottom: 20.0),
+                                            child: Column(
+                                                  crossAxisAlignment: CrossAxisAlignment.start,
+                                                      children: [
+                                                        Padding(
+                                                          padding: const EdgeInsets.only(bottom: 2.0),
+                                                          child: Row(
+                                                            children: [
+                                                              Icon(MdiIcons.bullseyeArrow, color: Colors.red),
+                                                              const Text("Base Target ", style: TextStyle(fontSize: 12, color: Colors.black)),
+                                                              Text(baseTarget.toString() + " kcal", style: const TextStyle(fontWeight: FontWeight.bold, fontSize: 12, color: Color.fromARGB(255, 76, 175, 80))),
+                                                            ],
+                                                          ),
+                                                        ),
+                                                        Padding(
+                                                          padding: const EdgeInsets.only(bottom: 2.0),
+                                                          child: Row(
+                                                            children: [
+                                                              Icon(MdiIcons.silverwareForkKnife, color: Colors.blue),
+                                                              const Text("Food ", style: TextStyle(fontSize: 12, color: Colors.black)),
+                                                              Text(actualCalories.toString() + " kcal", style: const TextStyle(fontWeight:FontWeight.bold, fontSize: 12, color: Color.fromARGB(255,76,175,80))), 
+                                                              ],
+                                                          ),
+                                                        ),
+                                                        Padding(
+                                                          padding: const EdgeInsets.only(bottom: 2.0),
+                                                          child: Row(
+                                                            children: [
+                                                              Icon(MdiIcons.fire, color:Colors.orange),
+                                                              const Text("Rest + Exercise ", style: TextStyle(fontSize: 12, color: Colors.black)),
+                                                              Text("$sumCalories" + " kcal", style: const TextStyle(fontWeight: FontWeight.bold, fontSize: 12, color: Color.fromARGB(255,76,175,80))),
+                                                            ],
+                                                          ),
+                                                        ), 
+                                                      ],
+                                                ),
+                                          ), // Column
+                                            
+                                          
+                                          
+                                        ],
+                                      ),
                                     ),
-                                  ),
-                                ),
+                                  ), 
+                    ],
+                        ),
+          ),
+        
                                 const SizedBox(height: 15),
                                 Container(
                                   height: 330,
@@ -726,16 +636,16 @@ class _HomePageState extends State<HomePage> {
                                                 side: const BorderSide(
                                                     color: Color.fromARGB(
                                                         255, 14, 75, 16),
-                                                    width: 2.5)),
+                                                    width: 2.5)
+                                                    ),
                                           ),
                                         ],
                                       ),
-                                    ],
-                                  ),
-                                ),
-                              ],
-                            )))
-                  ]);
+                                    ], 
+                    ),
+                ),
+              ],
+                  );
                 } else {
                   return const Center(
                     child: CircularProgressIndicator(),
@@ -747,7 +657,7 @@ class _HomePageState extends State<HomePage> {
     );
   } //build
 
-  void showDataAlert(List<ChartsData> chartData) {
+  void showAnalytics(List<ChartsData> chartData) {
     showDialog(
         context: context,
         builder: (BuildContext context) {
@@ -783,6 +693,13 @@ class _HomePageState extends State<HomePage> {
                   ),
                   primaryYAxis: NumericAxis(
                       // rangePadding: ChartRangePadding.round,
+                      title: AxisTitle(
+                                text: 'kcal',
+                                textStyle: TextStyle(
+                                    color: Colors.black,
+                                    fontSize: 16,
+                                )
+                            )
                       ),
                   tooltipBehavior:
                       TooltipBehavior(enable: true, header: "Calories"),

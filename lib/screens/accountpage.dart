@@ -13,7 +13,7 @@ class AccountPage extends StatefulWidget {
   final bool flag;
   const AccountPage({super.key, required this.firstDatabaseEntry, required this.flag});
 
-  static const routename = 'Accountpage';
+  static const routename = 'Profile';
 
   @override
   State<AccountPage> createState() => _AccountPageState();
@@ -115,6 +115,7 @@ bool _isFormValid() {
     return Scaffold(
       appBar: AppBar(
         title: Text(AccountPage.routename),
+        centerTitle: true,
         actions: [
           IconButton(
             icon: const Icon(Icons.info),
