@@ -7,7 +7,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter_doctors/models/cookbook.dart';
 import 'package:flutter_doctors/models/mealchoice.dart';
 import 'package:flutter_doctors/models/personalmeals.dart';
-import 'package:flutter_doctors/models/cookbook.dart';
 import 'package:provider/provider.dart';
 import 'package:flutter_doctors/screens/recipepage.dart';
 
