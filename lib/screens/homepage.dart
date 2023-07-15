@@ -5,6 +5,7 @@ import 'package:flutter_doctors/models/cookbook.dart';
 import 'package:flutter_doctors/models/personalmeals.dart';
 import 'package:flutter_doctors/models/mealchoice.dart';
 import 'package:flutter_doctors/screens/breakfastchoicepage.dart';
+import 'package:flutter_doctors/services/databasecall.dart';
 import 'package:intl/intl.dart';
 import 'package:line_icons/line_icons.dart';
 import 'package:material_design_icons_flutter/material_design_icons_flutter.dart';
@@ -123,8 +124,18 @@ void getCalorieIntake() async{
     
     return Scaffold(
       appBar: AppBar(
-        title: const Text(HomePage.routename, style: TextStyle(fontWeight: FontWeight.bold)),
+        title: const Text(HomePage.routename, style: TextStyle(fontWeight: FontWeight.bold, )),
         centerTitle: true,
+        actions: [
+            Transform.scale(
+              scale: 1.1,
+            child: IconButton(
+              icon: const Icon(LineIcons.alternateSignOut, color: Colors.white,),
+              tooltip: 'Logout',
+              onPressed: () =>  _toLoginPage(context),
+            ),
+          ),
+        ],
       ),
       body: SingleChildScrollView(
         child: Consumer<DatabaseProvider>(builder: (context, dbr, child) {
@@ -749,6 +760,26 @@ void getCalorieIntake() async{
             ),
           );
         });
+  }
+
+  void _toLoginPage(BuildContext context) async {
+    await DatabaseCall.deleteAll(context);
+    SharedPreferences sp = await SharedPreferences.getInstance();
+    await sp.remove('username');
+    await sp.remove('access');
+    await sp.remove('refresh');
+    await sp.remove('selectedIndex');
+
+    final savedMeals = await SharedPreferences.getInstance();
+      await savedMeals.remove('chosenMeals');
+      await savedMeals.remove('personalMeals');
+      await savedMeals.remove('snacks');
+
+    final cookbookStatus = await SharedPreferences.getInstance();
+    await cookbookStatus.remove('cookbook');
+
+    Navigator.of(context).pushReplacement(
+        MaterialPageRoute(builder: (context) => const LoginPage()));
   }
 
   void _toInfoPage(BuildContext context) {

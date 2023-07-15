@@ -151,9 +151,9 @@ class _LoginPageState extends State<LoginPage> {
       onRecoverPassword: _recoverPassword,
 
       onSubmitAnimationCompleted: () async{
-    if(apiAuth == true){        
-    _toAccountPage(context);
-    }
+      if(apiAuth == true){        
+        _toAccountPage(context);
+      }
       },
     );
   } // build

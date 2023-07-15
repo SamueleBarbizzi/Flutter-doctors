@@ -1,12 +1,10 @@
 // ignore_for_file: prefer_const_constructors_in_immutables, avoid_print, prefer_const_constructors, depend_on_referenced_packages, use_build_context_synchronously, sized_box_for_whitespace
 
 import 'package:flutter/material.dart';
-import 'package:flutter_doctors/screens/loginpage.dart';
 import 'package:flutter_doctors/screens/infopage.dart';
-import 'package:font_awesome_flutter/font_awesome_flutter.dart';
-import 'package:flutter_doctors/services/databasecall.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:flutter_doctors/screens/mainnavigator.dart';
+import 'package:line_icons/line_icons.dart';
 
 class AccountPage extends StatefulWidget {
   final bool firstDatabaseEntry;
@@ -14,7 +12,7 @@ class AccountPage extends StatefulWidget {
   const AccountPage(
       {super.key, required this.firstDatabaseEntry, required this.flag});
 
-  static const routename = 'Accountpage';
+  static const routename = 'Account';
 
   @override
   State<AccountPage> createState() => _AccountPageState();
@@ -125,10 +123,13 @@ class _AccountPageState extends State<AccountPage> {
         title: Text(AccountPage.routename, style: TextStyle(fontWeight: FontWeight.bold)),
         centerTitle: true,
         actions: [
-          IconButton(
-            icon: const Icon(Icons.info),
-            tooltip: 'Info',
-            onPressed: () => _toInfoPage(context),
+          Transform.scale(
+            scale: 1.1,
+            child: IconButton(
+              icon: const Icon(LineIcons.infoCircle),
+              tooltip: 'Info',
+              onPressed: () => _toInfoPage(context),
+            ),
           ),
         ],
       ),
@@ -214,122 +215,6 @@ class _AccountPageState extends State<AccountPage> {
               )
             ],
           ),
-        ),
-      ),
-      drawer: Drawer(
-        child: ListView(
-          padding: EdgeInsets.zero,
-          children: [
-            Container(
-              height: 150,
-              child: DrawerHeader(
-                decoration: BoxDecoration(
-                  color: Colors.green,
-                ),
-                child: Column(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: const [
-                    Row(
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      children: [
-                        Icon(
-                          Icons.settings,
-                          size: 28,
-                          color: Colors.white,
-                        ),
-                        SizedBox(width: 1),
-                        Text(
-                          'Settings',
-                          style: TextStyle(
-                            fontSize: 34,
-                            color: Colors.white,
-                          ),
-                        ),
-                      ],
-                    ),
-                  ],
-                ),
-              ),
-            ),
-            ListTile(
-              leading: Icon(FontAwesomeIcons.facebook),
-              title: Text(
-                'Facebook',
-                style: TextStyle(
-                  fontSize: 16,
-                ),
-              ),
-              onTap: () {
-                // Open Facebook page
-              },
-            ),
-            ListTile(
-              leading: Icon(FontAwesomeIcons.instagram),
-              title: Text(
-                'Instagram',
-                style: TextStyle(
-                  fontSize: 16,
-                ),
-              ),
-              onTap: () {
-                // Open Instagram page
-              },
-            ),
-            ListTile(
-              leading: Icon(Icons.feedback),
-              title: Text(
-                'Feedback',
-                style: TextStyle(
-                  fontSize: 16,
-                ),
-              ),
-              onTap: () {
-                // Open feedback form
-              },
-            ),
-            ListTile(
-              leading: Icon(Icons.star),
-              title: Text(
-                'Rate us',
-                style: TextStyle(
-                  fontSize: 16,
-                ),
-              ),
-              onTap: () {
-                // Open voting page
-              },
-            ),
-            ListTile(
-                leading: Icon(Icons.mail),
-                title: Text(
-                  'Contact support',
-                  style: TextStyle(
-                    fontSize: 16,
-                  ),
-                ),
-                onTap: () {
-                  // Open assistance contact
-                }),
-            ClipRRect(
-              borderRadius: BorderRadius.circular(80),
-              child: Container(
-                  color: Colors.red,
-                  child: ListTile(
-                    leading: Icon(Icons.logout, color: Colors.white),
-                    title: Text(
-                      'Logout',
-                      style: TextStyle(
-                        fontSize: 16,
-                        color: Colors.white,
-                      ),
-                    ),
-                    onTap: (
-
-
-                    ) => _toLoginPage(context),
-                  )),
-            )
-          ],
         ),
       ),
     );
@@ -428,28 +313,7 @@ class _AccountPageState extends State<AccountPage> {
             firstDatabaseEntry: widget.firstDatabaseEntry, flag: widget.flag)));
   }
 
-  void _toLoginPage(BuildContext context) async {
-    await DatabaseCall.deleteAll(context);
-    SharedPreferences sp = await SharedPreferences.getInstance();
-    await sp.remove('username');
-    await sp.remove('access');
-    await sp.remove('refresh');
-    await sp.remove('selectedIndex');
-
-    final savedMeals = await SharedPreferences.getInstance();
-      await savedMeals.remove('chosenMeals');
-      await savedMeals.remove('personalMeals');
-      await savedMeals.remove('snacks');
-
-    final cookbookStatus = await SharedPreferences.getInstance();
-    await cookbookStatus.remove('cookbook');
-
-    //Pop the drawer first
-    Navigator.pop(context);
-    //Then pop the HomePage
-    Navigator.of(context).pushReplacement(
-        MaterialPageRoute(builder: (context) => const LoginPage()));
-  }
+  
 
 //_toLoginPage
   void _toInfoPage(BuildContext context) {

@@ -77,7 +77,7 @@ class _MainNavigatorState extends State<MainNavigator> {
             splashColor: Colors.transparent,
             enablePaddingAnimation: false,
             dotIndicatorColor: Colors.white,
-            unselectedItemColor: Colors.grey[300],
+            unselectedItemColor: Colors.white.withOpacity(0.65),
             currentIndex: _currentIndex,
             onTap: (index) {
                     setState(() {
