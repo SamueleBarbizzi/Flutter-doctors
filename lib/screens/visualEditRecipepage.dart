@@ -5,6 +5,7 @@
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_doctors/models/mealchoice.dart';
+import 'package:flutter_doctors/models/cookbook.dart';
 import 'package:provider/provider.dart';
 import 'package:flutter_doctors/screens/recipepage.dart';
 
@@ -150,7 +151,8 @@ class _VisualEditRecipeState extends State<VisualEditRecipe> {
                                 child: IconButton(
                                   icon: const Icon(Icons.delete_forever),
                                   onPressed: () {
-                                    
+                                    Provider.of<CookBook>(context,listen: false)
+                                    .toggleRecipe(allRecipe[index]['id']);
                                     Provider.of<MealChoiche>(context,listen: false)
                                     .findAndRemoveChosenRecipe(allRecipe[index]['name']);
 

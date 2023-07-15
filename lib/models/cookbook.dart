@@ -1632,7 +1632,7 @@ class CookBook extends ChangeNotifier {
   ];
 
   void toggleRecipe(int id) {
-    // this wants to alternate between favorite and not favorite
+    // this wants to alternate between selected and not selected
     final isExist = recipeslist[id - 1]['isSelected'];
     if (isExist) {
       recipeslist[id - 1]['isSelected'] = false;
