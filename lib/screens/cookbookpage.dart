@@ -9,7 +9,6 @@ import 'package:material_design_icons_flutter/material_design_icons_flutter.dart
 import 'package:flutter_doctors/screens/mainnavigator.dart';
 import 'package:flutter_doctors/screens/ingredientspage.dart';
 import 'package:flutter_doctors/screens/recipepage.dart';
-import 'package:flutter_doctors/models/favorites.dart';
 import 'package:flutter_doctors/models/cookbook.dart';
 import 'package:flutter_doctors/models/groups.dart';
 import 'package:provider/provider.dart';
@@ -61,7 +60,7 @@ class _CookBookPageState extends State<CookBookPage> {
 
   @override
   void initState() {
-    final List<Map> recipes =
+    final List recipes =
         Provider.of<CookBook>(context, listen: false).recipeslist;
 
     if (widget.selected[0].isEmpty &
@@ -347,6 +346,7 @@ class _CookBookPageState extends State<CookBookPage> {
                                 Provider.of<MealChoiche>(context, listen: false)
                                     .TooglePersonalRecipe(widget.meal.toUpperCase(),
                                         coursesName[0].toLowerCase(), item);
+                                Provider.of<PersonalMeals>(context, listen: false).savePersonalMealsStatus();
                                     });
 
                                         countCalories = Provider.of<MealChoiche>(
@@ -406,11 +406,14 @@ class _CookBookPageState extends State<CookBookPage> {
                                   // if this item isn't selected yet, "isSelected": false -> true
                                   // If this item already is selected: "isSelected": true -> false
                                   setState(() {
-                                    possibleRecipes[0][index]['is${widget.meal}Saved'] =
-                                        !possibleRecipes[0][index]
-                                            ['is${widget.meal}Saved'];
+                                    //possibleRecipes[0][index]['is${widget.meal}Saved'] =
+                                    //    !possibleRecipes[0][index]
+                                    //        ['is${widget.meal}Saved'];
                                     String meal = widget.meal;
                                     String course = coursesName[0];
+
+                                    Provider.of<CookBook>(context, listen: false).
+                                    toggleMealRecipe(meal.toUpperCase(), possibleRecipes[0][index]['id']);
 
                                     Provider.of<MealChoiche>(context, listen: false).
                                     ToogleChosenRecipe(meal.toUpperCase(), course , possibleRecipes[0][index]);
@@ -658,6 +661,8 @@ class _CookBookPageState extends State<CookBookPage> {
                                 Provider.of<MealChoiche>(context, listen: false)
                                     .TooglePersonalRecipe(widget.meal.toUpperCase(),
                                         coursesName[1].toLowerCase(), item);
+                                
+                                Provider.of<PersonalMeals>(context, listen: false).savePersonalMealsStatus();
 
                                         countCalories = Provider.of<MealChoiche>(
                                         context,
@@ -721,11 +726,14 @@ class _CookBookPageState extends State<CookBookPage> {
                                   // if this item isn't selected yet, "isSelected": false -> true
                                   // If this item already is selected: "isSelected": true -> false
                                   setState(() {
-                                    possibleRecipes[1][index]['is${widget.meal}Saved'] =
-                                        !possibleRecipes[1][index]
-                                            ['is${widget.meal}Saved'];
+                                    //possibleRecipes[1][index]['is${widget.meal}Saved'] =
+                                    //    !possibleRecipes[1][index]
+                                    //        ['is${widget.meal}Saved'];
                                     String meal = widget.meal;
                                     String course = coursesName[1];
+
+                                    Provider.of<CookBook>(context, listen: false).
+                                    toggleMealRecipe(meal.toUpperCase(), possibleRecipes[1][index]['id']);
 
                                     Provider.of<MealChoiche>(context, listen: false).
                                     ToogleChosenRecipe(meal.toUpperCase(), course , possibleRecipes[1][index]);
@@ -970,6 +978,8 @@ class _CookBookPageState extends State<CookBookPage> {
                                 Provider.of<MealChoiche>(context, listen: false)
                                     .TooglePersonalRecipe(widget.meal.toUpperCase(),
                                         coursesName[2].toLowerCase(), item);
+                                
+                                Provider.of<PersonalMeals>(context, listen: false).savePersonalMealsStatus();
 
                                         countCalories = Provider.of<MealChoiche>(
                                         context,
@@ -1029,11 +1039,14 @@ class _CookBookPageState extends State<CookBookPage> {
                                   // if this item isn't selected yet, "isSelected": false -> true
                                   // If this item already is selected: "isSelected": true -> false
                                   setState(() {
-                                    possibleRecipes[2][index]['is${widget.meal}Saved'] =
-                                        !possibleRecipes[2][index]
-                                            ['is${widget.meal}Saved'];
+                                    //possibleRecipes[2][index]['is${widget.meal}Saved'] =
+                                    //    !possibleRecipes[2][index]
+                                    //        ['is${widget.meal}Saved'];
                                     String meal = widget.meal;
                                     String course = coursesName[2];
+
+Provider.of<CookBook>(context, listen: false).
+                                    toggleMealRecipe(meal.toUpperCase(), possibleRecipes[2][index]['id']);
 
                                     Provider.of<MealChoiche>(context, listen: false).
                                     ToogleChosenRecipe(meal.toUpperCase(), course , possibleRecipes[2][index]);
@@ -1344,10 +1357,13 @@ class _CookBookPageState extends State<CookBookPage> {
                               // if this item isn't selected yet, "isSelected": false -> true
                               // If this item already is selected: "isSelected": true -> false
                               setState(() {
-                                possibleRecipes[3][index]['is${widget.meal}Saved'] =
-                                    !possibleRecipes[3][index]['is${widget.meal}Saved'];
+                                //possibleRecipes[3][index]['is${widget.meal}Saved'] =
+                                //    !possibleRecipes[3][index]['is${widget.meal}Saved'];
                                 String meal = widget.meal;
                                 String course = coursesName[3];
+
+                                Provider.of<CookBook>(context, listen: false).
+                                    toggleMealRecipe(meal.toUpperCase(), possibleRecipes[3][index]['id']);
 
                                 Provider.of<MealChoiche>(context, listen: false).
                                 ToogleChosenRecipe(meal.toUpperCase(), course , possibleRecipes[3][index]);

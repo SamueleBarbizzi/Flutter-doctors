@@ -1,9 +1,58 @@
 // ignore_for_file: file_names
 
+import 'dart:convert';
 import 'package:flutter/material.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 class CookBook extends ChangeNotifier {
-  final List<Map> recipeslist = [
+
+  Future<void> saveCookbookStatus() async {
+    final cookbookStatus = await SharedPreferences.getInstance();
+      String encodedCookbook = json.encode(recipeslist);
+      await cookbookStatus.setString('cookbook', encodedCookbook);
+  }
+
+  Future<void> loadCookbookStatus() async {
+    final cookbookStatus = await SharedPreferences.getInstance();
+    if (cookbookStatus.getString('cookbook') != null)
+      { String encodedCookbook = cookbookStatus.getString('cookbook')!;
+      recipeslist = json.decode(encodedCookbook);}
+  }
+
+  Future<void> clearCookbookStatus() async {
+    final cookbookStatus = await SharedPreferences.getInstance();
+    await cookbookStatus.remove('cookbook');
+  }
+
+  void toggleRecipe(int id) {
+    // this wants to alternate between favorite and not favorite
+    final isSelected = recipeslist[id - 1]['isSelected'];
+    if (isSelected) {
+      recipeslist[id - 1]['isSelected'] = false;
+    } else {
+      recipeslist[id - 1]['isSelected'] = true;
+    }
+    //Call the notifyListeners() method to alert that something happened.
+    saveCookbookStatus();
+    notifyListeners();
+  }
+
+  void toggleMealRecipe(String meal, int id) {
+    // this wants to alternate between favorite and not favorite
+    final isExist = recipeslist[id - 1]['is${meal}Saved'];
+    if (isExist) {
+      recipeslist[id - 1]['is${meal}Saved'] = false;
+    } else {
+      recipeslist[id - 1]['is${meal}Saved'] = true;
+    }
+    //Call the notifyListeners() method to alert that something happened.
+    saveCookbookStatus();
+    notifyListeners();
+  }
+
+
+
+  List recipeslist = [
     {
       'id': 1,
       'isSelected': false,
@@ -1631,17 +1680,6 @@ class CookBook extends ChangeNotifier {
     },
   ];
 
-  void toggleRecipe(int id) {
-    // this wants to alternate between selected and not selected
-    final isExist = recipeslist[id - 1]['isSelected'];
-    if (isExist) {
-      recipeslist[id - 1]['isSelected'] = false;
-    } else {
-      recipeslist[id - 1]['isSelected'] = true;
-    }
-    //Call the notifyListeners() method to alert that something happened.
-    notifyListeners();
-  }
 }//Ingredients
 
 /*     {
