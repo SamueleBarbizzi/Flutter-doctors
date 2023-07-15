@@ -301,19 +301,19 @@ class _BreakfastChoicePageState extends State<BreakfastChoicePage> {
                       child: ListTile(
                         onTap: () {
                           // if this item isn't selected yet, "isSelected": false -> true
-                          // If this item already is selected: "isSelected": true -> false
+                          // If this item already is selected: "isSelected": true -> fals
+
                           setState(() {
-                            recipes[index]['isSelected'] =
-                                !recipes[index]['isSelected'];
+
                             String meal = 'BREAKFAST';
                             String course = 'breakfast';
-
-                            Provider.of<CookBook>(context, listen: false).
-                                    toggleRecipe(recipes[index]['id']);
 
                             Provider.of<MealChoiche>(context, listen: false)
                                 .ToogleChosenRecipe(
                                     meal.toUpperCase(), course, recipes[index]);
+
+                            Provider.of<CookBook>(context, listen: false).
+                                    toggleRecipe(recipes[index]['id']);
 
                             countCalories = Provider.of<MealChoiche>(
                                         context,

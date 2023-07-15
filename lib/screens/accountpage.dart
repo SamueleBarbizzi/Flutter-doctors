@@ -260,7 +260,7 @@ class _AccountPageState extends State<AccountPage> {
                 ),
               ),
               onTap: () {
-                // TODO: Open Facebook page
+                // Open Facebook page
               },
             ),
             ListTile(
@@ -272,7 +272,7 @@ class _AccountPageState extends State<AccountPage> {
                 ),
               ),
               onTap: () {
-                // TODO: Open Instagram page
+                // Open Instagram page
               },
             ),
             ListTile(
@@ -284,7 +284,7 @@ class _AccountPageState extends State<AccountPage> {
                 ),
               ),
               onTap: () {
-                // TODO: Open feedback form
+                // Open feedback form
               },
             ),
             ListTile(
@@ -296,7 +296,7 @@ class _AccountPageState extends State<AccountPage> {
                 ),
               ),
               onTap: () {
-                // TODO: Open voting page
+                // Open voting page
               },
             ),
             ListTile(
@@ -308,7 +308,7 @@ class _AccountPageState extends State<AccountPage> {
                   ),
                 ),
                 onTap: () {
-                  // TODO: Open assistance contact
+                  // Open assistance contact
                 }),
             ClipRRect(
               borderRadius: BorderRadius.circular(80),

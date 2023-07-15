@@ -406,9 +406,9 @@ class _CookBookPageState extends State<CookBookPage> {
                                   // if this item isn't selected yet, "isSelected": false -> true
                                   // If this item already is selected: "isSelected": true -> false
                                   setState(() {
-                                    possibleRecipes[0][index]['is${widget.meal}Saved'] =
-                                        !possibleRecipes[0][index]
-                                            ['is${widget.meal}Saved'];
+                                    //possibleRecipes[0][index]['is${widget.meal}Saved'] =
+                                    //    !possibleRecipes[0][index]
+                                    //        ['is${widget.meal}Saved'];
                                     String meal = widget.meal;
                                     String course = coursesName[0];
 
@@ -726,9 +726,9 @@ class _CookBookPageState extends State<CookBookPage> {
                                   // if this item isn't selected yet, "isSelected": false -> true
                                   // If this item already is selected: "isSelected": true -> false
                                   setState(() {
-                                    possibleRecipes[1][index]['is${widget.meal}Saved'] =
-                                        !possibleRecipes[1][index]
-                                            ['is${widget.meal}Saved'];
+                                    //possibleRecipes[1][index]['is${widget.meal}Saved'] =
+                                    //    !possibleRecipes[1][index]
+                                    //        ['is${widget.meal}Saved'];
                                     String meal = widget.meal;
                                     String course = coursesName[1];
 
@@ -1039,9 +1039,9 @@ class _CookBookPageState extends State<CookBookPage> {
                                   // if this item isn't selected yet, "isSelected": false -> true
                                   // If this item already is selected: "isSelected": true -> false
                                   setState(() {
-                                    possibleRecipes[2][index]['is${widget.meal}Saved'] =
-                                        !possibleRecipes[2][index]
-                                            ['is${widget.meal}Saved'];
+                                    //possibleRecipes[2][index]['is${widget.meal}Saved'] =
+                                    //    !possibleRecipes[2][index]
+                                    //        ['is${widget.meal}Saved'];
                                     String meal = widget.meal;
                                     String course = coursesName[2];
 
@@ -1357,8 +1357,8 @@ Provider.of<CookBook>(context, listen: false).
                               // if this item isn't selected yet, "isSelected": false -> true
                               // If this item already is selected: "isSelected": true -> false
                               setState(() {
-                                possibleRecipes[3][index]['is${widget.meal}Saved'] =
-                                    !possibleRecipes[3][index]['is${widget.meal}Saved'];
+                                //possibleRecipes[3][index]['is${widget.meal}Saved'] =
+                                //    !possibleRecipes[3][index]['is${widget.meal}Saved'];
                                 String meal = widget.meal;
                                 String course = coursesName[3];
 
