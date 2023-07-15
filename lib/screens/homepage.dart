@@ -34,6 +34,7 @@ class _HomePageState extends State<HomePage> {
   int largestValueIndex = 0;
   List<CaloriesEntity> fetchedData = [];
   List<ChartsData> chartData = [];
+  int baseTarget = 0;
 
   TextEditingController nameController = TextEditingController();
   TextEditingController quantityController = TextEditingController();
@@ -59,6 +60,10 @@ void loadCookBookStatus() {
   Provider.of<CookBook>(context,listen: false).loadCookbookStatus();
 }
 
+void getCalorieIntake() async{
+  SharedPreferences prefs = await SharedPreferences.getInstance();
+  baseTarget = prefs.getInt('dailycalorieintake')!;
+}
 
   Future<void> selectedIndex() async {
     SharedPreferences sp = await SharedPreferences.getInstance();
@@ -111,7 +116,7 @@ void loadCookBookStatus() {
     //Calories calculation
     int actualCalories =
         Provider.of<MealChoiche>(context, listen: false).getAllCalories();
-    int baseTarget = 2387; //da inserire
+    //int baseTarget = 2387; //da inserire
     int sumCalories = 0; // actual calculation below at line 130
     // Remain = Target - Food + Exercise;
     int remain = baseTarget - actualCalories + sumCalories;
@@ -130,6 +135,7 @@ void loadCookBookStatus() {
                   final data = snapshot.data as List<CaloriesEntity>;
                   int dataLength = data.length;
                   firstIndex(dataLength);
+                  getCalorieIntake();
                   final DateFormat italyDateFormat = DateFormat("dd-MM-yyyy");
                   chartData = [];
                   for (int t = 0; t < data.length; t++) {
