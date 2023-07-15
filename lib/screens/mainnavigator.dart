@@ -4,12 +4,13 @@ import 'package:flutter/material.dart';
 import 'package:flutter_doctors/services/apicall.dart';
 import 'package:flutter_doctors/services/databasecall.dart';
 import 'package:jwt_decoder/jwt_decoder.dart';
-import 'package:material_design_icons_flutter/material_design_icons_flutter.dart';
+import 'package:line_icons/line_icons.dart';
 import 'package:flutter_doctors/screens/loginpage.dart';
 import 'package:flutter_doctors/screens/accountpage.dart';
 import 'package:flutter_doctors/screens/homepage.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:flutter_doctors/screens/visualEditRecipepage.dart';
+import 'package:dot_navigation_bar/dot_navigation_bar.dart';
 
 class MainNavigator extends StatefulWidget {
   final bool firstDatabaseEntry;
@@ -53,78 +54,42 @@ class _MainNavigatorState extends State<MainNavigator> {
   }
 
   int _currentIndex = 0;
-  final PageController _pageController = PageController();
-
-  void _onPageChanged(int index) {
-    setState(() {
-      _currentIndex = index;
-    });
-  }
-
-  void _onItemTapped(int value) {
-    _pageController.jumpToPage(value);
-  }
 
   @override
   Widget build(BuildContext context) {
-    final List<Widget> _screens = [
+    final List<Widget> _navScreen = [
       HomePage(firstDatabaseEntry: widget.firstDatabaseEntry),
-      // ignore: prefer_const_constructors
       VisualEditRecipe(),
       AccountPage(firstDatabaseEntry: widget.firstDatabaseEntry, flag: false),
-
     ];
     print('${MainNavigator.routename} built');
     return SafeArea(
       child: Scaffold(
-        body: PageView(
-          controller: _pageController,
-          onPageChanged: _onPageChanged,
-          physics: const NeverScrollableScrollPhysics(),
-          children: _screens,
+        body: Center(
+          child: _navScreen.elementAt(_currentIndex),
         ),
-        drawer: Drawer(
-          child: ListView(
-            padding: EdgeInsets.zero,
-            children: [
-              const DrawerHeader(
-                decoration: BoxDecoration(
-                  color: Colors.blue,
-                ),
-                child: Text('user1'),
-              ),
-              ListTile(
-                leading: const Icon(Icons.logout),
-                title: const Text('Logout'),
-                onTap: () => _toLoginPage(context),
-              ),
+        extendBody: true,
+        bottomNavigationBar: DotNavigationBar(
+          marginR: const EdgeInsets.symmetric(horizontal: 50, vertical: 18),
+          paddingR: const EdgeInsets.only(bottom: 8, top: 8),
+          borderRadius: 50,
+            backgroundColor: Color(0xFF00916E),
+            splashColor: Colors.transparent,
+            enablePaddingAnimation: false,
+            dotIndicatorColor: Colors.white,
+            unselectedItemColor: Colors.grey[300],
+            currentIndex: _currentIndex,
+            onTap: (index) {
+                    setState(() {
+                      _currentIndex = index;
+                    });
+                  },
+            items: [
+              DotNavigationBarItem(icon: Icon(LineIcons.home), selectedColor: Colors.white),
+              DotNavigationBarItem(icon: Icon(LineIcons.utensils), selectedColor: Colors.white),
+              DotNavigationBarItem(icon: Icon(LineIcons.user), selectedColor: Colors.white),
             ],
           ),
-        ),
-        bottomNavigationBar: BottomNavigationBar(
-          items: [
-            const BottomNavigationBarItem(
-              icon: Icon(Icons.home),
-              label: 'Home',
-            ),
-            BottomNavigationBarItem(
-                icon: Icon(MdiIcons.gridLarge), label: 'My Recipes'),
-            BottomNavigationBarItem(
-              icon: Icon(MdiIcons.account),
-              label: 'Profile',
-            ),
-          ],
-          backgroundColor: const Color.fromARGB(255, 14, 75, 16),
-          // selectedFontSize: 10,
-          type: BottomNavigationBarType.fixed,
-          selectedIconTheme: const IconThemeData(color: Colors.white),
-          selectedItemColor: Colors.white,
-          selectedLabelStyle: const TextStyle(fontWeight: FontWeight.bold),
-          unselectedIconTheme: const IconThemeData(color: Colors.white70),
-          unselectedItemColor: Colors.white70,
-          onTap: _onItemTapped,
-          currentIndex: _currentIndex,
-        ),
       ),
     );
   } //build

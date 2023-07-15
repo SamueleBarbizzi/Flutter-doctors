@@ -37,10 +37,11 @@ class MyApp extends StatelessWidget {
     //Here we are injecting an instance of Favorites through the widget tree. As such, the instance will be shared through the application.
     //Moreover, everyone will be able to perform action over this instance.
     return MaterialApp(
+      debugShowCheckedModeBanner: false,
       theme: ThemeData(
         primarySwatch: Colors.green,
         appBarTheme: const AppBarTheme(
-          color: Color.fromARGB(255, 14, 75, 16),
+          color: Color(0xFF00916E),
         ),
       ),
       home: const LoginPage(),

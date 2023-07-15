@@ -14,7 +14,7 @@ class AccountPage extends StatefulWidget {
   const AccountPage(
       {super.key, required this.firstDatabaseEntry, required this.flag});
 
-  static const routename = 'Profile';
+  static const routename = 'Accountpage';
 
   @override
   State<AccountPage> createState() => _AccountPageState();
@@ -36,7 +36,7 @@ class _AccountPageState extends State<AccountPage> {
   final TextEditingController _ageController = TextEditingController();
   final TextEditingController _weightController = TextEditingController();
   final TextEditingController _heightController = TextEditingController();
-  final TextEditingController _dailycalorieintakeController =TextEditingController();
+  final TextEditingController _dailycalorieintakeController = TextEditingController();
   final TextEditingController _activityController = TextEditingController();
   final TextEditingController _consentController = TextEditingController(text: 'false');
 
@@ -124,7 +124,6 @@ class _AccountPageState extends State<AccountPage> {
     return Scaffold(
       appBar: AppBar(
         title: Text(AccountPage.routename),
-        centerTitle: true,
         actions: [
           IconButton(
             icon: const Icon(Icons.info),
@@ -261,7 +260,7 @@ class _AccountPageState extends State<AccountPage> {
                 ),
               ),
               onTap: () {
-                // TODO: Open Facebook page
+                // Open Facebook page
               },
             ),
             ListTile(
@@ -273,7 +272,7 @@ class _AccountPageState extends State<AccountPage> {
                 ),
               ),
               onTap: () {
-                // TODO: Open Instagram page
+                // Open Instagram page
               },
             ),
             ListTile(
@@ -285,7 +284,7 @@ class _AccountPageState extends State<AccountPage> {
                 ),
               ),
               onTap: () {
-                // TODO: Open feedback form
+                // Open feedback form
               },
             ),
             ListTile(
@@ -297,7 +296,7 @@ class _AccountPageState extends State<AccountPage> {
                 ),
               ),
               onTap: () {
-                // TODO: Open voting page
+                // Open voting page
               },
             ),
             ListTile(
@@ -309,7 +308,7 @@ class _AccountPageState extends State<AccountPage> {
                   ),
                 ),
                 onTap: () {
-                  // TODO: Open assistance contact
+                  // Open assistance contact
                 }),
             ClipRRect(
               borderRadius: BorderRadius.circular(80),
@@ -324,7 +323,10 @@ class _AccountPageState extends State<AccountPage> {
                         color: Colors.white,
                       ),
                     ),
-                    onTap: () => _toLoginPage(context),
+                    onTap: (
+
+
+                    ) => _toLoginPage(context),
                   )),
             )
           ],
@@ -433,6 +435,14 @@ class _AccountPageState extends State<AccountPage> {
     await sp.remove('access');
     await sp.remove('refresh');
     await sp.remove('selectedIndex');
+
+    final savedMeals = await SharedPreferences.getInstance();
+      await savedMeals.remove('chosenMeals');
+      await savedMeals.remove('personalMeals');
+      await savedMeals.remove('snacks');
+
+    final cookbookStatus = await SharedPreferences.getInstance();
+    await cookbookStatus.remove('cookbook');
 
     //Pop the drawer first
     Navigator.pop(context);
