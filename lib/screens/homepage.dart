@@ -104,10 +104,10 @@ class _HomePageState extends State<HomePage> {
     // Remain = Target - Food + Exercise;
     int remain = baseTarget - actualCalories + sumCalories;
     return Scaffold(
-      appBar: AppBar(
+      /* appBar: AppBar(
         title: Text(HomePage.routename, style: TextStyle(fontWeight: FontWeight.bold)),
         centerTitle: true,
-      ),
+      ), */
       body: SingleChildScrollView(
         child: Consumer<DatabaseProvider>(builder: (context, dbr, child) {
           return FutureBuilder<List<CaloriesEntity>>(
@@ -352,294 +352,143 @@ class _HomePageState extends State<HomePage> {
                                                 color: Color.fromARGB(
                                                     255, 76, 175, 80))),
                                       ),
-                                      const SizedBox(height: 25),
+                                      const SizedBox(height: 20),
                                       Row(
-                                        mainAxisAlignment:
-                                            MainAxisAlignment.center,
-                                        children: [
-                                          ElevatedButton.icon(
-                                            icon: Icon(MdiIcons.coffee,
-                                                color: const Color.fromARGB(
-                                                    255, 6, 90, 158),
-                                                shadows: const <Shadow>[
-                                                  Shadow(
-                                                      color: Colors.black,
-                                                      blurRadius: 1.0,
-                                                      offset: Offset(0, 2))
-                                                ]),
-                                            label: const Text('Breakfast'),
-                                            onPressed: () {
+                                        mainAxisAlignment: MainAxisAlignment.center,
+                                        children:[ GestureDetector( 
+                                          onTap: () {
                                               _toBreakfastChoicePage(
                                                   context, baseTarget);
-                                            },
-                                            style: ElevatedButton.styleFrom(
-                                                //padding: EdgeInsets.fromLTRB(0, 20, 20, 20),
-                                                backgroundColor:
-                                                    Colors.lightGreen,
-                                                fixedSize: const Size(200, 40),
-                                                textStyle: const TextStyle(
-                                                    fontSize: 22,
-                                                    fontWeight:
-                                                        FontWeight.bold),
-                                                elevation: 15,
-                                                shadowColor:
-                                                    const Color.fromARGB(
-                                                        255, 14, 75, 16),
-                                                shape: const StadiumBorder(),
-                                                side: const BorderSide(
-                                                    color: Color.fromARGB(
-                                                        255, 14, 75, 16),
-                                                    width: 2.5)),
-                                          ),
-                                        ],
-                                      ),
-                                      const SizedBox(height: 15),
-                                      Row(
-                                        mainAxisAlignment:
-                                            MainAxisAlignment.center,
-                                        children: [
-                                          ElevatedButton.icon(
-                                            icon: Icon(
-                                                MdiIcons.whiteBalanceSunny,
-                                                color: const Color.fromARGB(
-                                                    255, 219, 200, 23),
-                                                shadows: const <Shadow>[
-                                                  Shadow(
-                                                      color: Colors.black,
-                                                      blurRadius: 1.0,
-                                                      offset: Offset(0, 2))
-                                                ]),
-                                            label: const Text('Lunch'),
-                                            onPressed: () {
+                                          },
+                                          child: Container(
+                                            decoration: BoxDecoration(
+                                                color: Colors.white,
+                                              border: Border.all(color: Colors.grey.shade400, width: 1.0),
+                                              borderRadius: BorderRadius.circular(10)
+                                            ), 
+                                            child: ClipRRect(borderRadius: BorderRadius.circular(10),
+                                              child: Image.asset('assets/images/Breakfast.jpg', fit: BoxFit.cover, width: 100, height: 100),)
+                                          )
+                                        ),
+                                        GestureDetector( 
+                                          onTap: () {
                                               String mealName = 'LUNCH';
                                               _toIngredientsPage(context,
                                                   mealName, baseTarget);
                                             },
-                                            style: ElevatedButton.styleFrom(
-                                                //padding: EdgeInsets.fromLTRB(0, 20, 50, 20),
-                                                backgroundColor:
-                                                    Colors.lightGreen,
-                                                fixedSize: const Size(200, 40),
-                                                textStyle: const TextStyle(
-                                                    fontSize: 22,
-                                                    fontWeight:
-                                                        FontWeight.bold),
-                                                elevation: 15,
-                                                shadowColor:
-                                                    const Color.fromARGB(
-                                                        255, 14, 75, 16),
-                                                shape: const StadiumBorder(),
-                                                side: const BorderSide(
-                                                    color: Color.fromARGB(
-                                                        255, 14, 75, 16),
-                                                    width: 2.5)),
-                                          ),
-                                        ],
-                                      ),
+                                          child: Container(
+                                            decoration: BoxDecoration(
+                                                color: Colors.white,
+                                              border: Border.all(color: Colors.grey.shade400, width: 1.0),
+                                              borderRadius: BorderRadius.circular(10)
+                                            ), 
+                                            child: ClipRRect(borderRadius: BorderRadius.circular(10),
+                                              child: Image.asset('assets/images/Lunch.jpg', fit: BoxFit.cover, width: 100, height: 100),)
+                                          )
+                                        )]
+                                      ),           
                                       const SizedBox(height: 15),
                                       Row(
-                                        mainAxisAlignment:
-                                            MainAxisAlignment.center,
-                                        children: [
-                                          ElevatedButton.icon(
-                                            icon: const Icon(
-                                                Icons.mode_night_rounded,
-                                                color: Color.fromARGB(
-                                                    255, 126, 125, 125),
-                                                shadows: <Shadow>[
-                                                  Shadow(
-                                                      color: Colors.black,
-                                                      blurRadius: 1.0,
-                                                      offset: Offset(0, 2))
-                                                ]),
-                                            label: const Text('Dinner'),
-                                            onPressed: () {
+                                        mainAxisAlignment: MainAxisAlignment.center,
+                                        children:[ GestureDetector( 
+                                          onTap: () {
                                               String mealName = 'DINNER';
                                               _toIngredientsPage(context,
                                                   mealName, baseTarget);
                                             },
-                                            style: ElevatedButton.styleFrom(
-                                                //padding: EdgeInsets.all(20.0),
-                                                backgroundColor:
-                                                    Colors.lightGreen,
-                                                fixedSize: const Size(200, 40),
-                                                textStyle: const TextStyle(
-                                                    fontSize: 22,
-                                                    fontWeight:
-                                                        FontWeight.bold),
-                                                elevation: 15,
-                                                shadowColor:
-                                                    const Color.fromARGB(
-                                                        255, 14, 75, 16),
-                                                shape: const StadiumBorder(),
-                                                side: const BorderSide(
-                                                    color: Color.fromARGB(
-                                                        255, 14, 75, 16),
-                                                    width: 2.5)),
-                                          ),
-                                        ],
-                                      ),
-                                      const SizedBox(height: 15),
-                                      Row(
-                                        mainAxisAlignment:
-                                            MainAxisAlignment.center,
-                                        children: [
-                                          ElevatedButton.icon(
-                                            icon: Icon(MdiIcons.foodApple,
-                                                color: const Color.fromARGB(
-                                                    255, 218, 26, 12),
-                                                shadows: const <Shadow>[
-                                                  Shadow(
-                                                      color: Colors.black,
-                                                      blurRadius: 1.0,
-                                                      offset: Offset(0, 2))
-                                                ]),
-                                            label: const Text('Snack'),
-                                            onPressed: () => showDialog(
-                                              context: context,
-                                              builder: (context) =>
-                                                  ScaffoldMessenger(
-                                                child: Builder(
-                                                  builder: (context) =>
-                                                      Scaffold(
-                                                    backgroundColor:
-                                                        Colors.transparent,
-                                                    body: GestureDetector(
-                                                      child: AlertDialog(
-                                                        title: const Text(
-                                                            'New snack'),
-                                                        content: Column(
-                                                          mainAxisSize:
-                                                              MainAxisSize.min,
-                                                          children: [
-                                                            TextField(
-                                                              controller:
-                                                                  nameController,
-                                                              //onChanged: (value) {String name = value;},
-                                                              decoration:
-                                                                  const InputDecoration(
-                                                                labelText:
-                                                                    "Name",
-                                                                hintText:
-                                                                    "Name...",
-                                                                border: OutlineInputBorder(
-                                                                    borderRadius:
-                                                                        BorderRadius.all(
-                                                                            Radius.circular(10))),
-                                                              ),
+                                          child: Container(
+                                            decoration: BoxDecoration(
+                                                color: Colors.white,
+                                              border: Border.all(color: Colors.grey.shade400, width: 1.0),
+                                              borderRadius: BorderRadius.circular(10)
+                                            ), 
+                                            child: ClipRRect(borderRadius: BorderRadius.circular(10),
+                                              child: Image.asset('assets/images/Dinner.jpg', fit: BoxFit.cover, width: 100, height: 100),)
+                                          )
+                                        ),
+                                        GestureDetector( 
+                                          onTap: () => showDialog( context: context,
+                                            builder: (context) => ScaffoldMessenger(
+                                              child: Builder(
+                                                builder: (context) => Scaffold(
+                                                  backgroundColor: Colors.transparent,
+                                                  body: GestureDetector(
+                                                    child: AlertDialog(
+                                                      title: const Text('New snack'),
+                                                      content: Column(mainAxisSize: MainAxisSize.min,
+                                                        children: [ TextField( 
+                                                          controller: nameController,
+                                                          //onChanged: (value) {String name = value;},
+                                                          decoration: const InputDecoration(
+                                                            labelText: "Name",
+                                                            hintText:"Name...",
+                                                            border: OutlineInputBorder(
+                                                              borderRadius: BorderRadius.all(Radius.circular(10))
                                                             ),
-                                                            const SizedBox(
-                                                                height: 20),
-                                                            TextField(
-                                                              controller:
-                                                                  quantityController,
-                                                              keyboardType:
-                                                                  TextInputType
-                                                                      .number,
-                                                              //onChanged: (value) {int quantity = int.parse(value);},
-                                                              decoration:
-                                                                  const InputDecoration(
-                                                                labelText:
-                                                                    "Calories",
-                                                                hintText:
-                                                                    "Kcals...",
-                                                                border: OutlineInputBorder(
-                                                                    borderRadius:
-                                                                        BorderRadius.all(
-                                                                            Radius.circular(10))),
-                                                              ),
-                                                            ),
-                                                          ],
-                                                        ),
-                                                        actions: <Widget>[
-                                                          TextButton(
-                                                            onPressed: () {
-                                                              nameController
-                                                                  .clear();
-                                                              quantityController
-                                                                  .clear();
-                                                              Navigator.pop(
-                                                                  context,
-                                                                  'Cancel');
-                                                            },
-                                                            child: const Text(
-                                                                'Cancel'),
                                                           ),
-                                                          TextButton(
-                                                            onPressed: () {
-                                                              if (nameController
-                                                                          .text !=
-                                                                      '' &&
-                                                                  quantityController
-                                                                          .text !=
-                                                                      '') {
-                                                                Provider.of<MealChoiche>(
-                                                                        context,
-                                                                        listen:
-                                                                            false)
-                                                                    .addSnack(
-                                                                        nameController
-                                                                            .text,
-                                                                        int.parse(
-                                                                            quantityController.text));
-                                                                setState(() {});
-
-                                                                actualCalories = Provider.of<
-                                                                            MealChoiche>(
-                                                                        context,
-                                                                        listen:
-                                                                            false)
-                                                                    .getAllCalories();
-
-                                                                nameController
-                                                                    .clear();
-                                                                quantityController
-                                                                    .clear();
-                                                                Navigator.pop(
-                                                                    context,
-                                                                    'Add');
-                                                              } else {
-                                                                ScaffoldMessenger.of(
-                                                                        context)
-                                                                    .showSnackBar(
-                                                                        const SnackBar(
-                                                                  content: Text(
-                                                                      'Name or quantity inserted are empty! Please complete both inputs or Cancel'),
-                                                                  elevation: 20,
-                                                                ));
-                                                              }
-                                                            },
-                                                            child: const Text(
-                                                                'Add'),
+                                                        ),
+                                                          const SizedBox(height: 20),
+                                                          TextField( controller: quantityController,
+                                                            keyboardType: TextInputType.number,
+                                                            //onChanged: (value) {int quantity = int.parse(value);},
+                                                            decoration: const InputDecoration(
+                                                              labelText: "Calories",
+                                                              hintText: "Kcals...",
+                                                              border: OutlineInputBorder(
+                                                                borderRadius:BorderRadius.all(Radius.circular(10))
+                                                              ),
+                                                            ),
                                                           ),
                                                         ],
                                                       ),
+                                                      actions: <Widget>[
+                                                        TextButton(
+                                                          onPressed: () {
+                                                            nameController.clear();
+                                                            quantityController.clear();
+                                                            Navigator.pop(context,'Cancel');
+                                                          },
+                                                          child: const Text('Cancel'),
+                                                        ),
+                                                        TextButton(
+                                                          onPressed: () {
+                                                            if (nameController.text != '' &&  quantityController.text !=  '') {
+                                                              Provider.of<MealChoiche>(context,listen:false)
+                                                                  .addSnack(nameController.text,
+                                                                      int.parse(quantityController.text));
+                                                              setState(() {});
+                                                              actualCalories = Provider.of<MealChoiche>(context,listen:false)
+                                                                .getAllCalories();
+                                                              nameController.clear();
+                                                              quantityController.clear();
+                                                              Navigator.pop(context,'Add');
+                                                            } else {
+                                                              ScaffoldMessenger.of(context)
+                                                                .showSnackBar(const SnackBar( 
+                                                                  content: Text('Name or quantity inserted are empty! Please complete both inputs or Cancel'),
+                                                                  elevation: 20,
+                                                                ));
+                                                            }
+                                                          },
+                                                          child: const Text('Add'),
+                                                        ),
+                                                      ],
                                                     ),
                                                   ),
                                                 ),
                                               ),
                                             ),
-                                            style: ElevatedButton.styleFrom(
-                                                //padding: EdgeInsets.fromLTRB(0, 20, 50, 20),
-                                                backgroundColor:
-                                                    Colors.lightGreen,
-                                                fixedSize: const Size(200, 40),
-                                                textStyle: const TextStyle(
-                                                    fontSize: 22,
-                                                    fontWeight:
-                                                        FontWeight.bold),
-                                                elevation: 15,
-                                                shadowColor:
-                                                    const Color.fromARGB(
-                                                        255, 14, 75, 16),
-                                                shape: const StadiumBorder(),
-                                                side: const BorderSide(
-                                                    color: Color.fromARGB(
-                                                        255, 14, 75, 16),
-                                                    width: 2.5)
-                                                    ),
                                           ),
-                                        ],
+                                          child: Container(
+                                            decoration: BoxDecoration(
+                                                color: Colors.white,
+                                              border: Border.all(color: Colors.grey.shade400, width: 1.0),
+                                              borderRadius: BorderRadius.circular(10)
+                                            ), 
+                                            child: ClipRRect(borderRadius: BorderRadius.circular(10),
+                                              child: Image.asset('assets/images/Snack.jpg', fit: BoxFit.cover, width: 100, height: 100),)
+                                          )
+                                        )]
                                       ),
                                     ], 
                     ),

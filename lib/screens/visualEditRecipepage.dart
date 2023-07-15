@@ -137,8 +137,8 @@ class _VisualEditRecipeState extends State<VisualEditRecipe> {
                         child: Container(
                           decoration: BoxDecoration(
                               color: Colors.white,
-                            border: Border.all(color: Colors.grey.shade400, width: 1.0),
-                            borderRadius: BorderRadius.circular(8)
+                            //border: Border.all(color: Colors.grey.shade400, width: 1.0),
+                            borderRadius: BorderRadius.circular(10)
                           ), 
                           child: ClipRRect(borderRadius: BorderRadius.circular(10),
                           child: Stack( alignment: Alignment.topRight,
@@ -146,8 +146,7 @@ class _VisualEditRecipeState extends State<VisualEditRecipe> {
                               Container(alignment: Alignment.center, height: 50, width: 50,
                               decoration: BoxDecoration( 
                                             color: Colors.red,
-                                            border: Border.all(color: Colors.grey.shade400, width: 1.0),
-                                            borderRadius: BorderRadius.circular(8)),               
+                                            borderRadius: BorderRadius.circular(10)),               
                                 child: IconButton(
                                   icon: const Icon(Icons.delete_forever),
                                   onPressed: () {
