@@ -315,10 +315,10 @@ class _HomePageState extends State<HomePage> {
                     ],
                         ),
           ),
-        
+                              //COPIARE DA QUI 
                                 const SizedBox(height: 15),
                                 Container(
-                                  height: 330,
+                                  height: 350,
                                   width: 350,
                                   margin:
                                       const EdgeInsets.fromLTRB(25, 0, 25, 0),
@@ -348,44 +348,93 @@ class _HomePageState extends State<HomePage> {
                                         child: const Text("Meal Selection",
                                             style: TextStyle(
                                                 fontWeight: FontWeight.bold,
-                                                fontSize: 20,
+                                                fontSize: 24,
                                                 color: Color.fromARGB(
                                                     255, 76, 175, 80))),
                                       ),
-                                      const SizedBox(height: 20),
+                                      const SizedBox(height: 15),
                                       Row(
                                         mainAxisAlignment: MainAxisAlignment.center,
-                                        children:[ GestureDetector( 
-                                          onTap: () {
-                                              _toBreakfastChoicePage(
-                                                  context, baseTarget);
-                                          },
-                                          child: Container(
-                                            decoration: BoxDecoration(
-                                                color: Colors.white,
-                                              border: Border.all(color: Colors.grey.shade400, width: 1.0),
-                                              borderRadius: BorderRadius.circular(10)
-                                            ), 
-                                            child: ClipRRect(borderRadius: BorderRadius.circular(10),
-                                              child: Image.asset('assets/images/Breakfast.jpg', fit: BoxFit.cover, width: 100, height: 100),)
-                                          )
-                                        ),
-                                        GestureDetector( 
-                                          onTap: () {
-                                              String mealName = 'LUNCH';
-                                              _toIngredientsPage(context,
-                                                  mealName, baseTarget);
+                                        children:[ 
+                                          GestureDetector( 
+                                            onTap: () {
+                                                _toBreakfastChoicePage(context, baseTarget);
                                             },
-                                          child: Container(
-                                            decoration: BoxDecoration(
-                                                color: Colors.white,
-                                              border: Border.all(color: Colors.grey.shade400, width: 1.0),
-                                              borderRadius: BorderRadius.circular(10)
-                                            ), 
-                                            child: ClipRRect(borderRadius: BorderRadius.circular(10),
-                                              child: Image.asset('assets/images/Lunch.jpg', fit: BoxFit.cover, width: 100, height: 100),)
+                                            child: Container(
+                                              decoration: BoxDecoration(
+                                                  color: Colors.white,
+                                                border: Border.all(color: Colors.grey.shade400, width: 1.0),
+                                                borderRadius: BorderRadius.circular(10)
+                                              ), 
+                                              child: ClipRRect(borderRadius: BorderRadius.circular(10),
+                                              child: Stack( alignment: Alignment.center,
+                                                children: [
+                                                  Image.asset('assets/images/breakfast.jpg', 
+                                                    fit: BoxFit.cover, width: 150, height: 120),
+                                                  Container( padding: EdgeInsets.all(10),
+                                                    decoration: BoxDecoration(
+                                                      color: Colors.black.withOpacity(0.5),
+                                                      borderRadius: BorderRadius.circular(5)
+                                                    ), 
+                                                    child: Text("Breakfast", 
+                                                            style: TextStyle(
+                                                              color: Colors.white,
+                                                              fontFamily: 'Balthazar',
+                                                              fontSize: 24,
+                                                              //fontWeight: FontWeight.bold,
+                                                              shadows: [Shadow(
+                                                                color: Colors.black,
+                                                                blurRadius: 1,
+                                                                offset: Offset(0,2)
+                                                              )]
+                                                            )
+                                                            
+                                                            )
+                                                  )
+                                            ]))
+                                            )
+                                          ),
+                                          const SizedBox(height: 100, width: 10),
+                                          GestureDetector( 
+                                            onTap: () {
+                                                String mealName = 'LUNCH';
+                                                _toIngredientsPage(context,mealName, baseTarget);
+                                              },
+                                            child: Container(
+                                              decoration: BoxDecoration(
+                                                  color: Colors.white,
+                                                border: Border.all(color: Colors.grey.shade400, width: 1.0),
+                                                borderRadius: BorderRadius.circular(10)
+                                              ), 
+                                              child: ClipRRect(borderRadius: BorderRadius.circular(10),
+                                              child: Stack( alignment: Alignment.center,
+                                                children: [
+                                                  Image.asset('assets/images/Lunch.webp', 
+                                                    fit: BoxFit.cover, width: 150, height: 120),
+                                                  Container( padding: EdgeInsets.all(10),
+                                                    decoration: BoxDecoration(
+                                                      color: Colors.black.withOpacity(0.5),
+                                                      borderRadius: BorderRadius.circular(5)
+                                                    ), 
+                                                    child: Text("Lunch", 
+                                                            style: TextStyle(
+                                                              color: Colors.white,
+                                                              fontFamily: 'Balthazar',
+                                                              fontSize: 24,
+                                                              //fontWeight: FontWeight.bold,
+                                                              shadows: [Shadow(
+                                                                color: Colors.black,
+                                                                blurRadius: 1,
+                                                                offset: Offset(0,2)
+                                                              )]
+                                                            )
+                                                            
+                                                            )
+                                                  )
+                                            ]))
+                                            )
                                           )
-                                        )]
+                                        ]
                                       ),           
                                       const SizedBox(height: 15),
                                       Row(
@@ -393,19 +442,43 @@ class _HomePageState extends State<HomePage> {
                                         children:[ GestureDetector( 
                                           onTap: () {
                                               String mealName = 'DINNER';
-                                              _toIngredientsPage(context,
-                                                  mealName, baseTarget);
+                                              _toIngredientsPage(context, mealName, baseTarget);
                                             },
                                           child: Container(
-                                            decoration: BoxDecoration(
-                                                color: Colors.white,
-                                              border: Border.all(color: Colors.grey.shade400, width: 1.0),
-                                              borderRadius: BorderRadius.circular(10)
-                                            ), 
-                                            child: ClipRRect(borderRadius: BorderRadius.circular(10),
-                                              child: Image.asset('assets/images/Dinner.jpg', fit: BoxFit.cover, width: 100, height: 100),)
-                                          )
+                                              decoration: BoxDecoration(
+                                                  color: Colors.white,
+                                                border: Border.all(color: Colors.grey.shade400, width: 1.0),
+                                                borderRadius: BorderRadius.circular(10)
+                                              ), 
+                                              child: ClipRRect(borderRadius: BorderRadius.circular(10),
+                                              child: Stack( alignment: Alignment.center,
+                                                children: [
+                                                  Image.asset('assets/images/Dinner.jpg', 
+                                                    fit: BoxFit.cover, width: 150, height: 120),
+                                                  Container( padding: EdgeInsets.all(10),
+                                                    decoration: BoxDecoration(
+                                                      color: Colors.black.withOpacity(0.5),
+                                                      borderRadius: BorderRadius.circular(5)
+                                                    ), 
+                                                    child: Text("Dinner", 
+                                                            style: TextStyle(
+                                                              color: Colors.white,
+                                                              fontFamily: 'Balthazar',
+                                                              fontSize: 24,
+                                                              //fontWeight: FontWeight.bold,
+                                                              shadows: [Shadow(
+                                                                color: Colors.black,
+                                                                blurRadius: 1,
+                                                                offset: Offset(0,2)
+                                                              )]
+                                                            )
+                                                            
+                                                            )
+                                                  )
+                                            ]))
+                                            )
                                         ),
+                                        const SizedBox(height: 100, width: 10),
                                         GestureDetector( 
                                           onTap: () => showDialog( context: context,
                                             builder: (context) => ScaffoldMessenger(
@@ -480,21 +553,47 @@ class _HomePageState extends State<HomePage> {
                                             ),
                                           ),
                                           child: Container(
-                                            decoration: BoxDecoration(
-                                                color: Colors.white,
-                                              border: Border.all(color: Colors.grey.shade400, width: 1.0),
-                                              borderRadius: BorderRadius.circular(10)
-                                            ), 
-                                            child: ClipRRect(borderRadius: BorderRadius.circular(10),
-                                              child: Image.asset('assets/images/Snack.jpg', fit: BoxFit.cover, width: 100, height: 100),)
-                                          )
+                                              decoration: BoxDecoration(
+                                                  color: Colors.white,
+                                                border: Border.all(color: Colors.grey.shade400, width: 1.0),
+                                                borderRadius: BorderRadius.circular(10)
+                                              ), 
+                                              child: ClipRRect(borderRadius: BorderRadius.circular(10),
+                                              child: Stack( alignment: Alignment.center,
+                                                children: [
+                                                  Image.asset('assets/images/Snack.jpg', 
+                                                    fit: BoxFit.cover, width: 150, height: 120),
+                                                  Container( padding: EdgeInsets.all(10),
+                                                    decoration: BoxDecoration(
+                                                      color: Colors.black.withOpacity(0.5),
+                                                      borderRadius: BorderRadius.circular(5)
+                                                    ), 
+                                                    child: Text("Snack", 
+                                                            style: TextStyle(
+                                                              color: Colors.white,
+                                                              fontFamily: 'Balthazar',
+                                                              fontSize: 24,
+                                                              //fontWeight: FontWeight.bold,
+                                                              shadows: [Shadow(
+                                                                color: Colors.black,
+                                                                blurRadius: 1,
+                                                                offset: Offset(0,2)
+                                                              )]
+                                                            )
+                                                            
+                                                            )
+                                                  )
+                                            ]))
+                                            )
                                         )]
                                       ),
+                                      const SizedBox(height:20),
                                     ], 
                     ),
                 ),
               ],
                   );
+                // FINO A QUI
                 } else {
                   return const Center(
                     child: CircularProgressIndicator(),
