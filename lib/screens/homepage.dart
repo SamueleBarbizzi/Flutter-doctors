@@ -281,9 +281,9 @@ void getCalorieIntake() async{
                                         color: Color(0xFF4CAF50)))),
                             Container(
                                 height: 20,
-                                alignment: const Alignment(-0.9, 0),
+                                alignment: const Alignment(-0.6, 0),
                                 child: const Text(
-                                    "Remaining = Target - Food + Exercise",
+                                    "Remaining = 70% Target + 30% (Rest + Exercise) - Food",
                                     style: TextStyle(
                                         fontSize: 12, color: Colors.black))),
                             Padding(
