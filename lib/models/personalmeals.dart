@@ -102,11 +102,11 @@ void togglePersonalRecipe(String meal, String name) {
     for (int index=0; index<personalRecipes[meal].length; index++){
       int ind = personalRecipes[meal][index].indexWhere((element) => element['name'] == name);
       if(ind != -1){
-        final isSelected = personalRecipes[meal][index][ind]['isSelected'];
+        final isSelected = personalRecipes[meal][index][ind]['is${meal}Saved'];
         if (isSelected) {
-          personalRecipes[meal][index][ind]['isSelected'] = false;
+          personalRecipes[meal][index][ind]['is${meal}Saved'] = false;
         } else {
-          personalRecipes[meal][index][ind]['isSelected'] = true;
+          personalRecipes[meal][index][ind]['is${meal}Saved'] = true;
         }
         break loop;
       }

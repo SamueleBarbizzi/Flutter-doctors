@@ -111,7 +111,6 @@ class _VisualEditRecipeState extends State<VisualEditRecipe> {
                                     Provider.of<PersonalMeals>(context, listen: false).
                                     togglePersonalRecipe(k, allRecipePersonal[index]['name']);
 
-                                    
                                     Provider.of<MealChoiche>(context,listen: false)
                                     .findAndRemovePersonalRecipe(allRecipePersonal[index]['name']);
 

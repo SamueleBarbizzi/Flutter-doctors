@@ -346,6 +346,7 @@ class _CookBookPageState extends State<CookBookPage> {
                                 Provider.of<MealChoiche>(context, listen: false)
                                     .TooglePersonalRecipe(widget.meal.toUpperCase(),
                                         coursesName[0].toLowerCase(), item);
+                                Provider.of<PersonalMeals>(context, listen: false).savePersonalMealsStatus();
                                     });
 
                                         countCalories = Provider.of<MealChoiche>(
@@ -660,6 +661,8 @@ class _CookBookPageState extends State<CookBookPage> {
                                 Provider.of<MealChoiche>(context, listen: false)
                                     .TooglePersonalRecipe(widget.meal.toUpperCase(),
                                         coursesName[1].toLowerCase(), item);
+                                
+                                Provider.of<PersonalMeals>(context, listen: false).savePersonalMealsStatus();
 
                                         countCalories = Provider.of<MealChoiche>(
                                         context,
@@ -975,6 +978,8 @@ class _CookBookPageState extends State<CookBookPage> {
                                 Provider.of<MealChoiche>(context, listen: false)
                                     .TooglePersonalRecipe(widget.meal.toUpperCase(),
                                         coursesName[2].toLowerCase(), item);
+                                
+                                Provider.of<PersonalMeals>(context, listen: false).savePersonalMealsStatus();
 
                                         countCalories = Provider.of<MealChoiche>(
                                         context,
