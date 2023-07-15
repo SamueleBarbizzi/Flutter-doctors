@@ -133,8 +133,8 @@ class MealChoiche extends ChangeNotifier {
     int id = item['id'];
     int ind = chosen[meal][course].indexWhere((element) => element['id'] == id);
         if (ind != -1) {
-          Map item = chosen[meal.toUpperCase()][course.toLowerCase()].elementAt(ind);
-          chosen[meal.toUpperCase()][course.toLowerCase()].remove(item);
+          //Map item = chosen[meal.toUpperCase()][course.toLowerCase()].elementAt(ind);
+          chosen[meal.toUpperCase()][course.toLowerCase()].removeAt(ind);
         }
         else{
       chosen[meal][course].add(item);

@@ -184,7 +184,7 @@ void getCalorieIntake() async{
                   }
                   String date = italyDateFormat.format(data[i].dateTime);
                   int sumCalories = data[i].sumCalories.round();
-                  int remain = (0.7*baseTarget - actualCalories + 0.3*sumCalories).round();
+                  int remain = (0.7*baseTarget + 0.3*sumCalories - actualCalories).round();
                   return Column(
                     children: [
                       Row(
@@ -306,7 +306,7 @@ void getCalorieIntake() async{
                                               frontColor: Color(0xFF4CAF50),
                                               strokeWidth: 20,
                                               value: (actualCalories /
-                                                      baseTarget)
+                                                      (0.7*baseTarget + 0.3*sumCalories))
                                                   .toDouble(), 
                                             ),
                                             child: Center(
@@ -458,7 +458,7 @@ void getCalorieIntake() async{
                                       ]),
                                   label: const Text('Breakfast'),
                                   onPressed: () {
-                                    _toBreakfastChoicePage(context, baseTarget);
+                                    _toBreakfastChoicePage(context, (0.7*baseTarget + 0.3*sumCalories).round());
                                   },
                                   style: ElevatedButton.styleFrom(
                                       //padding: EdgeInsets.fromLTRB(0, 20, 20, 20),
@@ -496,7 +496,7 @@ void getCalorieIntake() async{
                                   onPressed: () {
                                     String mealName = 'LUNCH';
                                     _toIngredientsPage(
-                                        context, mealName, baseTarget);
+                                        context, mealName, (0.7*baseTarget + 0.3*sumCalories).round());
                                   },
                                   style: ElevatedButton.styleFrom(
                                       //padding: EdgeInsets.fromLTRB(0, 20, 50, 20),
@@ -533,7 +533,7 @@ void getCalorieIntake() async{
                                   onPressed: () {
                                     String mealName = 'DINNER';
                                     _toIngredientsPage(
-                                        context, mealName, baseTarget);
+                                        context, mealName, (0.7*baseTarget + 0.3*sumCalories).round());
                                   },
                                   style: ElevatedButton.styleFrom(
                                       //padding: EdgeInsets.all(20.0),
