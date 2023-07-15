@@ -111,6 +111,25 @@ void getCalorieIntake() async{
     });
   }
 
+  Widget remainingText(int remain){
+    if(remain>=0){
+    return Text('Remaining',style: TextStyle(fontSize: 14));
+    }
+    else{
+      return Text('Exceeding!!',style: TextStyle(fontSize: 14, color: Colors.red));
+    }
+  }
+
+  Widget remainingValue(int remain){
+     if(remain>=0){
+      return Text(remain.toString(), style: const TextStyle(fontWeight:FontWeight.bold, fontSize: 28, color: Color(0xFF4CAF50)));
+     }
+     else{
+      remain = -remain;
+       return Text("+"+remain.toString(), style: const TextStyle(fontWeight:FontWeight.bold, fontSize: 28, color: Colors.red));
+     }
+  }
+
   @override
   Widget build(BuildContext context) {
     loadSavedMeals();
@@ -165,7 +184,7 @@ void getCalorieIntake() async{
                   }
                   String date = italyDateFormat.format(data[i].dateTime);
                   int sumCalories = data[i].sumCalories.round();
-                  int remain = baseTarget - actualCalories + sumCalories;
+                  int remain = (0.7*baseTarget - actualCalories + 0.3*sumCalories).round();
                   return Column(
                     children: [
                       Row(
@@ -298,16 +317,8 @@ void getCalorieIntake() async{
                                                   mainAxisAlignment:
                                                       MainAxisAlignment.start,
                                                   children: [
-                                                    Text(remain.toString(),
-                                                        style: const TextStyle(
-                                                            fontWeight:
-                                                                FontWeight.bold,
-                                                            fontSize: 28,
-                                                            color: Color(
-                                                                0xFF4CAF50))),
-                                                    const Text('Remaining',
-                                                        style: TextStyle(
-                                                            fontSize: 14))
+                                                    remainingValue(remain),
+                                                    remainingText(remain),
                                                   ]), // Column
                                             ) // Padding
                                                 )), // CustomPaint
@@ -469,7 +480,7 @@ void getCalorieIntake() async{
                                 ),
                               ],
                             ),
-                            const SizedBox(height: 15),
+                            const SizedBox(height: 10),
                             Row(
                               mainAxisAlignment: MainAxisAlignment.center,
                               children: [
@@ -507,7 +518,7 @@ void getCalorieIntake() async{
                                 ),
                               ],
                             ),
-                            const SizedBox(height: 15),
+                            const SizedBox(height: 10),
                             Row(
                               mainAxisAlignment: MainAxisAlignment.center,
                               children: [
@@ -544,7 +555,7 @@ void getCalorieIntake() async{
                                 ),
                               ],
                             ),
-                            const SizedBox(height: 15),
+                            const SizedBox(height: 10),
                             Row(
                               mainAxisAlignment: MainAxisAlignment.center,
                               children: [

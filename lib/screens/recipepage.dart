@@ -23,8 +23,7 @@ class RecipePage extends StatelessWidget {
           leading: BackButton(onPressed: () {
             _toCookBookPage(context);
           }),
-          title: const Text(RecipePage.routename),
-          centerTitle: true),
+          ),
       body: SingleChildScrollView(
           child: Container(
         padding: const EdgeInsets.all(5),
