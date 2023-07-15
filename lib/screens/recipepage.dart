@@ -73,7 +73,7 @@ class RecipePage extends StatelessWidget {
                           Icon(MdiIcons.fire,
                               color: Colors.orange, size: 30),
                           Row(children: [
-                            Text(recipe['calories'].toString() + " kcals",
+                            Text("${recipe['calories']} kcals",
                                 style: const TextStyle(
                                     fontWeight: FontWeight.bold,
                                     fontSize: 16,

@@ -154,12 +154,12 @@ class _CookBookPageState extends State<CookBookPage> {
             //go to recipe page
             _Done(context);
           },
-          backgroundColor: Colors.green,
+          backgroundColor: Color(0xFF0B614D),
           child: const Icon(Icons.done),
         ),
         appBar: AppBar(
-          backgroundColor: Colors.green,
-          title: const Text(CookBookPage.routename),
+          backgroundColor: Color(0xFF00916E),
+          title: const Text("CookBook"),
           leading: BackButton(
             onPressed: () => Navigator.of(context).pushReplacement(
                 MaterialPageRoute(
@@ -327,7 +327,7 @@ class _CookBookPageState extends State<CookBookPage> {
                                               .personalRecipes[widget.meal][0][index]
                                           ['is${widget.meal}Saved'] ==
                                       true
-                                  ? Colors.lightGreen
+                                  ? Color(0xFF00916E)
                                   : Colors.white,
                               child: ListTile(
                                   onTap: () {
@@ -401,7 +401,7 @@ class _CookBookPageState extends State<CookBookPage> {
                               // The color depends on this is selected or not
                               color: possibleRecipes[0][index]['is${widget.meal}Saved'] ==
                                       true
-                                  ? Colors.lightGreen
+                                  ? Color(0xFF00916E)
                                   : Colors.white,
                               child: ListTile(
                                 onTap: () {
@@ -475,7 +475,7 @@ class _CookBookPageState extends State<CookBookPage> {
                   child: Container(
                     height: 30,
                     width: deviceWidth(context),
-                    color: Colors.blue,
+                    color: Color(0xFF00916E),
                     child: Column(
                       crossAxisAlignment: CrossAxisAlignment.stretch,
                       children: [
@@ -490,8 +490,8 @@ class _CookBookPageState extends State<CookBookPage> {
                           child: CustomPaint(
                             foregroundPainter: ScoreLinearProgress(
                               backColor:
-                                  Colors.lightBlueAccent.withOpacity(0.4),
-                              frontColor: Colors.lightBlueAccent,
+                                  Color(0xFF4CAF50).withOpacity(0.4),
+                              frontColor: Color(0xFF4CAF50),
 
                               strokeWidth: 15,
                               value: (countCalories/widget.sumCalories).toDouble(),
@@ -641,7 +641,7 @@ class _CookBookPageState extends State<CookBookPage> {
                                               .personalRecipes[widget.meal][1][index]
                                           ['is${widget.meal}Saved'] ==
                                       true
-                                  ? Colors.lightGreen
+                                  ? Color(0xFF00916E)
                                   : Colors.white,
                               child: ListTile(
                                   onTap: () {
@@ -720,7 +720,7 @@ class _CookBookPageState extends State<CookBookPage> {
                               // The color depends on this is selected or not
                               color: possibleRecipes[1][index]['is${widget.meal}Saved'] ==
                                       true
-                                  ? Colors.lightGreen
+                                  ? Color(0xFF00916E)
                                   : Colors.white,
                               child: ListTile(
                                 onTap: () {
@@ -794,7 +794,7 @@ class _CookBookPageState extends State<CookBookPage> {
                   child: Container(
                     height: 30,
                     width: deviceWidth(context),
-                    color: Colors.blue,
+                    color: Color(0xFF00916E),
                     child: Column(
                       crossAxisAlignment: CrossAxisAlignment.stretch,
                       children: [
@@ -807,8 +807,8 @@ class _CookBookPageState extends State<CookBookPage> {
                           child: CustomPaint(
                             foregroundPainter: ScoreLinearProgress(
                               backColor:
-                                  Colors.lightBlueAccent.withOpacity(0.4),
-                              frontColor: Colors.lightBlueAccent,
+                                  Colors.lightGreen.withOpacity(0.4),
+                              frontColor: Colors.lightGreen,
 
                               strokeWidth: 15,
                         value: (countCalories/widget.sumCalories).toDouble(),
@@ -958,7 +958,7 @@ class _CookBookPageState extends State<CookBookPage> {
                                               .personalRecipes[widget.meal][2][index]
                                           ['is${widget.meal}Saved'] ==
                                       true
-                                  ? Colors.lightGreen
+                                  ? Color(0xFF00916E)
                                   : Colors.white,
                               child: ListTile(
                                   onTap: () {
@@ -1033,7 +1033,7 @@ class _CookBookPageState extends State<CookBookPage> {
                               // The color depends on this is selected or not
                               color: possibleRecipes[2][index]['is${widget.meal}Saved'] ==
                                       true
-                                  ? Colors.lightGreen
+                                  ? Color(0xFF00916E)
                                   : Colors.white,
                               child: ListTile(
                                 onTap: () {
@@ -1119,7 +1119,7 @@ Provider.of<CookBook>(context, listen: false).
                   child: Container(
                     height: 30,
                     width: deviceWidth(context),
-                    color: Colors.blue,
+                    color: Color(0xFF00916E),
                     child: Column(
                       crossAxisAlignment: CrossAxisAlignment.stretch,
                       children: [
@@ -1134,8 +1134,8 @@ Provider.of<CookBook>(context, listen: false).
                           child: CustomPaint(
                             foregroundPainter: ScoreLinearProgress(
                               backColor:
-                                  Colors.lightBlueAccent.withOpacity(0.4),
-                              frontColor: Colors.lightBlueAccent,
+                                  Colors.lightGreen.withOpacity(0.4),
+                              frontColor: Colors.lightGreen,
 
                               strokeWidth: 15,
                         value: (countCalories/widget.sumCalories).toDouble(),
@@ -1279,7 +1279,7 @@ Provider.of<CookBook>(context, listen: false).
                                           .personalRecipes[widget.meal][3][index]
                                       ['is${widget.meal}Saved'] ==
                                   true
-                              ? Colors.lightGreen
+                              ? Color(0xFF00916E)
                               : Colors.white,
                           child: ListTile(
                               onTap: () {
@@ -1351,7 +1351,7 @@ Provider.of<CookBook>(context, listen: false).
 
                           // The color depends on this is selected or not
                           color: possibleRecipes[3][index]['is${widget.meal}Saved'] == true
-                              ? Colors.lightGreen
+                              ? Color(0xFF00916E)
                               : Colors.white,
                           child: ListTile(
                             onTap: () {
@@ -1418,7 +1418,7 @@ Provider.of<CookBook>(context, listen: false).
                   child: Container(
                     height: 30,
                     width: deviceWidth(context),
-                    color: Colors.blue,
+                    color: Color(0xFF00916E),
                     child: Column(
                       crossAxisAlignment: CrossAxisAlignment.stretch,
                       children: [
@@ -1433,8 +1433,8 @@ Provider.of<CookBook>(context, listen: false).
                           child: CustomPaint(
                             foregroundPainter: ScoreLinearProgress(
                               backColor:
-                                  Colors.lightBlueAccent.withOpacity(0.4),
-                              frontColor: Colors.lightBlueAccent,
+                                  Colors.lightGreen.withOpacity(0.4),
+                              frontColor: Colors.lightGreen,
 
                               strokeWidth: 15,
                         value: (countCalories/widget.sumCalories).toDouble(),

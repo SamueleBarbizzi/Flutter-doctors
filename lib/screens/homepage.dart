@@ -116,7 +116,7 @@ void getCalorieIntake() async{
     return Text('Remaining',style: TextStyle(fontSize: 14));
     }
     else{
-      return Text('Exceeding!!',style: TextStyle(fontSize: 14, color: Colors.red));
+      return Text('Exceeding!',style: TextStyle(fontSize: 14, color: Colors.red));
     }
   }
 
@@ -126,7 +126,7 @@ void getCalorieIntake() async{
      }
      else{
       remain = -remain;
-       return Text("+"+remain.toString(), style: const TextStyle(fontWeight:FontWeight.bold, fontSize: 28, color: Colors.red));
+       return Text("+$remain", style: const TextStyle(fontWeight:FontWeight.bold, fontSize: 28, color: Colors.red));
      }
   }
 
@@ -283,7 +283,7 @@ void getCalorieIntake() async{
                                 height: 20,
                                 alignment: const Alignment(-0.6, 0),
                                 child: const Text(
-                                    "Remaining = 70% Target + 30% (Rest + Exercise) - Food",
+                                    "Remaining = 75% Target + 25% (Rest + Exercise) - Food",
                                     style: TextStyle(
                                         fontSize: 12, color: Colors.black))),
                             Padding(
@@ -301,9 +301,9 @@ void getCalorieIntake() async{
                                         height: 140,
                                         child: CustomPaint(
                                             painter: ScoreCircularProgress(
-                                              backColor: Colors.lightGreen
+                                              backColor: Color(0xFF4CAF50)
                                                   .withOpacity(0.4),
-                                              frontColor: Colors.lightGreen,
+                                              frontColor: Color(0xFF4CAF50),
                                               strokeWidth: 20,
                                               value: (actualCalories /
                                                       baseTarget)
@@ -344,8 +344,7 @@ void getCalorieIntake() async{
                                                         fontSize: 12,
                                                         color: Colors.black)),
                                                 Text(
-                                                    baseTarget.toString() +
-                                                        " kcal",
+                                                    "$baseTarget kcal",
                                                     style: const TextStyle(
                                                         fontWeight:
                                                             FontWeight.bold,
@@ -369,8 +368,7 @@ void getCalorieIntake() async{
                                                         fontSize: 12,
                                                         color: Colors.black)),
                                                 Text(
-                                                    actualCalories.toString() +
-                                                        " kcal",
+                                                    "$actualCalories kcal",
                                                     style: const TextStyle(
                                                         fontWeight:
                                                             FontWeight.bold,
@@ -464,7 +462,7 @@ void getCalorieIntake() async{
                                   },
                                   style: ElevatedButton.styleFrom(
                                       //padding: EdgeInsets.fromLTRB(0, 20, 20, 20),
-                                      backgroundColor: Colors.lightGreen,
+                                      backgroundColor: Color(0xFF00916E),
                                       fixedSize: const Size(200, 40),
                                       textStyle: const TextStyle(
                                           fontSize: 22,
@@ -502,7 +500,7 @@ void getCalorieIntake() async{
                                   },
                                   style: ElevatedButton.styleFrom(
                                       //padding: EdgeInsets.fromLTRB(0, 20, 50, 20),
-                                      backgroundColor: Colors.lightGreen,
+                                      backgroundColor: Color(0xFF00916E),
                                       fixedSize: const Size(200, 40),
                                       textStyle: const TextStyle(
                                           fontSize: 22,
@@ -539,7 +537,7 @@ void getCalorieIntake() async{
                                   },
                                   style: ElevatedButton.styleFrom(
                                       //padding: EdgeInsets.all(20.0),
-                                      backgroundColor: Colors.lightGreen,
+                                      backgroundColor: Color(0xFF00916E),
                                       fixedSize: const Size(200, 40),
                                       textStyle: const TextStyle(
                                           fontSize: 22,
@@ -679,7 +677,7 @@ void getCalorieIntake() async{
                                   ),
                                   style: ElevatedButton.styleFrom(
                                       //padding: EdgeInsets.fromLTRB(0, 20, 50, 20),
-                                      backgroundColor: Colors.lightGreen,
+                                      backgroundColor: Color(0xFF00916E),
                                       fixedSize: const Size(200, 40),
                                       textStyle: const TextStyle(
                                           fontSize: 22,

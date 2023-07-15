@@ -72,12 +72,12 @@ class _BreakfastChoicePageState extends State<BreakfastChoicePage> {
           //back to MainNavigator, saving the coiches
           _Done(context);
         },
-        backgroundColor: Colors.green,
+        backgroundColor: Color(0xFF0B614D),
         child: const Icon(Icons.done),
       ),
       appBar: AppBar(
-        backgroundColor: Colors.green,
-        title: const Text(BreakfastChoicePage.routename),
+        backgroundColor: Color(0xFF00916E),
+        title: const Text("Breakfast"),
         leading: BackButton(
           onPressed: () => _toMainNavigator(context),
         ),
@@ -219,7 +219,7 @@ class _BreakfastChoicePageState extends State<BreakfastChoicePage> {
                         // The color depends on this is selected or not
                         color: Provider.of<PersonalMeals>(context, listen: false)
                                     .personalRecipes[meal][index]['isSelected'] == true
-                            ? Colors.lightGreen
+                            ? Color(0xFF00916E)
                             : Colors.white,
                         child: ListTile(
                             onTap: () {
@@ -296,7 +296,7 @@ class _BreakfastChoicePageState extends State<BreakfastChoicePage> {
 
                       // The color depends on this is selected or not
                       color: recipes[index]['isSelected'] == true
-                          ? Colors.lightGreen
+                          ? Color(0xFF00916E)
                           : Colors.white,
                       child: ListTile(
                         onTap: () {
@@ -343,7 +343,7 @@ class _BreakfastChoicePageState extends State<BreakfastChoicePage> {
             child: Container(
               height: 30,
               width: deviceWidth(context),
-              color: Colors.blue,
+              color: Color(0xFF00916E),
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.stretch,
                 children: [
@@ -355,8 +355,8 @@ class _BreakfastChoicePageState extends State<BreakfastChoicePage> {
                   Expanded(
                     child: CustomPaint(
                       foregroundPainter: ScoreLinearProgress(
-                        backColor: Colors.lightBlueAccent.withOpacity(0.4),
-                        frontColor: Colors.lightBlueAccent,
+                        backColor: Color(0xFF4CAF50).withOpacity(0.4),
+                        frontColor: Color(0xFF4CAF50),
 
                         strokeWidth: 15,
                         value: (countCalories/widget.sumCalories).toDouble(),

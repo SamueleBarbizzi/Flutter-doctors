@@ -64,12 +64,12 @@ class _IngredientsPageState extends State<IngredientsPage> {
             //go to recipes page
             _toCookBookPage(context);
           },
-          backgroundColor: Colors.green,
+          backgroundColor: Color(0xFF0B614D),
           child: const Icon(Icons.done),
         ),
         appBar: AppBar(
-          backgroundColor: Colors.green,
-          title: const Text(IngredientsPage.routename),
+          backgroundColor: Color(0xFF00916E),
+          title: const Text("Ingredients"),
           leading: BackButton(
             onPressed: () => Navigator.of(context).pushReplacement(
                 MaterialPageRoute(
@@ -109,7 +109,7 @@ class _IngredientsPageState extends State<IngredientsPage> {
 
                     // The color depends on this is selected or not
                     color: groups[0][index]['isSelected'] == true
-                        ? Colors.lightGreen
+                        ? Color(0xFF00916E)
                         : Colors.white,
                     child: ListTile(
                       onTap: () {
@@ -136,7 +136,7 @@ class _IngredientsPageState extends State<IngredientsPage> {
 
                     // The color depends on this is selected or not
                     color: groups[1][index]['isSelected'] == true
-                        ? Colors.lightGreen
+                        ? Color(0xFF00916E)
                         : Colors.white,
                     child: ListTile(
                       onTap: () {
@@ -163,7 +163,7 @@ class _IngredientsPageState extends State<IngredientsPage> {
 
                     // The color depends on this is selected or not
                     color: groups[2][index]['isSelected'] == true
-                        ? Colors.lightGreen
+                        ? Color(0xFF00916E)
                         : Colors.white,
                     child: ListTile(
                       onTap: () {
@@ -190,7 +190,7 @@ class _IngredientsPageState extends State<IngredientsPage> {
 
                     // The color depends on this is selected or not
                     color: groups[3][index]['isSelected'] == true
-                        ? Colors.lightGreen
+                        ? Color(0xFF00916E)
                         : Colors.white,
                     child: ListTile(
                       onTap: () {
