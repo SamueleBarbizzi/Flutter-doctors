@@ -63,14 +63,14 @@ class _CookBookPageState extends State<CookBookPage> {
     final List recipes =
         Provider.of<CookBook>(context, listen: false).recipeslist;
 
-    if (widget.selected[0].isEmpty &
-        widget.selected[1].isEmpty &
-        widget.selected[2].isEmpty &
-        widget.selected[3].isEmpty) {
+    if ((widget.selected[0].length == 29) &
+        (widget.selected[1].length == 44) &
+        (widget.selected[2].length == 25) &
+        (widget.selected[3].length == 8)) {
       
       subtitle2Color = Colors.transparent;
-
-      possibleRecipes = [
+      
+      /*possibleRecipes = [
         Groups().createFirstMainDishes(context),
         Groups().createSecondMainDishes(context),
         Groups().createSideDishes(context),
@@ -79,10 +79,12 @@ class _CookBookPageState extends State<CookBookPage> {
 
       for (int i = 0; i < possibleRecipes.length; i++) {
         possibleRecipes[i].sort((a, b) => a["name"].compareTo(b["name"]));
-      }
+      }*/
     } else {
 
       subtitle2Color = Colors.black;
+      }
+      
 
       for (var i = 0; i < widget.selected.length; i++) {
         for (var element in widget.selected[i]) {
@@ -120,7 +122,7 @@ class _CookBookPageState extends State<CookBookPage> {
         //we want to sort the list of recipes
         possibleRecipes[i].sort((b, a) =>
             a['commonIngredientsCount'].compareTo(b['commonIngredientsCount']));
-      }
+      
     }
 
     super.initState();
@@ -447,8 +449,7 @@ class _CookBookPageState extends State<CookBookPage> {
                                             fontWeight: FontWeight.normal,
                                             fontSize: 11,
                                             fontStyle: FontStyle.italic,
-                                            color:
-                                                subtitle2Color),
+                                            color: subtitle2Color),
                                       ),
                                     ],
                                   ),
@@ -767,7 +768,7 @@ class _CookBookPageState extends State<CookBookPage> {
                                             fontSize: 11,
                                             fontStyle: FontStyle.italic,
                                             color:
-                                                Colors.black.withOpacity(0.6)),
+                                               subtitle2Color),
                                       ),
                                     ],
                                   ),
@@ -1076,7 +1077,7 @@ Provider.of<CookBook>(context, listen: false).
                                             fontSize: 11,
                                             fontStyle: FontStyle.italic,
                                             color:
-                                                Colors.black.withOpacity(0.6)),
+                                                subtitle2Color),
                                       ),
                                     ],
                                   ),

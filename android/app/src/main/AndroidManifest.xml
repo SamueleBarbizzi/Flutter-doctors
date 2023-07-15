@@ -2,9 +2,9 @@
     package="com.example.flutter_application_1w">
     <uses-permission android:name="android.permission.QUERY_ALL_PACKAGES" />
     <application
-        android:label="flutter_application_1w"
+        android:label="FoodFitFinder"
         android:name="${applicationName}"
-        android:icon="@mipmap/ic_launcher">
+        android:icon="@mipmap/logo">
         <activity
             android:name=".MainActivity"
             android:exported="true"
