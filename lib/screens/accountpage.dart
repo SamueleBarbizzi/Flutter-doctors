@@ -323,7 +323,10 @@ class _AccountPageState extends State<AccountPage> {
                         color: Colors.white,
                       ),
                     ),
-                    onTap: () => _toLoginPage(context),
+                    onTap: (
+
+
+                    ) => _toLoginPage(context),
                   )),
             )
           ],
@@ -432,6 +435,14 @@ class _AccountPageState extends State<AccountPage> {
     await sp.remove('access');
     await sp.remove('refresh');
     await sp.remove('selectedIndex');
+
+    final savedMeals = await SharedPreferences.getInstance();
+      await savedMeals.remove('chosenMeals');
+      await savedMeals.remove('personalMeals');
+      await savedMeals.remove('snacks');
+
+    final cookbookStatus = await SharedPreferences.getInstance();
+    await cookbookStatus.remove('cookbook');
 
     //Pop the drawer first
     Navigator.pop(context);

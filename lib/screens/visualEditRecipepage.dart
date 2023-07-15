@@ -4,7 +4,9 @@
 
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_doctors/models/cookbook.dart';
 import 'package:flutter_doctors/models/mealchoice.dart';
+import 'package:flutter_doctors/models/personalmeals.dart';
 import 'package:provider/provider.dart';
 import 'package:flutter_doctors/screens/recipepage.dart';
 
@@ -105,6 +107,10 @@ class _VisualEditRecipeState extends State<VisualEditRecipe> {
                     trailing: IconButton(
                                   icon: const Icon(Icons.delete_forever),
                                   onPressed: () {
+
+                                    Provider.of<PersonalMeals>(context, listen: false).
+                                    togglePersonalRecipe(k, allRecipePersonal[index]['name']);
+
                                     
                                     Provider.of<MealChoiche>(context,listen: false)
                                     .findAndRemovePersonalRecipe(allRecipePersonal[index]['name']);
@@ -150,6 +156,15 @@ class _VisualEditRecipeState extends State<VisualEditRecipe> {
                                 child: IconButton(
                                   icon: const Icon(Icons.delete_forever),
                                   onPressed: () {
+                                    if (k == 'BREAKFAST'){
+                                      Provider.of<CookBook>(context, listen: false).
+                                      toggleRecipe(allRecipe[index]['id']);
+                                    }
+                                    else{
+                                      Provider.of<CookBook>(context, listen: false).
+                                      toggleMealRecipe(k, allRecipe[index]['id']);
+                                    }
+                                    
                                     
                                     Provider.of<MealChoiche>(context,listen: false)
                                     .findAndRemoveChosenRecipe(allRecipe[index]['name']);

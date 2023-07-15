@@ -1,10 +1,33 @@
 // ignore_for_file: non_constant_identifier_names, unused_element
 
+import 'dart:convert';
+
 import 'package:flutter/material.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 class PersonalMeals extends ChangeNotifier {
   //Initialize list of choosen recipes
 
+
+  Future<void> savePersonalMealsStatus() async {
+    final personalMealsStatus = await SharedPreferences.getInstance();
+      String encodedPersonalMeals = json.encode(personalRecipes);
+      await personalMealsStatus.setString('personalRecipes', encodedPersonalMeals);
+  }
+
+  Future<void> loadPersonalMealsStatus() async {
+    final personalMealsStatus = await SharedPreferences.getInstance();
+    if (personalMealsStatus.getString('personalRecipes') != null)
+      { String encodedPersonalMeals = personalMealsStatus.getString('personalRecipes')!;
+      personalRecipes = json.decode(encodedPersonalMeals);}
+  }
+
+  Future<void> clearPersonalMealsStatus() async {
+    final personalMealsStatus = await SharedPreferences.getInstance();
+    await personalMealsStatus.remove('personalRecipes');
+  }
+
+  
   Map personalRecipes = {
     'BREAKFAST' : [],
     'LUNCH' : [[], [], [], []],
@@ -38,6 +61,7 @@ class PersonalMeals extends ChangeNotifier {
       }
     }
     //Call the notifyListeners() method to alert that something happened.
+    savePersonalMealsStatus();
     notifyListeners();
   }
 
@@ -58,6 +82,41 @@ class PersonalMeals extends ChangeNotifier {
       personalRecipes[meal][indexCourse].removeAt(indexRecipe);
     }
     //Call the notifyListeners() method to alert that something happened.
+    savePersonalMealsStatus();
+    notifyListeners();
+  }
+
+void togglePersonalRecipe(String meal, String name) {
+  if (meal == 'BREAKFAST'){
+    int ind = personalRecipes[meal].indexWhere((element) => element['name'] == name);
+
+    final isSelected = personalRecipes[meal][ind]['isSelected'];
+    if (isSelected) {
+      personalRecipes[meal][ind]['isSelected'] = false;
+    } else {
+      personalRecipes[meal][ind]['isSelected'] = true;
+    }
+  }
+  else {
+    loop:
+    for (int index=0; index<personalRecipes[meal].length; index++){
+      int ind = personalRecipes[meal][index].indexWhere((element) => element['name'] == name);
+      if(ind != -1){
+        final isSelected = personalRecipes[meal][index][ind]['isSelected'];
+        if (isSelected) {
+          personalRecipes[meal][index][ind]['isSelected'] = false;
+        } else {
+          personalRecipes[meal][index][ind]['isSelected'] = true;
+        }
+        break loop;
+      }
+    }
+    
+  }
+    
+
+    //Call the notifyListeners() method to alert that something happened.
+    savePersonalMealsStatus();
     notifyListeners();
   }
 

@@ -9,7 +9,6 @@ import 'package:material_design_icons_flutter/material_design_icons_flutter.dart
 import 'package:flutter_doctors/screens/mainnavigator.dart';
 import 'package:flutter_doctors/screens/ingredientspage.dart';
 import 'package:flutter_doctors/screens/recipepage.dart';
-import 'package:flutter_doctors/models/favorites.dart';
 import 'package:flutter_doctors/models/cookbook.dart';
 import 'package:flutter_doctors/models/groups.dart';
 import 'package:provider/provider.dart';
@@ -62,8 +61,7 @@ class _BreakfastChoicePageState extends State<BreakfastChoicePage> {
     
     int countCalories = Provider.of<MealChoiche>(context, listen: false).getAllCalories();
     
-    double deviceWidth(BuildContext context) =>
-        MediaQuery.of(context).size.width;
+    double deviceWidth(BuildContext context) => MediaQuery.of(context).size.width;
     final recipes = Groups().createBreakfastDishes(context);
     recipes.sort((a, b) => a["name"].compareTo(b["name"]));
     String meal = 'BREAKFAST';
@@ -231,6 +229,7 @@ class _BreakfastChoicePageState extends State<BreakfastChoicePage> {
                                 Map item = Provider.of<PersonalMeals>(context,
                                         listen: false)
                                     .getPersonalRecipe(meal, 0, index, false);
+                                    
                                 Provider.of<MealChoiche>(context, listen: false)
                                     .TooglePersonalRecipe(meal.toUpperCase(),
                                         course.toLowerCase(), item);
@@ -249,6 +248,8 @@ class _BreakfastChoicePageState extends State<BreakfastChoicePage> {
                                                 listen: false)
                                             .personalRecipes[meal][index]
                                         ['isSelected'];
+                                Provider.of<PersonalMeals>(context, listen: false).savePersonalMealsStatus();
+
                               });
                             },
                             title: Text(
@@ -306,6 +307,10 @@ class _BreakfastChoicePageState extends State<BreakfastChoicePage> {
                                 !recipes[index]['isSelected'];
                             String meal = 'BREAKFAST';
                             String course = 'breakfast';
+
+                            Provider.of<CookBook>(context, listen: false).
+                                    toggleRecipe(recipes[index]['id']);
+
                             Provider.of<MealChoiche>(context, listen: false)
                                 .ToogleChosenRecipe(
                                     meal.toUpperCase(), course, recipes[index]);

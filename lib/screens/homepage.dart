@@ -1,6 +1,7 @@
 // ignore_for_file: depend_on_referenced_packages, library_private_types_in_public_api, avoid_print, unused_import, unused_element, avoid_unnecessary_containers
 
 import 'package:flutter/material.dart';
+import 'package:flutter_doctors/models/cookbook.dart';
 import 'package:flutter_doctors/models/personalmeals.dart';
 import 'package:flutter_doctors/models/mealchoice.dart';
 import 'package:flutter_doctors/screens/breakfastchoicepage.dart';
@@ -50,6 +51,15 @@ class _HomePageState extends State<HomePage> {
     selectedIndex();
   }
 
+void loadSavedMeals() {
+  Provider.of<MealChoiche>(context,listen: false).loadMeals();
+}
+
+void loadCookBookStatus() {
+  Provider.of<CookBook>(context,listen: false).loadCookbookStatus();
+}
+
+
   Future<void> selectedIndex() async {
     SharedPreferences sp = await SharedPreferences.getInstance();
     i = sp.getInt('selectedIndex') ?? 0;
@@ -96,6 +106,8 @@ class _HomePageState extends State<HomePage> {
 
   @override
   Widget build(BuildContext context) {
+    loadSavedMeals();
+    loadCookBookStatus();
     //Calories calculation
     int actualCalories =
         Provider.of<MealChoiche>(context, listen: false).getAllCalories();
@@ -105,7 +117,7 @@ class _HomePageState extends State<HomePage> {
     int remain = baseTarget - actualCalories + sumCalories;
     return Scaffold(
       appBar: AppBar(
-        title: Text(HomePage.routename, style: TextStyle(fontWeight: FontWeight.bold)),
+        title: const Text(HomePage.routename, style: TextStyle(fontWeight: FontWeight.bold)),
         centerTitle: true,
       ),
       body: SingleChildScrollView(
@@ -278,7 +290,7 @@ class _HomePageState extends State<HomePage> {
                                                             children: [
                                                               Icon(MdiIcons.bullseyeArrow, color: Colors.red),
                                                               const Text("Base Target ", style: TextStyle(fontSize: 12, color: Colors.black)),
-                                                              Text(baseTarget.toString() + " kcal", style: const TextStyle(fontWeight: FontWeight.bold, fontSize: 12, color: Color.fromARGB(255, 76, 175, 80))),
+                                                              Text("$baseTarget kcal", style: const TextStyle(fontWeight: FontWeight.bold, fontSize: 12, color: Color.fromARGB(255, 76, 175, 80))),
                                                             ],
                                                           ),
                                                         ),
@@ -288,7 +300,7 @@ class _HomePageState extends State<HomePage> {
                                                             children: [
                                                               Icon(MdiIcons.silverwareForkKnife, color: Colors.blue),
                                                               const Text("Food ", style: TextStyle(fontSize: 12, color: Colors.black)),
-                                                              Text(actualCalories.toString() + " kcal", style: const TextStyle(fontWeight:FontWeight.bold, fontSize: 12, color: Color.fromARGB(255,76,175,80))), 
+                                                              Text("$actualCalories kcal", style: const TextStyle(fontWeight:FontWeight.bold, fontSize: 12, color: Color.fromARGB(255,76,175,80))), 
                                                               ],
                                                           ),
                                                         ),
@@ -298,7 +310,7 @@ class _HomePageState extends State<HomePage> {
                                                             children: [
                                                               Icon(MdiIcons.fire, color:Colors.orange),
                                                               const Text("Rest + Exercise ", style: TextStyle(fontSize: 12, color: Colors.black)),
-                                                              Text("$sumCalories" + " kcal", style: const TextStyle(fontWeight: FontWeight.bold, fontSize: 12, color: Color.fromARGB(255,76,175,80))),
+                                                              Text("$sumCalories" " kcal", style: const TextStyle(fontWeight: FontWeight.bold, fontSize: 12, color: Color.fromARGB(255,76,175,80))),
                                                             ],
                                                           ),
                                                         ), 
@@ -695,7 +707,7 @@ class _HomePageState extends State<HomePage> {
                       // rangePadding: ChartRangePadding.round,
                       title: AxisTitle(
                                 text: 'kcal',
-                                textStyle: TextStyle(
+                                textStyle: const TextStyle(
                                     color: Colors.black,
                                     fontSize: 16,
                                 )

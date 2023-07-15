@@ -9,7 +9,6 @@ import 'package:material_design_icons_flutter/material_design_icons_flutter.dart
 import 'package:flutter_doctors/screens/mainnavigator.dart';
 import 'package:flutter_doctors/screens/ingredientspage.dart';
 import 'package:flutter_doctors/screens/recipepage.dart';
-import 'package:flutter_doctors/models/favorites.dart';
 import 'package:flutter_doctors/models/cookbook.dart';
 import 'package:flutter_doctors/models/groups.dart';
 import 'package:provider/provider.dart';
@@ -61,7 +60,7 @@ class _CookBookPageState extends State<CookBookPage> {
 
   @override
   void initState() {
-    final List<Map> recipes =
+    final List recipes =
         Provider.of<CookBook>(context, listen: false).recipeslist;
 
     if (widget.selected[0].isEmpty &
@@ -412,6 +411,9 @@ class _CookBookPageState extends State<CookBookPage> {
                                     String meal = widget.meal;
                                     String course = coursesName[0];
 
+                                    Provider.of<CookBook>(context, listen: false).
+                                    toggleMealRecipe(meal.toUpperCase(), possibleRecipes[0][index]['id']);
+
                                     Provider.of<MealChoiche>(context, listen: false).
                                     ToogleChosenRecipe(meal.toUpperCase(), course , possibleRecipes[0][index]);
 
@@ -727,6 +729,9 @@ class _CookBookPageState extends State<CookBookPage> {
                                     String meal = widget.meal;
                                     String course = coursesName[1];
 
+                                    Provider.of<CookBook>(context, listen: false).
+                                    toggleMealRecipe(meal.toUpperCase(), possibleRecipes[1][index]['id']);
+
                                     Provider.of<MealChoiche>(context, listen: false).
                                     ToogleChosenRecipe(meal.toUpperCase(), course , possibleRecipes[1][index]);
                                     countCalories = Provider.of<MealChoiche>(
@@ -1034,6 +1039,9 @@ class _CookBookPageState extends State<CookBookPage> {
                                             ['is${widget.meal}Saved'];
                                     String meal = widget.meal;
                                     String course = coursesName[2];
+
+Provider.of<CookBook>(context, listen: false).
+                                    toggleMealRecipe(meal.toUpperCase(), possibleRecipes[2][index]['id']);
 
                                     Provider.of<MealChoiche>(context, listen: false).
                                     ToogleChosenRecipe(meal.toUpperCase(), course , possibleRecipes[2][index]);
@@ -1348,6 +1356,9 @@ class _CookBookPageState extends State<CookBookPage> {
                                     !possibleRecipes[3][index]['is${widget.meal}Saved'];
                                 String meal = widget.meal;
                                 String course = coursesName[3];
+
+                                Provider.of<CookBook>(context, listen: false).
+                                    toggleMealRecipe(meal.toUpperCase(), possibleRecipes[3][index]['id']);
 
                                 Provider.of<MealChoiche>(context, listen: false).
                                 ToogleChosenRecipe(meal.toUpperCase(), course , possibleRecipes[3][index]);
