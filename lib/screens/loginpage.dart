@@ -17,6 +17,8 @@ class LoginPage extends StatefulWidget {
 }
 
 class _LoginPageState extends State<LoginPage> {
+  bool apiAuth = false;
+
   @override
   void initState() {
     super.initState();
@@ -41,7 +43,7 @@ class _LoginPageState extends State<LoginPage> {
 
     if (data.name == email && data.password == password) {
       bool refreshedToken = false;
-      bool apiAuth = await ApiCall.requestTokens(context, refreshedToken);
+      apiAuth = await ApiCall.requestTokens(context, refreshedToken);
       if (apiAuth == true) {
         final sp = await SharedPreferences.getInstance();
         sp.setString('username', data.name);
@@ -71,11 +73,12 @@ class _LoginPageState extends State<LoginPage> {
     return FlutterLogin(
       title: 'Welcome!',
       // logo: const AssetImage('assets/images/logo.png'),
-
+      hideForgotPasswordButton: true,
+      
       theme: LoginTheme(
-        primaryColor: Colors.green,
+        primaryColor: Color(0xFF00916E),
         accentColor: Colors.black,
-        errorColor: Colors.deepOrange,
+        errorColor: const Color.fromRGBO(211, 47, 47, 1),
         titleStyle: const TextStyle(
           color: Colors.white,
           fontFamily: 'Quicksand',
@@ -105,24 +108,23 @@ class _LoginPageState extends State<LoginPage> {
           fillColor: Colors.purple.withOpacity(.1),
           contentPadding: EdgeInsets.zero,
           errorStyle: const TextStyle(
-            backgroundColor: Colors.red,
-            color: Colors.white,
+            color: const Color.fromRGBO(211, 47, 47, 1),
           ),
           labelStyle: const TextStyle(fontSize: 12),
           enabledBorder: UnderlineInputBorder(
-            borderSide: BorderSide(color: Colors.green.shade700, width: 4),
+            borderSide: BorderSide(color: Color(0xFF00916E), width: 4),
             borderRadius: inputBorder,
           ),
           focusedBorder: UnderlineInputBorder(
-            borderSide: BorderSide(color: Colors.green.shade400, width: 5),
+            borderSide: BorderSide(color: Color(0xFF00916E), width: 5),
             borderRadius: inputBorder,
           ),
           errorBorder: UnderlineInputBorder(
-            borderSide: BorderSide(color: Colors.red.shade700, width: 7),
+            borderSide: BorderSide(color: const Color.fromRGBO(211, 47, 47, 1), width: 7),
             borderRadius: inputBorder,
           ),
           focusedErrorBorder: UnderlineInputBorder(
-            borderSide: BorderSide(color: Colors.red.shade400, width: 8),
+            borderSide: BorderSide(color: const Color.fromRGBO(211, 47, 47, 1), width: 8),
             borderRadius: inputBorder,
           ),
           disabledBorder: const UnderlineInputBorder(
@@ -131,9 +133,9 @@ class _LoginPageState extends State<LoginPage> {
           ),
         ),
         buttonTheme: const LoginButtonTheme(
-          splashColor: Colors.blue,
-          backgroundColor: Colors.green,
-          highlightColor: Colors.lightGreen,
+          splashColor: Colors.transparent,
+          backgroundColor: Color(0xFF0B614D),
+          highlightColor: Color(0xFF4CAF50),
           elevation: 9.0,
           highlightElevation: 6.0,
           //shape: BeveledRectangleBorder(
@@ -149,8 +151,9 @@ class _LoginPageState extends State<LoginPage> {
       onRecoverPassword: _recoverPassword,
 
       onSubmitAnimationCompleted: () async{
+    if(apiAuth == true){        
     _toAccountPage(context);
-
+    }
       },
     );
   } // build

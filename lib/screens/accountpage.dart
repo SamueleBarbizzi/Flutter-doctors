@@ -120,10 +120,10 @@ class _AccountPageState extends State<AccountPage> {
 
   @override
   Widget build(BuildContext context) {
-    print('${AccountPage.routename} built');
     return Scaffold(
       appBar: AppBar(
-        title: Text(AccountPage.routename),
+        title: Text(AccountPage.routename, style: TextStyle(fontWeight: FontWeight.bold)),
+        centerTitle: true,
         actions: [
           IconButton(
             icon: const Icon(Icons.info),

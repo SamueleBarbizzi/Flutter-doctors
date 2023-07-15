@@ -50,6 +50,7 @@ class _HomePageState extends State<HomePage> {
   void didChangeDependencies() {
     super.didChangeDependencies();
     selectedIndex();
+    getCalorieIntake();
   }
 
 void loadSavedMeals() {
@@ -117,9 +118,9 @@ void getCalorieIntake() async{
     int actualCalories =
         Provider.of<MealChoiche>(context, listen: false).getAllCalories();
     //int baseTarget = 2387; //da inserire
-    int sumCalories = 0; // actual calculation below at line 130
+    
     // Remain = Target - Food + Exercise;
-    int remain = baseTarget - actualCalories + sumCalories;
+    
     return Scaffold(
       appBar: AppBar(
         title: const Text(HomePage.routename, style: TextStyle(fontWeight: FontWeight.bold)),
@@ -135,7 +136,6 @@ void getCalorieIntake() async{
                   final data = snapshot.data as List<CaloriesEntity>;
                   int dataLength = data.length;
                   firstIndex(dataLength);
-                  getCalorieIntake();
                   final DateFormat italyDateFormat = DateFormat("dd-MM-yyyy");
                   chartData = [];
                   for (int t = 0; t < data.length; t++) {
@@ -154,12 +154,12 @@ void getCalorieIntake() async{
                   }
                   String date = italyDateFormat.format(data[i].dateTime);
                   int sumCalories = data[i].sumCalories.round();
+                  int remain = baseTarget - actualCalories + sumCalories;
                   return Column(
                     children: [
                       Row(
                         mainAxisAlignment: MainAxisAlignment.center,
                         children: [
-                          // const SizedBox(height: 5),
                           IconButton(
                             color: Color(0xFF0B614D),
                             splashColor: Colors.transparent,
@@ -277,7 +277,7 @@ void getCalorieIntake() async{
                                               strokeWidth: 20,
                                               value: (actualCalories /
                                                       baseTarget)
-                                                  .toDouble(), // da mettere valori
+                                                  .toDouble(), 
                                             ),
                                             child: Center(
                                                 child: Padding(

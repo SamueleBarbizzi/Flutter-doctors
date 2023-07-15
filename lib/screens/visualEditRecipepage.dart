@@ -36,9 +36,6 @@ class _VisualEditRecipeState extends State<VisualEditRecipe> {
 
   @override
   Widget build(BuildContext context) {
-    if (kDebugMode) {
-      print('${VisualEditRecipe.routename} built');
-    }
   
     List<Widget> widgetMeals = [];
     Map chosen= Provider.of<MealChoiche>(context, listen: false).chosen;
@@ -256,9 +253,12 @@ class _VisualEditRecipeState extends State<VisualEditRecipe> {
         ),*/
       ),
       body: SingleChildScrollView(
-        child: Column(
-          mainAxisSize: MainAxisSize.min,
-          children: widgetMeals
+        child: Padding(
+          padding: const EdgeInsets.only(bottom: 100),
+          child: Column(
+            mainAxisSize: MainAxisSize.min,
+            children: widgetMeals
+          ),
         ),
       ),
     );
